@@ -1,0 +1,9 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Figma: arrow_insert (node 741:33994) — exact path extracted from Figma export -->
+  <mask id="mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+    <rect width="20" height="20" fill="#D9D9D9"/>
+  </mask>
+  <g mask="url(#mask0)">
+    <path d="M14.7552 14.7035L6.54688 6.50313V13.9583H5.29688V4.375H14.8802V5.625H7.425L15.6254 13.8333L14.7552 14.7035Z" fill="#1E1E1E"/>
+  </g>
+</svg>

@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   @theme — Poppins 폰트 + 타이포그래피 토큰
+   (CICCC 프로젝트와 동일한 스케일/이름 사용)
+   fluid: 1920px(100%) → 1280px(90%)
+   ───────────────────────────────────────────── */
+@theme {
+  --font-poppins: 'Poppins', sans-serif;
+
+  /* font-size 토큰 */
+  --font-size-8xl:  clamp(57.6px, 1vw + 44.8px, 64px);
+  --font-size-7xl:  clamp(50.4px, 0.875vw + 39.2px, 56px);
+  --font-size-6xl:  clamp(43.2px, 0.75vw + 33.6px, 48px);
+  --font-size-5xl:  clamp(32.4px, 0.5625vw + 25.2px, 36px);
+  --font-size-4xl:  clamp(28.8px, 0.5vw + 22.4px, 32px);
+  --font-size-3xl:  clamp(25.2px, 0.4375vw + 19.6px, 28px);
+  --font-size-2xl:  clamp(21.6px, 0.375vw + 16.8px, 24px);
+  --font-size-xl:   clamp(18px, 0.3125vw + 14px, 20px);
+  --font-size-lg:   clamp(16.2px, 0.28125vw + 12.6px, 18px);
+  --font-size-base: clamp(14.4px, 0.25vw + 11.2px, 16px);
+  --font-size-sm:   clamp(12.6px, 0.21875vw + 9.8px, 14px);
+
+  /* line-height 토큰 */
+  --line-height-8xl:  clamp(72px, 1.25vw + 56px, 80px);
+  --line-height-7xl:  clamp(60.3px, 1.046875vw + 46.9px, 67px);
+  --line-height-6xl:  clamp(52.2px, 0.90625vw + 40.6px, 58px);
+  --line-height-5xl:  clamp(42.3px, 0.734375vw + 32.9px, 47px);
+  --line-height-4xl:  clamp(37.8px, 0.65625vw + 29.4px, 42px);
+  --line-height-3xl:  clamp(32.4px, 0.5625vw + 25.2px, 36px);
+  --line-height-2xl:  clamp(32.4px, 0.5625vw + 25.2px, 36px);
+  --line-height-xl:   clamp(27px, 0.46875vw + 21px, 30px);
+  --line-height-lg:   clamp(24.3px, 0.421875vw + 18.9px, 27px);
+  --line-height-base: clamp(21.6px, 0.375vw + 16.8px, 24px);
+  --line-height-sm:   clamp(18.9px, 0.328125vw + 14.7px, 21px);
+
+  /* letter-spacing 토큰 */
+  --letter-spacing-4xl-tracked: 3.2px;
+  --letter-spacing-lg-tracked:  1.8px;
+
+  /* color 토큰 — 포트폴리오 브랜드 */
+  --color-bg:        #F7F4F0;
+  --color-bg-dark:   #E7E4DE;
+  --color-black:     #1E1E1E;
+  --color-yellow:    #FBF27E;
+  --color-text-gray-1: #8B8B8B;
+  --color-text-gray-2: #666666;
+}
+
+/* ─────────────────────────────────────────────
+   @utility — desktop 타이포그래피 유틸리티
+   사용법: className="text-8xl-semibold"
+   네이밍: {size}-{weight}
+   (CICCC 프로젝트와 동일한 이름/값)
+   ───────────────────────────────────────────── */
+
+/* 8xl — 64px / 80px */
+@utility text-8xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-8xl);
+  font-weight: 600;
+  line-height: var(--line-height-8xl);
+  letter-spacing: 0px;
+}
+
+/* 7xl — 56px / 67px */
+@utility text-7xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-7xl);
+  font-weight: 600;
+  line-height: var(--line-height-7xl);
+  letter-spacing: 0px;
+}
+
+/* 6xl — 48px / 58px */
+@utility text-6xl-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-6xl);
+  font-weight: 500;
+  line-height: var(--line-height-6xl);
+  letter-spacing: 0px;
+}
+@utility text-6xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-6xl);
+  font-weight: 600;
+  line-height: var(--line-height-6xl);
+  letter-spacing: 0px;
+}
+
+/* 5xl — 36px / 47px */
+@utility text-5xl-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  line-height: var(--line-height-5xl);
+  letter-spacing: 0px;
+}
+@utility text-5xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-5xl);
+  font-weight: 600;
+  line-height: var(--line-height-5xl);
+  letter-spacing: 0px;
+}
+
+/* 4xl — 32px / 42px */
+@utility text-4xl-regular {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-4xl);
+  font-weight: 400;
+  line-height: var(--line-height-4xl);
+  letter-spacing: 0px;
+}
+@utility text-4xl-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-4xl);
+  font-weight: 500;
+  line-height: var(--line-height-4xl);
+  letter-spacing: 0px;
+}
+@utility text-4xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  line-height: var(--line-height-4xl);
+  letter-spacing: 0px;
+}
+/* 4xl/Medium 2 — letter-spacing: 3.2px */
+@utility text-4xl-medium-2 {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-4xl);
+  font-weight: 500;
+  line-height: var(--line-height-4xl);
+  letter-spacing: var(--letter-spacing-4xl-tracked);
+}
+
+/* 3xl — 28px / 36px */
+@utility text-3xl-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-3xl);
+  font-weight: 500;
+  line-height: var(--line-height-3xl);
+  letter-spacing: 0px;
+}
+
+/* 2xl — 24px / 36px */
+@utility text-2xl-regular {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  line-height: var(--line-height-2xl);
+  letter-spacing: 0px;
+}
+@utility text-2xl-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  line-height: var(--line-height-2xl);
+  letter-spacing: 0px;
+}
+@utility text-2xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  line-height: var(--line-height-2xl);
+  letter-spacing: 0px;
+}
+
+/* xl — 20px / 30px */
+@utility text-xl-regular {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  line-height: var(--line-height-xl);
+  letter-spacing: 0px;
+}
+@utility text-xl-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: var(--line-height-xl);
+  letter-spacing: 0px;
+}
+@utility text-xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: var(--line-height-xl);
+  letter-spacing: 0px;
+}
+
+/* lg — 18px / 27px */
+@utility text-lg-regular {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: var(--line-height-lg);
+  letter-spacing: 0px;
+}
+@utility text-lg-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: var(--line-height-lg);
+  letter-spacing: 0px;
+}
+@utility text-lg-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: var(--line-height-lg);
+  letter-spacing: 0px;
+}
+/* lg/Medium 2 — letter-spacing: 1.8px */
+@utility text-lg-medium-2 {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: var(--line-height-lg);
+  letter-spacing: var(--letter-spacing-lg-tracked);
+}
+
+/* base — 16px / 24px */
+@utility text-base-regular {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: var(--line-height-base);
+  letter-spacing: 0px;
+}
+@utility text-base-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: var(--line-height-base);
+  letter-spacing: 0px;
+}
+@utility text-base-semibold {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: var(--line-height-base);
+  letter-spacing: 0px;
+}
+
+/* sm — 14px / 21px */
+@utility text-sm-regular {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: var(--line-height-sm);
+  letter-spacing: 0px;
+}
+@utility text-sm-medium {
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: var(--line-height-sm);
+  letter-spacing: 0px;
+}
+
+/* ─────────────────────────────────────────────
+   @utility — mobile 타이포그래피 유틸리티
+   fixed px (393px Figma base)
+   (CICCC 프로젝트와 동일한 이름/값)
+   ───────────────────────────────────────────── */
+
+/* 5xl — 36px / 44px */
+@utility mobile-text-5xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+}
+
+/* 3xl — 28px / 38px */
+@utility mobile-text-3xl-medium {
+  font-family: var(--font-poppins);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 38px;
+}
+@utility mobile-text-3xl-semibold {
+  font-family: var(--font-poppins);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 38px;
+}
+
+/* 2xl — 24px / 34px */
+@utility mobile-text-2xl-medium {
+  font-family: var(--font-poppins);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 34px;
+}
+
+/* xl — 22px / 30px */
+@utility mobile-text-xl-medium {
+  font-family: var(--font-poppins);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+/* lg — 18px / 27px */
+@utility mobile-text-lg-medium {
+  font-family: var(--font-poppins);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+}
+
+/* base — 16px / 24px */
+@utility mobile-text-base-regular {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+@utility mobile-text-base-medium {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/* base-tall — 16px / 26px (body text) */
+@utility mobile-text-base-regular-tall {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+/* sm — 14px / 21px */
+@utility mobile-text-sm-regular {
+  font-family: var(--font-poppins);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+}
+@utility mobile-text-sm-medium {
+  font-family: var(--font-poppins);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+/* xs — 13px / 20px */
+@utility mobile-text-xs-regular {
+  font-family: var(--font-poppins);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* ─────────────────────────────────────────────
+   Global reset — @layer base 안에 있어야 Tailwind
+   utility 클래스(px-[14px] 등)가 정상 동작함.
+   unlayered 규칙은 @layer utilities보다 항상 우선
+   되어 모든 padding/margin 유틸리티를 덮어씀.
+   ───────────────────────────────────────────── */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    background-color: #F7F4F0;
+  }
+
+  body {
+    font-family: var(--font-poppins);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    width: 100%;
+  }
+}
