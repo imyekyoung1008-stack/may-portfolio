@@ -4,9 +4,10 @@
 // LOCAL ASSETS:
 //   Images → src/assets/images/
 //     hero-photo.jpeg        : May's photo (About me card, left half)
-//     cornerstone-thumb.png  : CICCC project thumbnail
 //     cnai-thumb.png         : CNAI AI Avatar thumbnail
-//     shelter-thumb.jpeg     : Homeless Shelter thumbnail
+//   Videos → src/assets/videos/
+//     cornerstone-thumb-v2.mp4 : CICCC project demo
+//     shelter-demo.mp4         : Homeless Shelter demo
 //   Icons → src/assets/icons/
 //     arrow-insert.svg       : diagonal NE arrow (project list items)
 //     icon-arrow-next.svg    : right arrow (Download Resume button)
@@ -17,10 +18,10 @@ import { useNavigate } from 'react-router-dom'
 
 // ── Images ──────────────────────────────────────
 import imgHeroPhoto      from '../assets/images/hero-photo.jpeg'
-import imgCornerstoneTh  from '../assets/images/cornerstone-thumb.png'
 import imgCnaiTh         from '../assets/images/cnai-thumb.png'
 
 // ── Videos ──────────────────────────────────────
+import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
 import vidShelterDemo    from '../assets/videos/shelter-demo.mp4'
 
 // ── Icons ────────────────────────────────────────
@@ -43,8 +44,8 @@ const PROJECT_LIST = [
 
 const PROJECT_CARDS = [
   {
-    img:   imgCornerstoneTh,
-    alt:   'Cornerstone College Website screenshot',
+    video: vidCornerstoneDemo,
+    alt:   'Cornerstone College Website demo',
     title: 'Cornerstone College Website',
     desc:  '70%+ AI-assisted workflow, one scalable system across 10 program pages',
   },
