@@ -91,9 +91,9 @@ export default function AboutPage() {
         <img src={icClose} alt="" aria-hidden className="block w-[24px] h-[24px]" />
       </button>
 
-      {/* Page content — centered, max 880px */}
-      <div className="flex flex-col items-center px-[170px] py-[80px]">
-        <div className="flex flex-col gap-[80px] items-start w-full" style={{ maxWidth: '880px' }}>
+      {/* Page content — responsive container: viewport>960px→880px fixed, ≤960px→content shrinks */}
+      <div className="w-full px-[40px] py-[80px]">
+        <div className="max-w-[880px] mx-auto w-full flex flex-col gap-[80px] items-start">
 
           {/* ── Top section ── */}
           <div className="flex flex-col gap-[48px] items-start w-full">

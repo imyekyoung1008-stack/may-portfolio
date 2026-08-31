@@ -132,14 +132,14 @@ function StepNote({ children }: { children: React.ReactNode }) {
   )
 }
 
-/** Inner content wrapper: px-170 outer → max-w-1100 centered */
+/** Inner content wrapper: responsive container
+ *  viewport > 1180px → content 1100px fixed, margins absorb rest
+ *  viewport ≤ 1180px → padding 40px fixed, content shrinks with viewport */
 function ContentWrap({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-[170px] w-full py-[60px]">
-      <div className="w-full flex flex-col items-center">
-        <div className="w-full max-w-[1100px] flex flex-col gap-[40px]">
-          {children}
-        </div>
+    <div className="w-full px-[40px] py-[60px]">
+      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[40px]">
+        {children}
       </div>
     </div>
   )
@@ -328,10 +328,8 @@ function Solution1Section() {
 // ─────────────────────────────────────────────────
 function BeforeAfter1() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-[80px]">
-      {/* Figma: items-center wrapper → max-w-[1100px] w-[1100px], gap-[60px] */}
-      <div className="w-full flex flex-col items-center">
-        <div className="max-w-[1100px] w-[1100px] flex flex-col gap-[60px]">
+    <section className="w-full bg-[#f7f7f7] py-[80px] px-[40px]">
+      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[60px]">
 
           {/* ── Before ── */}
           <div className="flex flex-col w-full">
@@ -369,7 +367,6 @@ function BeforeAfter1() {
             </div>
           </div>
 
-        </div>
       </div>
     </section>
   )
@@ -409,9 +406,8 @@ function Solution2Section() {
 // Figma node: 767:37725 (section) / 767:37726 (Container:margin)
 function BeforeAfter2() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-[80px]">
-      <div className="w-full flex flex-col items-center">
-        <div className="max-w-[1100px] w-[1100px] flex flex-col gap-[60px]">
+    <section className="w-full bg-[#f7f7f7] py-[80px] px-[40px]">
+      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[60px]">
 
           {/* ── Before ── */}
           <div className="flex flex-col w-full">
@@ -452,7 +448,6 @@ function BeforeAfter2() {
           </div>
 
         </div>
-      </div>
     </section>
   )
 }
@@ -982,8 +977,8 @@ function Across10Programs() {
           하나의 시스템으로 확장한 10개 프로그램
         </h2>
       </ContentWrap>
-      {/* Horizontal scroll row — wider than ContentWrap */}
-      <div className="w-full overflow-x-auto pb-[40px] px-[170px]" style={{ scrollbarWidth: 'thin' }}>
+      {/* Horizontal scroll row — ContentWrap과 좌측 정렬 맞춤 */}
+      <div className="w-full overflow-x-auto pb-[40px] px-[40px]" style={{ scrollbarWidth: 'thin' }}>
         <div className="flex gap-[16px]" style={{ width: 'max-content' }}>
           {PROGRAMS.map((prog) => (
             <div
