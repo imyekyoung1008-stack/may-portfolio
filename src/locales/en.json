@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "title": "Cornerstone College Website",
+    "subtitle": "Education Website"
+  },
+  "problem": {
+    "sectionNum": "01",
+    "sectionLabel": "PROBLEM",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "photo": {
+      "quote": "\"Handing someone your phone feels like handing over your entire life.\""
+    },
+    "items": [
+      {
+        "num": "01",
+        "title": "Text-heavy Experience",
+        "subtitle": "핵심 정보가 한눈에 들어오지 않았습니다",
+        "body": "TODO: problem 01 body text"
+      },
+      {
+        "num": "02",
+        "title": "Hard to Find Information",
+        "subtitle": "원하는 정보의 위치를 예측하기 어려웠습니다",
+        "body": "TODO: problem 02 body text"
+      },
+      {
+        "num": "03",
+        "title": "Two Separate Websites",
+        "subtitle": "도메스틱·인터내셔널 사이트가 분리되어 있었습니다",
+        "body": "TODO: problem 03 body text"
+      },
+      {
+        "num": "04",
+        "title": "Late Feedback",
+        "subtitle": "중요한 피드백이 너무 늦게 발생했습니다",
+        "body": "TODO: problem 04 body text"
+      }
+    ]
+  },
+  "discovery": {
+    "sectionNum": "02",
+    "sectionLabel": "DISCOVERY",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "personas": [
+      { "num": "01", "label": "예비 학생", "question": "\"무엇을 배우게 되나요?\"" },
+      { "num": "02", "label": "국제 학생", "question": "\"비용은 얼마나 드나요?\"" },
+      { "num": "03", "label": "유학원 관계자", "question": "\"입학 조건은 무엇인가요?\"" }
+    ],
+    "principle": {
+      "label": "DESIGN PRINCIPLE",
+      "text": "정보를 읽기 쉽게 만드는 것을 넘어, 찾기 쉽게 만든다."
+    }
+  },
+  "solution1": {
+    "sectionNum": "03",
+    "sectionLabel": "SOLUTION 1",
+    "solves": "SOLVES  PROBLEM 01 · 02",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "before": {
+      "label": "BEFORE",
+      "title": "Long Page, Passive Scroll",
+      "items": ["Long page", "Scroll", "Scroll", "Find Information"]
+    },
+    "after": {
+      "label": "AFTER",
+      "title": "Purpose-Driven Navigation",
+      "items": [
+        { "label": "About",      "sub": "이 프로그램은 무엇인가?" },
+        { "label": "Courses",    "sub": "무엇을 배우게 되는가?" },
+        { "label": "Admissions", "sub": "내가 지원할 수 있는가?" },
+        { "label": "Costs",      "sub": "얼마의 비용이 필요한가?" },
+        { "label": "Careers",    "sub": "어떤 커리어로 이어지는가?" }
+      ]
+    },
+    "screenshots": {
+      "before": {
+        "label": "Before",
+        "caption": "프로그램 정보, 학비, 입학 조건이 서로 다른 페이지에 흩어져 있었습니다."
+      },
+      "after": {
+        "label": "After",
+        "caption": "TODO: after screenshot caption"
+      }
+    }
+  },
+  "solution2": {
+    "sectionNum": "04",
+    "sectionLabel": "SOLUTION 2",
+    "solves": "SOLVES  PROBLEM 03",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "insight": {
+      "label": "KEY INSIGHT",
+      "text": "두 학생 그룹이 듣는 프로그램은 동일했고, 실제로 달라지는 정보는 Admissions와 Costs뿐이었습니다."
+    },
+    "screenshots": {
+      "before": {
+        "label": "Before",
+        "caption": "프로그램 정보, 학비, 입학 조건이 서로 다른 페이지에 흩어져 있었습니다."
+      },
+      "after": {
+        "label": "After",
+        "caption": "사이트 전체를 분리하는 대신, 각 프로그램 페이지 안에서 Admissions와 Costs만 도메스틱/인터내셔널로 구분했습니다."
+      }
+    }
+  },
+  "aiImpact1": {
+    "sectionNum": "05",
+    "sectionLabel": "AI IMPACT 1 · Collaboration",
+    "solves": "SOLVES  PROBLEM 04",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "checklist": {
+      "label": "CONTENT CHECKLIST",
+      "items": [
+        "TODO: checklist item 1",
+        "TODO: checklist item 2",
+        "TODO: checklist item 3",
+        "TODO: checklist item 4",
+        "TODO: checklist item 5",
+        "TODO: checklist item 6",
+        "TODO: checklist item 7",
+        "TODO: checklist item 8"
+      ],
+      "body": "TODO: checklist body text"
+    },
+    "workflow": {
+      "label": "AI PROTOTYPING WORKFLOW",
+      "tools": ["Figma MCP", "Claude", "GitHub", "Vercel"],
+      "steps": [
+        "TODO: workflow step 1",
+        "TODO: workflow step 2",
+        "TODO: workflow step 3",
+        "TODO: workflow step 4",
+        "TODO: workflow step 5"
+      ]
+    },
+    "email": {
+      "label": "Actual Request Email to Program Managers",
+      "body": "TODO: email body text",
+      "links": [
+        { "label": "Prototype Link" },
+        { "label": "Content Checklist" }
+      ]
+    },
+    "caption": "Checklist로 '무엇이 필요한지'를, Live Prototype으로 '어디에 어떻게 쓰이는지'를 함께 전달했습니다."
+  },
+  "aiImpact2": {
+    "sectionNum": "06",
+    "sectionLabel": "AI IMPACT 02 · EXPLORATION",
+    "solves": "SOLVES  PROBLEM 04",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "insight": {
+      "label": "KEY INSIGHT",
+      "text": "AI는 정답을 만드는 도구가 아니라, 탐색의 폭을 넓히고 빠르게 합의하기 위한 도구였습니다."
+    },
+    "exploration": {
+      "label": "AI ASSISTED UX EXPLORATION",
+      "findings": [
+        {
+          "title": "Real Voices First",
+          "body": "학생들이 가장 중요하게 보는 것은 실제 경험에 가까운 정보입니다."
+        },
+        {
+          "title": "Video over Text",
+          "body": "긴 설명보다 영상이 시선을 더 빠르게 집중시킵니다."
+        },
+        {
+          "title": "Visual First, Consult for Details",
+          "body": "페이지는 비주얼 중심으로 간결하게, 자세한 설명은 상담으로 연결합니다."
+        }
+      ]
+    }
+  },
+  "aiImpact3": {
+    "sectionNum": "07",
+    "sectionLabel": "AI IMPACT 03",
+    "headline": "TODO: section headline",
+    "body": "TODO: section body text",
+    "insight": {
+      "label": "KEY INSIGHT",
+      "text": "AI를 활용해 실제 화면의 규칙을 추출하고, 재사용 가능한 스타일 시스템으로 빠르게 전환했습니다."
+    },
+    "typographySystem": {
+      "label": "AI ASSISTED TYPOGRAPHY SYSTEM",
+      "sublabel": "Extracted Typography Attributes",
+      "attributes": [
+        "TODO: typography attribute 1",
+        "TODO: typography attribute 2",
+        "TODO: typography attribute 3",
+        "TODO: typography attribute 4"
+      ]
+    },
+    "plugin": {
+      "title": "Custom Figma Plugin Built with Claude",
+      "body": "Figma 파일의 텍스트 레이어를 스캔하고, 등록된 Text Style을 폰트 크기(Size)와 굵기(Weight) 기준으로 자동 매칭하도록 플러그인을 생성했습니다."
+    },
+    "textStyleResult": {
+      "title": "Text Style Auto Applied",
+      "body": "텍스트 레이어를 스캔해, 조건에 맞는 Text Style을 자동으로 연결했습니다."
+    },
+    "diagram": {
+      "inputLabel": "Text Layers (Figma)",
+      "inputLines": [
+        "Make work simpler,",
+        "create more impact.",
+        "AI IMPACT helps teams",
+        "automate repetitive tasks",
+        "Get Started"
+      ],
+      "matchingLabel": "AI 기반 자동 매칭",
+      "matchingSubLabel": "( Size + Weight )",
+      "outputLabel": "Registered Text Styles",
+      "styles": [
+        { "sample": "Ag", "name": "8xl / SemiBold" },
+        { "sample": "Ag", "name": "7xl / SemiBold" },
+        { "sample": "Ag", "name": "lg / Regular" },
+        { "sample": "Ag", "name": "base / Regular" },
+        { "sample": "Ag", "name": "sm / Medium" }
+      ]
+    }
+  }
+}

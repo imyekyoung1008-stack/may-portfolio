@@ -102,10 +102,11 @@ function SubHeading({ icon = icSectionIcon, label }: { icon?: string; label: str
   )
 }
 
-/** Step card: numbered header + horizontal line + content */
+/** Step card: numbered header + horizontal line + content
+ *  Figma: outer bg-[#f7f7f7] p-[32px] → 32px gray frame around white inner boxes */
 function StepCard({ num, title, children }: { num: string; title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-[#f7f7f7] flex flex-col w-full">
+    <div className="bg-[#f7f7f7] flex flex-col w-full p-[32px]">
       {/* Step header */}
       <div className="flex items-center w-full">
         <div className="bg-white flex flex-1 gap-[16px] items-center px-[20px] py-[16px]">
