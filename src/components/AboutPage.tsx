@@ -79,8 +79,11 @@ export default function AboutPage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-[#f7f4f0] relative"
-      style={{ fontFamily: "'Poppins', sans-serif", position: 'relative', zIndex: 10 }}
+      style={{
+        fontFamily: "'Poppins', sans-serif",
+        position: 'fixed', inset: 0, overflowY: 'auto',
+        zIndex: 20, backgroundColor: '#f7f4f0',
+      }}
       initial={{ y: '100%' }}
       animate={{ y: 0 }}
       exit={{ y: '100%' }}

@@ -139,7 +139,7 @@ function StepNote({ children }: { children: React.ReactNode }) {
 function ContentWrap({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full px-[40px] py-[60px]">
-      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[40px]">
+      <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[40px]">
         {children}
       </div>
     </div>
@@ -158,16 +158,16 @@ function CornerstoneHeader() {
   ]
   return (
     <section className="w-full bg-white pt-[80px] pb-[60px] px-[42px]">
-      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[42px]">
+      <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[42px]">
 
         {/* ── 타이틀 행 ── */}
         <div className="flex gap-[40px] items-start w-full">
           {/* 제목 + 부제 */}
           <div className="flex flex-col gap-[12px] flex-1 min-w-0">
-            <p className="text-[48px] font-medium leading-[58px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+            <p className="text-[36px] font-medium leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
               Cornerstone College Website
             </p>
-            <p className="text-[24px] font-normal leading-[36px] text-[#8b8b8b] w-full" style={{ fontFamily: poppins }}>
+            <p className="text-[20px] font-normal leading-[30px] text-[#8b8b8b] w-full" style={{ fontFamily: poppins }}>
               70%+ AI-assisted workflow, one scalable system across 10 program pages
             </p>
           </div>
@@ -400,7 +400,7 @@ function Solution1Section() {
 function BeforeAfter1() {
   return (
     <section className="w-full bg-[#f7f7f7] py-[80px] px-[40px]">
-      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[60px]">
+      <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[60px]">
 
           {/* ── Before ── */}
           <div className="flex flex-col w-full">
@@ -478,7 +478,7 @@ function Solution2Section() {
 function BeforeAfter2() {
   return (
     <section className="w-full bg-[#f7f7f7] py-[80px] px-[40px]">
-      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[60px]">
+      <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[60px]">
 
           {/* ── Before ── */}
           <div className="flex flex-col w-full">
@@ -1126,8 +1126,11 @@ export default function CornerstonePage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-white"
-      style={{ fontFamily: poppins, position: 'relative', zIndex: 10 }}
+      style={{
+        fontFamily: poppins,
+        position: 'fixed', inset: 0, overflowY: 'auto',
+        zIndex: 20, backgroundColor: 'white',
+      }}
       initial={{ y: '100%' }}
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
