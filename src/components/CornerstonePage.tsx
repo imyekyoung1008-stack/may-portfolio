@@ -139,7 +139,7 @@ function StepNote({ children }: { children: React.ReactNode }) {
 function ContentWrap({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full px-[40px] py-[60px]">
-      <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[40px]">
+      <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[32px]">
         {children}
       </div>
     </div>
@@ -161,7 +161,7 @@ function CornerstoneHeader() {
       <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[42px]">
 
         {/* ── 타이틀 행 ── */}
-        <div className="flex gap-[40px] items-start w-full">
+        <div className="flex gap-[32px] items-start w-full">
           {/* 제목 + 부제 */}
           <div className="flex flex-col gap-[12px] flex-1 min-w-0">
             <p className="text-[36px] font-medium leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -241,7 +241,7 @@ function ProblemSection() {
     <section className="w-full bg-white">
       <ContentWrap>
         <SectionLabel num="01" label="PROBLEM" />
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           막연한 불만을 구체적인 디자인 문제로 정의하기
         </h2>
         {/* Hero image — Figma: wrapper absolute left-[-244px] top-[-141px] 1435×956px, blur 16px, overflow-clip */}
@@ -302,7 +302,7 @@ function DiscoverySection() {
     <section className="w-full bg-white">
       <ContentWrap>
         <SectionLabel num="02" label="DISCOVERY" />
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           사용자는 페이지를 읽으러 오는 것이 아니라 답을 찾으러 왔습니다
         </h2>
         <div className="flex gap-[24px] items-start w-full">
@@ -345,7 +345,7 @@ function Solution1Section() {
           <SectionLabel num="03" label="SOLUTION 1" />
           <SolvesBadge text="SOLVES  PROBLEM 01 · 02" />
         </div>
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           긴 페이지를 읽는 경험에서 목적 기반 탐색 경험으로
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -454,7 +454,7 @@ function Solution2Section() {
           <SectionLabel num="04" label="SOLUTION 2" />
           <SolvesBadge text="SOLVES  PROBLEM 03" />
         </div>
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           공통 경험은 하나로, 차이가 필요한 순간에만 분기하기
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -536,7 +536,7 @@ function AIImpact1Section() {
           <SectionLabel num="05" label="AI IMPACT 1 · Collaboration" />
           <SolvesBadge text="SOLVES  PROBLEM 04" />
         </div>
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           체크리스트와 라이브 프로토타입으로 콘텐츠 수집 구조화하기
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -661,7 +661,7 @@ function AIImpact2Section() {
           <SectionLabel num="06" label="AI IMPACT 02 · EXPLORATION" />
           <SolvesBadge text="SOLVES  PROBLEM 04" />
         </div>
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           UX 가설을 비교 가능한 화면으로 빠르게 구체화하기
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -802,7 +802,7 @@ function AIImpact3Section() {
     <section className="w-full bg-white">
       <ContentWrap>
         <SectionLabel num="07" label="AI IMPACT 03" />
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           AI로 실제 화면의 디자인 규칙을 추출하고 시스템화하기
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -980,7 +980,7 @@ function ConsistentSection() {
     <section className="w-full bg-white">
       <ContentWrap>
         <SectionLabel num="08" label="CONSISTENT ACROSS EVERY FORMAT" />
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           웹부터 홍보물까지, 하나의 비주얼 언어로 연결하기
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -1044,7 +1044,7 @@ function Across10Programs() {
     <section className="w-full bg-white">
       <ContentWrap>
         <SectionLabel num="09" label="ACROSS 10 PROGRAMS" />
-        <h2 className="text-[36px] font-semibold leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           하나의 시스템으로 확장한 10개 프로그램
         </h2>
       </ContentWrap>
