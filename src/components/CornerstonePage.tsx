@@ -146,12 +146,82 @@ function ContentWrap({ children }: { children: React.ReactNode }) {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 1 — Video Hero
+// 헤더 섹션 — Figma node 777:42395
 // ─────────────────────────────────────────────────
-function VideoHero() {
+function CornerstoneHeader() {
+  const META = [
+    { label: 'Product',  value: 'Responsive Web' },
+    { label: 'My role',  value: 'Solo Product Designer' },
+    { label: 'Timeline', value: 'Q2 2026 - Q3 2026' },
+    { label: 'Skills',   value: 'UX Strategy, Information Architecture, UI Design, Responsive Design, AI Assisted Workflow, Stakeholder Collaboration' },
+  ]
   return (
-    <section className="w-full bg-[#1e1e1e] overflow-hidden" style={{ height: '800px' }}>
-      <video src={vidHero} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+    <section className="w-full bg-white pt-[80px] pb-[60px] px-[42px]">
+      <div className="max-w-[1100px] mx-auto w-full flex flex-col gap-[42px]">
+
+        {/* ── 타이틀 행 ── */}
+        <div className="flex gap-[40px] items-start w-full">
+          {/* 제목 + 부제 */}
+          <div className="flex flex-col gap-[12px] flex-1 min-w-0">
+            <p className="text-[48px] font-medium leading-[58px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+              Cornerstone College Website
+            </p>
+            <p className="text-[24px] font-normal leading-[36px] text-[#8b8b8b] w-full" style={{ fontFamily: poppins }}>
+              70%+ AI-assisted workflow, one scalable system across 10 program pages
+            </p>
+          </div>
+          {/* Shipped 배지 */}
+          <div className="bg-[#f7f4f0] flex gap-[12px] items-center justify-center px-[12px] py-[8px] shrink-0">
+            {/* 초록 dot #00C950 (Figma: Ellipse 2965) */}
+            <div className="w-[8px] h-[8px] rounded-full shrink-0" style={{ backgroundColor: '#00C950' }} />
+            <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>
+              Shipped
+            </span>
+          </div>
+        </div>
+
+        {/* ── 히어로 영상 (733px, object-cover) ── */}
+        <div className="w-full overflow-hidden" style={{ height: '733px' }}>
+          <video
+            src={vidHero}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* ── 소개 문단 ── */}
+        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+          I led the redesign of Cornerstone College's diploma program experience as the solo product designer, creating a shared information structure and visual system across multiple program pages. I connected UX, responsive design, AI-assisted workflows, and developer handoff into one scalable foundation.
+        </p>
+
+        {/* ── 메타정보 그리드 ── */}
+        {/* border-t/b #F7F7F7, py-20, 4열 grid, gap-20 */}
+        <div
+          className="w-full py-[20px] grid gap-[20px]"
+          style={{
+            gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+            borderTop: '1px solid #f7f7f7',
+            borderBottom: '1px solid #f7f7f7',
+          }}
+        >
+          {/* Row 1: 4개 항목 */}
+          {META.map((item) => (
+            <div key={item.label} className="flex flex-col items-start">
+              <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>{item.label}</p>
+              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item.value}</p>
+            </div>
+          ))}
+          {/* Row 2: Team — 4열 전체 */}
+          <div className="flex flex-col items-start" style={{ gridColumn: '1 / span 4' }}>
+            <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>Team</p>
+            <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>2 Developers · 6 Program Managers</p>
+          </div>
+        </div>
+
+      </div>
     </section>
   )
 }
@@ -343,7 +413,7 @@ function BeforeAfter1() {
             </div>
             {/* Caption: bg white, px-32 py-28, 20px Medium */}
             <div className="bg-white flex flex-col px-[32px] py-[28px] w-full">
-              <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>프로그램 정보, 학비, 입학 조건이 서로 다른 페이지에 흩어져 있었습니다.</p>
+              <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>긴 페이지와 약한 시각적 위계로 인해 중요한 정보를 지나치기 쉬웠고, 원하는 내용을 찾기 위해 반복적인 스크롤이 필요했습니다.</p>
             </div>
           </div>
 
@@ -363,7 +433,7 @@ function BeforeAfter1() {
             </div>
             {/* Caption: bg white, px-32 py-28, 20px Medium */}
             <div className="bg-white flex flex-col px-[32px] py-[28px] w-full">
-              <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>프로그램 정보, 학비, 입학 조건이 서로 다른 페이지에 흩어져 있었습니다.</p>
+              <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>탭을 통해 정보를 목적별로 그룹화해, 사용자가 관심 있는 카테고리로 바로 이동하고 그 안에서 필요한 정보를 단계적으로 탐색하도록 개선했습니다.</p>
             </div>
           </div>
 
@@ -1066,7 +1136,7 @@ export default function CornerstonePage() {
       </button>
 
       {/* ─── All sections ────────────────────────── */}
-      <VideoHero />
+      <CornerstoneHeader />
       <ProblemSection />
       <DiscoverySection />
       <Solution1Section />
