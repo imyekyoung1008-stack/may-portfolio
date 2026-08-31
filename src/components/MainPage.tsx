@@ -193,13 +193,13 @@ export default function MainPage() {
                     className="w-[72px] h-[72px] shrink-0 block"
                   />
 
-                  {/* Headline — Figma: leading-[0] wrapper, 3 <p> each leading-[58px] mb-0 */}
+                  {/* Headline — Figma: desktop/5xl/Medium, 36px/47px */}
                   <div className="flex flex-col items-start w-full">
-                    <div className="w-full text-[48px] leading-[0] text-[#1e1e1e] not-italic"
+                    <div className="w-full text-[36px] leading-[0] text-[#1e1e1e] not-italic"
                       style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 500 }}>
-                      <p className="leading-[58px] mb-0">I'm May,</p>
-                      <p className="leading-[58px] mb-0">a product designer</p>
-                      <p className="leading-[58px] mb-0">who listens first.</p>
+                      <p className="leading-[47px] mb-0">I'm May,</p>
+                      <p className="leading-[47px] mb-0">a product designer</p>
+                      <p className="leading-[47px] mb-0">who listens first.</p>
                     </div>
                   </div>
                 </div>

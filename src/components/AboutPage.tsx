@@ -25,6 +25,7 @@ import img03Curious3     from '../assets/images/about/03-curious-3.jpg'
 import icClose           from '../assets/icons/close.svg'
 
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 // ─────────────────────────────────────────────────
 // Data
@@ -77,9 +78,13 @@ export default function AboutPage() {
   const navigate = useNavigate()
 
   return (
-    <div
+    <motion.div
       className="min-h-screen bg-[#f7f4f0] relative"
-      style={{ fontFamily: "'Poppins', sans-serif" }}
+      style={{ fontFamily: "'Poppins', sans-serif", position: 'relative', zIndex: 10 }}
+      initial={{ y: '100%' }}
+      animate={{ y: 0 }}
+      exit={{ y: '100%' }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Close button — fixed top-right */}
       <button
@@ -110,11 +115,11 @@ export default function AboutPage() {
             {/* Headline */}
             <div className="w-full">
               <div
-                className="text-[#1e1e1e] text-[36px] leading-[0] not-italic w-full"
+                className="text-[#1e1e1e] text-[32px] leading-[0] not-italic w-full"
                 style={{ fontWeight: 500 }}
               >
-                <p className="leading-[47px] mb-0">I'm May,</p>
-                <p className="leading-[47px]">a product designer who listens first and turns what I learn into thoughtful digital experiences.</p>
+                <p className="leading-[42px] mb-0">I'm May,</p>
+                <p className="leading-[42px]">a product designer who listens first and turns what I learn into thoughtful digital experiences.</p>
               </div>
             </div>
 
@@ -199,6 +204,6 @@ export default function AboutPage() {
 
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

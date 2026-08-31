@@ -3,6 +3,7 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=767-37494
 
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 // ── Videos ────────────────────────────────────────
 import vidHero from '../assets/videos/cornerstone-thumb-v2.mp4'
@@ -180,8 +181,8 @@ function CornerstoneHeader() {
           </div>
         </div>
 
-        {/* ── 히어로 영상 (733px, object-cover) ── */}
-        <div className="w-full overflow-hidden" style={{ height: '733px' }}>
+        {/* ── 히어로 영상 (640px, object-cover) ── */}
+        <div className="w-full overflow-hidden" style={{ height: '640px' }}>
           <video
             src={vidHero}
             autoPlay
@@ -1124,7 +1125,14 @@ export default function CornerstonePage() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: poppins }}>
+    <motion.div
+      className="min-h-screen bg-white"
+      style={{ fontFamily: poppins, position: 'relative', zIndex: 10 }}
+      initial={{ y: '100%' }}
+      animate={{ y: 0 }}
+      exit={{ y: '100%' }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+    >
       {/* Close button — fixed top-right */}
       <button
         type="button"
@@ -1150,6 +1158,6 @@ export default function CornerstonePage() {
       <Across10Programs />
       <ImpactSection />
       <ReflectionSection />
-    </div>
+    </motion.div>
   )
 }
