@@ -48,18 +48,21 @@ const PROJECT_CARDS = [
     alt:   'Cornerstone College Website demo',
     title: 'Cornerstone College Website',
     desc:  '70%+ AI-assisted workflow, one scalable system across 10 program pages',
+    route: '/projects/cornerstone',
   },
   {
     img:   imgCnaiTh,
     alt:   'AI Avatar Video Creation Platform screenshot',
     title: 'AI Avatar Video Creation Platform',
     desc:  '50% faster voice selection, 59% fewer voice re-selections',
+    route: null,
   },
   {
     video: vidShelterDemo,
     alt:   'Homeless Shelter Life Management System demo',
     title: 'Homeless Shelter Life Management System',
     desc:  '94.3% NFC adoption and 30+ minutes faster response time',
+    route: null,
   },
 ]
 
@@ -68,7 +71,7 @@ const PROJECT_CARDS = [
 // ─────────────────────────────────────────────────
 // ProjectCard — cursor-following badge
 // ─────────────────────────────────────────────────
-function ProjectCard({ img, video, alt, title, desc }: { img?: string; video?: string; alt: string; title: string; desc: string }) {
+function ProjectCard({ img, video, alt, title, desc, onClick }: { img?: string; video?: string; alt: string; title: string; desc: string; onClick?: () => void }) {
   const [pos, setPos]         = useState({ x: 0, y: 0 })
   const [visible, setVisible] = useState(false)
 
@@ -78,7 +81,7 @@ function ProjectCard({ img, video, alt, title, desc }: { img?: string; video?: s
   }
 
   return (
-    <div className="flex flex-col gap-[24px] items-start w-full cursor-pointer">
+    <div className="flex flex-col gap-[24px] items-start w-full cursor-pointer" onClick={onClick}>
       {/* Thumbnail */}
       <div
         className="relative w-full shrink-0 overflow-hidden cursor-none"
@@ -336,7 +339,11 @@ export default function MainPage() {
           <div className="ml-[604px]">
             <div className="flex flex-col gap-[72px] items-start w-full pt-[80px] pb-[80px]">
               {PROJECT_CARDS.map((card) => (
-                <ProjectCard key={card.title} {...card} />
+                <ProjectCard
+                  key={card.title}
+                  {...card}
+                  onClick={card.route ? () => navigate(card.route!) : undefined}
+                />
               ))}
             </div>
 
