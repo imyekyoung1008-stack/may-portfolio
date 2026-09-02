@@ -3,10 +3,14 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=767-37494
 
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 // ── Videos ────────────────────────────────────────
-import vidHero from '../assets/videos/cornerstone-thumb-v2.mp4'
+import vidHero          from '../assets/videos/cornerstone-thumb-v2.mp4'
+import vidBeforeS1      from '../assets/videos/solution3-before.mp4'
+import vidBeforeS2      from '../assets/videos/solution2-before.mp4'
+import vidAfterS1       from '../assets/videos/solution1-after.mp4'
 
 // ── Images: problem / solutions ───────────────────
 import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
@@ -55,6 +59,9 @@ import icCheckOutline    from '../assets/icons/cornerstone/check-outline.svg'
 import icSectionAsterisk from '../assets/icons/cornerstone/section-asterisk.svg'
 import icProgArrow       from '../assets/icons/cornerstone/prog-arrow.svg'
 import icArrowDirection  from '../assets/icons/cornerstone/arrow-direction.svg'
+import icStep02PanelArrow from '../assets/icons/cornerstone/step02-conn-left.svg'
+import icStep02ConnLeft   from '../assets/icons/cornerstone/step02-arrow.svg'
+import icStep02ConnRight  from '../assets/icons/cornerstone/step02-conn-right.svg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -131,6 +138,30 @@ function StepNote({ children }: { children: React.ReactNode }) {
       <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] flex-1" style={{ fontFamily: poppins }}>{children}</p>
     </div>
   )
+}
+
+/** 화면에 50% 이상 보이면 자동재생, 벗어나면 일시정지. controls/muted 유지. */
+function AutoplayVideo({ src, className }: { src: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
+
+  return <video ref={ref} src={src} controls playsInline muted className={className} />
 }
 
 /** Inner content wrapper: responsive container
@@ -406,11 +437,11 @@ function BeforeAfter1() {
           <div className="flex flex-col w-full">
             {/* Header: bg #F3F3F3, border #DDD, px-32 py-12, 24px Medium */}
             <div className="bg-[#f3f3f3] border border-[#ddd] flex items-center px-[32px] py-[12px] w-full">
-              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Before</p>
+              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Before · Data Science</p>
             </div>
-            {/* Image: aspect-ratio 1920/1080, object-cover */}
-            <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
-              <img src={imgBeforeS1} alt="Before — 기존 CICCC 웹사이트" className="w-full h-full object-cover object-top" />
+            {/* Video: 원본 비율 그대로, 가로 100% */}
+            <div className="w-full">
+              <AutoplayVideo src={vidBeforeS1} className="w-full h-auto block" />
             </div>
             {/* Caption: bg white, px-32 py-28, 20px Medium */}
             <div className="bg-white flex flex-col px-[32px] py-[28px] w-full">
@@ -422,15 +453,11 @@ function BeforeAfter1() {
           <div className="flex flex-col w-full">
             {/* Header: bg #B9CDFB, border #B9CDFB, 나머지 Before와 동일 */}
             <div className="bg-[#b9cdfb] border border-[#b9cdfb] flex items-center px-[32px] py-[12px] w-full">
-              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>After</p>
+              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>After · Data Science</p>
             </div>
-            {/*
-              TODO: Figma 원본에 실제 이미지 미완성 상태.
-              현재 Figma와 동일하게 bg-[#eee] + 빨간 "After" 텍스트 플레이스홀더 유지.
-              실제 After 스크린샷 확정 시 이 영역을 <img>로 교체할 것.
-            */}
-            <div className="bg-[#eee] relative w-full overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1920/1080' }}>
-              <p className="text-[64px] font-semibold leading-[80px] text-red-600" style={{ fontFamily: poppins }}>After</p>
+            {/* Video: 원본 비율 그대로, 가로 100% */}
+            <div className="w-full">
+              <AutoplayVideo src={vidAfterS1} className="w-full h-auto block" />
             </div>
             {/* Caption: bg white, px-32 py-28, 20px Medium */}
             <div className="bg-white flex flex-col px-[32px] py-[28px] w-full">
@@ -483,15 +510,11 @@ function BeforeAfter2() {
           {/* ── Before ── */}
           <div className="flex flex-col w-full">
             <div className="bg-[#f3f3f3] border border-[#ddd] flex items-center px-[32px] py-[12px] w-full">
-              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Before</p>
+              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Before · UI/UX Design</p>
             </div>
-            {/*
-              TODO: Figma 원본에 실제 이미지 미완성 상태 (Figma node 767:37731).
-              현재 Figma와 동일하게 bg-[#eee] + 빨간 "Before" 텍스트 플레이스홀더 유지.
-              실제 Before 스크린샷 확정 시 이 영역을 <img>로 교체할 것.
-            */}
-            <div className="bg-[#eee] relative w-full overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1920/1080' }}>
-              <p className="text-[64px] font-semibold leading-[80px] text-red-600" style={{ fontFamily: poppins }}>Before</p>
+            {/* Video: 원본 비율 그대로, 가로 100% */}
+            <div className="w-full">
+              <AutoplayVideo src={vidBeforeS2} className="w-full h-auto block" />
             </div>
             <div className="bg-white flex flex-col px-[32px] py-[28px] w-full">
               <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>프로그램 정보, 학비, 입학 조건이 서로 다른 페이지에 흩어져 있었습니다.</p>
@@ -501,7 +524,7 @@ function BeforeAfter2() {
           {/* ── After ── */}
           <div className="flex flex-col w-full">
             <div className="bg-[#b9cdfb] border border-[#b9cdfb] flex items-center px-[32px] py-[12px] w-full">
-              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>After</p>
+              <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>After · UI/UX Design</p>
             </div>
             {/*
               TODO: Figma 원본에 실제 이미지 미완성 상태 (Figma node 767:37740).
@@ -865,82 +888,112 @@ function AIImpact3Section() {
 
             {/* Step 02 */}
             <StepCard num="02" title="Auto Apply in Figma">
-              <div className="bg-white flex flex-col gap-[8px] pt-[16px] px-[20px] pb-[0px] w-full">
-                <div className="flex gap-[32px] items-center w-full">
-                  {/* Plugin */}
+              <div className="bg-white flex flex-col gap-[8px] pt-[16px] px-[20px] pb-[0] w-full">
+
+                {/* ── 상단: AI Plugin → Text Style Auto Applied ── */}
+                <div className="flex gap-[32px] items-stretch w-full">
+                  {/* Left: Custom Figma Plugin */}
                   <div className="flex flex-1 flex-col min-w-0">
-                    <div className="bg-[#b9cdfb] flex gap-[10px] items-center px-[20px] py-[10px]">
-                      <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px]">
-                        <span className="text-[14px] font-medium text-white" style={{ fontFamily: poppins }}>AI</span>
+                    <div className="bg-[#b9cdfb] flex gap-[10px] items-center px-[20px] py-[10px] w-full">
+                      <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
+                        <span className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>AI</span>
                       </div>
                       <span className="text-[16px] font-semibold leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Custom Figma Plugin Built with Claude</span>
                     </div>
-                    <div className="bg-[#f7f7f7] flex flex-col px-[20px] py-[12px]">
+                    <div className="bg-[#f7f7f7] flex-1 px-[20px] py-[12px]">
                       <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
                         Figma 파일의 텍스트 레이어를 스캔하고, 등록된 Text Style을 폰트 크기(Size)와 굵기(Weight) 기준으로 자동 매칭하도록 플러그인을 생성했습니다.
                       </p>
                     </div>
                   </div>
-                  <img src={icArrowRightBox} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
-                  {/* Result */}
+                  {/* → 아이콘 */}
+                  <div className="flex items-center justify-center shrink-0">
+                    <img src={icStep02PanelArrow} alt="" aria-hidden className="w-[24px] h-[24px]" />
+                  </div>
+                  {/* Right: Text Style Auto Applied */}
                   <div className="flex flex-1 flex-col min-w-0">
-                    <div className="bg-[#b9cdfb] flex gap-[10px] items-center px-[20px] py-[10px]">
-                      <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px]">
-                        <span className="text-[14px] font-medium text-white" style={{ fontFamily: poppins }}>02</span>
+                    <div className="bg-[#b9cdfb] flex gap-[10px] items-center px-[20px] py-[10px] w-full">
+                      <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
+                        <span className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>02</span>
                       </div>
                       <span className="text-[16px] font-semibold leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Text Style Auto Applied</span>
                     </div>
-                    <div className="bg-[#f7f7f7] flex flex-col px-[20px] py-[12px]">
+                    <div className="bg-[#f7f7f7] flex-1 px-[20px] py-[12px]">
                       <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
                         텍스트 레이어를 스캔해, 조건에 맞는 Text Style을 자동으로 연결했습니다.
                       </p>
                     </div>
                   </div>
                 </div>
-                {/* Auto-match diagram */}
-                <div className="bg-white flex items-center justify-between p-[32px] w-full gap-[24px]">
-                  {/* Left panel */}
-                  <div className="bg-white border border-[#ddd] flex flex-col flex-1 min-w-0 overflow-hidden">
-                    <div className="bg-[#f7f7f7] border-b border-[#ddd] px-[20px] py-[10px]">
-                      <p className="text-[16px] font-semibold text-[#1e293b]" style={{ fontFamily: poppins }}>Text Layers (Figma)</p>
-                    </div>
-                    <div className="flex flex-col gap-[16px] p-[20px]">
-                      {['Make work simpler,', 'create more impact.', 'AI IMPACT helps teams', 'automate repetitive tasks', 'Get Started'].map((line) => (
-                        <div key={line} className="border-b border-[#f3f4f6] pb-[8px]">
-                          <p className="text-[14px] font-normal leading-[21px] text-[#1e293b]" style={{ fontFamily: poppins }}>{line}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Center */}
-                  <div className="bg-[#b9cdfb] flex flex-col items-center justify-center py-[20px] w-[196px] shrink-0">
-                    <div className="text-[20px] font-semibold leading-[30px] text-center text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-                      <p>AI 기반</p>
-                      <p>자동 매칭</p>
-                    </div>
-                    <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>( Size + Weight )</p>
-                  </div>
-                  {/* Right panel */}
-                  <div className="bg-white border border-[#ddd] flex flex-col flex-1 min-w-0 overflow-hidden">
-                    <div className="bg-[#f7f7f7] border-b border-[#ddd] px-[20px] py-[10px]">
-                      <p className="text-[16px] font-semibold text-[#1e293b]" style={{ fontFamily: poppins }}>Registered Text Styles</p>
-                    </div>
-                    <div className="flex flex-col gap-[10px] p-[20px]">
-                      {[
-                        { sample: 'Ag', style: '8xl / SemiBold' },
-                        { sample: 'Ag', style: '7xl / SemiBold' },
-                        { sample: 'Ag', style: 'lg / Regular' },
-                        { sample: 'Ag', style: 'base / Regular' },
-                        { sample: 'Ag', style: 'sm / Medium' },
-                      ].map((row) => (
-                        <div key={row.style} className="flex gap-[12px] items-center border-b border-[#f3f4f6] pb-[8px]">
-                          <div className="bg-[rgba(185,205,251,0.5)] flex items-center justify-center w-[32px] h-[32px]">
-                            <span className="text-[16px] font-semibold text-[#5e8fff]" style={{ fontFamily: poppins }}>{row.sample}</span>
+
+                {/* ── 하단: 3-panel 매칭 다이어그램 ── */}
+                <div className="bg-white flex items-center justify-center py-[24px] w-full">
+                  <div className="flex flex-1 gap-[40px] items-center">
+
+                    {/* Left panel: Text Layers (Figma) */}
+                    <div className="bg-white border border-[#ddd] flex flex-col flex-1 min-w-0 overflow-hidden">
+                      <div className="bg-[#f7f7f7] border-b border-[#e2e8f0] px-[20px] pt-[10px] pb-[10px]">
+                        <p className="text-[16px] font-semibold leading-[24px] text-[#1e293b]" style={{ fontFamily: poppins }}>Text Layers (Figma)</p>
+                      </div>
+                      <div className="flex flex-col p-[20px]">
+                        {['Make work simpler,', 'create more impact.', 'AI IMPACT helps teams', 'automate repetitive tasks', 'Get Started'].map((line, i, arr) => (
+                          <div key={line} className={i < arr.length - 1 ? 'border-b border-[#f3f4f6] pb-[10px] mb-[10px]' : ''}>
+                            <p className="text-[14px] font-normal leading-[21px] text-[#1e293b]" style={{ fontFamily: poppins }}>{line}</p>
                           </div>
-                          <span className="text-[14px] font-normal text-[#334155]" style={{ fontFamily: poppins }}>{row.style}</span>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
+
+                    {/* Connection: Left panel → Center (rotate 180 so curve opens rightward) */}
+                    <img
+                      src={icStep02ConnLeft}
+                      alt="" aria-hidden
+                      className="shrink-0"
+                      style={{ width: '62px', height: '123px', transform: 'rotate(180deg)' }}
+                    />
+
+                    {/* Center panel: AI 기반 자동 매칭 */}
+                    <div className="bg-[#b9cdfb] flex flex-col items-center justify-center py-[20px] shrink-0" style={{ width: '196px' }}>
+                      <div className="flex flex-col gap-[3px] items-center" style={{ width: '133px' }}>
+                        <div className="text-[20px] font-semibold leading-[30px] text-center text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+                          <p className="mb-0">AI 기반</p>
+                          <p>자동 매칭</p>
+                        </div>
+                        <p className="text-[16px] font-medium leading-[24px] text-center text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>( Size + Weight )</p>
+                      </div>
+                    </div>
+
+                    {/* Connection: Center → Right panel */}
+                    <img
+                      src={icStep02ConnRight}
+                      alt="" aria-hidden
+                      className="shrink-0"
+                      style={{ width: '62px', height: '123px' }}
+                    />
+
+                    {/* Right panel: Registered Text Styles */}
+                    <div className="bg-white border border-[#ddd] flex flex-col flex-1 min-w-0 overflow-hidden">
+                      <div className="bg-[#f7f7f7] border-b border-[#ddd] px-[20px] pt-[10px] pb-[10px]">
+                        <p className="text-[16px] font-semibold leading-[24px] text-[#1e293b]" style={{ fontFamily: poppins }}>Registered Text Styles</p>
+                      </div>
+                      <div className="flex flex-col p-[20px]">
+                        {[
+                          '8xl / SemiBold',
+                          '7xl / SemiBold',
+                          'lg / Regular',
+                          'base / Regular',
+                          'sm / Medium',
+                        ].map((label, i, arr) => (
+                          <div key={label} className={`flex gap-[12px] items-center ${i < arr.length - 1 ? 'border-b border-[#f3f4f6] pb-[10px] mb-[10px]' : ''}`}>
+                            <div className="bg-[rgba(185,205,251,0.5)] flex items-center justify-center shrink-0" style={{ width: '32px', height: '32px' }}>
+                              <span className="text-[16px] font-semibold leading-[24px] text-[#5e8fff] text-center" style={{ fontFamily: poppins }}>Ag</span>
+                            </div>
+                            <span className="text-[14px] font-normal leading-[21px] text-[#334155] whitespace-nowrap" style={{ fontFamily: poppins }}>{label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
