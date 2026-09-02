@@ -28,6 +28,98 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 // ─────────────────────────────────────────────────
+// AboutDeco — stagger fade-in inline SVG
+// ─────────────────────────────────────────────────
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.025, delayChildren: 0.25 } },
+}
+const dotVariants = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
+}
+const D = motion.rect   // shorthand for motion.rect
+const P = motion.path   // shorthand for motion.path
+
+function AboutDeco() {
+  return (
+    <motion.svg
+      aria-hidden
+      width="262.44" height="147.26"
+      viewBox="0 0 323 179"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      style={{
+        position: 'absolute', right: 0, top: '-5px',
+        pointerEvents: 'none', zIndex: -1,
+        overflow: 'visible',
+      }}
+    >
+      {/* ── Logo dots (left→right, top→bottom per column) ── */}
+      {/* Col 1 */}
+      <D variants={dotVariants} x="195.008" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="195.008" y="72.3096" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="195.008" y="88.7095" width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* Col 2 */}
+      <D variants={dotVariants} x="211.406" y="39.5098" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="211.406" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="211.406" y="72.3096" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="211.406" y="88.71"   width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="211.406" y="105.11"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* Col 3 */}
+      <D variants={dotVariants} x="227.809" y="23.1099" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="227.809" y="39.5098" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="227.809" y="55.9097" width="8.2" height="8.2" fill="#FBF27E"/>
+      <D variants={dotVariants} x="227.809" y="72.3101" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="227.809" y="88.71"   width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="227.809" y="105.11"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="227.809" y="121.51"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* Col 4 */}
+      <D variants={dotVariants} x="244.207" y="23.1099" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="244.207" y="39.5098" width="8.2" height="8.2" fill="#FBF27E"/>
+      <D variants={dotVariants} x="244.207" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="244.207" y="72.3101" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="244.207" y="88.71"   width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="244.207" y="105.11"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="244.207" y="121.51"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* Col 5 */}
+      <D variants={dotVariants} x="260.609" y="23.1099" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="260.609" y="39.5098" width="8.2" height="8.2" fill="#FBF27E"/>
+      <D variants={dotVariants} x="260.609" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="260.609" y="72.3101" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="260.609" y="88.71"   width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="260.609" y="105.11"  width="8.2" height="8.2" fill="#FBF27E"/>
+      <D variants={dotVariants} x="260.609" y="121.51"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* Col 6 */}
+      <D variants={dotVariants} x="277.008" y="39.5098" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="277.008" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="277.008" y="72.3096" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="277.008" y="88.71"   width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="277.008" y="105.11"  width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* Col 7 */}
+      <D variants={dotVariants} x="293.406" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="293.406" y="72.3096" width="8.2" height="8.2" fill="#1E1E1E"/>
+      <D variants={dotVariants} x="293.406" y="88.7095" width="8.2" height="8.2" fill="#1E1E1E"/>
+      {/* ── Cross deco 1 ── */}
+      <P variants={dotVariants} d="M12.9625 0H21.0625V8.1H12.9625V0Z" fill="#1E1E1E"/>
+      <P variants={dotVariants} d="M12.9625 12.96H21.0625V21.06H12.9625V12.96Z" fill="#FBF27E"/>
+      <P variants={dotVariants} d="M12.9625 25.9199H21.0625V34.0199H12.9625V25.9199Z" fill="#1E1E1E"/>
+      <P variants={dotVariants} d="M25.9195 12.96H34.0195V21.06H25.9195V12.96Z" fill="#1E1E1E"/>
+      <P variants={dotVariants} d="M0.00156403 12.96H8.10156V21.06H0.00156403V12.96Z" fill="#1E1E1E"/>
+      {/* ── Cross deco 2 ── */}
+      <P variants={dotVariants} d="M156.962 144H165.062V152.101H156.962V144Z" fill="#1E1E1E"/>
+      <P variants={dotVariants} d="M169.92 156.959H178.02V165.059H169.92V156.959Z" fill="#1E1E1E"/>
+      <P variants={dotVariants} d="M156.962 156.959H165.062V165.059H156.962V156.959Z" fill="#FBF27E"/>
+      <P variants={dotVariants} d="M144.002 156.959H152.102V165.059H144.002V156.959Z" fill="#1E1E1E"/>
+      <P variants={dotVariants} d="M156.962 169.92H165.062V178.02H156.962V169.92Z" fill="#1E1E1E"/>
+    </motion.svg>
+  )
+}
+
+// ─────────────────────────────────────────────────
 // Data
 // ─────────────────────────────────────────────────
 
@@ -93,18 +185,22 @@ export default function AboutPage() {
       <button
         type="button"
         onClick={() => navigate('/')}
-        className="fixed top-[48px] right-[48px] w-[48px] h-[48px] bg-[#1e1e1e] flex items-center justify-center z-50 border-0 outline-none cursor-pointer shrink-0"
+        className="group fixed top-[48px] right-[48px] w-[48px] h-[48px] bg-[#1e1e1e] flex items-center justify-center z-50 border-0 outline-none cursor-pointer shrink-0"
         aria-label="Close"
       >
-        <img src={icClose} alt="" aria-hidden className="block w-[24px] h-[24px]" />
+        <img src={icClose} alt="" aria-hidden className="block w-[24px] h-[24px] transition-transform duration-200 ease-out group-hover:rotate-90" />
       </button>
 
-      {/* Page content — responsive container: viewport>960px→880px fixed, ≤960px→content shrinks */}
+      {/* Page content */}
       <div className="w-full px-[40px] py-[80px]">
         <div className="max-w-[880px] mx-auto w-full flex flex-col gap-[80px] items-start">
 
           {/* ── Top section ── */}
-          <div className="flex flex-col gap-[48px] items-start w-full">
+          {/* position:relative so the deco SVG can be absolute inside it */}
+          <div className="flex flex-col gap-[48px] items-start w-full relative">
+
+            {/* About deco — stagger fade-in inline SVG */}
+            <AboutDeco />
 
             {/* Profile photo — 200×229px */}
             <div className="w-[200px] h-[229px] relative shrink-0 overflow-hidden">

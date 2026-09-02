@@ -3,7 +3,7 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=767-37494
 
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 // ── Videos ────────────────────────────────────────
@@ -11,17 +11,14 @@ import vidHero          from '../assets/videos/cornerstone-thumb-v2.mp4'
 import vidBeforeS1      from '../assets/videos/solution3-before.mp4'
 import vidBeforeS2      from '../assets/videos/solution2-before.mp4'
 import vidAfterS1       from '../assets/videos/solution1-after.mp4'
+import vidAfterS2       from '../assets/videos/solution2-after.mp4'
 
 // ── Images: problem / solutions ───────────────────
 import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
 import imgBeforeS1       from '../assets/images/cornerstone-detail/before-s1.png'
 
 // ── Images: section 08 (CONSISTENT) ──────────────
-import imgEventBg        from '../assets/images/cornerstone-detail/consistent-event-bg.png'
-import imgEventDesktop   from '../assets/images/cornerstone-detail/consistent-desktop.png'
-import imgEventFlyer     from '../assets/images/cornerstone-detail/consistent-flyer.png'
-import imgEventIphone    from '../assets/images/cornerstone-detail/consistent-iphone.png'
-import imgEventIpad      from '../assets/images/cornerstone-detail/consistent-ipad.png'
+import imgFormatConsistency from '../assets/images/cornerstone-detail/format-consistency.png'
 
 // ── Images: section 09 (AI IMPACT 2) ─────────────
 import imgStitch         from '../assets/images/cornerstone-detail/stitch-screenshot.png'
@@ -31,18 +28,18 @@ import imgTypographyScreen from '../assets/images/cornerstone-detail/typography-
 import imgTypographyFigma  from '../assets/images/cornerstone-detail/typography-figma.png'
 
 // ── Images: section 12 (ACROSS 10 PROGRAMS) ──────
-import imgProgUiux  from '../assets/images/cornerstone-detail/prog-uiux.png'
-import imgProgCyber from '../assets/images/cornerstone-detail/prog-cyber.png'
-import imgProgDs    from '../assets/images/cornerstone-detail/prog-ds.png'
-import imgProgNss   from '../assets/images/cornerstone-detail/prog-nss.png'
-import imgProgWeb   from '../assets/images/cornerstone-detail/prog-web.png'
-import imgProgEm    from '../assets/images/cornerstone-detail/prog-em.png'
-import imgProgIbm   from '../assets/images/cornerstone-detail/prog-ibm.png'
-import imgProgHm    from '../assets/images/cornerstone-detail/prog-hm.png'
-import imgProgDm    from '../assets/images/cornerstone-detail/prog-dm.png'
-import imgProgSdm   from '../assets/images/cornerstone-detail/prog-sdm.png'
-import imgProgEsl   from '../assets/images/cornerstone-detail/prog-esl.png'
-import imgProgCelpip from '../assets/images/cornerstone-detail/prog-celpip.png'
+import imgProgUiux          from '../assets/images/cornerstone-detail/programs/program-uiux.jpg'
+import imgProgCyber         from '../assets/images/cornerstone-detail/programs/program-cybersecurity.jpg'
+import imgProgDs            from '../assets/images/cornerstone-detail/programs/program-data-science.jpg'
+import imgProgNss           from '../assets/images/cornerstone-detail/programs/program-nss.jpg'
+import imgProgWeb           from '../assets/images/cornerstone-detail/programs/program-web-dev.jpg'
+import imgProgEm            from '../assets/images/cornerstone-detail/programs/program-event-mgmt.jpg'
+import imgProgIbm           from '../assets/images/cornerstone-detail/programs/program-ibm.jpg'
+import imgProgHm            from '../assets/images/cornerstone-detail/programs/program-hospitality.jpg'
+import imgProgDm            from '../assets/images/cornerstone-detail/programs/program-digital-marketing.jpg'
+import imgProgSdm           from '../assets/images/cornerstone-detail/programs/program-strategic-dm.jpg'
+import imgProgEsl           from '../assets/images/cornerstone-detail/programs/program-esl.jpg'
+import imgProgCelpip        from '../assets/images/cornerstone-detail/programs/program-celpip.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -57,7 +54,6 @@ import icAttachEmail     from '../assets/icons/cornerstone/attach-email.svg'
 import icCheckCircleUnread from '../assets/icons/cornerstone/check-circle-unread.svg'
 import icCheckOutline    from '../assets/icons/cornerstone/check-outline.svg'
 import icSectionAsterisk from '../assets/icons/cornerstone/section-asterisk.svg'
-import icProgArrow       from '../assets/icons/cornerstone/prog-arrow.svg'
 import icArrowDirection  from '../assets/icons/cornerstone/arrow-direction.svg'
 import icStep02PanelArrow from '../assets/icons/cornerstone/step02-conn-left.svg'
 import icStep02ConnLeft   from '../assets/icons/cornerstone/step02-arrow.svg'
@@ -174,6 +170,87 @@ function ContentWrap({ children }: { children: React.ReactNode }) {
         {children}
       </div>
     </div>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 사이드 네비게이션
+// ─────────────────────────────────────────────────
+const NAV_ITEMS = [
+  { id: 'problem',     label: 'PROBLEM' },
+  { id: 'discovery',   label: 'DISCOVERY' },
+  { id: 'solution-1',  label: 'SOLUTION 1' },
+  { id: 'solution-2',  label: 'SOLUTION 2' },
+  { id: 'ai-impact-1', label: 'AI IMPACT 1 · Collaboration' },
+  { id: 'ai-impact-2', label: 'AI IMPACT 02 · Exploration' },
+  { id: 'ai-impact-3', label: 'AI IMPACT 03' },
+  { id: 'consistent',  label: 'CONSISTENT ACROSS EVERY FORMAT' },
+  { id: 'programs',    label: 'ACROSS 10 PROGRAMS' },
+  { id: 'impact',      label: 'IMPACT' },
+  { id: 'reflection',  label: 'Reflection' },
+] as const
+
+function SideNav() {
+  const [activeId, setActiveId] = useState<string>('problem')
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id)
+          }
+        })
+      },
+      // 뷰포트 상단 30% 구간에 들어온 섹션을 활성으로 판단
+      { rootMargin: '0px 0px -70% 0px', threshold: 0 },
+    )
+
+    NAV_ITEMS.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <nav
+      style={{
+        position: 'fixed',
+        left: '48px',
+        top: '100px',
+        width: '160px',
+        zIndex: 30,
+        background: 'transparent',
+      }}
+    >
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px', background: 'transparent' }}>
+        {NAV_ITEMS.map(({ id, label }) => (
+          <li key={id}>
+            <button
+              type="button"
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                textAlign: 'left',
+                fontFamily: poppins,
+                fontSize: '11px',
+                fontWeight: activeId === id ? 500 : 400,
+                lineHeight: '16px',
+                color: activeId === id ? '#1e1e1e' : '#c0c0c0',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              {label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }
 
@@ -526,13 +603,9 @@ function BeforeAfter2() {
             <div className="bg-[#b9cdfb] border border-[#b9cdfb] flex items-center px-[32px] py-[12px] w-full">
               <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>After · UI/UX Design</p>
             </div>
-            {/*
-              TODO: Figma 원본에 실제 이미지 미완성 상태 (Figma node 767:37740).
-              현재 Figma와 동일하게 bg-[#eee] + 빨간 "After" 텍스트 플레이스홀더 유지.
-              실제 After 스크린샷 확정 시 이 영역을 <img>로 교체할 것.
-            */}
-            <div className="bg-[#eee] relative w-full overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1920/1080' }}>
-              <p className="text-[64px] font-semibold leading-[80px] text-red-600" style={{ fontFamily: poppins }}>After</p>
+            {/* Video: 원본 비율 그대로, 가로 100% */}
+            <div className="w-full">
+              <AutoplayVideo src={vidAfterS2} className="w-full h-auto block" />
             </div>
             <div className="bg-white flex flex-col px-[32px] py-[28px] w-full">
               <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
@@ -1033,40 +1106,57 @@ function ConsistentSection() {
     <section className="w-full bg-white">
       <ContentWrap>
         <SectionLabel num="08" label="CONSISTENT ACROSS EVERY FORMAT" />
-        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+        <h2 className="text-[36px] font-medium leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           웹부터 홍보물까지, 하나의 비주얼 언어로 연결하기
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           각 프로그램의 Hero Visual을 기준으로 Desktop, Tablet, Mobile과 Flyer까지 포맷에 맞게 확장해, 프로그램별 정체성을 유지하면서 일관된 시각 경험을 만들었습니다.
         </p>
 
-        {/* EVENT MANAGEMENT */}
-        <div className="flex flex-col gap-[24px] w-full">
-          <SubHeading icon={icSectionAsterisk} label="EVENT MANAGEMENT" />
-          {/* Image showcase */}
-          <div className="relative w-full overflow-hidden bg-[#f7f7f7]" style={{ height: '508px' }}>
-            <img src={imgEventBg} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
-            {/* Flyer */}
-            <img src={imgEventFlyer} alt="Flyer" className="absolute rounded-[16px] object-cover" style={{ left: '27px', top: '151px', width: '177px', height: '229px' }} />
-            {/* iPhone */}
-            <img src={imgEventIphone} alt="Mobile" className="absolute rounded-[16px] object-cover" style={{ left: '224px', top: '68px', width: '143px', height: '312px' }} />
-            {/* iPad */}
-            <img src={imgEventIpad} alt="iPad" className="absolute rounded-[16px] object-cover" style={{ left: '387px', top: '68px', width: '241px', height: '346px' }} />
-            {/* Desktop */}
-            <img src={imgEventDesktop} alt="Desktop" className="absolute rounded-[16px] object-cover" style={{ left: '657px', top: '68px', width: '417px', height: '296px' }} />
+        {/* 2×2 카드 그리드 */}
+        <div className="flex flex-col gap-[20px] w-full">
+          {/* Row 1 */}
+          <div className="flex gap-[20px] w-full" style={{ height: '380px' }}>
+            {/* Card 1 */}
+            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
+              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
+              <img
+                src={imgFormatConsistency}
+                alt=""
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+            </div>
+            {/* Card 2 */}
+            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
+              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
+              <img
+                src={imgFormatConsistency}
+                alt=""
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+            </div>
           </div>
-        </div>
-
-        {/* Digital marketing */}
-        <div className="flex flex-col gap-[24px] w-full">
-          <SubHeading icon={icSectionAsterisk} label="Digital marketing" />
-          <div className="bg-[#f7f7f7] w-full" style={{ height: '416px' }} />
-        </div>
-
-        {/* Hospitality Management */}
-        <div className="flex flex-col gap-[24px] w-full">
-          <SubHeading icon={icSectionAsterisk} label="Hospitality Management" />
-          <div className="bg-[#f7f7f7] w-full" style={{ height: '416px' }} />
+          {/* Row 2 */}
+          <div className="flex gap-[20px] w-full" style={{ height: '380px' }}>
+            {/* Card 3 */}
+            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
+              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
+              <img
+                src={imgFormatConsistency}
+                alt=""
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+            </div>
+            {/* Card 4 */}
+            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
+              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
+              <img
+                src={imgFormatConsistency}
+                alt=""
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+            </div>
+          </div>
         </div>
       </ContentWrap>
     </section>
@@ -1074,22 +1164,22 @@ function ConsistentSection() {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 12 — 09 ACROSS 10 PROGRAMS (가로 스크롤)
+// 섹션 12 — 09 ACROSS 10 PROGRAMS
 // ─────────────────────────────────────────────────
 
-const PROGRAMS = [
-  { name: 'UI/UX Design',                       category: 'Tech',       color: '#881dd0', img: imgProgUiux  },
-  { name: 'Cybersecurity',                       category: 'Tech',       color: '#00778c', img: imgProgCyber },
-  { name: 'Data Science',                        category: 'Tech',       color: '#4280a1', img: imgProgDs    },
-  { name: 'Network Systems Solutions',           category: 'Tech',       color: '#4f5b66', img: imgProgNss   },
-  { name: 'Web Development',                     category: 'Tech',       color: '#1b6655', img: imgProgWeb   },
-  { name: 'Event Management',                    category: 'Management', color: '#cf3562', img: imgProgEm    },
-  { name: 'International Business Management',   category: 'Management', color: '#4280a1', img: imgProgIbm   },
-  { name: 'Hospitality Management',              category: 'Management', color: '#a17a00', img: imgProgHm    },
-  { name: 'Digital Marketing',                   category: 'Marketing',  color: '#b6362d', img: imgProgDm    },
-  { name: 'Strategic Digital Marketing',         category: 'Marketing',  color: '#80120a', img: imgProgSdm   },
-  { name: 'English as a Second Language (ESL)',  category: 'Languages',  color: '#cf0000', img: imgProgEsl   },
-  { name: 'CELPIP',                              category: 'Languages',  color: '#87744c', img: imgProgCelpip },
+const PROGRAMS: { name: string; img: string }[] = [
+  { name: 'UI/UX Design',                      img: imgProgUiux    },
+  { name: 'Cybersecurity',                      img: imgProgCyber   },
+  { name: 'Data Science',                       img: imgProgDs      },
+  { name: 'Network Systems Solutions',          img: imgProgNss     },
+  { name: 'Web Development',                    img: imgProgWeb     },
+  { name: 'Event Management',                   img: imgProgEm      },
+  { name: 'International Business Management',  img: imgProgIbm     },
+  { name: 'Hospitality Management',             img: imgProgHm      },
+  { name: 'Digital Marketing',                  img: imgProgDm      },
+  { name: 'Strategic Digital Marketing',        img: imgProgSdm     },
+  { name: 'English as a Second Language (ESL)', img: imgProgEsl     },
+  { name: 'CELPIP',                             img: imgProgCelpip  },
 ]
 
 function Across10Programs() {
@@ -1101,35 +1191,24 @@ function Across10Programs() {
           하나의 시스템으로 확장한 10개 프로그램
         </h2>
       </ContentWrap>
-      {/* Horizontal scroll row — ContentWrap과 좌측 정렬 맞춤 */}
-      <div className="w-full overflow-x-auto pb-[40px] px-[40px]" style={{ scrollbarWidth: 'thin' }}>
+      <div className="w-full overflow-x-auto pb-[40px] px-[40px] scrollbar-none">
         <div className="flex gap-[16px]" style={{ width: 'max-content' }}>
           {PROGRAMS.map((prog) => (
-            <div
+            <button
               key={prog.name}
-              className="flex flex-col overflow-hidden"
-              style={{ width: '276px', backgroundColor: prog.color }}
+              type="button"
+              className="cursor-pointer border-0 p-0 bg-transparent"
+              style={{ width: '304px' }}
+              onClick={() => {
+                // TODO: 각 프로그램 상세 페이지 라우팅 연결 예정
+              }}
             >
-              {/* Header */}
-              <div className="flex flex-col pb-[12px] relative">
-                <div className="flex items-center p-[12px]">
-                  <div className="rounded-full px-[14px] py-[4px]" style={{ background: 'rgba(255,255,255,0.15)' }}>
-                    <span className="text-[13px] font-medium leading-[19px] text-[#edf3ff] whitespace-nowrap" style={{ fontFamily: poppins }}>{prog.category}</span>
-                  </div>
-                </div>
-                <div className="flex flex-col px-[12px]">
-                  <p className="text-[18px] font-semibold leading-[26px] text-white" style={{ fontFamily: poppins }}>{prog.name}</p>
-                </div>
-                {/* Arrow */}
-                <div className="absolute right-[12px] top-[12px] bg-[#1e1e1e] w-[24px] h-[24px] flex items-center justify-center overflow-hidden">
-                  <img src={icProgArrow} alt="" aria-hidden className="w-[16px] h-[16px]" />
-                </div>
-              </div>
-              {/* Image */}
-              <div className="w-full overflow-hidden" style={{ aspectRatio: '398.67 / 225' }}>
-                <img src={prog.img} alt={prog.name} className="w-full h-full object-cover" />
-              </div>
-            </div>
+              <img
+                src={prog.img}
+                alt={prog.name}
+                style={{ width: '304px', height: '298px', display: 'block', objectFit: 'cover' }}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -1193,27 +1272,30 @@ export default function CornerstonePage() {
       <button
         type="button"
         onClick={() => navigate('/')}
-        className="fixed top-[48px] right-[48px] w-[48px] h-[48px] bg-[#1e1e1e] flex items-center justify-center z-50 border-0 outline-none cursor-pointer shrink-0"
+        className="group fixed top-[48px] right-[48px] w-[48px] h-[48px] bg-[#1e1e1e] flex items-center justify-center z-50 border-0 outline-none cursor-pointer shrink-0"
         aria-label="Close"
       >
-        <img src={icClose} alt="" aria-hidden className="block w-[24px] h-[24px]" />
+        <img src={icClose} alt="" aria-hidden className="block w-[24px] h-[24px] transition-transform duration-200 ease-out group-hover:rotate-90" />
       </button>
 
-      {/* ─── All sections ────────────────────────── */}
+      {/* ─── Header (full-width) ─────────────────── */}
       <CornerstoneHeader />
-      <ProblemSection />
-      <DiscoverySection />
-      <Solution1Section />
-      <BeforeAfter1 />
-      <Solution2Section />
-      <BeforeAfter2 />
-      <AIImpact1Section />
-      <AIImpact2Section />
-      <AIImpact3Section />
-      <ConsistentSection />
-      <Across10Programs />
-      <ImpactSection />
-      <ReflectionSection />
+
+      {/* ─── Side nav — 뷰포트 왼쪽 고정 ───────────── */}
+      <SideNav />
+
+      {/* ─── Sections — 중앙 정렬 그대로 유지 ──────── */}
+      <div id="problem"><ProblemSection /></div>
+      <div id="discovery"><DiscoverySection /></div>
+      <div id="solution-1"><Solution1Section /><BeforeAfter1 /></div>
+      <div id="solution-2"><Solution2Section /><BeforeAfter2 /></div>
+      <div id="ai-impact-1"><AIImpact1Section /></div>
+      <div id="ai-impact-2"><AIImpact2Section /></div>
+      <div id="ai-impact-3"><AIImpact3Section /></div>
+      <div id="consistent"><ConsistentSection /></div>
+      <div id="programs"><Across10Programs /></div>
+      <div id="impact"><ImpactSection /></div>
+      <div id="reflection"><ReflectionSection /></div>
     </motion.div>
   )
 }
