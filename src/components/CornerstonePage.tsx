@@ -15,7 +15,6 @@ import vidAfterS2       from '../assets/videos/solution2-after.mp4'
 
 // ── Images: problem / solutions ───────────────────
 import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
-import imgBeforeS1       from '../assets/images/cornerstone-detail/before-s1.png'
 
 // ── Images: section 08 (CONSISTENT) ──────────────
 import imgFormatConsistency from '../assets/images/cornerstone-detail/format-consistency.png'

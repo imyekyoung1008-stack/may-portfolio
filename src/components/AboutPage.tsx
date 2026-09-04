@@ -36,7 +36,7 @@ const containerVariants = {
 }
 const dotVariants = {
   hidden:  { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
+  visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeOut' as const } },
 }
 const D = motion.rect   // shorthand for motion.rect
 const P = motion.path   // shorthand for motion.path
