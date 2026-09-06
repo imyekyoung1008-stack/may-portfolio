@@ -16,8 +16,7 @@ import vidAfterS2       from '../assets/videos/solution2-after.mp4'
 // ── Images: problem / solutions ───────────────────
 import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
 
-// ── Images: section 08 (CONSISTENT) ──────────────
-import imgFormatConsistency from '../assets/images/cornerstone-detail/format-consistency.png'
+// ── Images: section 08 (VISUAL SYSTEM) ──────────────
 import imgFormatConsistencyExample from '../assets/images/cornerstone-detail/format-consistency-example.png'
 
 // ── Images: section 09 (AI IMPACT 2) ─────────────
@@ -49,12 +48,9 @@ import icSectionIcon     from '../assets/icons/cornerstone/section-icon.svg'
 import icCheckFill       from '../assets/icons/cornerstone/check-fill.svg'
 import icChecklist       from '../assets/icons/cornerstone/checklist.svg'
 import icArrowRightBox   from '../assets/icons/cornerstone/arrow-right-box.svg'
-import icDvr             from '../assets/icons/cornerstone/dvr.svg'
 import icAttachEmail     from '../assets/icons/cornerstone/attach-email.svg'
 import icCheckCircleUnread from '../assets/icons/cornerstone/check-circle-unread.svg'
-import icCheckOutline    from '../assets/icons/cornerstone/check-outline.svg'
 import icSectionAsterisk from '../assets/icons/cornerstone/section-asterisk.svg'
-import icArrowDirection  from '../assets/icons/cornerstone/arrow-direction.svg'
 import icArrowDown              from '../assets/icons/arrow-down.svg'
 import icArrowSelectedDirection from '../assets/icons/arrow-selected-direction.svg'
 import icArrowNote              from '../assets/icons/arrow-note.svg'
@@ -67,7 +63,6 @@ import imgAi1Proto1       from '../assets/images/cornerstone-detail/ai-impact-1/
 import imgAi1Proto2       from '../assets/images/cornerstone-detail/ai-impact-1/prototype-screenshot-2.png'
 import imgAi1Checklist1   from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-1.png'
 import imgAi1Checklist2   from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-2.png'
-import imgAi1Hero         from '../assets/images/cornerstone-detail/ai-impact-1/hero-image.png'
 import imgAi1EmailBlurred from '../assets/images/cornerstone-detail/ai-impact-1/email-blurred.png'
 import icStep02PanelArrow from '../assets/icons/cornerstone/step02-conn-left.svg'
 import icStep02ConnLeft   from '../assets/icons/cornerstone/step02-arrow.svg'
