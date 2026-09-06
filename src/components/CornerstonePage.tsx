@@ -18,6 +18,7 @@ import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-
 
 // ── Images: section 08 (CONSISTENT) ──────────────
 import imgFormatConsistency from '../assets/images/cornerstone-detail/format-consistency.png'
+import imgFormatConsistencyExample from '../assets/images/cornerstone-detail/format-consistency-example.png'
 
 // ── Images: section 09 (AI IMPACT 2) ─────────────
 import imgStitch         from '../assets/images/cornerstone-detail/stitch-screenshot.png'
@@ -67,6 +68,7 @@ import imgAi1Proto2       from '../assets/images/cornerstone-detail/ai-impact-1/
 import imgAi1Checklist1   from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-1.png'
 import imgAi1Checklist2   from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-2.png'
 import imgAi1Hero         from '../assets/images/cornerstone-detail/ai-impact-1/hero-image.png'
+import imgAi1EmailBlurred from '../assets/images/cornerstone-detail/ai-impact-1/email-blurred.png'
 import icStep02PanelArrow from '../assets/icons/cornerstone/step02-conn-left.svg'
 import icStep02ConnLeft   from '../assets/icons/cornerstone/step02-arrow.svg'
 import icStep02ConnRight  from '../assets/icons/cornerstone/step02-conn-right.svg'
@@ -196,10 +198,9 @@ const NAV_ITEMS = [
   { id: 'ai-impact-1', label: 'AI IMPACT 1 · Collaboration' },
   { id: 'ai-impact-2', label: 'AI IMPACT 02 · Exploration' },
   { id: 'ai-impact-3', label: 'AI IMPACT 03' },
-  { id: 'consistent',  label: 'CONSISTENT ACROSS EVERY FORMAT' },
-  { id: 'programs',    label: 'ACROSS 10 PROGRAMS' },
+  { id: 'consistent',  label: 'VISUAL SYSTEM' },
   { id: 'impact',      label: 'IMPACT' },
-  { id: 'reflection',  label: 'Reflection' },
+  { id: 'reflection',  label: 'REFLECTION' },
 ] as const
 
 function SideNav() {
@@ -917,9 +918,9 @@ function AIImpact1Section() {
                   </div>
                 </div>
               </div>
-              {/* 우: 히어로 이미지 + 그라디언트 */}
+              {/* 우: 블러 처리된 이메일 이미지 + 하단 그라디언트 */}
               <div className="flex-1 min-w-0 relative self-stretch">
-                <img src={imgAi1Hero} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={imgAi1EmailBlurred} alt="" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 72.46%, white 100%)' }} />
               </div>
             </div>
@@ -1288,66 +1289,34 @@ function AIImpact3Section() {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 11 — 08 CONSISTENT ACROSS EVERY FORMAT
+// 섹션 11 — 08 VISUAL SYSTEM
 // ─────────────────────────────────────────────────
 function ConsistentSection() {
   return (
     <section className="w-full bg-white">
-      <ContentWrap>
-        <SectionLabel num="08" label="CONSISTENT ACROSS EVERY FORMAT" />
-        <h2 className="text-[36px] font-medium leading-[47px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          웹부터 홍보물까지, 하나의 비주얼 언어로 연결하기
-        </h2>
-        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          각 프로그램의 Hero Visual을 기준으로 Desktop, Tablet, Mobile과 Flyer까지 포맷에 맞게 확장해, 프로그램별 정체성을 유지하면서 일관된 시각 경험을 만들었습니다.
-        </p>
+      {/* pt-60px, pb-0 — 아래 Across10Programs(pt-24px)와 합쳐 24px 간격 */}
+      <div className="w-full px-[40px] pt-[60px]">
+        <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[32px]">
+          <SectionLabel num="08" label="VISUAL SYSTEM" />
+          <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+            Scaling One Visual System Across Formats and Programs
+          </h2>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+            I extended each program's hero visual across digital and print formats, then applied the same system across 10 diploma programs.
+          </p>
 
-        {/* 2×2 카드 그리드 */}
-        <div className="flex flex-col gap-[20px] w-full">
-          {/* Row 1 */}
-          <div className="flex gap-[20px] w-full" style={{ height: '380px' }}>
-            {/* Card 1 */}
-            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
-              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
-              <img
-                src={imgFormatConsistency}
-                alt=""
-                className="absolute inset-0 w-full h-full object-contain"
-              />
-            </div>
-            {/* Card 2 */}
-            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
-              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
-              <img
-                src={imgFormatConsistency}
-                alt=""
-                className="absolute inset-0 w-full h-full object-contain"
-              />
-            </div>
+          {/* Sub-section: One Program, Multiple Formats */}
+          <div className="flex gap-[6px] items-center w-full">
+            <img src={icSectionAsterisk} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>One Program, Multiple Formats</p>
           </div>
-          {/* Row 2 */}
-          <div className="flex gap-[20px] w-full" style={{ height: '380px' }}>
-            {/* Card 3 */}
-            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
-              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
-              <img
-                src={imgFormatConsistency}
-                alt=""
-                className="absolute inset-0 w-full h-full object-contain"
-              />
-            </div>
-            {/* Card 4 */}
-            <div className="flex-1 relative bg-[#f7f7f7] p-[32px]">
-              {/* TODO: 카드별 다른 이미지로 교체 예정 */}
-              <img
-                src={imgFormatConsistency}
-                alt=""
-                className="absolute inset-0 w-full h-full object-contain"
-              />
-            </div>
+
+          {/* Format consistency example — #F7F7F7 박스 386px */}
+          <div className="w-full bg-[#f7f7f7] overflow-hidden flex items-center justify-center" style={{ height: '386px' }}>
+            <img src={imgFormatConsistencyExample} alt="One program across Flyer, Desktop, iPad Pro, and iPhone formats" className="w-full h-full object-contain" />
           </div>
         </div>
-      </ContentWrap>
+      </div>
     </section>
   )
 }
@@ -1372,22 +1341,44 @@ const PROGRAMS: { name: string; img: string }[] = [
 ]
 
 function Across10Programs() {
+  const [paused, setPaused] = useState(false)
+
   return (
-    <section className="w-full bg-white">
-      <ContentWrap>
-        <SectionLabel num="09" label="ACROSS 10 PROGRAMS" />
-        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          하나의 시스템으로 확장한 10개 프로그램
-        </h2>
-      </ContentWrap>
-      <div className="w-full overflow-x-auto pb-[40px] px-[40px] scrollbar-none">
-        <div className="flex gap-[16px]" style={{ width: 'max-content' }}>
-          {PROGRAMS.map((prog) => (
+    <section className="w-full bg-white flex flex-col py-[24px] gap-[24px]">
+      {/* Sub-section label: Across 10 Programs — px-40 constrained */}
+      <div className="w-full px-[40px]">
+        <div className="max-w-[960px] mx-auto w-full">
+          <div className="flex gap-[6px] items-center">
+            <img src={icSectionAsterisk} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Across 10 Programs</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 마퀴 래퍼 — overflow hidden + 좌우 페이드 + hover 멈춤 */}
+      <div
+        className="w-full overflow-hidden relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* 왼쪽 페이드 */}
+        <div className="absolute left-0 top-0 h-full z-10 pointer-events-none" style={{ width: '100px', background: 'linear-gradient(to right, white, transparent)' }} />
+        {/* 오른쪽 페이드 */}
+        <div className="absolute right-0 top-0 h-full z-10 pointer-events-none" style={{ width: '100px', background: 'linear-gradient(to left, white, transparent)' }} />
+        <div
+          className="flex gap-[12px] items-start"
+          style={{
+            width: 'max-content',
+            animation: 'marquee 40s linear infinite',
+            animationPlayState: paused ? 'paused' : 'running',
+          }}
+        >
+          {[...PROGRAMS, ...PROGRAMS].map((prog, i) => (
             <button
-              key={prog.name}
+              key={`${prog.name}-${i}`}
               type="button"
-              className="cursor-pointer border-0 p-0 bg-transparent"
-              style={{ width: '304px' }}
+              className="cursor-pointer border-0 p-0 bg-transparent shrink-0"
+              style={{ width: '247px' }}
               onClick={() => {
                 // TODO: 각 프로그램 상세 페이지 라우팅 연결 예정
               }}
@@ -1395,7 +1386,7 @@ function Across10Programs() {
               <img
                 src={prog.img}
                 alt={prog.name}
-                style={{ width: '304px', height: '298px', display: 'block', objectFit: 'cover' }}
+                style={{ width: '247px', height: '241px', display: 'block', objectFit: 'cover' }}
               />
             </button>
           ))}

@@ -358,6 +358,12 @@
   line-height: 20px;
 }
 
+/* 마퀴(무한 가로 흐름) 애니메이션 */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* 스크롤바 완전 숨김 유틸리티 */
 @utility scrollbar-none {
   scrollbar-width: none;
