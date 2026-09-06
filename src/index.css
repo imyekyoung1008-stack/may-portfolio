@@ -8,6 +8,7 @@
    ───────────────────────────────────────────── */
 @theme {
   --font-poppins: 'Poppins', sans-serif;
+  --breakpoint-3xl: 1440px;
 
   /* font-size 토큰 */
   --font-size-8xl:  clamp(57.6px, 1vw + 44.8px, 64px);
@@ -372,6 +373,11 @@
    unlayered 규칙은 @layer utilities보다 항상 우선
    되어 모든 padding/margin 유틸리티를 덮어씀.
    ───────────────────────────────────────────── */
+/* 비디오 컨트롤 패널 배경 — Webkit(Chrome, Safari) */
+video::-webkit-media-controls-panel {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+}
+
 @layer base {
   * {
     margin: 0;
