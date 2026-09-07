@@ -40,6 +40,43 @@
   --letter-spacing-4xl-tracked: 3.2px;
   --letter-spacing-lg-tracked:  1.8px;
 
+  /* ── desktop 타이포그래피 스케일 — Figma Poppins (고정 px) ──
+     사용법: className="text-desktop-4xl font-semibold"
+     굵기는 font-weight 유틸리티로 별도 조합 (font-normal / font-medium / font-semibold)
+  */
+  --text-desktop-8xl: 64px;
+  --text-desktop-8xl--line-height: 80px;
+
+  --text-desktop-7xl: 56px;
+  --text-desktop-7xl--line-height: 67px;
+
+  --text-desktop-6xl: 48px;
+  --text-desktop-6xl--line-height: 58px;
+
+  --text-desktop-5xl: 36px;
+  --text-desktop-5xl--line-height: 47px;
+
+  --text-desktop-4xl: 32px;
+  --text-desktop-4xl--line-height: 42px;
+
+  --text-desktop-3xl: 28px;
+  --text-desktop-3xl--line-height: 36px;
+
+  --text-desktop-2xl: 24px;
+  --text-desktop-2xl--line-height: 36px;
+
+  --text-desktop-xl: 20px;
+  --text-desktop-xl--line-height: 30px;
+
+  --text-desktop-lg: 18px;
+  --text-desktop-lg--line-height: 27px;
+
+  --text-desktop-base: 16px;
+  --text-desktop-base--line-height: 24px;
+
+  --text-desktop-sm: 14px;
+  --text-desktop-sm--line-height: 21px;
+
   /* color 토큰 — 포트폴리오 브랜드 */
   --color-bg:        #F7F4F0;
   --color-bg-dark:   #E7E4DE;
@@ -382,6 +419,11 @@
 /* 비디오 컨트롤 패널 배경 — Webkit(Chrome, Safari) */
 video::-webkit-media-controls-panel {
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+}
+
+::selection {
+  background-color: rgba(251, 242, 126, 0.5);
+  color: inherit;
 }
 
 @layer base {
