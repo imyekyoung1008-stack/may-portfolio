@@ -4,6 +4,7 @@
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 // ── Images ──────────────────────────────────────
 import imgHeroPhoto      from '../assets/images/hero-photo.jpeg'
@@ -25,6 +26,16 @@ import icViewProject     from '../assets/icons/arrow-view-project.svg'
 // ─────────────────────────────────────────────────
 
 const poppins = "'Poppins', sans-serif"
+
+// ── Card animation variants ──────────────────────
+const cardContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+}
+const cardVariants = {
+  hidden:  { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' as const } },
+}
 
 const PROJECT_LIST = [
   { title: 'Cornerstone College(CICCC)', sub: 'Education Website' },
@@ -281,15 +292,22 @@ export default function TabletMainPage() {
 
         {/* ══ 오른쪽 컬럼 — flex-1, py-48px, gap-48px ══ */}
         <div className="flex-1 min-w-0">
-          <div className="flex flex-col gap-[48px] items-start w-full py-[48px]">
+          <motion.div
+            className="flex flex-col gap-[48px] items-start w-full py-[48px]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={cardContainerVariants}
+          >
             {PROJECT_CARDS.map((card) => (
-              <ProjectCard
-                key={card.title}
-                {...card}
-                onClick={card.route ? () => navigate(card.route!) : undefined}
-              />
+              <motion.div key={card.title} className="w-full" variants={cardVariants}>
+                <ProjectCard
+                  {...card}
+                  onClick={card.route ? () => navigate(card.route!) : undefined}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
       </div>

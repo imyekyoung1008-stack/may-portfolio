@@ -15,6 +15,7 @@
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 // ── Images ──────────────────────────────────────
 import imgHeroPhoto      from '../assets/images/hero-photo.jpeg'
@@ -34,6 +35,7 @@ import icViewProject     from '../assets/icons/arrow-view-project.svg'
 // ─────────────────────────────────────────────────
 // Data
 // ─────────────────────────────────────────────────
+
 
 const PROJECT_LIST = [
   { title: 'Cornerstone College(CICCC)', sub: 'Education Website' },
@@ -338,12 +340,20 @@ export default function MainPage() {
           ════════════════════════════════════ */}
           <div className="ml-[612px] mp-right-col">
             <div className="flex flex-col gap-[72px] items-start w-full pt-[80px] pb-[80px]">
-              {PROJECT_CARDS.map((card) => (
-                <ProjectCard
+              {PROJECT_CARDS.map((card, i) => (
+                <motion.div
                   key={card.title}
-                  {...card}
-                  onClick={card.route ? () => navigate(card.route!) : undefined}
-                />
+                  className="w-full"
+                  initial={{ opacity: 0, y: 48 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.12 }}
+                >
+                  <ProjectCard
+                    {...card}
+                    onClick={card.route ? () => navigate(card.route!) : undefined}
+                  />
+                </motion.div>
               ))}
             </div>
 

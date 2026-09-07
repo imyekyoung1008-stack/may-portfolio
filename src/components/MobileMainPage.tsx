@@ -3,6 +3,7 @@
 // ★ MainPage.tsx(데스크톱)는 건드리지 않고 완전히 별도 컴포넌트로 분리
 
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 // ── Images ──────────────────────────────────────
 import imgHeroPhoto      from '../assets/images/hero-photo.jpeg'
@@ -23,6 +24,7 @@ import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
 // ─────────────────────────────────────────────────
 
 const poppins = "'Poppins', sans-serif"
+
 
 const PROJECT_LIST = [
   { title: 'Cornerstone College(CICCC)', sub: 'Education Website' },
@@ -144,10 +146,14 @@ export default function MobileMainPage() {
 
         {/* ══ 섹션 2: 프로젝트 카드 3개 — gap-40px ══ */}
         <div className="flex flex-col gap-[40px] items-start w-full">
-          {PROJECT_CARDS.map((card) => (
-            <div
+          {PROJECT_CARDS.map((card, i) => (
+            <motion.div
               key={card.title}
               className="flex flex-col gap-[16px] items-start w-full cursor-pointer"
+              initial={{ opacity: 0, y: 48 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.12 }}
               onClick={card.route ? () => navigate(card.route!) : undefined}
             >
               {/* 썸네일 — 342/228 비율 (모바일 전용) */}
@@ -179,7 +185,7 @@ export default function MobileMainPage() {
                   {card.desc}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
