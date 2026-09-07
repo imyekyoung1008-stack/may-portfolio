@@ -173,10 +173,10 @@ export default function MainPage() {
           {/* ════════════════════════════════════
               LEFT COLUMN — 464px, viewport에 fixed 고정
               fixed이므로 문서 흐름에서 빠짐 →
-              오른쪽 컬럼에 ml-[604px](464+140) 보정
+              오른쪽 컬럼에 ml-[612px](472+140) 보정
               Figma: node 741:33981
           ════════════════════════════════════ */}
-          <div className="fixed top-0 w-[464px] h-screen overflow-hidden flex flex-col items-start z-10 bg-[#F7F4F0] mp-left-col" style={{ left: 'calc((100vw - 1440px) / 2)' }}>
+          <div className="fixed top-0 w-[472px] h-screen overflow-hidden flex flex-col items-start z-10 bg-[#F7F4F0] mp-left-col" style={{ left: 'calc((100vw - 1440px) / 2)' }}>
             {/* 741:33982 — pt-104 pb-80 + gap-56, matching Figma layout */}
             <div className="flex flex-col gap-[56px] items-start pt-[80px] pb-[80px] w-full shrink-0">
 
@@ -336,7 +336,7 @@ export default function MainPage() {
           {/* ════════════════════════════════════
               RIGHT COLUMN — fixed 왼쪽 컬럼(464px) + gap(140px) = 604px 보정
           ════════════════════════════════════ */}
-          <div className="ml-[604px] mp-right-col">
+          <div className="ml-[612px] mp-right-col">
             <div className="flex flex-col gap-[72px] items-start w-full pt-[80px] pb-[80px]">
               {PROJECT_CARDS.map((card) => (
                 <ProjectCard

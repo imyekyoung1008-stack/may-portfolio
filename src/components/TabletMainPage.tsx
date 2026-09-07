@@ -152,7 +152,7 @@ export default function TabletMainPage() {
       <div className="flex flex-row gap-[32px] px-[40px]">
 
         {/* ══ 왼쪽 컬럼 — sticky, w-300px, h-screen ══ */}
-        <div className="w-[300px] shrink-0 sticky top-0 h-screen overflow-hidden bg-[#F7F4F0]">
+        <div className="shrink-0 sticky top-0 h-screen overflow-hidden bg-[#F7F4F0]" style={{ width: 'clamp(300px, calc(-103.69px + 39.42vw), 464px)' }}>
 
           {/* 내부 콘텐츠: py-48px, gap-32px */}
           <div className="flex flex-col gap-[32px] items-start py-[48px] w-full shrink-0">
