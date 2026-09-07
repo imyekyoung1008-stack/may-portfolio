@@ -1,6 +1,5 @@
-// AboutPage.tsx — About me page
-// Figma: node 759:37337
-// Layout: max-w-880px, px-170px, py-80px, centered
+// TabletAboutPage.tsx — About me page, Tablet layout (1024px–1439px)
+// Figma: node-id 817-1312
 
 // ── Profile ──────────────────────────────────────
 import imgProfile        from '../assets/images/about/profile.jpg'
@@ -28,7 +27,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 // ─────────────────────────────────────────────────
-// AboutDeco — stagger fade-in inline SVG
+// AboutDeco — tablet scale (≈80%)
 // ─────────────────────────────────────────────────
 const containerVariants = {
   hidden: {},
@@ -38,14 +37,14 @@ const dotVariants = {
   hidden:  { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeOut' as const } },
 }
-const D = motion.rect   // shorthand for motion.rect
-const P = motion.path   // shorthand for motion.path
+const D = motion.rect
+const P = motion.path
 
 function AboutDeco() {
   return (
     <motion.svg
       aria-hidden
-      width="262.44" height="147.26"
+      width="210" height="118"
       viewBox="0 0 323 179"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +57,6 @@ function AboutDeco() {
         overflow: 'visible',
       }}
     >
-      {/* ── Logo dots (left→right, top→bottom per column) ── */}
       {/* Col 1 */}
       <D variants={dotVariants} x="195.008" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
       <D variants={dotVariants} x="195.008" y="72.3096" width="8.2" height="8.2" fill="#1E1E1E"/>
@@ -103,13 +101,13 @@ function AboutDeco() {
       <D variants={dotVariants} x="293.406" y="55.9097" width="8.2" height="8.2" fill="#1E1E1E"/>
       <D variants={dotVariants} x="293.406" y="72.3096" width="8.2" height="8.2" fill="#1E1E1E"/>
       <D variants={dotVariants} x="293.406" y="88.7095" width="8.2" height="8.2" fill="#1E1E1E"/>
-      {/* ── Cross deco 1 ── */}
+      {/* Cross deco 1 */}
       <P variants={dotVariants} d="M12.9625 0H21.0625V8.1H12.9625V0Z" fill="#1E1E1E"/>
       <P variants={dotVariants} d="M12.9625 12.96H21.0625V21.06H12.9625V12.96Z" fill="#FBF27E"/>
       <P variants={dotVariants} d="M12.9625 25.9199H21.0625V34.0199H12.9625V25.9199Z" fill="#1E1E1E"/>
       <P variants={dotVariants} d="M25.9195 12.96H34.0195V21.06H25.9195V12.96Z" fill="#1E1E1E"/>
       <P variants={dotVariants} d="M0.00156403 12.96H8.10156V21.06H0.00156403V12.96Z" fill="#1E1E1E"/>
-      {/* ── Cross deco 2 ── */}
+      {/* Cross deco 2 */}
       <P variants={dotVariants} d="M156.962 144H165.062V152.101H156.962V144Z" fill="#1E1E1E"/>
       <P variants={dotVariants} d="M169.92 156.959H178.02V165.059H169.92V156.959Z" fill="#1E1E1E"/>
       <P variants={dotVariants} d="M156.962 156.959H165.062V165.059H156.962V156.959Z" fill="#FBF27E"/>
@@ -122,7 +120,6 @@ function AboutDeco() {
 // ─────────────────────────────────────────────────
 // Data
 // ─────────────────────────────────────────────────
-
 const CARDS = [
   {
     num:   '01',
@@ -166,7 +163,7 @@ const CARDS = [
 // ─────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────
-export default function AboutPage() {
+export default function TabletAboutPage() {
   const navigate = useNavigate()
 
   return (
@@ -181,25 +178,23 @@ export default function AboutPage() {
       exit={{ y: '100%' }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Close button — fixed top-right */}
+      {/* Close button — top-[24px] right-[24px] */}
       <button
         type="button"
         onClick={() => navigate('/')}
-        className="group fixed top-[48px] right-[48px] w-[48px] h-[48px] bg-[#1e1e1e] flex items-center justify-center z-50 border-0 outline-none cursor-pointer shrink-0"
+        className="group fixed top-[24px] right-[24px] w-[48px] h-[48px] bg-[#1e1e1e] flex items-center justify-center z-50 border-0 outline-none cursor-pointer shrink-0"
         aria-label="Close"
       >
         <img src={icClose} alt="" aria-hidden className="block w-[24px] h-[24px] transition-transform duration-200 ease-out group-hover:rotate-90" />
       </button>
 
-      {/* Page content */}
-      <div className="w-full px-[40px] py-[80px]">
-        <div className="max-w-[880px] mx-auto w-full flex flex-col gap-[60px] items-start">
+      {/* Page content: px-48px pt-80px pb-64px */}
+      <div className="w-full px-[48px] pt-[80px] pb-[64px]">
+        <div className="max-w-[880px] mx-auto w-full flex flex-col gap-[64px] items-start">
 
           {/* ── Top section ── */}
-          {/* position:relative so the deco SVG can be absolute inside it */}
-          <div className="flex flex-col gap-[32px] items-start w-full relative">
+          <div className="flex flex-col gap-[48px] items-start w-full relative">
 
-            {/* About deco — stagger fade-in inline SVG */}
             <AboutDeco />
 
             {/* Profile photo — 200×229px */}
@@ -211,18 +206,18 @@ export default function AboutPage() {
               />
             </div>
 
-            {/* Headline */}
+            {/* Headline — 24px/34px Medium */}
             <div className="w-full">
               <div
-                className="text-[#1e1e1e] text-[28px] leading-[0] not-italic w-full"
+                className="text-[#1e1e1e] text-[24px] leading-[0] not-italic w-full"
                 style={{ fontWeight: 500 }}
               >
-                <p className="leading-[36px] mb-0">I'm May,</p>
-                <p className="leading-[36px]">a product designer who listens first and turns what I learn into thoughtful digital experiences.</p>
+                <p className="leading-[34px] mb-0">I'm May,</p>
+                <p className="leading-[34px]">a product designer who listens first and turns what I learn into thoughtful digital experiences.</p>
               </div>
             </div>
 
-            {/* Body text */}
+            {/* Body text — 18px/27px */}
             <div
               className="text-[#1e1e1e] text-[18px] leading-[27px] not-italic w-full"
               style={{ fontWeight: 400 }}
@@ -243,7 +238,7 @@ export default function AboutPage() {
                 key={card.num}
                 className="bg-white flex flex-col gap-[24px] items-start p-[24px] w-full"
               >
-                {/* Card header: number badge + title */}
+                {/* Card header */}
                 <div className="flex gap-[20px] items-center w-full">
                   <div className="bg-[#fbf27e] w-[32px] h-[32px] shrink-0 flex items-center justify-center">
                     <p
@@ -278,7 +273,7 @@ export default function AboutPage() {
                   ))}
                 </div>
 
-                {/* Gallery */}
+                {/* Gallery — fixed height, auto width from aspect-ratio */}
                 <div
                   className="flex items-start w-full overflow-hidden"
                   style={{ gap: `${card.galleryGap}px`, height: `${card.galleryHeight}px` }}

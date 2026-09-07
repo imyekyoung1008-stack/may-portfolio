@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import MainPageRouter  from './components/MainPageRouter'
-import AboutPage       from './components/AboutPage'
+import AboutPageRouter from './components/AboutPageRouter'
 import CornerstonePage from './components/CornerstonePage'
 import ScrollToTop     from './components/ScrollToTop'
 
@@ -11,7 +11,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="sync">
       <Routes location={location} key={location.pathname}>
         <Route path="/"                         element={<MainPageRouter />}  />
-        <Route path="/about"                    element={<AboutPage />}       />
+        <Route path="/about"                    element={<AboutPageRouter />} />
         <Route path="/projects/cornerstone"     element={<CornerstonePage />} />
       </Routes>
     </AnimatePresence>
