@@ -1,0 +1,7 @@
+<svg width="72" height="123" viewBox="0 0 72 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- bracket mirrored: top and bottom curves converge to left-center (x=10, y=61.8) -->
+  <path d="M71 0.807C30.333 0.807 30.333 61.807 10 61.807" stroke="#9CA3AF" stroke-width="1.615" stroke-dasharray="4.84 4.84"/>
+  <path d="M72 121.807C32 121.807 32 61.807 12 61.807" stroke="#9CA3AF" stroke-width="1.615" stroke-dasharray="4.84 4.84"/>
+  <!-- arrowhead at left, pointing ← -->
+  <path d="M10 56.807L0 61.807L10 66.807Z" fill="#4B5563"/>
+</svg>

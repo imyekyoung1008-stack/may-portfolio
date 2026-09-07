@@ -23,8 +23,9 @@ import imgFormatConsistencyExample from '../assets/images/cornerstone-detail/for
 import imgStitch         from '../assets/images/cornerstone-detail/stitch-screenshot.png'
 
 // ── Images: section 10 (AI IMPACT 3) ─────────────
-import imgTypographyScreen from '../assets/images/cornerstone-detail/typography-screen.png'
-import imgTypographyFigma  from '../assets/images/cornerstone-detail/typography-figma.png'
+import imgExtractScreen1  from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-1.png'
+import imgExtractScreen2  from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-2.png'
+import imgExtendMobile    from '../assets/images/cornerstone-detail/ai-impact-3/extend-mobile-screenshot.png'
 
 // ── Images: section 12 (ACROSS 10 PROGRAMS) ──────
 import imgProgUiux          from '../assets/images/cornerstone-detail/programs/program-uiux.jpg'
@@ -64,9 +65,9 @@ import imgAi1Proto2       from '../assets/images/cornerstone-detail/ai-impact-1/
 import imgAi1Checklist1   from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-1.png'
 import imgAi1Checklist2   from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-2.png'
 import imgAi1EmailBlurred from '../assets/images/cornerstone-detail/ai-impact-1/email-blurred.png'
-import icStep02PanelArrow from '../assets/icons/cornerstone/step02-conn-left.svg'
-import icStep02ConnLeft   from '../assets/icons/cornerstone/step02-arrow.svg'
-import icStep02ConnRight  from '../assets/icons/cornerstone/step02-conn-right.svg'
+import icStep02PanelArrow    from '../assets/icons/cornerstone/step02-conn-left.svg'
+import icConnDashedLeft     from '../assets/icons/cornerstone/connection-dashed-left.svg'
+import icConnDashedRight    from '../assets/icons/cornerstone/connection-dashed-right.svg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -1082,19 +1083,13 @@ function AIImpact3Section() {
   return (
     <section className="w-full bg-white">
       <ContentWrap>
-        <SectionLabel num="07" label="AI IMPACT 03" />
-        <h2 className="text-[32px] font-semibold leading-[42px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          AI로 실제 화면의 디자인 규칙을 추출하고 시스템화하기
+        <SectionLabel num="07" label="AI IMPACT 03 · System Building" />
+        <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+          Turning real UI rules into a reusable typography system
         </h2>
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          완성된 Desktop 화면에서 실제 사용된 Typography 규칙을 Figma MCP와 Claude로 추출해 Style Library로 구조화했습니다. 이후 Mobile까지 확장하고, 추후 제작되는 랜딩페이지에서도 동일한 스타일 기준을 디자인과 개발에 재사용할 수 있는 기반을 만들었습니다.
+          I extracted typography rules from a finished desktop interface using Figma MCP and Claude. Then I built a Figma plugin to apply the corresponding text styles across desktop, tablet, and mobile. The system can be reused for future landing pages and development work.
         </p>
-        <KeyInsight text={
-          <>
-            <p>AI를 활용해 실제 화면의 규칙을 추출하고,</p>
-            <p>재사용 가능한 스타일 시스템으로 빠르게 전환했습니다.</p>
-          </>
-        } />
 
         {/* AI ASSISTED TYPOGRAPHY SYSTEM */}
         <div className="flex flex-col gap-[24px] w-full">
@@ -1102,36 +1097,45 @@ function AIImpact3Section() {
           <div className="flex flex-col gap-[16px] w-full">
 
             {/* Step 01 */}
-            <StepCard num="01" title="Extract with AI from Real UI">
-              <div className="bg-white flex gap-[16px] items-center pt-[16px] px-[20px] pb-[0px] w-full">
-                <div className="flex-1 min-w-0 overflow-hidden relative" style={{ height: '300px' }}>
-                  <img src={imgTypographyScreen} alt="실제 Desktop 화면" className="w-full h-full object-cover object-top" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 60%, white 100%)' }} />
+            <StepCard num="01" title="Extract Typography Rules from a Real UI">
+              <div className="bg-white flex gap-[16px] items-start pt-[16px] px-[20px] pb-[0px] w-full">
+                {/* Left: full-page screenshot (271×444) */}
+                <div className="shrink-0 overflow-hidden" style={{ width: '271px', height: '444px' }}>
+                  <img src={imgExtractScreen1} alt="Desktop UI screenshot" className="w-full h-full object-cover object-top" />
                 </div>
-                <img src={icArrowRightBox} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
-                <div className="w-[200px] shrink-0 overflow-hidden relative" style={{ height: '300px' }}>
-                  <img src={imgTypographyFigma} alt="Figma Typography panel" className="w-full h-full object-cover object-top" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 60%, white 100%)' }} />
+                {/* Arrow */}
+                <img src={icArrowRightBox} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0 mt-[210px]" />
+                {/* Middle: zoomed panel screenshot (146×444) */}
+                <div className="shrink-0 overflow-hidden" style={{ width: '146px', height: '444px' }}>
+                  <img src={imgExtractScreen2} alt="Typography panel close-up" className="w-full h-full object-cover object-top" />
                 </div>
+                {/* Right: Extracted Typography Attributes */}
                 <div className="flex flex-1 flex-col gap-[16px] min-w-0">
                   <div className="border-b border-[#1e1e1e] pb-[12px] pt-[4px]">
-                    <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Extracted Typography Attributes</p>
+                    <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Extracted Typography Attributes</p>
                   </div>
-                  {['Font Size', 'Weight', 'Line Height', 'Line Spacing'].map((attr) => (
-                    <div key={attr} className="bg-[#f7f7f7] flex items-center justify-center px-[20px] py-[16px] w-full">
-                      <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>{attr}</span>
+                  {[
+                    { attr: 'Font Size',      val: '64px' },
+                    { attr: 'Weight',         val: 'SemiBold' },
+                    { attr: 'Line Height',    val: '80px' },
+                    { attr: 'Letter Spacing', val: '0px' },
+                  ].map(({ attr, val }) => (
+                    <div key={attr} className="bg-[#f7f7f7] flex items-center justify-between px-[20px] py-[16px] w-full">
+                      <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{attr}</span>
+                      <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>{val}</span>
                     </div>
                   ))}
                 </div>
               </div>
+              {/* Flow badges */}
               <div className="bg-white flex items-center px-[20px] py-[16px] w-full">
                 <div className="flex gap-[8px] items-center w-full">
                   {[
-                    { label: 'Figma MCP', bg: 'bg-[#f7f7f7]' },
-                    { label: null, isArrow: true },
-                    { label: 'Claude 분석', bg: 'bg-[#f7f7f7]' },
-                    { label: null, isArrow: true },
-                    { label: 'Typography 추출', bg: 'bg-[#b9cdfb]' },
+                    { label: 'Figma MCP',             bg: 'bg-[#f7f7f7]', isArrow: false },
+                    { label: null,                    bg: '',              isArrow: true  },
+                    { label: 'Claude Analysis',       bg: 'bg-[#f7f7f7]', isArrow: false },
+                    { label: null,                    bg: '',              isArrow: true  },
+                    { label: 'Typography Extraction', bg: 'bg-[#b9cdfb]', isArrow: false },
                   ].map((item, i) => item.isArrow ? (
                     <img key={i} src={icArrowRightBox} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
                   ) : (
@@ -1141,14 +1145,14 @@ function AIImpact3Section() {
                   ))}
                 </div>
               </div>
-              <StepNote>일부 완성된 Desktop 화면을 기준으로, Figma MCP와 Claude를 활용해 실제 사용된 Typography 규칙을 추출했습니다.</StepNote>
+              <StepNote>Using Figma MCP and Claude, I extracted the typography rules from a completed desktop interface.</StepNote>
             </StepCard>
 
             {/* Step 02 */}
-            <StepCard num="02" title="Auto Apply in Figma">
+            <StepCard num="02" title="Auto Apply Text Styles in Figma">
               <div className="bg-white flex flex-col gap-[8px] pt-[16px] px-[20px] pb-[0] w-full">
 
-                {/* ── 상단: AI Plugin → Text Style Auto Applied ── */}
+                {/* Top 2-column */}
                 <div className="flex gap-[32px] items-stretch w-full">
                   {/* Left: Custom Figma Plugin */}
                   <div className="flex flex-1 flex-col min-w-0">
@@ -1160,31 +1164,31 @@ function AIImpact3Section() {
                     </div>
                     <div className="bg-[#f7f7f7] flex-1 px-[20px] py-[12px]">
                       <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-                        Figma 파일의 텍스트 레이어를 스캔하고, 등록된 Text Style을 폰트 크기(Size)와 굵기(Weight) 기준으로 자동 매칭하도록 플러그인을 생성했습니다.
+                        Scans all text layers in the Figma file and auto-matches them to registered text styles by font size and weight.
                       </p>
                     </div>
                   </div>
-                  {/* → 아이콘 */}
+                  {/* Arrow */}
                   <div className="flex items-center justify-center shrink-0">
                     <img src={icStep02PanelArrow} alt="" aria-hidden className="w-[24px] h-[24px]" />
                   </div>
-                  {/* Right: Text Style Auto Applied */}
+                  {/* Right: Text Styles Automatically Applied */}
                   <div className="flex flex-1 flex-col min-w-0">
                     <div className="bg-[#b9cdfb] flex gap-[10px] items-center px-[20px] py-[10px] w-full">
                       <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
                         <span className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>02</span>
                       </div>
-                      <span className="text-[16px] font-semibold leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Text Style Auto Applied</span>
+                      <span className="text-[16px] font-semibold leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Text Styles Automatically Applied</span>
                     </div>
                     <div className="bg-[#f7f7f7] flex-1 px-[20px] py-[12px]">
                       <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-                        텍스트 레이어를 스캔해, 조건에 맞는 Text Style을 자동으로 연결했습니다.
+                        Scanned text layers and automatically linked matching text styles.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* ── 하단: 3-panel 매칭 다이어그램 ── */}
+                {/* Bottom 3-panel matching diagram */}
                 <div className="bg-white flex items-center justify-center py-[24px] w-full">
                   <div className="flex flex-1 gap-[40px] items-center">
 
@@ -1193,40 +1197,37 @@ function AIImpact3Section() {
                       <div className="bg-[#f7f7f7] border-b border-[#e2e8f0] px-[20px] pt-[10px] pb-[10px]">
                         <p className="text-[16px] font-semibold leading-[24px] text-[#1e293b]" style={{ fontFamily: poppins }}>Text Layers (Figma)</p>
                       </div>
-                      <div className="flex flex-col p-[20px]">
+                      <div className="flex flex-col gap-[19px] p-[20px]">
                         {['Make work simpler,', 'create more impact.', 'AI IMPACT helps teams', 'automate repetitive tasks', 'Get Started'].map((line, i, arr) => (
-                          <div key={line} className={i < arr.length - 1 ? 'border-b border-[#f3f4f6] pb-[10px] mb-[10px]' : ''}>
+                          <div key={line} className={i < arr.length - 1 ? 'border-b border-[#f3f4f6] pb-[11px]' : ''}>
                             <p className="text-[14px] font-normal leading-[21px] text-[#1e293b]" style={{ fontFamily: poppins }}>{line}</p>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Connection: Left panel → Center (rotate 180 so curve opens rightward) */}
+                    {/* Left connector: bracket opens ← toward left panel, arrowhead ← */}
                     <img
-                      src={icStep02ConnLeft}
+                      src={icConnDashedLeft}
                       alt="" aria-hidden
                       className="shrink-0"
-                      style={{ width: '62px', height: '123px', transform: 'rotate(180deg)' }}
+                      style={{ width: '72px', height: '123px' }}
                     />
 
-                    {/* Center panel: AI 기반 자동 매칭 */}
+                    {/* Center: AI Assisted Matching */}
                     <div className="bg-[#b9cdfb] flex flex-col items-center justify-center py-[20px] shrink-0" style={{ width: '196px' }}>
                       <div className="flex flex-col gap-[3px] items-center" style={{ width: '133px' }}>
-                        <div className="text-[20px] font-semibold leading-[30px] text-center text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-                          <p className="mb-0">AI 기반</p>
-                          <p>자동 매칭</p>
-                        </div>
+                        <p className="text-[20px] font-semibold leading-[30px] text-center text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>AI Assisted Matching</p>
                         <p className="text-[16px] font-medium leading-[24px] text-center text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>( Size + Weight )</p>
                       </div>
                     </div>
 
-                    {/* Connection: Center → Right panel */}
+                    {/* Right connector: bracket opens → toward right panel, arrowhead → */}
                     <img
-                      src={icStep02ConnRight}
+                      src={icConnDashedRight}
                       alt="" aria-hidden
                       className="shrink-0"
-                      style={{ width: '62px', height: '123px' }}
+                      style={{ width: '72px', height: '123px' }}
                     />
 
                     {/* Right panel: Registered Text Styles */}
@@ -1234,7 +1235,7 @@ function AIImpact3Section() {
                       <div className="bg-[#f7f7f7] border-b border-[#ddd] px-[20px] pt-[10px] pb-[10px]">
                         <p className="text-[16px] font-semibold leading-[24px] text-[#1e293b]" style={{ fontFamily: poppins }}>Registered Text Styles</p>
                       </div>
-                      <div className="flex flex-col p-[20px]">
+                      <div className="flex flex-col gap-[10px] p-[20px]">
                         {[
                           '8xl / SemiBold',
                           '7xl / SemiBold',
@@ -1242,7 +1243,7 @@ function AIImpact3Section() {
                           'base / Regular',
                           'sm / Medium',
                         ].map((label, i, arr) => (
-                          <div key={label} className={`flex gap-[12px] items-center ${i < arr.length - 1 ? 'border-b border-[#f3f4f6] pb-[10px] mb-[10px]' : ''}`}>
+                          <div key={label} className={`flex gap-[13px] items-center ${i < arr.length - 1 ? 'border-b border-[#f3f4f6] pb-[11px]' : ''}`}>
                             <div className="bg-[rgba(185,205,251,0.5)] flex items-center justify-center shrink-0" style={{ width: '32px', height: '32px' }}>
                               <span className="text-[16px] font-semibold leading-[24px] text-[#5e8fff] text-center" style={{ fontFamily: poppins }}>Ag</span>
                             </div>
@@ -1255,27 +1256,28 @@ function AIImpact3Section() {
                   </div>
                 </div>
               </div>
-              <StepNote>정리한 Text Style을 자동 매칭 로직으로 연결해, 반복적인 수작업을 줄였습니다.</StepNote>
+              <StepNote>The plugin replaced repetitive manual updates with one-click style application.</StepNote>
             </StepCard>
 
             {/* Step 03 */}
             <StepCard num="03" title="Extend to Mobile">
-              <div className="bg-white flex flex-col gap-[8px] pt-[16px] px-[20px] pb-[0px] w-full">
-                <div className="flex gap-[8px] items-start w-full">
-                  <div className="bg-[#c4c4c4] flex-1 min-w-0" style={{ aspectRatio: '2292 / 1494' }} />
-                  <div className="bg-[#858585] flex-1 min-w-0" style={{ aspectRatio: '2292 / 1494' }} />
+              <div className="bg-white pt-[16px] px-[20px] pb-[0px] w-full">
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '856/540' }}>
+                  <img src={imgExtendMobile} alt="Mobile typography extension" className="w-full h-full object-cover" />
                 </div>
               </div>
-              <StepNote>Desktop 스케일을 Mobile 스케일로 매핑하고, Mobile Text Style도 라이브러리화했습니다.</StepNote>
+              <StepNote>Mapped the desktop scale to mobile and created reusable mobile text styles.</StepNote>
             </StepCard>
 
             {/* Step 04 */}
+            {/* TODO: 실제 이미지 나오면 교체 예정 */}
             <StepCard num="04" title="Bridge to Development & Reuse">
               <div className="bg-white flex items-center pt-[16px] px-[20px] pb-[0px] w-full" style={{ height: '421px' }}>
                 <div className="bg-[#b7b7b7] flex-1 h-full min-w-0" />
               </div>
-              <StepNote>00개의 Text Style 값을 개별 기준으로 연결하고, 이후 랜딩페이지 작업에도 같은 스타일 기준을 재사용했습니다.</StepNote>
+              <StepNote>Connected Figma text styles to development for reuse across future pages.</StepNote>
             </StepCard>
+
           </div>
         </div>
       </ContentWrap>
