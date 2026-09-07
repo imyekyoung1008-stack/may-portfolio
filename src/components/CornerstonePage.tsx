@@ -193,7 +193,7 @@ const NAV_ITEMS = [
   { id: 'solution-2',  label: 'SOLUTION 2' },
   { id: 'ai-impact-1', label: 'AI IMPACT 1 · Collaboration' },
   { id: 'ai-impact-2', label: 'AI IMPACT 02 · Exploration' },
-  { id: 'ai-impact-3', label: 'AI IMPACT 03' },
+  { id: 'ai-impact-3', label: 'AI IMPACT 03 · System Building' },
   { id: 'consistent',  label: 'VISUAL SYSTEM' },
   { id: 'impact',      label: 'IMPACT' },
   { id: 'reflection',  label: 'REFLECTION' },
@@ -230,7 +230,7 @@ function SideNav() {
         position: 'fixed',
         left: '48px',
         top: '100px',
-        width: '160px',
+        width: '200px',
         zIndex: 30,
         background: 'transparent',
       }}
@@ -253,6 +253,7 @@ function SideNav() {
                 lineHeight: '16px',
                 color: activeId === id ? '#1e1e1e' : '#c0c0c0',
                 transition: 'color 0.2s ease',
+                whiteSpace: 'nowrap',
               }}
             >
               {label}
@@ -943,10 +944,7 @@ function AIImpact2Section() {
   return (
     <section className="w-full bg-white">
       <ContentWrap>
-        <div className="flex items-center justify-between w-full">
-          <SectionLabel num="06" label="AI IMPACT 02 · EXPLORATION" />
-          <SolvesBadge text="SOLVES  PROBLEM 04" />
-        </div>
+        <SectionLabel num="06" label="AI IMPACT 02 · EXPLORATION" />
         <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
           Turning UX Hypotheses into Comparable Screens, Fast
         </h2>
@@ -1098,16 +1096,18 @@ function AIImpact3Section() {
 
             {/* Step 01 */}
             <StepCard num="01" title="Extract Typography Rules from a Real UI">
-              <div className="bg-white flex gap-[16px] items-start pt-[16px] px-[20px] pb-[0px] w-full">
+              <div className="bg-white flex gap-[16px] items-center pt-[16px] px-[20px] pb-[0px] w-full">
                 {/* Left: full-page screenshot (271×444) */}
-                <div className="shrink-0 overflow-hidden" style={{ width: '271px', height: '444px' }}>
+                <div className="relative shrink-0 overflow-hidden" style={{ width: '271px', height: '444px' }}>
                   <img src={imgExtractScreen1} alt="Desktop UI screenshot" className="w-full h-full object-cover object-top" />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 45%, white 98.6%)' }} />
                 </div>
-                {/* Arrow */}
-                <img src={icArrowRightBox} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0 mt-[210px]" />
+                {/* Arrow — 24×24 black-box white-arrow (same as Step 02) */}
+                <img src={icStep02PanelArrow} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
                 {/* Middle: zoomed panel screenshot (146×444) */}
-                <div className="shrink-0 overflow-hidden" style={{ width: '146px', height: '444px' }}>
+                <div className="relative shrink-0 overflow-hidden" style={{ width: '146px', height: '444px' }}>
                   <img src={imgExtractScreen2} alt="Typography panel close-up" className="w-full h-full object-cover object-top" />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 45%, white 98.6%)' }} />
                 </div>
                 {/* Right: Extracted Typography Attributes */}
                 <div className="flex flex-1 flex-col gap-[16px] min-w-0">
@@ -1137,7 +1137,7 @@ function AIImpact3Section() {
                     { label: null,                    bg: '',              isArrow: true  },
                     { label: 'Typography Extraction', bg: 'bg-[#b9cdfb]', isArrow: false },
                   ].map((item, i) => item.isArrow ? (
-                    <img key={i} src={icArrowRightBox} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
+                    <img key={i} src={icStep02PanelArrow} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
                   ) : (
                     <div key={i} className={`${item.bg} flex flex-1 items-center justify-center px-[20px] py-[16px]`}>
                       <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>{item.label}</span>
@@ -1150,17 +1150,17 @@ function AIImpact3Section() {
 
             {/* Step 02 */}
             <StepCard num="02" title="Auto Apply Text Styles in Figma">
-              <div className="bg-white flex flex-col gap-[8px] pt-[16px] px-[20px] pb-[0] w-full">
+              <div className="bg-white flex flex-col gap-[8px] pt-[16px] pb-[0] w-full">
 
                 {/* Top 2-column */}
-                <div className="flex gap-[32px] items-stretch w-full">
+                <div className="flex gap-[32px] items-stretch w-full px-[20px]">
                   {/* Left: Custom Figma Plugin */}
                   <div className="flex flex-1 flex-col min-w-0">
                     <div className="bg-[#b9cdfb] flex gap-[10px] items-center px-[20px] py-[10px] w-full">
                       <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
                         <span className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>AI</span>
                       </div>
-                      <span className="text-[16px] font-semibold leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Custom Figma Plugin Built with Claude</span>
+                      <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Custom Figma Plugin Built with Claude</span>
                     </div>
                     <div className="bg-[#f7f7f7] flex-1 px-[20px] py-[12px]">
                       <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
@@ -1178,7 +1178,7 @@ function AIImpact3Section() {
                       <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
                         <span className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>02</span>
                       </div>
-                      <span className="text-[16px] font-semibold leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Text Styles Automatically Applied</span>
+                      <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Text Styles Automatically Applied</span>
                     </div>
                     <div className="bg-[#f7f7f7] flex-1 px-[20px] py-[12px]">
                       <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
@@ -1188,12 +1188,13 @@ function AIImpact3Section() {
                   </div>
                 </div>
 
-                {/* Bottom 3-panel matching diagram */}
-                <div className="bg-white flex items-center justify-center py-[24px] w-full">
-                  <div className="flex flex-1 gap-[40px] items-center">
+                {/* Bottom 3-panel matching diagram — full StepCard width, connectors are absolute overlays */}
+                <div className="bg-white py-[24px] px-[20px] w-full">
+                  {/* Flex row: only 3 items (left panel, center, right panel). Connectors are absolute. */}
+                  <div className="relative flex gap-[40px] items-center w-full">
 
-                    {/* Left panel: Text Layers (Figma) */}
-                    <div className="bg-white border border-[#ddd] flex flex-col flex-1 min-w-0 overflow-hidden">
+                    {/* Left panel: flex-[1_0_0] — grows to fill half remaining space */}
+                    <div style={{ flex: '1 0 0' }} className="bg-white border border-[#ddd] flex flex-col overflow-hidden">
                       <div className="bg-[#f7f7f7] border-b border-[#e2e8f0] px-[20px] pt-[10px] pb-[10px]">
                         <p className="text-[16px] font-semibold leading-[24px] text-[#1e293b]" style={{ fontFamily: poppins }}>Text Layers (Figma)</p>
                       </div>
@@ -1206,15 +1207,7 @@ function AIImpact3Section() {
                       </div>
                     </div>
 
-                    {/* Left connector: bracket opens ← toward left panel, arrowhead ← */}
-                    <img
-                      src={icConnDashedLeft}
-                      alt="" aria-hidden
-                      className="shrink-0"
-                      style={{ width: '72px', height: '123px' }}
-                    />
-
-                    {/* Center: AI Assisted Matching */}
+                    {/* Center: 196px fixed, no flex-grow */}
                     <div className="bg-[#b9cdfb] flex flex-col items-center justify-center py-[20px] shrink-0" style={{ width: '196px' }}>
                       <div className="flex flex-col gap-[3px] items-center" style={{ width: '133px' }}>
                         <p className="text-[20px] font-semibold leading-[30px] text-center text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>AI Assisted Matching</p>
@@ -1222,16 +1215,8 @@ function AIImpact3Section() {
                       </div>
                     </div>
 
-                    {/* Right connector: bracket opens → toward right panel, arrowhead → */}
-                    <img
-                      src={icConnDashedRight}
-                      alt="" aria-hidden
-                      className="shrink-0"
-                      style={{ width: '72px', height: '123px' }}
-                    />
-
-                    {/* Right panel: Registered Text Styles */}
-                    <div className="bg-white border border-[#ddd] flex flex-col flex-1 min-w-0 overflow-hidden">
+                    {/* Right panel: flex-[1_0_0] — grows to fill half remaining space */}
+                    <div style={{ flex: '1 0 0' }} className="bg-white border border-[#ddd] flex flex-col overflow-hidden">
                       <div className="bg-[#f7f7f7] border-b border-[#ddd] px-[20px] pt-[10px] pb-[10px]">
                         <p className="text-[16px] font-semibold leading-[24px] text-[#1e293b]" style={{ fontFamily: poppins }}>Registered Text Styles</p>
                       </div>
@@ -1252,6 +1237,41 @@ function AIImpact3Section() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Left connector: centered in left gap (between left panel and center box)
+                        Both panels are flex:1 0 0 → each panel = (total - 276) / 2
+                        Left gap center from left = panel + 20 = 50% - 118px
+                        SVG is 72px wide → left = 50% - 118 - 36 = 50% - 154px */}
+                    <img
+                      src={icConnDashedLeft}
+                      alt="" aria-hidden
+                      style={{
+                        position: 'absolute',
+                        left: 'calc(50% - 154px)',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '72px',
+                        height: '123px',
+                        pointerEvents: 'none',
+                      }}
+                    />
+
+                    {/* Right connector: centered in right gap (between center box and right panel)
+                        Right gap center from left = 50% + 118px
+                        SVG is 72px wide → left = 50% + 118 - 36 = 50% + 82px */}
+                    <img
+                      src={icConnDashedRight}
+                      alt="" aria-hidden
+                      style={{
+                        position: 'absolute',
+                        left: 'calc(50% + 82px)',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '72px',
+                        height: '123px',
+                        pointerEvents: 'none',
+                      }}
+                    />
 
                   </div>
                 </div>
