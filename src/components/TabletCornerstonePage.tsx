@@ -17,6 +17,7 @@ import vidAfterS2       from '../assets/videos/solution2-after.mp4'
 // ── Images ────────────────────────────────────────
 import imgProblemHeroBg from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
 import imgFormatConsistencyExample from '../assets/images/cornerstone-detail/format-consistency-example.png'
+import imgFormatConsistencyMobile  from '../assets/images/cornerstone-detail/format-consistency-mobile.png'
 import imgStitch        from '../assets/images/cornerstone-detail/stitch-screenshot.png'
 import imgExtractScreen1 from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-1.png'
 import imgExtractScreen2 from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-2.png'
@@ -256,7 +257,7 @@ function TabletHeader() {
       <div className="w-full flex flex-col gap-[20px]">
 
         {/* 뱃지 → 타이틀 → 설명 (세로 스택) */}
-        <div className="flex flex-col gap-[16px] pb-[42px]">
+        <div className="flex flex-col gap-[16px] pb-[12px]">
           <div className="bg-[#f7f4f0] flex items-center gap-[12px] px-[10px] py-[6px] self-start shrink-0">
             <div className="w-[8px] h-[8px] rounded-full shrink-0" style={{ backgroundColor: '#00C950' }} />
             <span className="text-[14px] font-normal leading-[21px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>Shipped</span>
@@ -1322,9 +1323,173 @@ function TabletAIImpact1SectionTablet() {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 7 — 06 AI IMPACT 02 · EXPLORATION  (Figma 827:1921)
+// 섹션 7 — 06 AI IMPACT 02 · EXPLORATION  (Figma 827:1921 / 827:3014)
 // ─────────────────────────────────────────────────
+
+/** 모바일 전용 미니 스텝 카드 */
+function MStepCard({ num, title, children }: { num: string; title: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-[#f7f7f7] flex flex-col w-full">
+      <div className="flex items-center gap-[8px] px-[14px] py-[10px] bg-white">
+        <div className="bg-[#1e1e1e] rounded-full flex items-center justify-center shrink-0"
+             style={{ width: '11.667px', height: '11.667px' }}>
+          <span className="text-white font-medium" style={{ fontFamily: poppins, fontSize: '6.5px', lineHeight: 1 }}>{num}</span>
+        </div>
+        <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '7.292px', lineHeight: '10.938px' }}>{title}</span>
+      </div>
+      <div className="w-full border-t border-[#e5e5e5]" />
+      {children}
+    </div>
+  )
+}
+
+/** 모바일 전용 스텝 노트 */
+function MStepNote({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-white flex gap-[6px] items-center px-[10px] py-[8px] w-full">
+      <img src={icArrowNote} alt="" aria-hidden className="shrink-0 block" style={{ width: '8.75px', height: '8.75px' }} />
+      <p className="flex-1 text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '6.563px', lineHeight: '9.844px' }}>{children}</p>
+    </div>
+  )
+}
+
 function TabletAIImpact2Section() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 모바일 (<768px) — Figma 827:3014 ──
+  if (!isTablet) return (
+    <section id="ai-impact-2" className="w-full bg-white">
+      <div className="w-full flex flex-col gap-[20px] px-[16px] py-[48px]">
+        {/* 섹션 레이블 */}
+        <div className="flex flex-col gap-[4px]">
+          <p className="text-[16px] font-medium leading-[24px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>06</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI IMPACT 02 · EXPLORATION</p>
+        </div>
+        {/* 소제목 */}
+        <h2 className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Turning UX Hypotheses into Comparable Screens, Fast</h2>
+        {/* 본문 */}
+        <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I explored three UX directions with GPT and Stitch, aligned with Management, and refined the selected concept in Figma.</p>
+        {/* KEY INSIGHT */}
+        <div className="w-full bg-[#b9cdfb] flex items-center justify-center px-[16px] py-[24px]">
+          <div className="flex flex-col gap-[8px] items-center text-center text-[#1e1e1e]">
+            <p className="text-[13px] font-normal leading-[19px]" style={{ fontFamily: poppins }}>KEY INSIGHT</p>
+            <p className="text-[16px] font-medium leading-[24px]" style={{ fontFamily: poppins }}>AI was not a tool for finding the "right" answer. It helped me explore more directions and align faster.</p>
+          </div>
+        </div>
+        {/* AI ASSISTED UX EXPLORATION 소제목 */}
+        <div className="flex gap-[6px] items-center w-full">
+          <img src={icSectionIcon} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+          <p className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI ASSISTED UX EXPLORATION</p>
+        </div>
+
+        {/* 카드 리스트 */}
+        <div className="flex flex-col gap-[16px]">
+
+          {/* 카드 01 */}
+          <MStepCard num="01" title="Define & Prompt the UX Direction">
+            <div className="bg-white flex flex-col gap-[8px] px-[14px] pt-[10px] pb-[0]">
+              <div className="bg-[#b9cdfb] flex items-center justify-center px-[10px] py-[8px]">
+                <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Information needed for the Careers section</span>
+              </div>
+              <div className="flex gap-[6px]">
+                {['Alumni Story', 'Career Paths', 'Salary Range', 'CTA'].map((item) => (
+                  <div key={item} className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[6px] py-[8px] min-w-0">
+                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <MStepNote>Used GPT to structure the content and explore different UX directions in Stitch.</MStepNote>
+          </MStepCard>
+
+          {/* 카드 02 */}
+          <MStepCard num="02" title="Explore in Google Stitch">
+            <div className="bg-white flex flex-col gap-[8px] px-[14px] pt-[10px] pb-[0]">
+              <div className="flex gap-[6px]">
+                {['A : Data First', 'B : Story First', 'C : Explore First'].map((item) => (
+                  <div key={item} className="bg-[#b9cdfb] flex flex-1 items-center justify-center px-[6px] py-[8px] min-w-0">
+                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="w-full" style={{ aspectRatio: '2292 / 1494' }}>
+                <img src={imgStitch} alt="Google Stitch UX exploration — 3 directions" className="w-full h-full object-cover" />
+              </div>
+            </div>
+            <MStepNote>Visualized three UX structures to compare content priority and flow.</MStepNote>
+          </MStepCard>
+
+          {/* 카드 03 */}
+          <MStepCard num="03" title="Align on Direction">
+            <div className="bg-white flex items-start pb-[0]" style={{ gap: '8px', padding: '10px 14px 0' }}>
+              {/* 왼쪽: 131.25px — Selected 배지 행 + 스크린샷 */}
+              <div className="flex flex-col items-center shrink-0" style={{ width: '131.25px', gap: '5.867px' }}>
+                <div className="flex items-start w-full" style={{ gap: '5.867px' }}>
+                  <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0 px-[8px]" style={{ height: '14px' }}>
+                    <span className="font-medium text-white whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Selected</span>
+                  </div>
+                  <div className="bg-[#b9cdfb] flex items-center justify-center px-[8px] py-[5px]" style={{ flex: '1 0 0' }}>
+                    <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>B : Story First</span>
+                  </div>
+                </div>
+                <div className="relative w-full shrink-0 overflow-hidden" style={{ aspectRatio: '131/159' }}>
+                  <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <img src={imgStitch} alt="" className="absolute max-w-none" style={{ left: '-115.04%', top: '-4.88%', width: '330.07%', height: '170.98%' }} />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 75%, white 100%)' }} />
+                  </div>
+                </div>
+              </div>
+              {/* 오른쪽: flex-1 — 파란 헤더 + 피드백 리스트 */}
+              <div className="flex flex-col items-start self-stretch" style={{ flex: '1 0 0' }}>
+                <div className="bg-[#b9cdfb] flex items-center justify-center w-full px-[8px] py-[5px]">
+                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Management Feedback</span>
+                </div>
+                <div className="bg-[#f7f7f7] flex flex-col w-full" style={{ gap: '6px', padding: '8px' }}>
+                  {[
+                    { num: '01', label: 'Real Voices First',                body: 'Students value information grounded in real graduate experiences.' },
+                    { num: '02', label: 'Video over Text',                   body: 'Video communicates outcomes faster than long copy.' },
+                    { num: '03', label: 'Visual First, Consult for Details', body: 'Lead with visual proof, then connect students to details.' },
+                  ].map((row) => (
+                    <div key={row.num} className="flex flex-col w-full">
+                      <div className="bg-[#f3f3f3] flex items-center w-full" style={{ gap: '4px', padding: '4px 8px', border: '0.5px solid #ddd', borderBottom: 'none' }}>
+                        <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '10px', height: '10px' }}>
+                          <span className="font-medium text-white text-center" style={{ fontFamily: poppins, fontSize: '5px', lineHeight: 1 }}>{row.num}</span>
+                        </div>
+                        <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{row.label}</span>
+                      </div>
+                      <div className="bg-white w-full" style={{ padding: '4px 8px', border: '0.5px solid #ddd' }}>
+                        <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{row.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <MStepNote>Based on Management feedback, we selected the Story First direction to lead with real graduate experiences.</MStepNote>
+          </MStepCard>
+
+          {/* 카드 04 */}
+          <MStepCard num="04" title="Refine in Figma">
+            <div className="bg-white flex flex-col gap-[8px] px-[14px] pt-[10px] pb-[0]">
+              <div className="bg-[#b9cdfb] flex items-center justify-center px-[10px] py-[8px]">
+                <div className="flex gap-[6px] items-center">
+                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Selected UX Direction</span>
+                  <img src={icArrowSelectedDirection} alt="" aria-hidden className="shrink-0 block" style={{ width: '7.292px', height: '7.292px' }} />
+                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Final Visual Design</span>
+                </div>
+              </div>
+              <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '996/560' }} />
+            </div>
+            <MStepNote>Refined the selected Stitch concept into the final UI in Figma.</MStepNote>
+          </MStepCard>
+
+        </div>
+      </div>
+    </section>
+  )
+
+  // ── 태블릿 (768px+) — 기존 코드 그대로 ──
   return (
     <section id="ai-impact-2" className="w-full bg-white">
       <TContentWrap>
@@ -1629,32 +1794,64 @@ function TabletAIImpact3Section() {
 // 섹션 9 — 08 VISUAL SYSTEM  (Figma 827:2326)
 // ─────────────────────────────────────────────────
 function TabletVisualSystemSection() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
   const [paused, setPaused] = useState(false)
 
   return (
     <section id="consistent" className="w-full bg-white">
-      <div className="w-full px-[32px] pt-[60px]">
-        <div className="flex flex-col gap-[32px]">
-          <TSectionLabel num="08" label="VISUAL SYSTEM" />
-          <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Scaling One Visual System Across Formats and Programs</h2>
-          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I extended each program's hero visual across digital and print formats, then applied the same system across 10 diploma programs.</p>
-
-          {/* One Program, Multiple Formats */}
-          <div className="flex gap-[6px] items-center">
-            <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>One Program, Multiple Formats</p>
-          </div>
-          <div className="w-full bg-[#f7f7f7] overflow-hidden flex items-center justify-center" style={{ height: '280px' }}>
-            <img src={imgFormatConsistencyExample} alt="One program across Flyer, Desktop, iPad Pro, and iPhone formats" className="w-full h-full object-contain" />
-          </div>
-
-          {/* Across 10 Programs */}
-          <div className="flex gap-[6px] items-center">
-            <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Across 10 Programs</p>
+      {isTablet ? (
+        /* ── 태블릿 (768px+) — 기존 코드 그대로 ── */
+        <div className="w-full px-[32px] pt-[60px]">
+          <div className="flex flex-col gap-[32px]">
+            <TSectionLabel num="08" label="VISUAL SYSTEM" />
+            <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Scaling One Visual System Across Formats and Programs</h2>
+            <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I extended each program's hero visual across digital and print formats, then applied the same system across 10 diploma programs.</p>
+            <div className="flex gap-[6px] items-center">
+              <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>One Program, Multiple Formats</p>
+            </div>
+            <div className="w-full bg-[#f7f7f7] overflow-hidden flex items-center justify-center" style={{ height: '280px' }}>
+              <img src={imgFormatConsistencyExample} alt="One program across Flyer, Desktop, iPad Pro, and iPhone formats" className="w-full h-full object-contain" />
+            </div>
+            <div className="flex gap-[6px] items-center">
+              <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Across 10 Programs</p>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /* ── 모바일 (<768px) — Figma 827:3418 ── */
+        <div className="w-full px-[16px] pt-[48px]">
+          <div className="flex flex-col gap-[32px]">
+            {/* 라벨 + 소제목/본문 — gap 20px */}
+            <div className="flex flex-col gap-[20px]">
+              {/* 섹션 레이블 */}
+              <div className="flex flex-col gap-[4px]">
+                <p className="text-[14px] font-medium leading-[21px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>08</p>
+                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>VISUAL SYSTEM</p>
+              </div>
+              {/* 소제목 + 본문 */}
+              <div className="flex flex-col gap-[12px]">
+                <h2 className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Scaling One Visual System Across Formats and Programs</h2>
+                <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I extended each program's hero visual across digital and print formats, then applied the same system across 10 diploma programs.</p>
+              </div>
+            </div>
+            {/* One Program, Multiple Formats 서브라벨 */}
+            <div className="flex gap-[6px] items-center">
+              <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>One Program, Multiple Formats</p>
+            </div>
+            {/* 포맷 이미지 — Figma 827:3438 완성본, 원본 비율 유지 */}
+            <img src={imgFormatConsistencyMobile} alt="One program across Flyer, Desktop, iPad Pro, and iPhone formats" className="w-full h-auto block" />
+            {/* Across 10 Programs 서브라벨 */}
+            <div className="flex gap-[6px] items-center">
+              <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Across 10 Programs</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 마퀴 — px 없이 풀폭 */}
       <div
