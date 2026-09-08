@@ -39,6 +39,11 @@ import imgAi1Proto2      from '../assets/images/cornerstone-detail/ai-impact-1/p
 import imgAi1Checklist1  from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-1.png'
 import imgAi1Checklist2  from '../assets/images/cornerstone-detail/ai-impact-1/checklist-screenshot-2.png'
 import imgAi1EmailBlurred from '../assets/images/cornerstone-detail/ai-impact-1/email-blurred.png'
+import imgAi1ProtoMobile1    from '../assets/images/cornerstone-detail/ai-impact-1/proto-mobile-1.png'
+import imgAi1ProtoMobile2    from '../assets/images/cornerstone-detail/ai-impact-1/proto-mobile-2.png'
+import imgAi1ChecklistMobile1 from '../assets/images/cornerstone-detail/ai-impact-1/checklist-mobile-1.png'
+import imgAi1ChecklistMobile2 from '../assets/images/cornerstone-detail/ai-impact-1/checklist-mobile-2.png'
+import imgAi1EmailMobile     from '../assets/images/cornerstone-detail/ai-impact-1/email-mobile.png'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -407,14 +412,11 @@ function TabletProblemSection() {
             <p className="text-[15px] font-medium leading-[22px]" style={{ fontFamily: poppins }}>The deeper issue was how program information was structured, found, and kept up to date.</p>
           </div>
         </div>
-        {/* 문제 카드 리스트 */}
+        {/* 문제 카드 리스트 — Figma 843:11754 (소제목 제거, 번호→문장→설명) */}
         <div className="flex flex-col gap-[24px] w-full">
           {PROBLEMS.map((p) => (
             <div key={p.num} className="bg-[#f7f7f7] flex flex-col gap-[8px] px-[16px] py-[24px]">
-              <div className="flex gap-[8px] items-center">
-                <span className="text-[15px] font-medium leading-[22px] text-[#1e1e1e] shrink-0" style={{ fontFamily: poppins }}>{p.num}</span>
-                <span className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{p.label}</span>
-              </div>
+              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{p.num}</p>
               <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{p.title}</p>
               <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{p.body}</p>
             </div>
@@ -483,31 +485,31 @@ function TabletDiscoverySection() {
           <h2 className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Users came to find answers, not read pages.</h2>
           <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>After reviewing the existing site and speaking with internal stakeholders, I reframed the program pages around the questions prospective students and partners were actually trying to answer.</p>
         </div>
-        {/* 3개 질문 카드 */}
+        {/* 3개 질문 카드 — Figma 843:11788 */}
         <div className="flex flex-col gap-[24px]">
           {/* 카드 01 */}
-          <div className="bg-[#f7f7f7] flex flex-col gap-[12px] px-[16px] py-[24px]">
-            <div className="flex flex-col gap-[4px]">
-              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>01</p>
-              <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Prospective Students</p>
+          <div className="bg-[#f7f7f7] flex flex-col gap-[8px] px-[16px] py-[24px]">
+            <div className="flex items-center gap-[8px]">
+              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e] shrink-0" style={{ fontFamily: poppins }}>01</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Prospective Students</p>
             </div>
             <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>"What will I learn?"</p>
           </div>
           {/* 카드 02 */}
-          <div className="bg-[#f7f7f7] flex flex-col gap-[12px] px-[16px] py-[24px]">
-            <div className="flex flex-col gap-[4px]">
-              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>02</p>
-              <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>International Students</p>
+          <div className="bg-[#f7f7f7] flex flex-col gap-[8px] px-[16px] py-[24px]">
+            <div className="flex items-center gap-[8px]">
+              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e] shrink-0" style={{ fontFamily: poppins }}>02</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>International Students</p>
             </div>
             <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>"How much will it cost?"</p>
           </div>
-          {/* 카드 03 — 인용구만 15px/22px Regular (Figma 그대로) */}
-          <div className="bg-[#f7f7f7] flex flex-col gap-[12px] px-[16px] py-[24px]">
-            <div className="flex flex-col gap-[4px]">
-              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>03</p>
-              <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Education Agents</p>
+          {/* 카드 03 — 인용구 15px Medium (2줄) */}
+          <div className="bg-[#f7f7f7] flex flex-col gap-[8px] px-[16px] py-[24px]">
+            <div className="flex items-center gap-[8px]">
+              <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e] shrink-0" style={{ fontFamily: poppins }}>03</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Education Agents</p>
             </div>
-            <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>"What are the admission requirements?"</p>
+            <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>"What are the admission requirements?"</p>
           </div>
           {/* 카드 하단 설명 텍스트 */}
           <p className="text-[13px] font-normal leading-[19px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>I used these recurring questions to create a shared structure across 10 college diploma program pages.</p>
@@ -1032,63 +1034,57 @@ function TabletAIImpact1Section() {
             </div>
           </div>
 
-          {/* 04 ACTUAL REQUEST EMAIL */}
+          {/* 04 ACTUAL REQUEST EMAIL — Figma 888:17052 */}
           <div className="flex flex-col gap-[12px]">
             <div className="flex gap-[8px] items-center">
               <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>04</span>
               <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>ACTUAL REQUEST EMAIL to Program Managers</span>
             </div>
-            {/* 좌우 2컬럼 */}
-            <div className="flex items-start" style={{ gap: '5.833px' }}>
-              {/* Left panel */}
-              <div className="bg-[#f7f7f7] flex flex-col" style={{ flex: '1 0 0', gap: '17.6px', padding: '23.467px' }}>
-                <p className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '7.29px', lineHeight: '10.9px' }}>Actual Content Request</p>
-                <div className="flex flex-col" style={{ gap: '17.6px' }}>
-                  <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '5.83px', lineHeight: '8.75px' }}>What I Shared</p>
-                  {/* View Live Prototype */}
-                  <div className="flex flex-col" style={{ gap: '8.8px' }}>
-                    <div className="bg-[#b9cdfb] flex items-center justify-between" style={{ height: '29.333px', paddingLeft: '8.8px', paddingRight: '5.867px' }}>
-                      <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>View Live Prototype</span>
-                      <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
-                        <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
-                      </div>
-                    </div>
-                    <div className="flex">
-                      <div style={{ flex: '1 0 0', aspectRatio: '468/303' }}>
-                        <img src={imgAi1Proto1} alt="" className="w-full h-full object-cover" />
-                      </div>
-                      <div style={{ flex: '1 0 0', aspectRatio: '468/303' }}>
-                        <img src={imgAi1Proto2} alt="" className="w-full h-full object-cover" />
-                      </div>
+            {/* 새 세로 구조 */}
+            <div className="bg-[#f7f7f7] flex flex-col gap-[16px] px-[16px] py-[24px] w-full">
+              {/* 제목 */}
+              <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Actual Content Request</p>
+              {/* What I Shared */}
+              <div className="flex flex-col gap-[12px] w-full">
+                <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What I Shared</p>
+                {/* View Live Prototype */}
+                <div className="flex flex-col gap-[8px] w-full">
+                  <div className="bg-[#b9cdfb] flex items-center gap-[8.8px] p-[10px] w-full">
+                    <span className="flex-1 min-w-0 text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>View Live Prototype</span>
+                    <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
+                      <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
                     </div>
                   </div>
-                  {/* View Content Checklist */}
-                  <div className="flex flex-col" style={{ gap: '8.8px' }}>
-                    <div className="bg-[#b9cdfb] flex items-center justify-between" style={{ height: '29.333px', paddingLeft: '8.8px', paddingRight: '5.867px' }}>
-                      <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>View Content Checklist</span>
-                      <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
-                        <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
-                      </div>
+                  <div className="flex items-center w-full" style={{ height: '102.942px' }}>
+                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '468/303', height: '100%' }}>
+                      <img src={imgAi1ProtoMobile1} alt="" className="absolute inset-0 w-full h-full object-cover" />
                     </div>
-                    <div className="flex" style={{ border: '0.733px solid #ddd' }}>
-                      <div style={{ flex: '1 0 0', aspectRatio: '568.5/323' }}>
-                        <img src={imgAi1Checklist1} alt="" className="w-full h-full object-cover" />
-                      </div>
-                      <div style={{ flex: '1 0 0', aspectRatio: '568.5/323' }}>
-                        <img src={imgAi1Checklist2} alt="" className="w-full h-full object-cover" />
-                      </div>
+                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '468/303', height: '100%' }}>
+                      <img src={imgAi1ProtoMobile2} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                  </div>
+                </div>
+                {/* View Content Checklist */}
+                <div className="flex flex-col gap-[8px] w-full">
+                  <div className="bg-[#b9cdfb] flex items-center gap-[8.8px] p-[10px] w-full">
+                    <span className="flex-1 min-w-0 text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>View Content Checklist</span>
+                    <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
+                      <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
+                    </div>
+                  </div>
+                  <div className="flex items-center w-full" style={{ height: '91.388px', border: '0.733px solid #ddd' }}>
+                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '568.5/323', height: '100%' }}>
+                      <img src={imgAi1ChecklistMobile1} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '568.5/323', height: '100%' }}>
+                      <img src={imgAi1ChecklistMobile2} alt="" className="absolute inset-0 w-full h-full object-cover" />
                     </div>
                   </div>
                 </div>
               </div>
-              {/* Right panel — 이메일 이미지 (고정 크기 160.417×205.211px) */}
-              <div className="relative shrink-0 overflow-hidden" style={{ width: '160.417px', height: '205.211px' }}>
-                <img src={imgAi1EmailBlurred} alt="" className="absolute inset-0 w-full h-full object-cover object-top" />
-                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 72.46%, white 100%)' }} />
-                <div className="absolute" style={{ left: '49.87px', top: '48.28px',  width: '50.6px',  height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
-                <div className="absolute" style={{ left: '49.87px', top: '60.01px',  width: '44.733px', height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
-                <div className="absolute" style={{ left: '103.4px', top: '60.01px',  width: '19.067px', height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
-                <div className="absolute" style={{ left: '39.6px',  top: '113.55px', width: '19.8px',   height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+              {/* 이메일 이미지 — Figma 888:17074 완성본 (블러+그라데이션 포함) */}
+              <div className="w-full overflow-hidden" style={{ height: '257px' }}>
+                <img src={imgAi1EmailMobile} alt="" className="w-full h-full object-cover object-top" />
               </div>
             </div>
           </div>
