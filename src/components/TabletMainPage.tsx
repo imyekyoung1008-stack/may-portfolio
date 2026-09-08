@@ -57,7 +57,7 @@ const PROJECT_CARDS = [
     alt:   'AI Avatar Video Creation Platform screenshot',
     title: 'AI Avatar Video Creation Platform',
     desc:  '50% faster voice selection, 59% fewer voice re-selections',
-    route: null,
+    route: '/projects/ai-avatar',
   },
   {
     video: vidShelterDemo,
