@@ -45,6 +45,7 @@ import imgAi1ProtoMobile2    from '../assets/images/cornerstone-detail/ai-impact
 import imgAi1ChecklistMobile1 from '../assets/images/cornerstone-detail/ai-impact-1/checklist-mobile-1.png'
 import imgAi1ChecklistMobile2 from '../assets/images/cornerstone-detail/ai-impact-1/checklist-mobile-2.png'
 import imgAi1EmailMobile     from '../assets/images/cornerstone-detail/ai-impact-1/email-mobile.png'
+import imgEmailPreviewBg    from '../assets/images/cornerstone-detail/ai-impact-1/email-preview-bg.png'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -1056,12 +1057,12 @@ function TabletAIImpact1Section() {
                       <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
                     </div>
                   </div>
-                  <div className="flex items-center w-full" style={{ height: '102.942px' }}>
-                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '468/303', height: '100%' }}>
-                      <img src={imgAi1ProtoMobile1} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                  <div className="flex w-full" style={{ gap: '8.8px' }}>
+                    <div className="flex-1 min-w-0 overflow-hidden" style={{ aspectRatio: '468/303' }}>
+                      <img src={imgAi1ProtoMobile1} alt="" className="w-full h-full object-cover" />
                     </div>
-                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '468/303', height: '100%' }}>
-                      <img src={imgAi1ProtoMobile2} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    <div className="flex-1 min-w-0 overflow-hidden" style={{ aspectRatio: '468/303' }}>
+                      <img src={imgAi1ProtoMobile2} alt="" className="w-full h-full object-cover" />
                     </div>
                   </div>
                 </div>
@@ -1073,19 +1074,21 @@ function TabletAIImpact1Section() {
                       <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
                     </div>
                   </div>
-                  <div className="flex items-center w-full" style={{ height: '91.388px', border: '0.733px solid #ddd' }}>
-                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '568.5/323', height: '100%' }}>
-                      <img src={imgAi1ChecklistMobile1} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                  <div className="flex w-full" style={{ gap: '8.8px', border: '0.733px solid #ddd' }}>
+                    <div className="flex-1 min-w-0 overflow-hidden" style={{ aspectRatio: '568.5/323' }}>
+                      <img src={imgAi1ChecklistMobile1} alt="" className="w-full h-full object-cover" />
                     </div>
-                    <div className="relative flex-1 min-w-0" style={{ aspectRatio: '568.5/323', height: '100%' }}>
-                      <img src={imgAi1ChecklistMobile2} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    <div className="flex-1 min-w-0 overflow-hidden" style={{ aspectRatio: '568.5/323' }}>
+                      <img src={imgAi1ChecklistMobile2} alt="" className="w-full h-full object-cover" />
                     </div>
                   </div>
                 </div>
               </div>
-              {/* 이메일 이미지 — Figma 888:17074 완성본 (블러+그라데이션 포함) */}
-              <div className="w-full overflow-hidden" style={{ height: '257px' }}>
-                <img src={imgAi1EmailMobile} alt="" className="w-full h-full object-cover object-top" />
+              {/* 이메일 미리보기 — Figma 888:17074 (email-mobile.png) */}
+              <div className="relative w-full">
+                <img src={imgAi1EmailMobile} alt="" className="w-full h-auto block" />
+                <div className="absolute inset-0 pointer-events-none"
+                     style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 75%, white 100%)' }} />
               </div>
             </div>
           </div>
@@ -1645,10 +1648,12 @@ function TabletAIImpact3Section() {
               {/* 이미지 + 화살표 + 속성 패널 */}
               <div className="flex items-center px-[14px] pt-[14px]" style={{ gap: '6px' }}>
                 {/* 좌측 스크린샷 76×231px + 그라데이션 페이드 */}
-                <div className="relative shrink-0 overflow-hidden" style={{ width: '76px', height: '231px' }}>
-                  <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <img src={imgExtractScreen1} alt="" className="absolute max-w-none"
-                         style={{ left: '-15.5%', top: '-0.94%', width: '130.99%', height: '170.79%', objectFit: 'cover' }} />
+                <div className="h-[231px] relative shrink-0 w-[76px]">
+                  <div aria-hidden className="absolute inset-0 pointer-events-none">
+                    <div className="absolute inset-0 overflow-hidden">
+                      <img src={imgEmailPreviewBg} alt="" className="absolute max-w-none"
+                           style={{ left: '-15.5%', top: '-0.94%', width: '130.99%', height: '170.79%' }} />
+                    </div>
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 44.984%, white 98.636%)' }} />
                   </div>
                 </div>
@@ -1705,10 +1710,10 @@ function TabletAIImpact3Section() {
                   <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '14px', height: '14px' }}>
                     <span className="font-medium text-white" style={{ fontFamily: poppins, fontSize: '9px', lineHeight: 1 }}>AI</span>
                   </div>
-                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '9px', lineHeight: 1 }}>Custom Figma Plugin Built with Claude</span>
+                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '10px', lineHeight: 1 }}>Custom Figma Plugin Built with Claude</span>
                 </div>
                 <div className="bg-[#f7f7f7] p-[8px]">
-                  <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '8px', lineHeight: 1.5 }}>I built a Figma plugin that scans text layers and automatically matches them with registered Text Styles based on font size and weight.</p>
+                  <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '10px', lineHeight: 1.5 }}>I built a Figma plugin that scans text layers and automatically matches them with registered Text Styles based on font size and weight.</p>
                 </div>
               </div>
               {/* 90도 회전 화살표 */}
@@ -1721,10 +1726,10 @@ function TabletAIImpact3Section() {
                   <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '14px', height: '14px' }}>
                     <span className="font-medium text-white" style={{ fontFamily: poppins, fontSize: '9px', lineHeight: 1 }}>02</span>
                   </div>
-                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '8px', lineHeight: 1 }}>Text Styles Automatically Applied</span>
+                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '10px', lineHeight: 1 }}>Text Styles Automatically Applied</span>
                 </div>
                 <div className="bg-[#f7f7f7] p-[8px]">
-                  <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '8px', lineHeight: 1.5 }}>The plugin scans each text layer and automatically applies the matching Text Style.</p>
+                  <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '10px', lineHeight: 1.5 }}>The plugin scans each text layer and automatically applies the matching Text Style.</p>
                 </div>
               </div>
               {/* 3분할 미니 다이어그램 */}
