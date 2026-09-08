@@ -536,87 +536,198 @@ const SOLUTION1_AFTER = [
 ]
 
 function TabletSolution1Section() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 태블릿 (768px+) — 기존 코드 그대로 ──
+  if (isTablet) {
+    return (
+      <section id="solution-1" className="w-full bg-white">
+        <TContentWrap>
+          <div className="flex items-start justify-between gap-[12px]">
+            <TSectionLabel num="03" label="SOLUTION 1" />
+            <TSolvesBadge text="SOLVES  PROBLEM 01 · 02" />
+          </div>
+          <div className="flex flex-col gap-[12px]">
+            <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>From passive scrolling to purpose-driven navigation</h2>
+            <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I reorganized the program pages around the questions students were actually trying to answer, then applied the same structure across 10 college diploma program pages.</p>
+          </div>
+          <div className="flex flex-col gap-[16px]">
+            {/* BEFORE */}
+            <div className="bg-[#f7f7f7] flex flex-col gap-[28px] px-[24px] py-[20px]">
+              <div className="flex flex-col gap-[8px]">
+                <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>BEFORE</p>
+                <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Long Page, Passive Scroll</p>
+              </div>
+              <div className="flex flex-col gap-[12px] items-center">
+                {['Long page', 'Scroll', 'Scroll', 'Find Information'].map((label, i, arr) => (
+                  <div key={i} className="flex flex-col items-center gap-[12px] w-full">
+                    <div className="w-full border border-[#ddd] bg-[#f3f3f3] flex items-center px-[16px] py-[10px]">
+                      <span className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] text-center w-full" style={{ fontFamily: poppins }}>{label}</span>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div className="w-[24px] h-[24px] flex items-center justify-center bg-[#ddd] rotate-90">
+                        <img src={icFlowArrow} alt="" aria-hidden className="w-[24px] h-[24px]" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* AFTER */}
+            <div className="bg-[#b9cdfb] flex flex-col gap-[28px] px-[24px] py-[20px]">
+              <div className="flex flex-col gap-[8px]">
+                <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AFTER</p>
+                <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Purpose-Driven Navigation</p>
+              </div>
+              <div className="flex flex-col gap-[14px]">
+                {SOLUTION1_AFTER.map((item) => (
+                  <div key={item.tab} className="flex items-center gap-[20px] border-b border-black/10 py-[10px]">
+                    <span className="w-[90px] shrink-0 text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item.tab}</span>
+                    <span className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item.question}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </TContentWrap>
+      </section>
+    )
+  }
+
+  // ── 모바일 (<768px) — Figma 827:2667 ──
   return (
     <section id="solution-1" className="w-full bg-white">
-      <TContentWrap>
-        <div className="flex items-start justify-between gap-[12px]">
-          <TSectionLabel num="03" label="SOLUTION 1" />
-          <TSolvesBadge text="SOLVES  PROBLEM 01 · 02" />
+      <div className="w-full flex flex-col gap-[20px] px-[16px] py-[48px]">
+        {/* 섹션 레이블 */}
+        <div className="flex flex-col gap-[4px]">
+          <p className="text-[16px] font-medium leading-[24px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>03</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>SOLUTION 1</p>
         </div>
+        {/* SOLVES 배지 */}
+        <div className="flex items-center gap-[6px] pl-[12px] pr-[16px] py-[8px] bg-[#191919] rounded-full self-start">
+          <img src={icCheckCircle} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0" />
+          <span className="text-[13px] font-medium leading-[19px] text-white whitespace-nowrap" style={{ fontFamily: poppins }}>SOLVES  PROBLEM 01 · 02</span>
+        </div>
+        {/* 소제목 + 본문 */}
         <div className="flex flex-col gap-[12px]">
-          <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>From passive scrolling to purpose-driven navigation</h2>
-          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I reorganized the program pages around the questions students were actually trying to answer, then applied the same structure across 10 college diploma program pages.</p>
+          <h2 className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>From passive scrolling to purpose-driven navigation</h2>
+          <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I reorganized the program pages around the questions students were actually trying to answer, then applied the same structure across 10 college diploma program pages.</p>
         </div>
-        <div className="flex flex-col gap-[16px]">
-          {/* BEFORE */}
-          <div className="bg-[#f7f7f7] flex flex-col gap-[28px] px-[24px] py-[20px]">
-            <div className="flex flex-col gap-[8px]">
-              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>BEFORE</p>
-              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Long Page, Passive Scroll</p>
-            </div>
-            <div className="flex flex-col gap-[12px] items-center">
-              {['Long page', 'Scroll', 'Scroll', 'Find Information'].map((label, i, arr) => (
-                <div key={i} className="flex flex-col items-center gap-[12px] w-full">
-                  <div className="w-full border border-[#ddd] bg-[#f3f3f3] flex items-center px-[16px] py-[10px]">
-                    <span className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] text-center w-full" style={{ fontFamily: poppins }}>{label}</span>
+        {/* BEFORE 박스 */}
+        <div className="bg-[#f7f7f7] flex flex-col gap-[24px] px-[16px] py-[24px]">
+          <div className="flex flex-col gap-[12px]">
+            <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>BEFORE</p>
+            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Long Page, Passive Scroll</p>
+          </div>
+          <div className="flex flex-col gap-[12px] items-center">
+            {['Long page', 'Scroll', 'Scroll', 'Find Information'].map((label, i, arr) => (
+              <div key={i} className="flex flex-col items-center gap-[12px] w-full">
+                <div className="w-full border border-[#ddd] bg-[#f3f3f3] flex items-center justify-center px-[16px] py-[10px]">
+                  <span className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] text-center" style={{ fontFamily: poppins }}>{label}</span>
+                </div>
+                {i < arr.length - 1 && (
+                  <div className="w-[24px] h-[24px] flex items-center justify-center bg-[#ddd] rotate-90">
+                    <img src={icFlowArrow} alt="" aria-hidden className="w-[24px] h-[24px]" />
                   </div>
-                  {i < arr.length - 1 && (
-                    <div className="w-[24px] h-[24px] flex items-center justify-center bg-[#ddd] rotate-90">
-                      <img src={icFlowArrow} alt="" aria-hidden className="w-[24px] h-[24px]" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* AFTER */}
-          <div className="bg-[#b9cdfb] flex flex-col gap-[28px] px-[24px] py-[20px]">
-            <div className="flex flex-col gap-[8px]">
-              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AFTER</p>
-              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Purpose-Driven Navigation</p>
-            </div>
-            <div className="flex flex-col gap-[14px]">
-              {SOLUTION1_AFTER.map((item) => (
-                <div key={item.tab} className="flex items-center gap-[20px] border-b border-black/10 py-[10px]">
-                  <span className="w-[90px] shrink-0 text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item.tab}</span>
-                  <span className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item.question}</span>
-                </div>
-              ))}
-            </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
-      </TContentWrap>
+        {/* AFTER 박스 */}
+        <div className="bg-[#b9cdfb] flex flex-col gap-[24px] px-[16px] py-[24px]">
+          <div className="flex flex-col gap-[12px]">
+            <p className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AFTER</p>
+            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Purpose-Driven Navigation</p>
+          </div>
+          <div className="flex flex-col gap-[16px]">
+            {SOLUTION1_AFTER.map((item) => (
+              <div key={item.tab} className="flex items-center gap-[12px] pb-[16px]" style={{ borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
+                <span className="shrink-0 text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins, width: '100px' }}>{item.tab}</span>
+                <span className="flex-1 min-w-0 text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item.question}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
 
 function TabletSolution1BeforeAfter() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 태블릿 (768px+) — 기존 코드 그대로 ──
+  if (isTablet) {
+    return (
+      <section className="w-full bg-[#f7f7f7] py-[60px] px-[32px]">
+        <div className="flex flex-col gap-[24px]">
+          <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
+            <div className="bg-[#f3f3f3] flex items-center gap-[8px] px-[24px] py-[10px]">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
+              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Data Science Program</span>
+            </div>
+            <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidBeforeS1} className="w-full h-full block object-cover" /></div>
+            <div className="bg-[#f3f3f3] px-[24px] py-[20px]">
+              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Long pages and weak visual hierarchy made important information easy to miss, forcing users to scroll repeatedly to find what they needed.</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center rotate-90" style={{ width: '32px', height: '32px', background: '#101010', flexShrink: 0 }}>
+              <img src={icArrowDown} alt="" aria-hidden className="block" style={{ width: '30.72px', height: '30.72px' }} />
+            </div>
+          </div>
+          <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
+            <div className="bg-white flex items-center gap-[8px] px-[24px] py-[10px]">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
+              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Data Science Program</span>
+            </div>
+            <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidAfterS1} className="w-full h-full block object-cover" /></div>
+            <div className="bg-white px-[24px] py-[20px]">
+              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I grouped information by user intent, allowing students to jump directly to the category they cared about and explore the details step by step.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── 모바일 (<768px) — Figma 843:13020 ──
   return (
-    <section className="w-full bg-[#f7f7f7] py-[60px] px-[32px]">
+    <section className="w-full bg-[#f7f7f7] px-[16px] py-[48px]">
       <div className="flex flex-col gap-[24px]">
+        {/* Before 블록 */}
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
-          <div className="bg-[#f3f3f3] flex items-center gap-[8px] px-[24px] py-[10px]">
+          <div className="bg-[#f3f3f3] flex items-center gap-[10px] px-[16px] py-[10px]">
             <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
             <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Data Science Program</span>
           </div>
-          <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidBeforeS1} className="w-full h-full block object-cover" /></div>
-          <div className="bg-[#f3f3f3] px-[24px] py-[20px]">
-            <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Long pages and weak visual hierarchy made important information easy to miss, forcing users to scroll repeatedly to find what they needed.</p>
+          <div className="w-full aspect-[1920/1080]">
+            <AutoplayVideo src={vidBeforeS1} className="w-full h-full block object-cover" />
+          </div>
+          <div className="bg-[#f3f3f3] px-[16px] py-[24px]">
+            <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Long pages and weak visual hierarchy made important information easy to miss, forcing users to scroll repeatedly to find what they needed.</p>
           </div>
         </div>
+        {/* 중앙 화살표 */}
         <div className="flex items-center justify-center">
-          <div className="flex items-center justify-center rotate-90" style={{ width: '32px', height: '32px', background: '#101010', flexShrink: 0 }}>
+          <div className="flex items-center justify-center rotate-90 shrink-0" style={{ width: '30.72px', height: '30.72px', background: '#101010' }}>
             <img src={icArrowDown} alt="" aria-hidden className="block" style={{ width: '30.72px', height: '30.72px' }} />
           </div>
         </div>
+        {/* After 블록 */}
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
-          <div className="bg-white flex items-center gap-[8px] px-[24px] py-[10px]">
+          <div className="bg-white flex items-center gap-[10px] px-[16px] py-[10px]">
             <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
             <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Data Science Program</span>
           </div>
-          <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidAfterS1} className="w-full h-full block object-cover" /></div>
-          <div className="bg-white px-[24px] py-[20px]">
-            <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I grouped information by user intent, allowing students to jump directly to the category they cared about and explore the details step by step.</p>
+          <div className="w-full aspect-[1920/1080]">
+            <AutoplayVideo src={vidAfterS1} className="w-full h-full block object-cover" />
+          </div>
+          <div className="bg-white px-[16px] py-[24px]">
+            <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>I grouped information by user intent, allowing students to jump directly to the category they cared about and explore the details step by step.</p>
           </div>
         </div>
       </div>
@@ -628,50 +739,133 @@ function TabletSolution1BeforeAfter() {
 // 섹션 5 — 04 SOLUTION 2
 // ─────────────────────────────────────────────────
 function TabletSolution2Section() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 태블릿 (768px+) — 기존 코드 그대로 ──
+  if (isTablet) {
+    return (
+      <section id="solution-2" className="w-full bg-white">
+        <TContentWrap>
+          <div className="flex items-start justify-between gap-[12px]">
+            <TSectionLabel num="04" label="SOLUTION 2" />
+            <TSolvesBadge text="SOLVES  PROBLEM 03" />
+          </div>
+          <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Unify the shared experience, separate only what truly differs.</h2>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Domestic and International students were previously served through separate sites, creating duplicated content and unnecessary maintenance even though most program information was shared.</p>
+          <TKeyInsight text={<><p>The core program experience was the same for both student groups.</p><p>Only Admissions and Costs needed to differ.</p></>} />
+        </TContentWrap>
+      </section>
+    )
+  }
+
+  // ── 모바일 (<768px) — Figma 827:2761 ──
   return (
     <section id="solution-2" className="w-full bg-white">
-      <TContentWrap>
-        <div className="flex items-start justify-between gap-[12px]">
-          <TSectionLabel num="04" label="SOLUTION 2" />
-          <TSolvesBadge text="SOLVES  PROBLEM 03" />
+      <div className="w-full flex flex-col gap-[20px] px-[20px] py-[48px]">
+        {/* 섹션 레이블 */}
+        <div className="flex flex-col gap-[4px]">
+          <p className="text-[16px] font-medium leading-[24px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>04</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>SOLUTION 2</p>
         </div>
-        <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Unify the shared experience, separate only what truly differs.</h2>
-        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Domestic and International students were previously served through separate sites, creating duplicated content and unnecessary maintenance even though most program information was shared.</p>
-        <TKeyInsight text={<><p>The core program experience was the same for both student groups.</p><p>Only Admissions and Costs needed to differ.</p></>} />
-      </TContentWrap>
+        {/* SOLVES 배지 */}
+        <div className="flex items-center gap-[6px] pl-[12px] pr-[16px] py-[8px] bg-[#191919] rounded-full self-start">
+          <img src={icCheckCircle} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0" />
+          <span className="text-[13px] font-medium leading-[19px] text-white whitespace-nowrap" style={{ fontFamily: poppins }}>SOLVES  PROBLEM 03</span>
+        </div>
+        {/* 소제목 */}
+        <h2 className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Unify the shared experience, separate only what truly differs.</h2>
+        {/* 본문 */}
+        <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Domestic and International students were previously served through separate sites, creating duplicated content and unnecessary maintenance even though most program information was shared.</p>
+        {/* KEY INSIGHT 박스 */}
+        <div className="w-full bg-[#b9cdfb] flex items-center justify-center px-[16px] py-[24px]">
+          <div className="flex flex-col gap-[8px] items-center text-center text-[#1e1e1e]">
+            <p className="text-[13px] font-normal leading-[19px]" style={{ fontFamily: poppins }}>KEY INSIGHT</p>
+            <p className="text-[16px] font-medium leading-[24px]" style={{ fontFamily: poppins }}>The core program experience was the same for both student groups. Only Admissions and Costs needed to differ.</p>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
 
 function TabletSolution2BeforeAfter() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 태블릿 (768px+) — 기존 코드 그대로 ──
+  if (isTablet) {
+    return (
+      <section className="w-full bg-[#f7f7f7] py-[60px] px-[32px]">
+        <div className="flex flex-col gap-[24px]">
+          <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
+            <div className="bg-[#f3f3f3] flex items-center gap-[8px] px-[24px] py-[10px]">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
+              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+            </div>
+            <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidBeforeS2} className="w-full h-full block object-cover" /></div>
+            <div className="bg-[#f3f3f3] flex flex-col gap-[8px] px-[24px] py-[20px]">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Users had to move between multiple screens to find the information they needed.</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Key information such as Tuition and Admissions was spread across different locations, forcing users to repeatedly navigate back and forth.</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center rotate-90" style={{ width: '32px', height: '32px', background: '#101010', flexShrink: 0 }}>
+              <img src={icArrowDown} alt="" aria-hidden className="block" style={{ width: '30.72px', height: '30.72px' }} />
+            </div>
+          </div>
+          <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
+            <div className="bg-white flex items-center gap-[8px] px-[24px] py-[10px]">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
+              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+            </div>
+            <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidAfterS2} className="w-full h-full block object-cover" /></div>
+            <div className="bg-white flex flex-col gap-[8px] px-[24px] py-[20px]">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>One shared page, with differences shown only where needed.</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Domestic and International content was combined into one program experience, while sections such as Admissions and Costs use tabs to surface student-specific information without sending users to separate pages.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── 모바일 (<768px) — Figma 843:14247 ──
   return (
-    <section className="w-full bg-[#f7f7f7] py-[60px] px-[32px]">
+    <section className="w-full bg-[#f7f7f7] px-[16px] py-[48px]">
       <div className="flex flex-col gap-[24px]">
+        {/* Before 블록 */}
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
-          <div className="bg-[#f3f3f3] flex items-center gap-[8px] px-[24px] py-[10px]">
+          <div className="bg-[#f3f3f3] flex items-center gap-[10px] px-[16px] py-[10px]">
             <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
             <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
           </div>
-          <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidBeforeS2} className="w-full h-full block object-cover" /></div>
-          <div className="bg-[#f3f3f3] flex flex-col gap-[8px] px-[24px] py-[20px]">
+          <div className="w-full aspect-[1920/1080]">
+            <AutoplayVideo src={vidBeforeS2} className="w-full h-full block object-cover" />
+          </div>
+          <div className="bg-[#f3f3f3] flex flex-col gap-[8px] px-[16px] py-[24px]">
             <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Users had to move between multiple screens to find the information they needed.</p>
-            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Key information such as Tuition and Admissions was spread across different locations, forcing users to repeatedly navigate back and forth.</p>
+            <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Key information such as Tuition and Admissions was spread across different locations, forcing users to repeatedly navigate back and forth.</p>
           </div>
         </div>
+        {/* 중앙 화살표 */}
         <div className="flex items-center justify-center">
-          <div className="flex items-center justify-center rotate-90" style={{ width: '32px', height: '32px', background: '#101010', flexShrink: 0 }}>
+          <div className="flex items-center justify-center rotate-90 shrink-0" style={{ width: '30.72px', height: '30.72px', background: '#101010' }}>
             <img src={icArrowDown} alt="" aria-hidden className="block" style={{ width: '30.72px', height: '30.72px' }} />
           </div>
         </div>
+        {/* After 블록 */}
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
-          <div className="bg-white flex items-center gap-[8px] px-[24px] py-[10px]">
+          <div className="bg-white flex items-center gap-[10px] px-[16px] py-[10px]">
             <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
             <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
           </div>
-          <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidAfterS2} className="w-full h-full block object-cover" /></div>
-          <div className="bg-white flex flex-col gap-[8px] px-[24px] py-[20px]">
+          <div className="w-full aspect-[1920/1080]">
+            <AutoplayVideo src={vidAfterS2} className="w-full h-full block object-cover" />
+          </div>
+          <div className="bg-white flex flex-col gap-[12px] px-[16px] py-[24px]">
             <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>One shared page, with differences shown only where needed.</p>
-            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Domestic and International content was combined into one program experience, while sections such as Admissions and Costs use tabs to surface student-specific information without sending users to separate pages.</p>
+            <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Domestic and International content was combined into one program experience, while sections such as Admissions and Costs use tabs to surface student-specific information without sending users to separate pages.</p>
           </div>
         </div>
       </div>
@@ -686,6 +880,233 @@ const CHECKLIST_ROW1 = ['Program Overview', 'Credential', 'Duration', 'Schedule'
 const CHECKLIST_ROW2 = ['Courses', 'Admission Req.', 'Tuition & Fees', 'Career Opp.']
 
 function TabletAIImpact1Section() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 태블릿 (768px+) — 기존 코드 그대로 ──
+  if (isTablet) return <TabletAIImpact1SectionTablet />
+
+  // ── 모바일 (<768px) — Figma 827:2805 ──
+  return (
+    <section id="ai-impact-1" className="w-full bg-white">
+      <div className="w-full flex flex-col gap-[20px] px-[16px] py-[48px]">
+        {/* 섹션 레이블 */}
+        <div className="flex flex-col gap-[4px]">
+          <p className="text-[16px] font-medium leading-[24px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>05</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI IMPACT 1 · Collaboration</p>
+        </div>
+        {/* SOLVES 배지 */}
+        <div className="flex items-center gap-[6px] pl-[12px] pr-[16px] py-[8px] bg-[#191919] rounded-full self-start">
+          <img src={icCheckCircle} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0" />
+          <span className="text-[13px] font-medium leading-[19px] text-white whitespace-nowrap" style={{ fontFamily: poppins }}>SOLVES  PROBLEM 04</span>
+        </div>
+        {/* 소제목 */}
+        <h2 className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Structuring Content Collaboration Across Multiple Program Managers</h2>
+
+        <div className="flex flex-col gap-[40px]">
+
+          {/* 01 BACKGROUND */}
+          <div className="flex flex-col gap-[12px]">
+            <div className="flex gap-[8px] items-center">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>01</span>
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>BACKGROUND</span>
+            </div>
+            <div className="flex flex-col gap-[12px]">
+              <div className="bg-[#f7f7f7] flex flex-col gap-[8px] px-[16px] py-[20px]">
+                <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Each program was managed by a different Program Manager.</p>
+                <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Because they knew the latest curriculum and operational details best, I had to confirm the latest information directly with each of them.</p>
+              </div>
+              <div className="w-full" style={{ aspectRatio: '350/218.9' }}>
+                <img src={imgAi1BgDiagram} alt="Background diagram — 10 programs across multiple Program Managers" className="w-full h-full object-cover" />
+              </div>
+            </div>
+          </div>
+
+          {/* 02 WHY THIS WAS CHALLENGING */}
+          <div className="flex flex-col gap-[12px]">
+            <div className="flex gap-[8px] items-center">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>02</span>
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>WHY THIS WAS CHALLENGING</span>
+            </div>
+            <div className="flex flex-col gap-[12px]">
+              {[
+                { num: '01', title: 'No Single Source',               body: 'The latest program information was scattered across different Program Managers and materials.' },
+                { num: '02', title: 'Website vs. Actual Program Gap', body: 'Some existing website content no longer reflected the current curriculum.' },
+                { num: '03', title: 'Asynchronous Communication',     body: 'Program Managers were teaching and not always in the office, so most updates had to be confirmed by email.' },
+              ].map((card) => (
+                <div key={card.num} className="bg-[#f7f7f7] flex flex-col gap-[8px] px-[16px] py-[20px]">
+                  <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{card.num}</span>
+                  <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{card.title}</p>
+                  <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{card.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 03 SOLUTION */}
+          <div className="flex flex-col gap-[16px]">
+            <div className="flex gap-[8px] items-center">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>03</span>
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>SOLUTION</span>
+            </div>
+
+            {/* Content Checklist */}
+            <div className="flex flex-col gap-[12px]">
+              <div className="flex flex-col gap-[6px]">
+                <div className="flex gap-[6px] items-center">
+                  <img src={icSectionIcon} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+                  <span className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Content Checklist</span>
+                </div>
+                <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Standardized what information was needed across all program pages.</p>
+              </div>
+              {/* 2개씩 4줄 (Figma 843:15059) */}
+              <div className="flex flex-col gap-[8px]">
+                {[
+                  ['Program Overview', 'Credential'],
+                  ['Duration', 'Schedule'],
+                  ['Courses', 'Admission Req.'],
+                  ['Tuition & Fees', 'Career Opp.'],
+                ].map((row, ri) => (
+                  <div key={ri} className="flex gap-[8px]">
+                    {row.map((item) => (
+                      <div key={item} className="bg-[#b9cdfb] flex flex-1 items-center gap-[8px] px-[10px] py-[12px] min-w-0">
+                        <img src={icCheckFill} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px', flexShrink: 0 }} />
+                        <span className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Live Prototype */}
+            <div className="flex flex-col gap-[12px]">
+              <div className="flex flex-col gap-[6px]">
+                <div className="flex gap-[6px] items-center">
+                  <img src={icSectionIcon} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+                  <span className="text-[15px] font-medium leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Live Prototype</span>
+                </div>
+                <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Showed where and how each piece of information would be used.</p>
+              </div>
+              {/* 플로우 다이어그램 — 세로 스택 Figma 843:15120 */}
+              <div className="bg-[#f7f7f7] flex flex-col px-[16px] py-[24px]" style={{ gap: '17.6px' }}>
+                {/* 박스 4개 + 화살표 3개 세로 스택, 중앙 정렬 */}
+                <div className="flex flex-col items-center gap-[16px]">
+                  {[
+                    { icon: icChecklist,         label: 'Content Checklist', bg: 'bg-white' },
+                    { icon: icDesktopWindows,    label: 'Live Prototype',    bg: 'bg-[#b9cdfb]' },
+                    { icon: icAttachEmail,       label: 'Share & Request',   bg: 'bg-white' },
+                    { icon: icCheckCircleUnread, label: 'Verified Content',  bg: 'bg-white' },
+                  ].map((item, i, arr) => (
+                    <div key={item.label} className="flex flex-col items-center gap-[16px] w-full">
+                      <div className={`${item.bg} flex items-center gap-[8px] w-full`} style={{ padding: '11.733px 14.667px' }}>
+                        <img src={item.icon} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px', flexShrink: 0 }} />
+                        <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19px' }}>{item.label}</span>
+                      </div>
+                      {i < arr.length - 1 && (
+                        <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0 rotate-90" style={{ width: '17.6px', height: '17.6px' }}>
+                          <img src={icArrowRightBox} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {/* 구분선 */}
+                <div className="w-full border-t border-[#e5e5e5]" />
+                {/* Tools — 라벨 중앙 + 2×2 그리드 */}
+                <div className="flex flex-col items-center gap-[8px]">
+                  <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19px' }}>Tools</span>
+                  <div className="flex flex-col gap-[8px] w-full">
+                    {[['Figma MCP', 'Claude'], ['GitHub', 'Vercel']].map((row, ri) => (
+                      <div key={ri} className="flex gap-[8px]">
+                        {row.map((tool) => (
+                          <div key={tool} className="bg-[#f3f3f3] flex flex-1 items-center justify-center min-w-0" style={{ border: '1px solid #ddd', padding: '6px 12px' }}>
+                            <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19px' }}>{tool}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 04 ACTUAL REQUEST EMAIL */}
+          <div className="flex flex-col gap-[12px]">
+            <div className="flex gap-[8px] items-center">
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>04</span>
+              <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>ACTUAL REQUEST EMAIL to Program Managers</span>
+            </div>
+            {/* 좌우 2컬럼 */}
+            <div className="flex items-start" style={{ gap: '5.833px' }}>
+              {/* Left panel */}
+              <div className="bg-[#f7f7f7] flex flex-col" style={{ flex: '1 0 0', gap: '17.6px', padding: '23.467px' }}>
+                <p className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '7.29px', lineHeight: '10.9px' }}>Actual Content Request</p>
+                <div className="flex flex-col" style={{ gap: '17.6px' }}>
+                  <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '5.83px', lineHeight: '8.75px' }}>What I Shared</p>
+                  {/* View Live Prototype */}
+                  <div className="flex flex-col" style={{ gap: '8.8px' }}>
+                    <div className="bg-[#b9cdfb] flex items-center justify-between" style={{ height: '29.333px', paddingLeft: '8.8px', paddingRight: '5.867px' }}>
+                      <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>View Live Prototype</span>
+                      <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
+                        <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div style={{ flex: '1 0 0', aspectRatio: '468/303' }}>
+                        <img src={imgAi1Proto1} alt="" className="w-full h-full object-cover" />
+                      </div>
+                      <div style={{ flex: '1 0 0', aspectRatio: '468/303' }}>
+                        <img src={imgAi1Proto2} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* View Content Checklist */}
+                  <div className="flex flex-col" style={{ gap: '8.8px' }}>
+                    <div className="bg-[#b9cdfb] flex items-center justify-between" style={{ height: '29.333px', paddingLeft: '8.8px', paddingRight: '5.867px' }}>
+                      <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>View Content Checklist</span>
+                      <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
+                        <img src={icArrowOutward} alt="" aria-hidden style={{ width: '17.6px', height: '17.6px' }} />
+                      </div>
+                    </div>
+                    <div className="flex" style={{ border: '0.733px solid #ddd' }}>
+                      <div style={{ flex: '1 0 0', aspectRatio: '568.5/323' }}>
+                        <img src={imgAi1Checklist1} alt="" className="w-full h-full object-cover" />
+                      </div>
+                      <div style={{ flex: '1 0 0', aspectRatio: '568.5/323' }}>
+                        <img src={imgAi1Checklist2} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Right panel — 이메일 이미지 (고정 크기 160.417×205.211px) */}
+              <div className="relative shrink-0 overflow-hidden" style={{ width: '160.417px', height: '205.211px' }}>
+                <img src={imgAi1EmailBlurred} alt="" className="absolute inset-0 w-full h-full object-cover object-top" />
+                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 72.46%, white 100%)' }} />
+                <div className="absolute" style={{ left: '49.87px', top: '48.28px',  width: '50.6px',  height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+                <div className="absolute" style={{ left: '49.87px', top: '60.01px',  width: '44.733px', height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+                <div className="absolute" style={{ left: '103.4px', top: '60.01px',  width: '19.067px', height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+                <div className="absolute" style={{ left: '39.6px',  top: '113.55px', width: '19.8px',   height: '9.533px', backdropFilter: 'blur(1.1px)', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* 하단 파란 박스 */}
+        <div className="w-full bg-[#b9cdfb] flex items-center justify-center px-[16px] py-[24px]">
+          <p className="text-[16px] font-medium leading-[24px] text-center text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            The checklist clarified what information was needed, while the live prototype showed where and how it would be used.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function TabletAIImpact1SectionTablet() {
   return (
     <section id="ai-impact-1" className="w-full bg-white">
       <TContentWrap>
