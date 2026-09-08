@@ -1326,16 +1326,16 @@ function TabletAIImpact1SectionTablet() {
 // 섹션 7 — 06 AI IMPACT 02 · EXPLORATION  (Figma 827:1921 / 827:3014)
 // ─────────────────────────────────────────────────
 
-/** 모바일 전용 미니 스텝 카드 */
+/** 모바일 전용 스텝 카드 (Figma 827:3014 기준 — 13px 본 스케일) */
 function MStepCard({ num, title, children }: { num: string; title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-[#f7f7f7] flex flex-col w-full">
-      <div className="flex items-center gap-[8px] px-[14px] py-[10px] bg-white">
-        <div className="bg-[#1e1e1e] rounded-full flex items-center justify-center shrink-0"
-             style={{ width: '11.667px', height: '11.667px' }}>
-          <span className="text-white font-medium" style={{ fontFamily: poppins, fontSize: '6.5px', lineHeight: 1 }}>{num}</span>
+    <div className="flex flex-col w-full" style={{ background: '#f7f7f7', border: '1px solid rgba(221,221,221,0.87)' }}>
+      {/* 헤더 */}
+      <div className="flex items-center bg-white" style={{ gap: '11.733px', padding: '11.733px 14px' }}>
+        <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '24px', height: '24px' }}>
+          <span className="text-white font-medium" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: 1 }}>{num}</span>
         </div>
-        <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '7.292px', lineHeight: '10.938px' }}>{title}</span>
+        <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>{title}</span>
       </div>
       <div className="w-full border-t border-[#e5e5e5]" />
       {children}
@@ -1343,12 +1343,12 @@ function MStepCard({ num, title, children }: { num: string; title: string; child
   )
 }
 
-/** 모바일 전용 스텝 노트 */
+/** 모바일 전용 스텝 노트 (Figma 827:3014 기준 — 13px 본 스케일) */
 function MStepNote({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-white flex gap-[6px] items-center px-[10px] py-[8px] w-full">
-      <img src={icArrowNote} alt="" aria-hidden className="shrink-0 block" style={{ width: '8.75px', height: '8.75px' }} />
-      <p className="flex-1 text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '6.563px', lineHeight: '9.844px' }}>{children}</p>
+    <div className="bg-white flex items-center w-full" style={{ gap: '8.8px', padding: '11.733px 14.667px' }}>
+      <img src={icArrowNote} alt="" aria-hidden className="shrink-0 block" style={{ width: '17.6px', height: '17.6px' }} />
+      <p className="flex-1 font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>{children}</p>
     </div>
   )
 }
@@ -1388,28 +1388,26 @@ function TabletAIImpact2Section() {
 
           {/* 카드 01 */}
           <MStepCard num="01" title="Define & Prompt the UX Direction">
-            <div className="bg-white flex flex-col gap-[8px] px-[14px] pt-[10px] pb-[0]">
-              <div className="bg-[#b9cdfb] flex items-center justify-center px-[10px] py-[8px]">
-                <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Information needed for the Careers section</span>
+            <div className="bg-white flex flex-col" style={{ padding: '11.733px 14.667px', gap: '11.733px' }}>
+              <div className="bg-[#b9cdfb] flex items-center justify-center" style={{ padding: '10px 12px' }}>
+                <span className="font-normal text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Information needed for the Careers section</span>
               </div>
-              <div className="flex gap-[6px]">
-                {['Alumni Story', 'Career Paths', 'Salary Range', 'CTA'].map((item) => (
-                  <div key={item} className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[6px] py-[8px] min-w-0">
-                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
+              {['Alumni Story', 'Career Paths', 'Salary Range', 'CTA'].map((item) => (
+                <div key={item} className="bg-[#f7f7f7] flex items-center justify-center" style={{ padding: '11.733px 14.667px' }}>
+                  <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>{item}</span>
+                </div>
+              ))}
             </div>
             <MStepNote>Used GPT to structure the content and explore different UX directions in Stitch.</MStepNote>
           </MStepCard>
 
           {/* 카드 02 */}
           <MStepCard num="02" title="Explore in Google Stitch">
-            <div className="bg-white flex flex-col gap-[8px] px-[14px] pt-[10px] pb-[0]">
-              <div className="flex gap-[6px]">
+            <div className="bg-white flex flex-col" style={{ padding: '11.733px 14.667px', gap: '11.733px' }}>
+              <div className="flex" style={{ gap: '2.917px' }}>
                 {['A : Data First', 'B : Story First', 'C : Explore First'].map((item) => (
-                  <div key={item} className="bg-[#b9cdfb] flex flex-1 items-center justify-center px-[6px] py-[8px] min-w-0">
-                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{item}</span>
+                  <div key={item} className="bg-[#b9cdfb] flex flex-1 items-center justify-center min-w-0" style={{ padding: '5.833px 7.292px' }}>
+                    <span className="font-normal text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '8px', lineHeight: '12px' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -1422,48 +1420,44 @@ function TabletAIImpact2Section() {
 
           {/* 카드 03 */}
           <MStepCard num="03" title="Align on Direction">
-            <div className="bg-white flex items-start pb-[0]" style={{ gap: '8px', padding: '10px 14px 0' }}>
-              {/* 왼쪽: 131.25px — Selected 배지 행 + 스크린샷 */}
-              <div className="flex flex-col items-center shrink-0" style={{ width: '131.25px', gap: '5.867px' }}>
-                <div className="flex items-start w-full" style={{ gap: '5.867px' }}>
-                  <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0 px-[8px]" style={{ height: '14px' }}>
-                    <span className="font-medium text-white whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Selected</span>
-                  </div>
-                  <div className="bg-[#b9cdfb] flex items-center justify-center px-[8px] py-[5px]" style={{ flex: '1 0 0' }}>
-                    <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>B : Story First</span>
-                  </div>
+            <div className="bg-white flex flex-col" style={{ padding: '11.733px 14.667px', gap: '11.733px' }}>
+              {/* 배지 행: Selected(black) | B:Story First(blue flex-1) */}
+              <div className="flex items-start" style={{ gap: '5.867px' }}>
+                <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ padding: '10px 12px' }}>
+                  <span className="font-medium text-white whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Selected</span>
                 </div>
-                <div className="relative w-full shrink-0 overflow-hidden" style={{ aspectRatio: '131/159' }}>
-                  <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <img src={imgStitch} alt="" className="absolute max-w-none" style={{ left: '-115.04%', top: '-4.88%', width: '330.07%', height: '170.98%' }} />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 75%, white 100%)' }} />
-                  </div>
+                <div className="bg-[#b9cdfb] flex items-center justify-center" style={{ flex: '1 0 0', padding: '10px 12px' }}>
+                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>B : Story First</span>
                 </div>
               </div>
-              {/* 오른쪽: flex-1 — 파란 헤더 + 피드백 리스트 */}
-              <div className="flex flex-col items-start self-stretch" style={{ flex: '1 0 0' }}>
-                <div className="bg-[#b9cdfb] flex items-center justify-center w-full px-[8px] py-[5px]">
-                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Management Feedback</span>
-                </div>
-                <div className="bg-[#f7f7f7] flex flex-col w-full" style={{ gap: '6px', padding: '8px' }}>
-                  {[
-                    { num: '01', label: 'Real Voices First',                body: 'Students value information grounded in real graduate experiences.' },
-                    { num: '02', label: 'Video over Text',                   body: 'Video communicates outcomes faster than long copy.' },
-                    { num: '03', label: 'Visual First, Consult for Details', body: 'Lead with visual proof, then connect students to details.' },
-                  ].map((row) => (
-                    <div key={row.num} className="flex flex-col w-full">
-                      <div className="bg-[#f3f3f3] flex items-center w-full" style={{ gap: '4px', padding: '4px 8px', border: '0.5px solid #ddd', borderBottom: 'none' }}>
-                        <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '10px', height: '10px' }}>
-                          <span className="font-medium text-white text-center" style={{ fontFamily: poppins, fontSize: '5px', lineHeight: 1 }}>{row.num}</span>
-                        </div>
-                        <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{row.label}</span>
+              {/* 스티치 이미지 크롭 */}
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: '360 / 453' }}>
+                <img src={imgStitch} alt="" aria-hidden className="absolute max-w-none" style={{ left: '-115.04%', top: '-4.88%', width: '330.07%', height: '170.98%' }} />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 75%, white 100%)' }} />
+              </div>
+              {/* Management Feedback 헤더 */}
+              <div className="bg-[#b9cdfb] flex items-center justify-center w-full" style={{ padding: '10px 12px' }}>
+                <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Management Feedback</span>
+              </div>
+              {/* 피드백 리스트 */}
+              <div className="flex flex-col bg-[#f7f7f7]" style={{ gap: '11.733px', padding: '14.667px' }}>
+                {[
+                  { num: '01', label: 'Real Voices First',                body: 'Students value information grounded in real graduate experiences.', bodySize: '14px' },
+                  { num: '02', label: 'Video over Text',                   body: 'Video communicates outcomes faster than long copy.',              bodySize: '13px' },
+                  { num: '03', label: 'Visual First, Consult for Details', body: 'Lead with visual proof, then connect students to details.',      bodySize: '14px' },
+                ].map((row) => (
+                  <div key={row.num} className="flex flex-col w-full">
+                    <div className="bg-[#f3f3f3] flex items-center w-full" style={{ gap: '7.333px', padding: '7.333px 14.667px', borderTop: '0.733px solid #DDD', borderLeft: '0.733px solid #DDD', borderRight: '0.733px solid #DDD' }}>
+                      <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '19px', height: '19px' }}>
+                        <span className="font-medium text-white text-center" style={{ fontFamily: poppins, fontSize: '11px', lineHeight: 1 }}>{row.num}</span>
                       </div>
-                      <div className="bg-white w-full" style={{ padding: '4px 8px', border: '0.5px solid #ddd' }}>
-                        <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>{row.body}</p>
-                      </div>
+                      <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>{row.label}</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="bg-white w-full" style={{ padding: '8.8px 14.667px', border: '0.733px solid #DDD' }}>
+                      <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: row.bodySize, lineHeight: '21px' }}>{row.body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
             <MStepNote>Based on Management feedback, we selected the Story First direction to lead with real graduate experiences.</MStepNote>
@@ -1471,15 +1465,11 @@ function TabletAIImpact2Section() {
 
           {/* 카드 04 */}
           <MStepCard num="04" title="Refine in Figma">
-            <div className="bg-white flex flex-col gap-[8px] px-[14px] pt-[10px] pb-[0]">
-              <div className="bg-[#b9cdfb] flex items-center justify-center px-[10px] py-[8px]">
-                <div className="flex gap-[6px] items-center">
-                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Selected UX Direction</span>
-                  <img src={icArrowSelectedDirection} alt="" aria-hidden className="shrink-0 block" style={{ width: '7.292px', height: '7.292px' }} />
-                  <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '5.833px', lineHeight: '8.75px' }}>Final Visual Design</span>
-                </div>
+            <div className="bg-white flex flex-col" style={{ padding: '11.733px 14.667px', gap: '11.733px' }}>
+              <div className="bg-[#b9cdfb] flex items-center justify-center" style={{ padding: '10px 12px' }}>
+                <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Final Visual Design</span>
               </div>
-              <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '996/560' }} />
+              <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '2292 / 1494' }} />
             </div>
             <MStepNote>Refined the selected Stitch concept into the final UI in Figma.</MStepNote>
           </MStepCard>
