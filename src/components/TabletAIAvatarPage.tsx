@@ -2,7 +2,7 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=944-1124
 // ★ AIAvatarPage.tsx(데스크톱 원본)는 절대 건드리지 않음. 이 파일만 편집.
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
