@@ -61,11 +61,11 @@ function ContentWrap({ children, gap = 24, py = 60 }: { children: React.ReactNod
 // 사이드 네비게이션
 // ─────────────────────────────────────────────────
 const NAV_ITEMS = [
-  { id: 'intro',          label: 'INTRODUCTION' },
-  { id: 'project-goal',   label: 'PROJECT GOAL' },
+  { id: 'intro',          label: 'Introduction' },
+  { id: 'project-goal',   label: 'Project Goal' },
   { id: 'ai-thinking',    label: 'AI Product Thinking' },
   { id: 'outcome-top',    label: 'Outcome' },
-  { id: 'what-i-worked',  label: 'What did I work on?' },
+  { id: 'what-i-worked',  label: 'What Did I Work On?' },
   { id: 'ux-research',    label: 'UX Research' },
   { id: 'analysis',       label: 'Analysis of Results' },
   { id: 'problem-def',    label: 'Problem Definition' },
@@ -75,7 +75,6 @@ const NAV_ITEMS = [
   { id: 'solution-04',    label: 'Design Solution 04' },
   { id: 'outcome-bottom', label: 'Outcome' },
   { id: 'reflection',     label: 'Reflection' },
-  { id: 'team',           label: 'Team · Closing' },
 ] as const
 
 function SideNav() {
@@ -90,6 +89,7 @@ function SideNav() {
           }
         })
       },
+      // 뷰포트 상단 30% 구간에 들어온 섹션을 활성으로 판단
       { rootMargin: '0px 0px -70% 0px', threshold: 0 },
     )
     NAV_ITEMS.forEach(({ id }) => {
@@ -102,31 +102,38 @@ function SideNav() {
   return (
     <nav
       className="hidden 3xl:block"
-      style={{ position: 'fixed', left: '48px', top: '100px', width: '200px', zIndex: 30 }}
+      style={{
+        position: 'fixed',
+        left: '48px',
+        top: '100px',
+        width: '200px',
+        zIndex: 30,
+        background: 'transparent',
+      }}
     >
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px', background: 'transparent' }}>
         {NAV_ITEMS.map(({ id, label }) => (
           <li key={id}>
-            <a
-              href={`#${id}`}
+            <button
+              type="button"
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                textDecoration: 'none',
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                textAlign: 'left',
                 fontFamily: poppins,
-                fontSize: '12px',
-                lineHeight: '18px',
-                color: activeId === id ? '#1e1e1e' : '#8b8b8b',
+                fontSize: '11px',
                 fontWeight: activeId === id ? 500 : 400,
-                transition: 'color 0.2s',
+                lineHeight: '16px',
+                color: activeId === id ? '#1e1e1e' : '#c0c0c0',
+                transition: 'color 0.2s ease',
+                whiteSpace: 'nowrap',
               }}
             >
-              {activeId === id && (
-                <span style={{ display: 'inline-block', width: '16px', height: '2px', backgroundColor: '#a6daff', flexShrink: 0 }} />
-              )}
               {label}
-            </a>
+            </button>
           </li>
         ))}
       </ul>
