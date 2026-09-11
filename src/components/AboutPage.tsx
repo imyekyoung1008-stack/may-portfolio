@@ -171,6 +171,7 @@ export default function AboutPage() {
 
   return (
     <motion.div
+      data-scroll-id="about"
       style={{
         fontFamily: "'Poppins', sans-serif",
         position: 'fixed', inset: 0, overflowY: 'auto',

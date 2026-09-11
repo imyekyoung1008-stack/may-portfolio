@@ -2111,6 +2111,7 @@ export default function TabletCornerstonePage() {
 
   return (
     <motion.div
+      data-scroll-id="cornerstone"
       style={{ fontFamily: poppins, position: 'fixed', inset: 0, overflowY: 'auto', zIndex: 20, backgroundColor: 'white' }}
       initial={{ y: '100%' }}
       animate={{ y: 0 }}

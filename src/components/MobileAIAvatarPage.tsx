@@ -777,6 +777,7 @@ export default function MobileAIAvatarPage() {
   return (
     <motion.div
       ref={containerRef}
+      data-scroll-id="ai-avatar"
       style={{
         fontFamily: poppins,
         position: 'fixed', inset: 0, overflowY: 'auto',
