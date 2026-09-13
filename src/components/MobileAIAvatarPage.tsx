@@ -22,6 +22,13 @@ import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-t
 import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
 import imgSolution01Before from '../assets/images/ai-avatar/solution-01-before.jpg'
 import imgSolution01After  from '../assets/images/ai-avatar/solution-01-after.jpg'
+import imgSolution02Before from '../assets/images/ai-avatar/solution-02-before.jpg'
+import imgSolution02After  from '../assets/images/ai-avatar/solution-02-after.jpg'
+import imgSolution03Before from '../assets/images/ai-avatar/solution-03-before.jpg'
+import imgSolution03After  from '../assets/images/ai-avatar/solution-03-after.jpg'
+import imgSolution04Before from '../assets/images/ai-avatar/solution-04-before.jpg'
+import imgSolution04After  from '../assets/images/ai-avatar/solution-04-after.jpg'
+import imgTeamPhoto        from '../assets/images/ai-avatar/team-photo.jpg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -718,6 +725,194 @@ function Section09DesignSolution01() {
   )
 }
 
+// ─────────────────────────────────────────────────
+// 10 Design Solution 02
+// ─────────────────────────────────────────────────
+function Section10DesignSolution02() {
+  return (
+    <section className="w-full px-[16px] py-[48px] bg-white">
+      <div className="flex flex-col gap-[24px] w-full">
+        <div className="flex items-start justify-between gap-[8px] w-full">
+          <SectionLabel num="10" label="Design Solution 02" />
+          <MSolvesBadge problemNum="02" />
+        </div>
+
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          Making Applied Filters Easier to Scan and Modify
+        </p>
+
+        {[
+          { label: 'Task 2 success rate', value: '33%',  note: 'Finding a voice via filter/search' },
+          { label: 'Task 2 time',         value: '328s', note: '+88s over the expected 240s' },
+          { label: 'Task 2 errors',       value: '12',   note: 'Highest of all tasks' },
+        ].map(({ label, value, note }) => (
+          <div key={label} className="flex flex-col gap-[8px] w-full p-[16px]" style={{ border: '1px solid #ddd' }}>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
+            <p className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
+            <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{note}</p>
+          </div>
+        ))}
+
+        <div className="bg-[#f7f7f7] flex flex-col gap-[12px] p-[16px] w-full" style={{ border: '1px solid #ddd' }}>
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            When multiple filter values were selected, users struggled to tell which values were actually applied. Because filter states were condensed into numeric indicators, they were difficult to scan and modify. This directly contributed to Task 2 recording 12 usability errors — the highest of all five tasks.
+          </p>
+        </div>
+
+        <img src={imgSolution02Before} alt="Original filter UI — before redesign" className="w-full object-cover" style={{ height: '220px' }} />
+
+        <MBeforeAfterDivider />
+
+        <div className="bg-[#a6daff] flex flex-col gap-[12px] p-[16px] w-full">
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            We replaced the horizontal filter chips with a vertical layout that shows every category and selected value at once, so users can scan, modify, and remove filters without opening extra dropdowns.
+          </p>
+        </div>
+
+        <img src={imgSolution02After} alt="Redesigned filter UI — after redesign" className="w-full object-cover" style={{ height: '220px' }} />
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 11 Design Solution 03
+// ─────────────────────────────────────────────────
+const M_MATCHING_STEPS = [
+  { num: '01', desc: "AI extracts trait keywords (age range, mood, tone) from the AI human's image" },
+  { num: '02', desc: "Automatically matches them against each voice's existing tags (#warm #lively #calm, etc.)" },
+  { num: '03', desc: 'Surfaces the top 3 matches as recommended voices and automatically applies the top match as the default' },
+  { num: '04', desc: 'Rather than trusting the AI match blindly, a designer listens through and filters out any awkward pairings' },
+]
+
+function Section11DesignSolution03() {
+  return (
+    <section className="w-full px-[16px] py-[48px] bg-white">
+      <div className="flex flex-col gap-[24px] w-full">
+        <div className="flex items-start justify-between gap-[8px] w-full">
+          <SectionLabel num="11" label="Design Solution 03" />
+          <MSolvesBadge problemNum="03" />
+        </div>
+
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          Providing Recommended and Default Voices
+        </p>
+
+        <div className="bg-[#f7f7f7] flex flex-col gap-[12px] p-[16px] w-full" style={{ border: '1px solid #ddd' }}>
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            With over 110 voice options, users experienced decision fatigue, especially when they were unfamiliar with the available voices. We needed a way to surface relevant options without requiring users to preview them one by one.
+          </p>
+        </div>
+
+        <img src={imgSolution03Before} alt="Original voice selection — before redesign" className="w-full object-cover" style={{ height: '220px' }} />
+
+        <MBeforeAfterDivider />
+
+        <div className="bg-[#a6daff] flex flex-col gap-[12px] p-[16px] w-full">
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            We defined the AI avatar and each voice using structured keywords, then used those attributes to generate recommended voice matches and apply the best match as the default.
+          </p>
+        </div>
+
+        <img src={imgSolution03After} alt="Redesigned voice selection — after redesign" className="w-full object-cover" style={{ height: '220px' }} />
+
+        {/* Recommended Voice Matching Logic */}
+        <div className="flex flex-col gap-[16px] w-full p-[16px]" style={{ border: '1px solid #ddd' }}>
+          <div className="flex items-center gap-[6px]">
+            <img src={icWhyItWorks} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Recommended Voice Matching Logic</p>
+          </div>
+          {M_MATCHING_STEPS.map(({ num, desc }) => (
+            <div key={num} className="flex flex-col gap-[10px] w-full p-[14px] bg-[#f7f7f7]">
+              <div className="bg-[#1e1e1e] flex items-center justify-center w-[26px] h-[26px] shrink-0">
+                <p className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>{num}</p>
+              </div>
+              <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 12 Design Solution 04
+// ─────────────────────────────────────────────────
+function Section12DesignSolution04() {
+  return (
+    <section className="w-full px-[16px] py-[48px] bg-white">
+      <div className="flex flex-col gap-[24px] w-full">
+        <div className="flex items-start justify-between gap-[8px] w-full">
+          <SectionLabel num="12" label="Design Solution 04" />
+          <MSolvesBadge problemNum="04" />
+        </div>
+
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          Preview Voices With Live Content
+        </p>
+
+        <div className="bg-[#f7f7f7] flex flex-col gap-[12px] p-[16px] w-full" style={{ border: '1px solid #ddd' }}>
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            Users could only preview voices with fixed sample sentences, not their own scripts. As a result, the selected voice often felt different when applied to real content, forcing users to switch repeatedly between writing and voice selection.
+          </p>
+        </div>
+
+        <img src={imgSolution04Before} alt="Original voice preview — before redesign" className="w-full object-cover" style={{ height: '220px' }} />
+
+        <MBeforeAfterDivider />
+
+        <div className="bg-[#a6daff] flex flex-col gap-[12px] p-[16px] w-full">
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            We added an example sentence input so users could preview their own scripts with the selected voice on the same screen. This allowed them to evaluate how the voice fit their real content before applying it.
+          </p>
+        </div>
+
+        <img src={imgSolution04After} alt="Redesigned voice preview — after redesign" className="w-full object-cover" style={{ height: '220px' }} />
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 13 Outcome
+// ─────────────────────────────────────────────────
+function Section13Outcome() {
+  return (
+    <section className="w-full px-[16px] py-[48px] bg-white">
+      <div className="flex flex-col gap-[24px] w-full">
+        <SectionLabel num="13" label="Outcome" />
+
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          What These Four Changes Made Possible
+        </p>
+
+        <div className="flex flex-col gap-[12px] w-full">
+          {[
+            { stat: '50%↓',  label: 'Voice selection time' },
+            { stat: '59%↓',  label: 'Voice reselection rate' },
+            { stat: 'B2B2C', label: 'Expansion, built and launched' },
+          ].map(({ stat, label }) => (
+            <div
+              key={stat}
+              className="flex flex-col gap-[8px] p-[20px] bg-[#a6daff] w-full"
+            >
+              <p className="text-[24px] font-medium leading-[32px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{stat}</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Section07AnalysisOfResults() {
   return (
     <section className="w-full px-[16px] py-[48px]" style={{ backgroundColor: '#f7f7f7' }}>
@@ -795,6 +990,76 @@ function Section07AnalysisOfResults() {
 }
 
 // ─────────────────────────────────────────────────
+// 14 Reflection
+// ─────────────────────────────────────────────────
+function Section14Reflection() {
+  return (
+    <section className="w-full px-[16px] py-[48px]" style={{ backgroundColor: '#f7f7f7' }}>
+      <div className="flex flex-col gap-[24px] w-full">
+        <SectionLabel num="14" label="Reflection" />
+
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          What This Project Left Me, in Data and Feedback
+        </p>
+
+        <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          Looking at the low success rate and high error rate from Tasks 1 and 2 alongside the feedback we got after shipping the changes:
+        </p>
+
+        {/* 2개 인용 카드 — 세로 배치 */}
+        <div className="flex flex-col gap-[12px] w-full">
+          {[
+            'Even users coming from the old voice studio could use this naturally, without having to learn anything new.',
+            "Recommended voices wasn't something I'd even considered. It'll clearly make selection faster and more satisfying.",
+          ].map((quote, i) => (
+            <div
+              key={i}
+              className="flex flex-col gap-[10px] p-[16px] w-full"
+              style={{ backgroundColor: '#f7f7f7', border: '1px solid #ddd' }}
+            >
+              <p className="text-[18px] leading-none text-[#1e1e1e] select-none" aria-hidden>"</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{quote}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          This project showed me that combining video and voice generation into one experience requires more than screen design. Defining the criteria that guide the AI's output matters just as much. I validated four solutions using usability data and client feedback. The matching criteria we established became a lasting principle for designing AI human output.
+        </p>
+
+        <p className="text-[14px] font-normal leading-[21px]" style={{ fontFamily: poppins, color: '#8b8b8b' }}>
+          * Content created with KT AI Human Studio
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 15 Team · Closing
+// ─────────────────────────────────────────────────
+function Section15TeamClosing() {
+  return (
+    <section className="w-full bg-white">
+      <div className="flex flex-col gap-[24px] px-[16px] py-[32px] w-full">
+        <img
+          src={imgTeamPhoto}
+          alt="The CNAI STUDIO team that built KT AI Human Studio together"
+          className="w-full object-cover object-bottom"
+          style={{ height: '240px' }}
+        />
+        <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
+          The CNAI STUDIO team that built KT AI Human Studio together
+        </p>
+        <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
+          I started my career at a startup right after graduating. Working with a small team toward one shared goal let me own a product from planning through launch. I handled problem definition, UI/UX design, and client communication. The habit of defining scope quickly and validating as I go has stayed with me in every product I've worked on since.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
 // Main export
 // ─────────────────────────────────────────────────
 export default function MobileAIAvatarPage() {
@@ -860,6 +1125,24 @@ export default function MobileAIAvatarPage() {
 
       {/* 09 Design Solution 01 */}
       <Section09DesignSolution01 />
+
+      {/* 10 Design Solution 02 */}
+      <Section10DesignSolution02 />
+
+      {/* 11 Design Solution 03 */}
+      <Section11DesignSolution03 />
+
+      {/* 12 Design Solution 04 */}
+      <Section12DesignSolution04 />
+
+      {/* 13 Outcome */}
+      <Section13Outcome />
+
+      {/* 14 Reflection */}
+      <Section14Reflection />
+
+      {/* 15 Team · Closing */}
+      <Section15TeamClosing />
 
     </motion.div>
   )

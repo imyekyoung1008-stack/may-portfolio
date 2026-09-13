@@ -17,6 +17,13 @@ import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-t
 import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
 import imgSolution01Before from '../assets/images/ai-avatar/solution-01-before.jpg'
 import imgSolution01After  from '../assets/images/ai-avatar/solution-01-after.jpg'
+import imgSolution02Before from '../assets/images/ai-avatar/solution-02-before.jpg'
+import imgSolution02After  from '../assets/images/ai-avatar/solution-02-after.jpg'
+import imgSolution03Before from '../assets/images/ai-avatar/solution-03-before.jpg'
+import imgSolution03After  from '../assets/images/ai-avatar/solution-03-after.jpg'
+import imgSolution04Before from '../assets/images/ai-avatar/solution-04-before.jpg'
+import imgSolution04After  from '../assets/images/ai-avatar/solution-04-after.jpg'
+import imgTeamPhoto        from '../assets/images/ai-avatar/team-photo.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -912,30 +919,29 @@ function DesignSolution01Section() {
 // ─────────────────────────────────────────────────
 // 10 Design Solution 02 — 889:18936
 // ─────────────────────────────────────────────────
+const SOLUTION_02_STATS = [
+  { label: 'Task 2 success rate', value: '33%',  note: 'Finding a voice via filter/search' },
+  { label: 'Task 2 time',         value: '328s', note: '+88s over the expected 240s' },
+  { label: 'Task 2 errors',       value: '12',   note: 'Highest of all tasks' },
+]
+
 function DesignSolution02Section() {
-  const stats = [
-    { label: 'Task 2 success rate', value: '33%',  note: 'Lowest after T1' },
-    { label: 'Task 2 time',         value: '328s', note: '5.5x the expected time' },
-    { label: 'Task 2 errors',       value: '12',   note: 'Highest of all 5 tasks' },
-  ]
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+    <section className="w-full bg-white">
       <ContentWrap gap={40}>
         {/* 섹션 레이블 + 배지 */}
-        <div className="flex items-center gap-[4px] w-full">
-          <div className="flex-1 min-w-0">
-            <KTSectionLabel num="10" label="Design Solution 02" />
-          </div>
+        <div className="flex items-center justify-between gap-[4px] w-full">
+          <KTSectionLabel num="10" label="Design Solution 02" />
           <SolvesBadge problemNum="02" />
         </div>
 
         <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          Making Applied Filters Easy to Scan and Modify
+          Making Applied Filters Easier to Scan and Modify
         </h2>
 
-        {/* 3개 통계 카드 */}
+        {/* 통계 카드 3개 */}
         <div className="flex gap-[20px] w-full">
-          {stats.map(({ label, value, note }) => (
+          {SOLUTION_02_STATS.map(({ label, value, note }) => (
             <div key={label} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[24px]" style={{ border: '1px solid #ddd' }}>
               <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
               <p className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
@@ -944,33 +950,27 @@ function DesignSolution02Section() {
           ))}
         </div>
 
-        {/* Why? */}
+        {/* Why? → Before image → 화살표 → What we changed! → After image */}
         <div className="flex flex-col gap-[20px] w-full">
           <div className="bg-[#f7f7f7] flex flex-col gap-[16px] p-[24px] w-full" style={{ border: '1px solid #ddd' }}>
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              In the original UI, users could apply filters across 6 categories (gender, age, style, language, tone, speed), but there was no clear visual summary of which filters were active. Once a filter was set, users had to re-open the filter panel to check what was selected, causing confusion and extra taps.
+              When multiple filter values were selected, users struggled to tell which values were actually applied. Because filter states were condensed into numeric indicators, they were difficult to scan and modify. This directly contributed to Task 2 recording 12 usability errors — the highest of all five tasks.
             </p>
           </div>
-          {/* Image Placeholder — Figma 889:18958 (Before) */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
-          <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>
-            * The original filter panel made it difficult to see which options were currently applied.
-          </p>
+          <img src={imgSolution02Before} alt="Original filter UI — before redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
 
         <BeforeAfterDivider />
 
-        {/* What we changed! */}
         <div className="flex flex-col gap-[20px] w-full">
           <div className="bg-[#a6daff] flex flex-col gap-[16px] p-[24px] w-full">
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              We redesigned the filter UI to a vertical layout with persistent filter chips, so users can see all applied values at a glance, remove individual filters with one tap, and re-enter the panel with current state clearly visible.
+              We replaced the horizontal filter chips with a vertical layout that shows every category and selected value at once, so users can scan, modify, and remove filters without opening extra dropdowns.
             </p>
           </div>
-          {/* Image Placeholder — Figma 889:18975 (After) */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
+          <img src={imgSolution02After} alt="Redesigned filter UI — after redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
       </ContentWrap>
     </section>
@@ -981,26 +981,19 @@ function DesignSolution02Section() {
 // 11 Design Solution 03 — 889:18976
 // ─────────────────────────────────────────────────
 const MATCHING_STEPS = [
-  { num: '01', title: 'AI Human Traits Keywords',  body: 'Each AI human character is tagged with personality and style keywords (e.g. "professional", "warm", "energetic").' },
-  { num: '02', title: 'Voice Tone Keywords',        body: 'Each voice is tagged with matching tone and style keywords by the KT AI voice team.' },
-  { num: '03', title: 'Keyword Matching',           body: 'The recommendation engine cross-references AI human traits with voice tone keywords to surface the most compatible voices.' },
-  { num: '04', title: 'Default Voice',              body: "If a user hasn't selected a voice, the system auto-applies the highest-match voice so the creation flow never blocks." },
+  { num: '01', desc: "AI extracts trait keywords (age range, mood, tone) from the AI human's image" },
+  { num: '02', desc: "Automatically matches them against each voice's existing tags (#warm #lively #calm, etc.)" },
+  { num: '03', desc: 'Surfaces the top 3 matches as recommended voices and automatically applies the top match as the default' },
+  { num: '04', desc: 'Rather than trusting the AI match blindly, a designer listens through and filters out any awkward pairings' },
 ]
 
 function DesignSolution03Section() {
-  const stats = [
-    { label: 'Voices available',  value: '300+', note: 'Across 6 filter categories' },
-    { label: 'Avg. time on voice', value: '4min', note: 'Browsing without guidance' },
-    { label: 'Re-selection rate',  value: 'High', note: 'Voice differed from expectation' },
-  ]
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+    <section className="w-full bg-white">
       <ContentWrap gap={40}>
         {/* 섹션 레이블 + 배지 */}
-        <div className="flex items-center gap-[4px] w-full">
-          <div className="flex-1 min-w-0">
-            <KTSectionLabel num="11" label="Design Solution 03" />
-          </div>
+        <div className="flex items-center justify-between gap-[4px] w-full">
+          <KTSectionLabel num="11" label="Design Solution 03" />
           <SolvesBadge problemNum="03" />
         </div>
 
@@ -1008,60 +1001,54 @@ function DesignSolution03Section() {
           Providing Recommended and Default Voices
         </h2>
 
-        {/* 3개 통계 카드 */}
-        <div className="flex gap-[20px] w-full">
-          {stats.map(({ label, value, note }) => (
-            <div key={label} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[24px]" style={{ border: '1px solid #ddd' }}>
-              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
-              <p className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
-              <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{note}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Why? */}
-        <div className="bg-[#f7f7f7] flex flex-col gap-[16px] p-[24px] w-full" style={{ border: '1px solid #ddd' }}>
-          <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
-          <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            With 300+ voices across 6 filter categories, users faced decision paralysis. Without a recommended starting point, they either spent excessive time browsing or picked a voice at random, often regretting the choice after previewing the final output.
-          </p>
+        {/* Why? → Before image → 화살표 → What we changed! → After image → Logic */}
+        <div className="flex flex-col gap-[20px] w-full">
+          <div className="bg-[#f7f7f7] flex flex-col gap-[16px] p-[24px] w-full" style={{ border: '1px solid #ddd' }}>
+            <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
+            <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+              With over 110 voice options, users experienced decision fatigue, especially when they were unfamiliar with the available voices. We needed a way to surface relevant options without requiring users to preview them one by one.
+            </p>
+          </div>
+          <img src={imgSolution03Before} alt="Original voice selection — before redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
 
         <BeforeAfterDivider />
 
-        {/* What we changed! */}
         <div className="flex flex-col gap-[20px] w-full">
           <div className="bg-[#a6daff] flex flex-col gap-[16px] p-[24px] w-full">
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              We introduced a "Recommended Voices" section that surfaces the top 3 voices matched to the selected AI human character, plus a "Default Voice" that auto-applies the best match so users can start creating immediately without any selection required.
+              We defined the AI avatar and each voice using structured keywords, then used those attributes to generate recommended voice matches and apply the best match as the default.
             </p>
           </div>
-          {/* Image Placeholder (After) */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
+          <img src={imgSolution03After} alt="Redesigned voice selection — after redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
 
         {/* Recommended Voice Matching Logic */}
-        <div className="flex flex-col gap-[20px] w-full" style={{ border: '1px solid #ddd', padding: '24px' }}>
-          {/* 제목 */}
-          <div className="flex gap-[8px] items-center">
-            <span className="text-[20px] leading-[30px]" aria-hidden>✱</span>
-            <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-              Recommended Voice Matching Logic
-            </p>
+        <div className="flex flex-col gap-[20px] w-full p-[20px]" style={{ border: '1px solid #ddd' }}>
+          <div className="flex items-center gap-[6px] w-full">
+            <img src={icWhyItWorks} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Recommended Voice Matching Logic</p>
           </div>
-          <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            Because this was a B2B2C integration, I couldn't just add a "favorites" feature — I had to define the criteria the AI would use to recommend voices automatically. Here's how the matching logic works:
-          </p>
-          {/* 4-step 그리드 2×2 */}
-          <div className="grid gap-[16px]" style={{ gridTemplateColumns: '1fr 1fr' }}>
-            {MATCHING_STEPS.map(({ num, title, body }) => (
-              <div key={num} className="flex flex-col gap-[12px] bg-[#f7f7f7] p-[20px]">
-                <div className="flex items-center justify-center bg-[#1e1e1e] shrink-0" style={{ width: '28px', height: '28px' }}>
-                  <span className="text-[14px] font-medium leading-[21px] text-white" style={{ fontFamily: poppins }}>{num}</span>
+          {/* Row 1: 01 + 02 */}
+          <div className="flex gap-[20px] items-stretch w-full">
+            {MATCHING_STEPS.slice(0, 2).map(({ num, desc }) => (
+              <div key={num} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[20px] bg-[#f7f7f7]">
+                <div className="bg-[#1e1e1e] flex items-center justify-center w-[28px] h-[28px] shrink-0">
+                  <p className="text-[18px] font-medium leading-[27px] text-white text-center whitespace-nowrap" style={{ fontFamily: poppins }}>{num}</p>
                 </div>
-                <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{title}</p>
-                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{body}</p>
+                <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+          {/* Row 2: 03 + 04 */}
+          <div className="flex gap-[20px] items-stretch w-full">
+            {MATCHING_STEPS.slice(2).map(({ num, desc }) => (
+              <div key={num} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[20px] bg-[#f7f7f7]">
+                <div className="bg-[#1e1e1e] flex items-center justify-center w-[28px] h-[28px] shrink-0">
+                  <p className="text-[18px] font-medium leading-[27px] text-white text-center whitespace-nowrap" style={{ fontFamily: poppins }}>{num}</p>
+                </div>
+                <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -1075,19 +1062,11 @@ function DesignSolution03Section() {
 // 12 Design Solution 04 — 889:19029
 // ─────────────────────────────────────────────────
 function DesignSolution04Section() {
-  const stats = [
-    { label: 'Re-selection rate',   value: '59%', note: 'Users changed voice after first apply' },
-    { label: 'Avg. extra taps',     value: '+14', note: 'Per re-selection round trip' },
-    { label: 'Root cause',          value: 'Gap', note: 'Between preview and actual output' },
-  ]
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+    <section className="w-full bg-white">
       <ContentWrap gap={40}>
-        {/* 섹션 레이블 + 배지 */}
-        <div className="flex items-center gap-[4px] w-full">
-          <div className="flex-1 min-w-0">
-            <KTSectionLabel num="12" label="Design Solution 04" />
-          </div>
+        <div className="flex items-center justify-between gap-[4px] w-full">
+          <KTSectionLabel num="12" label="Design Solution 04" />
           <SolvesBadge problemNum="04" />
         </div>
 
@@ -1095,44 +1074,26 @@ function DesignSolution04Section() {
           Preview Voices With Live Content
         </h2>
 
-        {/* 3개 통계 카드 */}
-        <div className="flex gap-[20px] w-full">
-          {stats.map(({ label, value, note }) => (
-            <div key={label} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[24px]" style={{ border: '1px solid #ddd' }}>
-              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
-              <p className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
-              <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{note}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Why? */}
         <div className="flex flex-col gap-[20px] w-full">
           <div className="bg-[#f7f7f7] flex flex-col gap-[16px] p-[24px] w-full" style={{ border: '1px solid #ddd' }}>
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              The original KT AI Voice Studio offered only a generic voice sample for preview — a pre-recorded clip unrelated to the user's actual script. Users frequently discovered after applying a voice that it didn't match the tone or pacing of their content, requiring a full re-selection cycle.
+              Users could only preview voices with fixed sample sentences, not their own scripts. As a result, the selected voice often felt different when applied to real content, forcing users to switch repeatedly between writing and voice selection.
             </p>
           </div>
-          {/* Image Placeholder (Before) */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
-          <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>
-            * Preview used a fixed generic sample, not the user's actual script content.
-          </p>
+          <img src={imgSolution04Before} alt="Original voice preview — before redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
 
         <BeforeAfterDivider />
 
-        {/* What we changed! */}
         <div className="flex flex-col gap-[20px] w-full">
           <div className="bg-[#a6daff] flex flex-col gap-[16px] p-[24px] w-full">
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              We added an "Enter example sentence" feature that lets users type their own content and immediately hear how any voice sounds with it. This closes the gap between preview and production, dramatically reducing the need to reselect after applying.
+              We added an example sentence input so users could preview their own scripts with the selected voice on the same screen. This allowed them to evaluate how the voice fit their real content before applying it.
             </p>
           </div>
-          {/* Image Placeholder (After) */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
+          <img src={imgSolution04After} alt="Redesigned voice preview — after redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
       </ContentWrap>
     </section>
@@ -1142,49 +1103,29 @@ function DesignSolution04Section() {
 // ─────────────────────────────────────────────────
 // 13 Outcome (bottom) — 889:19055
 // ─────────────────────────────────────────────────
+const OUTCOME_CARDS = [
+  { stat: '50%↓',  label: 'Voice selection time' },
+  { stat: '59%↓',  label: 'Voice reselection rate' },
+  { stat: 'B2B2C', label: 'Expansion, built and launched' },
+]
+
 function OutcomeBottomSection() {
-  const outcomes = [
-    {
-      num:       '01',
-      stat:      '50%',
-      label:     'Faster voice selection',
-      body:      'The redesigned entry point and recommended voices cut the average time users spent on voice selection in half.',
-    },
-    {
-      num:       '02',
-      stat:      '59%',
-      label:     'Fewer voice re-selections',
-      body:      'Live content preview and better filter visibility meant users committed to their first choice far more often.',
-    },
-    {
-      num:       '03',
-      stat:      'B2B2C',
-      label:     'Extended business model',
-      body:      'By integrating KT AI Voice Studio, CNAI STUDIO expanded from a pure B2B product to a B2B2C platform, unlocking a new segment of end-user creators.',
-    },
-  ]
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+    <section className="w-full bg-white">
       <ContentWrap gap={40}>
         <KTSectionLabel num="13" label="Outcome" />
         <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          Three Measurable Wins
+          What These Four Changes Made Possible
         </h2>
-        <div className="flex flex-col gap-[20px] w-full">
-          {outcomes.map(({ num, stat, label, body }) => (
+        <div className="flex flex-row gap-[20px] w-full">
+          {OUTCOME_CARDS.map(({ stat, label }) => (
             <div
-              key={num}
-              className="flex gap-[28px] items-start px-[32px] py-[28px] w-full"
-              style={{ backgroundColor: '#a6daff' }}
+              key={stat}
+              className="flex-1 flex flex-col gap-[8px] p-[24px] bg-[#a6daff]"
+              style={{ height: '124px' }}
             >
-              <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '32px', height: '32px' }}>
-                <span className="text-[16px] font-medium leading-[24px] text-white text-center" style={{ fontFamily: poppins }}>{num}</span>
-              </div>
-              <div className="flex flex-col gap-[4px] flex-1 min-w-0">
-                <p className="text-[32px] font-semibold leading-[40px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{stat}</p>
-                <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
-                <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{body}</p>
-              </div>
+              <p className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{stat}</p>
+              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
             </div>
           ))}
         </div>
@@ -1194,17 +1135,11 @@ function OutcomeBottomSection() {
 }
 
 // ─────────────────────────────────────────────────
-// 14 Reflection — 889:19073
+// 14 Reflection — 942:20600
 // ─────────────────────────────────────────────────
-const QUOTES = [
-  {
-    quote: '"Designing AI recommendation criteria is a product decision, not just a UX decision."',
-    body:  'Deciding which keywords defined an AI human\'s "personality" — and how those matched voice tone — required alignment across design, AI engineering, and the KT partnership team. I learned that in AI-integrated products, the designer has to drive criteria definition, not just interface design.',
-  },
-  {
-    quote: '"Speed of decision matters more than completeness of options."',
-    body:  'We could have added more filter dimensions, but the research showed users were already overwhelmed. Reducing cognitive load by surfacing smart defaults and recommendations outperformed giving users more control. Sometimes the best UX is less choice.',
-  },
+const REFLECTION_QUOTES = [
+  'Even users coming from the old voice studio could use this naturally, without having to learn anything new.',
+  "Recommended voices wasn't something I'd even considered. It'll clearly make selection faster and more satisfying.",
 ]
 
 function ReflectionSection() {
@@ -1212,44 +1147,41 @@ function ReflectionSection() {
     <section className="w-full" style={{ backgroundColor: '#f7f7f7' }}>
       <ContentWrap gap={40}>
         <KTSectionLabel num="14" label="Reflection" />
-        <div className="flex flex-col gap-[12px] w-full">
-          <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            What I Learned From This Project
-          </h2>
-        </div>
 
-        {/* 2개 인용 카드 */}
+        <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+          What This Project Left Me, in Data and Feedback
+        </h2>
+
+        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+          Looking at the low success rate and high error rate from Tasks 1 and 2 alongside the feedback we got after shipping the changes:
+        </p>
+
+        {/* 2개 인용 카드 — 가로 배치 */}
         <div className="flex gap-[20px] w-full">
-          {QUOTES.map(({ quote, body }, i) => (
+          {REFLECTION_QUOTES.map((quote, i) => (
             <div
               key={i}
-              className="flex flex-col gap-[20px] flex-1 min-w-0 p-[28px]"
-              style={{ backgroundColor: '#f7f7f7', border: '1px solid #ddd' }}
+              className="flex flex-col gap-[16px] flex-1 min-w-0 p-[24px]"
+              style={{ backgroundColor: '#f7f7f7', border: '1px solid #ddd', height: '177px' }}
             >
-              {/* 오프닝 따옴표 */}
-              <p
-                className="text-[64px] leading-[48px] text-[#1e1e1e] select-none"
-                style={{ fontFamily: 'Georgia, serif', lineHeight: '48px' }}
-                aria-hidden
-              >
+              <p className="text-[20px] leading-none text-[#1e1e1e] select-none" aria-hidden>
                 "
               </p>
-              <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+              <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
                 {quote}
-              </p>
-              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-                {body}
               </p>
             </div>
           ))}
         </div>
 
-        {/* 본문 */}
+        {/* 마무리 본문 */}
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          This project pushed me to work at the intersection of product strategy, AI system logic, and interaction design. Collaborating with KT's engineering team to define matching criteria — rather than just designing around existing outputs — was a new kind of design challenge that I want to take further.
+          This project showed me that combining video and voice generation into one experience requires more than screen design. Defining the criteria that guide the AI's output matters just as much. I validated four solutions using usability data and client feedback. The matching criteria we established became a lasting principle for designing AI human output.
         </p>
-        <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b] w-full" style={{ fontFamily: poppins }}>
-          * Outcome metrics are based on internal usability testing conducted prior to and after the redesign with 6 participants.
+
+        {/* 캡션 */}
+        <p className="text-[14px] font-normal leading-[21px] w-full" style={{ fontFamily: poppins, color: '#8b8b8b' }}>
+          * Content created with KT AI Human Studio
         </p>
       </ContentWrap>
     </section>
@@ -1261,47 +1193,21 @@ function ReflectionSection() {
 // ─────────────────────────────────────────────────
 function TeamClosingSection() {
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
-      <ContentWrap gap={40}>
-        <KTSectionLabel num="15" label="Team · Closing" />
-        <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          Built With a Small Team, Shipped at Scale
-        </h2>
-
-        {/* 540px 이미지 자리 — centered */}
-        <div className="flex flex-col items-center gap-[16px] w-full">
-          <div className="bg-[#c4c4c4] shrink-0" style={{ width: '540px', height: '360px' }} aria-hidden />
-          <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b] text-center" style={{ fontFamily: poppins }}>
-            KT AI Human Studio — shipped Q3 2026
-          </p>
-        </div>
-
-        {/* 팀 설명 */}
-        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          This product was built by a cross-functional team of 2 developers and 6 program managers across CNAI STUDIO and KT. As the solo product designer, I was responsible for end-to-end UX and UI — from defining the information architecture and interaction model to delivering production-ready Figma specs and supporting developer handoff.
+    <section className="w-full bg-white">
+      <ContentWrap gap={24}>
+        {/* 팀 사진 — 960px 고정폭 컨테이너 안, 540px 높이, object-bottom */}
+        <img
+          src={imgTeamPhoto}
+          alt="The CNAI STUDIO team that built KT AI Human Studio together"
+          className="w-full object-cover object-bottom"
+          style={{ height: '540px' }}
+        />
+        <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
+          The CNAI STUDIO team that built KT AI Human Studio together
         </p>
-        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          The KT partnership required navigating technical constraints, stakeholder reviews, and real-time design pivots — experience that sharpened my ability to design collaboratively under pressure and ship in fast-moving environments.
+        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
+          I started my career at a startup right after graduating. Working with a small team toward one shared goal let me own a product from planning through launch. I handled problem definition, UI/UX design, and client communication. The habit of defining scope quickly and validating as I go has stayed with me in every product I've worked on since.
         </p>
-
-        {/* 팀 그리드 */}
-        <div
-          className="w-full py-[20px] grid gap-[20px]"
-          style={{ gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', borderTop: '1px solid #f7f7f7' }}
-        >
-          <div className="flex flex-col gap-[4px]">
-            <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>Product Designer</p>
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>May Im (Solo)</p>
-          </div>
-          <div className="flex flex-col gap-[4px]">
-            <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>Developers</p>
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>2 Engineers</p>
-          </div>
-          <div className="flex flex-col gap-[4px]">
-            <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>Program Managers</p>
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>6 PMs (CNAI + KT)</p>
-          </div>
-        </div>
       </ContentWrap>
     </section>
   )
