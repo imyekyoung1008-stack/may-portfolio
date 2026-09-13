@@ -26,6 +26,10 @@ import imgSolution04After  from '../assets/images/ai-avatar/solution-04-after.jp
 import imgTeamGroupPhoto    from '../assets/images/ai-avatar/team-group-photo.jpg'
 import imgTeamPhoto01       from '../assets/images/ai-avatar/team-photo-01.jpg'
 import imgTeamPhoto02       from '../assets/images/ai-avatar/team-photo-02.jpg'
+import chartSuccessRate     from '../assets/images/ai-avatar/charts/chart-success-rate.png'
+import chartTimeTaken       from '../assets/images/ai-avatar/charts/chart-time-taken.png'
+import chartErrorCount      from '../assets/images/ai-avatar/charts/chart-error-count.png'
+import chartSatisfaction    from '../assets/images/ai-avatar/charts/chart-satisfaction.png'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -801,51 +805,6 @@ function TabletOutcomeBottomSection() {
 // 07 ANALYSIS OF RESULTS — Figma 955:1124
 // ─────────────────────────────────────────────────
 
-/** 바 컬럼 — 재사용 헬퍼 */
-function TBarCol({
-  value, barH, barColor, isGradient, label, barW = '56px', dividerStyle, labelPb = 9,
-}: {
-  value: string; barH: string | 'flex'; barColor: string
-  isGradient?: boolean; label: string; barW?: string
-  dividerStyle?: React.CSSProperties
-  labelPb?: number
-}) {
-  const barStyle: React.CSSProperties = isGradient
-    ? { background: 'linear-gradient(to bottom, #3d5afb, #1c2a78)', borderRadius: '6px 6px 0 0', flexShrink: 0 }
-    : { backgroundColor: barColor, borderRadius: '6px 6px 0 0', flexShrink: 0 }
-
-  return (
-    <div className="relative flex flex-col items-center justify-end h-[180px] shrink-0" style={{ width: barW }}>
-      {dividerStyle && (
-        <div className="absolute border-t-[3px] border-dashed border-[#9098C0] pointer-events-none" style={dividerStyle} />
-      )}
-      <p className="relative z-[1] text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins, paddingBottom: `${labelPb}px` }}>{value}</p>
-      {barH === 'flex'
-        ? <div className="flex-1 min-h-0 w-full" style={barStyle} />
-        : <div style={{ ...barStyle, height: barH, width: '100%' }} />
-      }
-      <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>{label}</p>
-    </div>
-  )
-}
-
-/** 차트 카드 래퍼 — w-[344px] h-[340px] */
-function TChartCard({ title, subtitle, children }: { title: string; subtitle?: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <div
-      className="bg-white flex flex-col justify-between px-[16px] py-[20px] shrink-0"
-      style={{ width: '344px', height: '340px', border: '1px solid #ddd' }}
-    >
-      {/* 상단: 제목 + 선택적 부제목/범례 */}
-      <div className="flex flex-col gap-[8px] shrink-0 w-full">
-        <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{title}</p>
-        {subtitle && <div className="w-full shrink-0">{subtitle}</div>}
-      </div>
-      {/* 하단: 차트 영역 (180px, 바닥 고정) */}
-      {children}
-    </div>
-  )
-}
 
 function TabletAnalysisSection() {
   return (
@@ -861,155 +820,15 @@ function TabletAnalysisSection() {
           </p>
         </div>
 
-        {/* 2×2 차트 그리드 */}
+        {/* 2×2 차트 그리드 — Figma export 이미지 */}
         <div className="flex flex-col gap-[16px] w-full">
-
-          {/* Row 1 */}
-          <div className="flex gap-[16px] w-full overflow-x-auto pb-[4px]">
-
-            {/* Success rate */}
-            <TChartCard title="Success rate (%)">
-              <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
-                <TBarCol value="16"  barH="28.785px" barColor="#3d5afb" isGradient label="T1" />
-                <TBarCol value="33"  barH="59.385px" barColor="#3d5afb" isGradient label="T2" />
-                <TBarCol value="83"  barH="flex"     barColor="#e7e9f5" label="T3" />
-                <TBarCol value="100" barH="flex"     barColor="#e7e9f5" label="T4" />
-                <TBarCol value="100" barH="flex"     barColor="#e7e9f5" label="T5" />
-              </div>
-            </TChartCard>
-
-            {/* Time taken */}
-            <TChartCard title="Time taken (s)" subtitle={
-              <div className="flex items-center gap-[12px]">
-                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Expected Task Time</p>
-                <div className="border-t-[3px] border-dashed border-[#9098C0] shrink-0" style={{ width: '50.55px' }} />
-              </div>
-            }>
-              <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
-                <TBarCol value="65"  barH="32.49px"  barColor="#3d5afb" isGradient label="T1" dividerStyle={{ inset: '73.34% 1.5px 24.99% 1.5px' } as React.CSSProperties} />
-                <TBarCol value="328" barH="flex"      barColor="#3d5afb" isGradient label="T2" dividerStyle={{ inset: '34.45% 1.5px 63.88% 1.5px' } as React.CSSProperties} />
-                <TBarCol value="283" barH="flex"      barColor="#e7e9f5" label="T3"            dividerStyle={{ top: '-1.67%', right: '1.5px', bottom: '100%', left: '1.5px' }} />
-                <TBarCol value="91"  barH="45.495px"  barColor="#e7e9f5" label="T4"            dividerStyle={{ inset: '42.79% 1.5px 55.55% 1.5px' } as React.CSSProperties} labelPb={30} />
-                <TBarCol value="42"  barH="21px"      barColor="#e7e9f5" label="T5"            dividerStyle={{ inset: '59.45% 1.5px 38.88% 1.5px' } as React.CSSProperties} labelPb={25} />
-              </div>
-            </TChartCard>
+          <div className="flex gap-[16px] w-full">
+            <img src={chartSuccessRate} alt="Success rate chart" className="flex-1 min-w-0 h-auto" />
+            <img src={chartTimeTaken} alt="Time taken chart" className="flex-1 min-w-0 h-auto" />
           </div>
-
-          {/* Row 2 */}
-          <div className="flex gap-[16px] w-full overflow-x-auto pb-[4px]">
-
-            {/* Error rate — stacked */}
-            <TChartCard title="Error count" subtitle={
-              <div className="flex flex-wrap gap-x-[8px] items-center w-full">
-                {[
-                  { color: '#8fd9d9', label: 'Interaction' },
-                  { color: '#f4d98a', label: 'Labeling' },
-                  { color: '#c9b8f5', label: 'IA' },
-                  { color: '#b7e8c4', label: 'UI' },
-                ].map(({ color, label }) => (
-                  <div key={label} className="flex gap-[6px] items-center py-[1px]">
-                    <div style={{ width: 12, height: 12, backgroundColor: color, flexShrink: 0 }} />
-                    <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>{label}</p>
-                  </div>
-                ))}
-              </div>
-            }>
-              <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
-                {/* T1: 8 — teal+yellow */}
-                <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '56px' }}>
-                  <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>8</p>
-                  <div className="flex flex-col w-full" style={{ flex: '1 0 0' }}>
-                    <div style={{ flex: '1 0 0' }} />
-                    <div style={{ height: '23.76px', backgroundColor: '#8fd9d9', flexShrink: 0 }} />
-                    <div style={{ height: '39.63px', backgroundColor: '#f4d98a', flexShrink: 0 }} />
-                  </div>
-                  <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>T1</p>
-                </div>
-                {/* T2: 12 — teal+yellow+purple */}
-                <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '56px' }}>
-                  <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>12</p>
-                  <div className="flex flex-col w-full" style={{ flex: '1 0 0' }}>
-                    <div style={{ flex: '1 0 0' }} />
-                    <div style={{ height: '23.76px', backgroundColor: '#8fd9d9', flexShrink: 0 }} />
-                    <div style={{ height: '59.46px', backgroundColor: '#f4d98a', flexShrink: 0 }} />
-                    <div style={{ height: '11.88px', backgroundColor: '#c9b8f5', flexShrink: 0 }} />
-                  </div>
-                  <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>T2</p>
-                </div>
-                {/* T3: 4 — teal+purple */}
-                <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '56px' }}>
-                  <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>4</p>
-                  <div className="flex flex-col w-full" style={{ flex: '1 0 0' }}>
-                    <div style={{ flex: '1 0 0' }} />
-                    <div style={{ height: '19.8px', backgroundColor: '#8fd9d9', flexShrink: 0 }} />
-                    <div style={{ height: '11.88px', backgroundColor: '#c9b8f5', flexShrink: 0 }} />
-                  </div>
-                  <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>T3</p>
-                </div>
-                {/* T4: 0 */}
-                <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '56px' }}>
-                  <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>0</p>
-                  <div className="flex-1 min-h-0 w-full" />
-                  <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>T4</p>
-                </div>
-                {/* T5: 1 — yellow (tiny) */}
-                <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '56px' }}>
-                  <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>1</p>
-                  <div className="flex flex-col w-full" style={{ flex: '1 0 0' }}>
-                    <div style={{ flex: '1 0 0' }} />
-                    <div style={{ height: '7.92px', backgroundColor: '#f4d98a', flexShrink: 0 }} />
-                  </div>
-                  <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>T5</p>
-                </div>
-              </div>
-            </TChartCard>
-
-            {/* Satisfaction (/5) */}
-            <TChartCard title="Participant satisfaction (/5)">
-              <div className="relative flex gap-[8px] items-end justify-center h-[180px] w-full">
-                {/* Average dashed line — behind bars */}
-                <div
-                  className="absolute border-t border-dashed border-[#9098C0] pointer-events-none"
-                  style={{ top: '52px', left: '-16px', right: '-16px' }}
-                />
-                {/* Bars */}
-                {[
-                  { val: '3', h: '108px', isGrad: false, label: 'P1' },
-                  { val: '3', h: '108px', isGrad: false, label: 'P2' },
-                  { val: '4', h: 'flex',  isGrad: false, label: 'P3' },
-                  { val: '1', h: '36px',  isGrad: true,  label: 'P4' },
-                  { val: '3', h: '108px', isGrad: true,  label: 'P5' },
-                  { val: '2', h: '72px',  isGrad: true,  label: 'P6' },
-                ].map(({ val, h, isGrad, label }) => (
-                  <div key={label} className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '45.333px' }}>
-                    <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>{val}</p>
-                    {h === 'flex'
-                      ? <div className="flex-1 min-h-0 w-full" style={{ backgroundColor: '#e7e9f5', borderRadius: '6px 6px 0 0' }} />
-                      : <div style={{ height: h, width: '100%', borderRadius: '6px 6px 0 0', background: isGrad ? 'linear-gradient(to bottom, #3d5afb, #1c2a78)' : '#e7e9f5', flexShrink: 0 }} />
-                    }
-                    <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>{label}</p>
-                  </div>
-                ))}
-                {/* avg. 2.67 text — rendered after bars to sit on top */}
-                <p
-                  className="absolute text-[16px] font-semibold pointer-events-none"
-                  style={{
-                    top: '28px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: 'linear-gradient(to right, #0E43FB, #1F0099)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    color: 'transparent',
-                    fontFamily: poppins,
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  avg. 2.67
-                </p>
-              </div>
-            </TChartCard>
+          <div className="flex gap-[16px] w-full">
+            <img src={chartErrorCount} alt="Error count chart" className="flex-1 min-w-0 h-auto" />
+            <img src={chartSatisfaction} alt="Participant satisfaction chart" className="flex-1 min-w-0 h-auto" />
           </div>
         </div>
       </TContentWrap>
