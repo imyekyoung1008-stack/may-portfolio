@@ -26,7 +26,7 @@ import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
 import vidShelterDemo    from '../assets/videos/shelter-demo.mp4'
 
 // ── Icons ────────────────────────────────────────
-import icLogo            from '../assets/icons/logo.svg'
+import { MayImLogo } from './MayImLogo'
 import icArrowInsert     from '../assets/icons/arrow-insert.svg'
 import icArrowNext       from '../assets/icons/arrow-next.svg'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
@@ -188,12 +188,8 @@ export default function MainPage() {
                 {/* 741:34277: Logo + Headline, gap-32px */}
                 <div className="flex flex-col gap-[32px] items-start w-full">
 
-                  {/* may im logo — 72×72px SVG (dot grid 52×52px + 10px padding) */}
-                  <img
-                    src={icLogo}
-                    alt="May Im logo"
-                    className="w-[72px] h-[72px] shrink-0 block"
-                  />
+                  {/* may im logo — animated pixel-art globe → yellow circle */}
+                  <MayImLogo />
 
                   {/* Headline — Figma: desktop/5xl/Medium, 36px/47px */}
                   <div className="flex flex-col items-start w-full">

@@ -5,6 +5,11 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import React from 'react'
+import LottieLib from 'lottie-react'
+import { useLottieAnimation } from '../hooks/useLottieAnimation'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Lottie = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
 
 // ── Images ────────────────────────────────────────
 import imgIntroHandingPhone from '../assets/images/ai-avatar/intro-handing-phone.png'
@@ -46,6 +51,7 @@ function TSectionLabel({ num, label }: { num: string; label: string }) {
 // Header — Figma 944:1125
 // ─────────────────────────────────────────────────
 function TabletAIAvatarHeader() {
+  const heroAnimation = useLottieAnimation('/lottie/ai-avatar-hero.json')
   const META = [
     { label: 'Product',   value: 'Web' },
     { label: 'My role',   value: 'Solo Product Designer' },
@@ -72,8 +78,11 @@ function TabletAIAvatarHeader() {
           </div>
         </div>
 
-        {/* 히어로 플레이스홀더 — 704×469 비율 */}
-        <div className="w-full bg-[#bebebe] shrink-0" style={{ aspectRatio: '704 / 469.336' }} aria-hidden />
+        {/* 히어로 — Lottie 애니메이션 (1800×1200 = 3:2) */}
+        {heroAnimation
+          ? <Lottie animationData={heroAnimation} loop autoplay className="w-full shrink-0 block" style={{ aspectRatio: '704 / 469.336' }} />
+          : <div className="w-full shrink-0 bg-[#bebebe]" style={{ aspectRatio: '704 / 469.336' }} />
+        }
 
         {/* 소개 문단 */}
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>

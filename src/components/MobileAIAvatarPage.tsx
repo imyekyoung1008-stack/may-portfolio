@@ -5,6 +5,11 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import React from 'react'
+import LottieLib from 'lottie-react'
+import { useLottieAnimation } from '../hooks/useLottieAnimation'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Lottie = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
 
 // ── Icons ─────────────────────────────────────────
 import icClose from '../assets/icons/close.svg'
@@ -33,6 +38,7 @@ function SectionLabel({ num, label }: { num: string; label: string }) {
 // Header — Figma 945:1125 (Mobile 390px)
 // ─────────────────────────────────────────────────
 function MobileAIAvatarHeader() {
+  const heroAnimation = useLottieAnimation('/lottie/ai-avatar-hero.json')
   const META = [
     { label: 'Product',  value: 'Web',                  width: '163px' },
     { label: 'My role',  value: 'Solo Product Designer', width: '163px' },
@@ -81,12 +87,11 @@ function MobileAIAvatarHeader() {
       {/* ── 하단 블록: 히어로 + 본문 + 메타 ── */}
       <div className="flex flex-col gap-[20px] w-full">
 
-        {/* 히어로 플레이스홀더 */}
-        <div
-          className="w-full bg-[#bebebe] shrink-0"
-          style={{ aspectRatio: '358 / 238.668' }}
-          aria-hidden
-        />
+        {/* 히어로 — Lottie 애니메이션 (1800×1200 = 3:2) */}
+        {heroAnimation
+          ? <Lottie animationData={heroAnimation} loop autoplay className="w-full shrink-0 block" style={{ aspectRatio: '358 / 238.668' }} />
+          : <div className="w-full shrink-0 bg-[#bebebe]" style={{ aspectRatio: '358 / 238.668' }} />
+        }
 
         {/* 소개 문단 */}
         <p

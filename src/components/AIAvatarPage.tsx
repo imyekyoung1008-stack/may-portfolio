@@ -3,9 +3,36 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=889-18398
 // ★ Desktop only (1440px+). 반응형은 별도 작업 예정.
 
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, Component } from 'react'
+import type { ReactNode, ErrorInfo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import LottieLib from 'lottie-react'
+import { useLottieAnimation } from '../hooks/useLottieAnimation'
+// Vite wraps lottie-react v2 (CJS) as `export default require_index_umd()`
+// so the actual component is at .default inside the exports object
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Lottie = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
+
+// ── Temporary debug ErrorBoundary ──────────────────
+class LottieErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  state = { error: null }
+  static getDerivedStateFromError(e: Error) { return { error: e } }
+  componentDidCatch(e: Error, info: ErrorInfo) {
+    console.error('[LottieErrorBoundary] caught:', e, info)
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ background: '#fee', padding: 16, color: '#900', fontFamily: 'monospace', fontSize: 13 }}>
+          <b>Lottie Error:</b> {(this.state.error as Error).message}
+          <pre style={{ marginTop: 8, whiteSpace: 'pre-wrap' }}>{(this.state.error as Error).stack}</pre>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
 
 // ── Images ────────────────────────────────────────
 import imgIntroHandingPhone from '../assets/images/ai-avatar/intro-handing-phone.png'
@@ -145,6 +172,7 @@ function SideNav() {
 // Header — 889:18399
 // ─────────────────────────────────────────────────
 function AIAvatarHeader() {
+  const heroAnimation = useLottieAnimation('/lottie/ai-avatar-hero.json')
   const META = [
     { label: 'Product',  value: 'Web' },
     { label: 'My role',  value: 'Solo Product Designer' },
@@ -174,8 +202,20 @@ function AIAvatarHeader() {
           </div>
         </div>
 
-        {/* 히어로 — Image Placeholder (Figma: #bebebe, 960×640) */}
-        <div className="w-full bg-[#bebebe] shrink-0" style={{ height: '640px' }} aria-hidden />
+        {/* 히어로 — Lottie 애니메이션 (1800×1200 = 3:2, 960×640) */}
+        <LottieErrorBoundary>
+          {heroAnimation
+            ? <Lottie
+                animationData={heroAnimation}
+                loop
+                autoplay
+                className="w-full shrink-0 block"
+                style={{ height: '640px' }}
+                onDataFailed={() => console.error('[Lottie] onDataFailed')}
+              />
+            : <div className="w-full shrink-0 bg-[#bebebe]" style={{ height: '640px' }} />
+          }
+        </LottieErrorBoundary>
 
         {/* 소개 문단 */}
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>

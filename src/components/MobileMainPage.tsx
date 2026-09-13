@@ -14,7 +14,7 @@ import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
 import vidShelterDemo    from '../assets/videos/shelter-demo.mp4'
 
 // ── Icons ────────────────────────────────────────
-import icLogo            from '../assets/icons/logo.svg'
+import { MayImLogo } from './MayImLogo'
 import icArrowInsert     from '../assets/icons/arrow-insert.svg'
 import icArrowNext       from '../assets/icons/arrow-next.svg'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
@@ -81,12 +81,8 @@ export default function MobileMainPage() {
             {/* 로고 + 헤드라인 — gap-24px */}
             <div className="flex flex-col gap-[24px] items-start w-full">
 
-              {/* 로고 72×72px */}
-              <img
-                src={icLogo}
-                alt="May Im logo"
-                className="w-[72px] h-[72px] shrink-0 block"
-              />
+              {/* 로고 72×72px — animated */}
+              <MayImLogo />
 
               {/* 헤드라인: 24px/32px Medium */}
               <div
