@@ -29,6 +29,11 @@ import imgExtractScreen1  from '../assets/images/cornerstone-detail/ai-impact-3/
 import imgExtractScreen2  from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-2.png'
 import imgExtendMobile    from '../assets/images/cornerstone-detail/ai-impact-3/extend-mobile-screenshot.png'
 
+// ── Images: section 10 (REFLECTION) ──────────────
+import imgReflectionGroup from '../assets/images/cornerstone-detail/reflection/group-photo.jpg'
+import imgReflectionTeam1 from '../assets/images/cornerstone-detail/reflection/team-photo-01.jpg'
+import imgReflectionTeam2 from '../assets/images/cornerstone-detail/reflection/team-photo-02.jpg'
+
 // ── Images: section 12 (ACROSS 10 PROGRAMS) ──────
 import imgProgUiux          from '../assets/images/cornerstone-detail/programs/program-uiux.jpg'
 import imgProgCyber         from '../assets/images/cornerstone-detail/programs/program-cybersecurity.jpg'
@@ -1457,18 +1462,46 @@ function ImpactSection() {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 14 — 11 Reflection (placeholder)
+// 섹션 14 — 10 REFLECTION
 // ─────────────────────────────────────────────────
 function ReflectionSection() {
   return (
     <section className="w-full bg-white">
-      <ContentWrap>
-        <SectionLabel num="11" label="Reflection" />
+      <div className="w-full px-[40px] pt-[60px] pb-[120px]">
+        <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[32px]">
+        <SectionLabel num="10" label="REFLECTION" />
+        <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          A Project That Was Personally Meaningful
+        </h2>
         <div className="flex flex-col gap-[24px] w-full">
-          <SubHeading icon={icSectionAsterisk} label="Coming Soon" />
-          <div className="bg-[#f7f7f7] w-full" style={{ height: '416px' }} />
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            As my first design role in Canada, this project was personally meaningful because I was redesigning the website of a school I had attended myself.
+          </p>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            AI made it possible to explore more directions and systemize repetitive work within a short timeframe. It also changed how I approached design, from completing screens one by one to turning repeated decisions into reusable systems.
+          </p>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            The project helped me build trust with management and led to more opportunities across the organization. I was later asked to support more AI related projects and help teammates explore how AI could improve their workflows.
+          </p>
         </div>
-      </ContentWrap>
+        {/* Photo cluster */}
+        <div className="flex gap-[24px] items-start w-full">
+          {/* Left: group photo 576×420 */}
+          <div className="relative shrink-0 overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ width: '576px', height: '420px' }}>
+            <img src={imgReflectionGroup} alt="Group photo" className="absolute inset-0 w-full h-full object-cover object-bottom" />
+          </div>
+          {/* Right: two team photos stacked, each 360×198 */}
+          <div className="flex flex-col gap-[24px] shrink-0" style={{ width: '360px' }}>
+            <div className="relative overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ height: '198px' }}>
+              <img src={imgReflectionTeam1} alt="Team photo" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div className="relative overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ height: '198px' }}>
+              <img src={imgReflectionTeam2} alt="Team photo" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
     </section>
   )
 }
@@ -1523,3 +1556,4 @@ export default function CornerstonePage() {
     </motion.div>
   )
 }
+

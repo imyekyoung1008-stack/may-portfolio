@@ -24,6 +24,9 @@ import imgStitch        from '../assets/images/cornerstone-detail/stitch-screens
 import imgExtractScreen1 from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-1.png'
 import imgExtractScreen2 from '../assets/images/cornerstone-detail/ai-impact-3/extract-rules-screenshot-2.png'
 import imgExtendMobile   from '../assets/images/cornerstone-detail/ai-impact-3/extend-mobile-screenshot.png'
+import imgReflectionGroup from '../assets/images/cornerstone-detail/reflection/group-photo.jpg'
+import imgReflectionTeam1 from '../assets/images/cornerstone-detail/reflection/team-photo-01.jpg'
+import imgReflectionTeam2 from '../assets/images/cornerstone-detail/reflection/team-photo-02.jpg'
 import imgProgUiux       from '../assets/images/cornerstone-detail/programs/program-uiux.jpg'
 import imgProgCyber      from '../assets/images/cornerstone-detail/programs/program-cybersecurity.jpg'
 import imgProgDs         from '../assets/images/cornerstone-detail/programs/program-data-science.jpg'
@@ -2138,18 +2141,90 @@ function TabletImpactSection() {
 // 섹션 11 — 10 Reflection  (Figma 827:2511)
 // ─────────────────────────────────────────────────
 function TabletReflectionSection() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 모바일 (<768px) ──
+  if (!isTablet) {
+    return (
+      <section id="reflection" className="w-full bg-white">
+        <div className="w-full px-[20px] pt-[48px] pb-[96px] flex flex-col gap-[24px]">
+          {/* 라벨 */}
+          <div className="flex flex-col gap-[4px]">
+            <p className="text-[18px] font-medium leading-[27px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>10</p>
+            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>REFLECTION</p>
+          </div>
+          {/* 소제목 */}
+          <h2 className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            A Project That Was Personally Meaningful
+          </h2>
+          {/* 본문 */}
+          <div className="flex flex-col gap-[16px]">
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+              As my first design role in Canada, this project was personally meaningful because I was redesigning the website of a school I had attended myself.
+            </p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+              AI made it possible to explore more directions and systemize repetitive work within a short timeframe. It also changed how I approached design, from completing screens one by one to turning repeated decisions into reusable systems.
+            </p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+              The project helped me build trust with management and led to more opportunities across the organization. I was later asked to support more AI related projects and help teammates explore how AI could improve their workflows.
+            </p>
+          </div>
+          {/* 사진 — 모바일: 세로 스택 */}
+          <div className="flex flex-col gap-[16px] w-full">
+            <div className="relative w-full overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ aspectRatio: '576/420' }}>
+              <img src={imgReflectionGroup} alt="Group photo" className="absolute inset-0 w-full h-full object-cover object-bottom" />
+            </div>
+            <div className="relative w-full overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ aspectRatio: '360/198' }}>
+              <img src={imgReflectionTeam1} alt="Team photo" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div className="relative w-full overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ aspectRatio: '360/198' }}>
+              <img src={imgReflectionTeam2} alt="Team photo" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── 태블릿 (768px+) ──
   return (
     <section id="reflection" className="w-full bg-white">
-      <TContentWrap>
-        <TSectionLabel num="10" label="Reflection" />
-        <div className="flex flex-col gap-[20px]">
-          <div className="flex gap-[6px] items-center">
-            <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Coming Soon</p>
-          </div>
-          <div className="bg-[#f7f7f7] w-full" style={{ height: '320px' }} />
+      <div className="w-full px-[32px] pt-[60px] pb-[120px]">
+        <div className="w-full flex flex-col gap-[32px]">
+        <TSectionLabel num="10" label="REFLECTION" />
+        <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          A Project That Was Personally Meaningful
+        </h2>
+        <div className="flex flex-col gap-[20px] w-full">
+          <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            As my first design role in Canada, this project was personally meaningful because I was redesigning the website of a school I had attended myself.
+          </p>
+          <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            AI made it possible to explore more directions and systemize repetitive work within a short timeframe. It also changed how I approached design, from completing screens one by one to turning repeated decisions into reusable systems.
+          </p>
+          <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            The project helped me build trust with management and led to more opportunities across the organization. I was later asked to support more AI related projects and help teammates explore how AI could improve their workflows.
+          </p>
         </div>
-      </TContentWrap>
+        {/* 사진 클러스터 — 태블릿: 가로 배치, 비율 유지 */}
+        <div className="flex gap-[16px] items-start w-full">
+          {/* 좌: 그룹 사진, 576/960 ≈ 60% */}
+          <div className="relative overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ flex: '576 0 0', aspectRatio: '576/420' }}>
+            <img src={imgReflectionGroup} alt="Group photo" className="absolute inset-0 w-full h-full object-cover object-bottom" />
+          </div>
+          {/* 우: 팀 사진 2장 세로 스택, 360/960 ≈ 37.5% */}
+          <div className="flex flex-col gap-[16px]" style={{ flex: '360 0 0' }}>
+            <div className="relative overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ aspectRatio: '360/198' }}>
+              <img src={imgReflectionTeam1} alt="Team photo" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div className="relative overflow-hidden border border-[rgba(30,30,30,0.1)]" style={{ aspectRatio: '360/198' }}>
+              <img src={imgReflectionTeam2} alt="Team photo" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
     </section>
   )
 }
@@ -2221,3 +2296,4 @@ export default function TabletCornerstonePage() {
     </motion.div>
   )
 }
+
