@@ -7,7 +7,8 @@
  * - Cornerstone 페이지 video controls와 동일한 크림색 그라데이션 바
  */
 
-import React, { useRef, useState, useCallback, CSSProperties } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
+import type { CSSProperties } from 'react'
 import LottieLib from 'lottie-react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

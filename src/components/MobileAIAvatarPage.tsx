@@ -5,7 +5,6 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import React from 'react'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
 
@@ -155,9 +154,9 @@ function Section01Introduction() {
         <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
           <iframe
             key="MGSxaNMiLwU"
-            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&cc_load_policy=1&cc_lang_pref=en`}
+            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=en`}
             title="KT AI Human Studio"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
           />
