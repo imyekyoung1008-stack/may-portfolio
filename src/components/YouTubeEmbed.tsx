@@ -1,9 +1,8 @@
 /**
  * YouTubeEmbed — react-youtube 기반 반응형 임베드
  *
- * cc_load_policy=1 로 자막을 기본 on 상태로 시작.
- * 자동번역 영어 자막은 YouTube IFrame API 제약으로 프로그래밍 강제 불가 —
- * 사용자가 CC 버튼 → 자동번역 → English 로 직접 선택 가능.
+ * cc_load_policy=0 으로 자막을 명시적으로 off 상태로 시작.
+ * 사용자가 CC 버튼으로 직접 켤 수 있음.
  */
 
 import YouTube from 'react-youtube'
@@ -24,9 +23,7 @@ export function YouTubeEmbed({ videoId, className = '' }: YouTubeEmbedProps) {
       controls: 1,
       rel: 0,
       playsinline: 1,
-      cc_load_policy: 1,
-      cc_lang_pref: 'en',
-      hl: 'en',
+      cc_load_policy: 0,
     } as YT.PlayerVars,
   }
 
