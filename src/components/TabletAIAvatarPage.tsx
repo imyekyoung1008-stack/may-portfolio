@@ -12,6 +12,9 @@ import { YouTubeEmbed } from './YouTubeEmbed'
 
 // ── Images ────────────────────────────────────────
 import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.jpg'
+import imgProjectGoalBg from '../assets/images/ai-avatar/project-goal-background.jpg'
+import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-thinking-diagram.jpg'
+import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose from '../assets/icons/close.svg'
@@ -162,8 +165,10 @@ function TabletProjectGoalSection() {
             Our goal was to seamlessly integrate AI voice customization into the existing AI human video workflow. We designed a familiar yet intuitive creation experience, allowing users to easily personalize both voice and visuals within one unified platform.
           </p>
         </div>
-        {/* Image Placeholder — aspect 16:9 */}
-        <div className="w-full bg-[#c4c4c4] shrink-0" style={{ aspectRatio: '16 / 9' }} aria-hidden />
+        {/* 이미지 — Figma 942:19989 */}
+        <div className="w-full overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
+          <img src={imgProjectGoalBg} alt="AI Voice Customization workflow" className="w-full h-full object-cover" />
+        </div>
       </TContentWrap>
     </section>
   )
@@ -182,11 +187,13 @@ function TabletAIProductThinkingSection() {
             Defining What the AI Should Use as Its Criteria
           </h2>
           <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            {`This project went beyond screen design. It brought together CNAI STUDIO, which generates video using morphing technology, and a voice generation AI to create a single, coherent AI human. That meant defining each AI human's traits and each voice's tone as keywords, and deciding the criteria the AI would use to match them automatically. This became the foundation for the voice recommendation logic in Design Solution 03.`}
+            This project went beyond screen design. We defined the attributes of each AI avatar and voice as structured keywords, then established the criteria used to match them. These criteria became the foundation for the recommended voice logic in Design Solution 03.
           </p>
         </div>
-        {/* Image Placeholder */}
-        <div className="w-full bg-[#c4c4c4] shrink-0" style={{ aspectRatio: '16 / 9' }} aria-hidden />
+        {/* 이미지 — Figma 942:19990 */}
+        <div className="w-full overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
+          <img src={imgAIProductThinkingDiagram} alt="AI avatar and voice matching criteria diagram" className="w-full h-full object-cover" />
+        </div>
       </TContentWrap>
     </section>
   )
@@ -308,6 +315,7 @@ function TabletUXResearchSection() {
           </p>
         </div>
 
+        <img src={imgUXResearchTesting} alt="UX Research usability testing" className="w-full" />
         {/* Task 카드 — 2×2 + 1 full */}
         <div className="flex flex-col gap-[16px] w-full">
 

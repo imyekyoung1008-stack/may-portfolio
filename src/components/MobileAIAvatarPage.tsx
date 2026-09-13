@@ -14,6 +14,9 @@ import icClose from '../assets/icons/close.svg'
 
 // ── Images ────────────────────────────────────────
 import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.jpg'
+import imgProjectGoalBg from '../assets/images/ai-avatar/project-goal-background.jpg'
+import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-thinking-diagram.jpg'
+import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -187,11 +190,12 @@ function Section02ProjectGoal() {
           The original voice selection interface required users to navigate a long list of voice profiles with limited preview options, leading to high rates of reselection after video generation. Our goal was to redesign the voice selection flow to help users find the right voice faster, preview it more effectively, and commit to their choice with greater confidence — ultimately reducing post-generation reselection and improving overall production efficiency.
         </p>
 
-        {/* Placeholder */}
-        <div
-          className="w-full bg-[#c4c4c4]"
-          style={{ aspectRatio: '1920 / 1080' }}
-          aria-hidden
+        {/* 이미지 — Figma 942:19989 */}
+        <img
+          src={imgProjectGoalBg}
+          alt="AI Voice Customization workflow"
+          className="w-full object-cover"
+          style={{ aspectRatio: '16 / 9' }}
         />
       </div>
     </section>
@@ -208,18 +212,19 @@ function Section03AIProductThinking() {
         <SectionLabel num="03" label="AI Product Thinking" />
 
         <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-          Designing for AI means designing for uncertainty — users need to trust what they can't fully predict.
+          Defining What the AI Should Use as Its Criteria
         </p>
 
         <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-          AI-generated voice output is inherently variable — the same voice profile can sound different depending on the script, tone, and pacing. This created a fundamental UX challenge: how do you help users select a voice when the final output is difficult to preview accurately? I approached this by anchoring the design around reducing uncertainty through progressive disclosure, richer previews, and clearer voice profile metadata — giving users the information they need to make confident decisions before committing to a generation.
+          This project went beyond screen design. We defined the attributes of each AI avatar and voice as structured keywords, then established the criteria used to match them. These criteria became the foundation for the recommended voice logic in Design Solution 03.
         </p>
 
-        {/* Placeholder */}
-        <div
-          className="w-full bg-[#c4c4c4]"
-          style={{ aspectRatio: '1920 / 1080' }}
-          aria-hidden
+        {/* 이미지 — Figma 942:19990 */}
+        <img
+          src={imgAIProductThinkingDiagram}
+          alt="AI avatar and voice matching criteria diagram"
+          className="w-full object-cover"
+          style={{ aspectRatio: '16 / 9' }}
         />
       </div>
     </section>
@@ -366,138 +371,52 @@ function Section05WhatDidIWorkOn() {
 // ─────────────────────────────────────────────────
 // 06 UX Research
 // ─────────────────────────────────────────────────
+const MOBILE_TASKS = [
+  { id: 'T1', label: 'Task 1', title: 'Access the AI voice selection screen after creating a project', expected: 'Expected 30s · 5 taps', highlight: true },
+  { id: 'T2', label: 'Task 2', title: 'Select a voice using filters and search (by project)', expected: 'Expected 4 min · 8 taps', highlight: true },
+  { id: 'T3', label: 'Task 3', title: 'Write a sentence and select a voice (by sentence)', expected: 'Expected 6 min · 79 taps', highlight: false },
+  { id: 'T4', label: 'Task 4', title: 'Adjust detailed voice settings (emotion · language · speed · pitch)', expected: 'Expected 2 min · 34 taps', highlight: false },
+  { id: 'T5', label: 'Task 5', title: 'Play the written sentence, add silence', expected: 'Expected 1 min · 12 taps', highlight: false },
+]
+
 function Section06UXResearch() {
-  const TASKS_PRIMARY = [
-    {
-      label: 'Task 01',
-      title: 'Select a voice profile that matches a professional tone for a corporate training video',
-      meta: '5 participants · Think-aloud protocol',
-      bg: '#a6daff',
-      textColor: '#1e1e1e',
-      borderStyle: {},
-    },
-    {
-      label: 'Task 02',
-      title: 'Preview and compare two different voice profiles before making a final selection',
-      meta: '5 participants · Think-aloud protocol',
-      bg: '#a6daff',
-      textColor: '#1e1e1e',
-      borderStyle: {},
-    },
-  ]
-
-  const TASKS_SECONDARY = [
-    {
-      label: 'Task 03',
-      title: 'Filter voices by language and gender to narrow down options',
-      meta: '5 participants · Task completion rate',
-      bg: '#f3f3f3',
-      textColor: '#666666',
-      borderStyle: { border: '1px solid #dddddd' },
-    },
-    {
-      label: 'Task 04',
-      title: 'Identify the voice used in a previously generated video',
-      meta: '5 participants · Task completion rate',
-      bg: '#f3f3f3',
-      textColor: '#666666',
-      borderStyle: { border: '1px solid #dddddd' },
-    },
-    {
-      label: 'Task 05',
-      title: 'Adjust voice speed and pitch settings before finalizing the voice selection',
-      meta: '5 participants · Task completion rate',
-      bg: '#f3f3f3',
-      textColor: '#666666',
-      borderStyle: { border: '1px solid #dddddd' },
-    },
-  ]
-
   return (
     <section className="w-full px-[16px] py-[48px]" style={{ backgroundColor: '#f7f7f7' }}>
       <div className="flex flex-col gap-[24px] w-full">
         <SectionLabel num="06" label="UX Research" />
 
-        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-          Usability testing revealed key friction points in voice selection and preview flows.
-        </p>
+        <div className="flex flex-col gap-[12px] w-full">
+          <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            Conducting a Usability Test on "KT AI Voice Studio"
+          </p>
+          <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            To identify integration challenges and improve the voice selection experience, we conducted a usability test with six people using KT AI Voice Studio for the first time. Participants were split into two groups, with and without content creation experience, to compare behavior patterns. We designed five tasks covering the full voice selection and editing flow. The most critical usability issues appeared in Tasks 1 and 2, related to voice access and search efficiency.
+          </p>
+        </div>
 
-        <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-          I conducted moderated usability testing sessions with 5 enterprise users across two rounds to evaluate the redesigned voice selection experience. Participants were given scenario-based tasks and asked to think aloud while completing them. Sessions were recorded and analyzed for task completion rates, time-on-task, and qualitative feedback patterns.
-        </p>
+        <img src={imgUXResearchTesting} alt="UX Research usability testing" className="w-full" />
 
-        {/* Primary tasks (T1, T2) */}
-        {TASKS_PRIMARY.map((task) => (
+        {/* Task 카드 */}
+        {MOBILE_TASKS.map(({ id, label, title, expected, highlight }) => (
           <div
-            key={task.label}
-            className="w-full flex flex-col gap-[10px] p-[20px]"
-            style={{ backgroundColor: task.bg, ...task.borderStyle }}
+            key={id}
+            className="w-full flex flex-col gap-[10px] p-[16px]"
+            style={{
+              backgroundColor: highlight ? '#a6daff' : '#f3f3f3',
+              border: highlight ? 'none' : '1px solid #ddd',
+            }}
           >
-            <p
-              className="text-[13px] font-normal leading-[19px]"
-              style={{ fontFamily: poppins, color: task.textColor }}
-            >
-              {task.label}
-            </p>
-            <p
-              className="text-[14px] font-medium leading-[21px]"
-              style={{ fontFamily: poppins, color: task.textColor, minHeight: '56px' }}
-            >
-              {task.title}
-            </p>
-            <p
-              className="text-[13px] font-normal leading-[19px]"
-              style={{ fontFamily: poppins, color: task.textColor }}
-            >
-              {task.meta}
-            </p>
-          </div>
-        ))}
-
-        {/* Secondary tasks (T3–T5) */}
-        {TASKS_SECONDARY.map((task) => (
-          <div
-            key={task.label}
-            className="w-full flex flex-col gap-[10px] p-[20px]"
-            style={{ backgroundColor: task.bg, ...task.borderStyle }}
-          >
-            <p
-              className="text-[13px] font-normal leading-[19px]"
-              style={{ fontFamily: poppins, color: task.textColor }}
-            >
-              {task.label}
-            </p>
-            <p
-              className="text-[14px] font-medium leading-[21px]"
-              style={{ fontFamily: poppins, color: task.textColor, minHeight: '56px' }}
-            >
-              {task.title}
-            </p>
-            <p
-              className="text-[13px] font-normal leading-[19px]"
-              style={{ fontFamily: poppins, color: task.textColor }}
-            >
-              {task.meta}
-            </p>
+            <p className="text-[13px] font-normal leading-[19px]" style={{ fontFamily: poppins, color: highlight ? '#1e1e1e' : '#666' }}>{label}</p>
+            <p className="text-[14px] font-medium leading-[21px]" style={{ fontFamily: poppins, color: highlight ? '#1e1e1e' : '#666', minHeight: '42px' }}>{title}</p>
+            <p className="text-[13px] font-normal leading-[19px]" style={{ fontFamily: poppins, color: highlight ? '#1e1e1e' : '#666' }}>{expected}</p>
           </div>
         ))}
 
         {/* Key Insight */}
-        <div
-          className="w-full flex flex-col items-center gap-[16px] p-[24px]"
-          style={{ backgroundColor: '#a6daff' }}
-        >
-          <p
-            className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]"
-            style={{ fontFamily: poppins }}
-          >
-            Key Insight
-          </p>
-          <p
-            className="text-[18px] font-medium leading-[26px] text-[#1e1e1e] text-center"
-            style={{ fontFamily: poppins }}
-          >
-            Users struggled most with comparing voices — they needed a side-by-side preview capability that the original interface lacked entirely.
+        <div className="w-full flex flex-col items-center gap-[16px] p-[24px] text-center" style={{ backgroundColor: '#a6daff' }}>
+          <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Key Insight</p>
+          <p className="text-[18px] font-medium leading-[26px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            Most usability issues occurred before users could confidently start selecting voices.
           </p>
         </div>
       </div>
