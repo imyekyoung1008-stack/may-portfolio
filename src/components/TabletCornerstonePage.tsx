@@ -9,6 +9,7 @@ import { useWindowWidth } from '../hooks/useWindowWidth'
 
 // ── Videos ────────────────────────────────────────
 import vidHero          from '../assets/videos/cornerstone-thumb-v2.mp4'
+import vidShelterDemo   from '../assets/videos/shelter-demo.mp4'
 import vidBeforeS1      from '../assets/videos/solution3-before.mp4'
 import vidBeforeS2      from '../assets/videos/solution2-before.mp4'
 import vidAfterS1       from '../assets/videos/solution1-after.mp4'
@@ -17,6 +18,7 @@ import vidAiImpact1     from '../assets/videos/ai_impact1.mp4'
 import vidAiImpact2     from '../assets/videos/ai_impact2.mp4'
 
 // ── Images ────────────────────────────────────────
+import imgCnaiTh        from '../assets/images/cnai-thumb.png'
 import imgProblemHeroBg from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
 import imgFormatConsistencyExample from '../assets/images/cornerstone-detail/format-consistency-example.png'
 import imgFormatConsistencyMobile  from '../assets/images/cornerstone-detail/format-consistency-mobile.png'
@@ -2118,19 +2120,100 @@ function TabletVisualSystemSection() {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 10 — 09 IMPACT  (Figma 827:2490)
+// 섹션 10 — 09 IMPACT
 // ─────────────────────────────────────────────────
+const IMPACT_CARDS = [
+  { title: 'AI Assisted Workflow',  desc: 'Exploration, collaboration, and system building' },
+  { title: 'Design → Development',  desc: 'GitHub, Vercel, Claude Code, and Figma MCP' },
+  { title: 'Reusable System',       desc: 'Applied across future pages and projects' },
+] as const
+
+const IMPACT_LIST = [
+  { num: '01', label: 'Expanded Beyond Design',              body: 'Expanded my role beyond UI/UX into implementation using GitHub, Vercel, Claude Code, Figma MCP, and custom Figma plugins.' },
+  { num: '02', label: 'Built AI Assisted Workflows',         body: 'Applied AI across UX exploration, content workflows, design system building, and repetitive task automation.' },
+  { num: '03', label: 'More Scalable Design Process',        body: 'Turned repeated design decisions into reusable systems that could support future pages and projects.' },
+  { num: '04', label: 'Clearer Alignment & Handoff',         body: 'Used shared structures, prototypes, and style systems to create clearer collaboration between Program Managers, design, and development.' },
+  { num: '05', label: 'AI Knowledge Shared Across the Team', body: 'The project led to more AI related work and opportunities to help teammates improve their own workflows.' },
+] as const
+
 function TabletImpactSection() {
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 모바일 (<768px) ──
+  if (!isTablet) {
+    return (
+      <section id="impact" className="w-full bg-white">
+        <div className="w-full px-[20px] py-[48px] flex flex-col gap-[24px]">
+          <div className="flex flex-col gap-[4px]">
+            <p className="text-[16px] font-medium leading-[24px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>09</p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>IMPACT</p>
+          </div>
+          <div className="flex flex-col gap-[10px]">
+            <h2 className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+              From a Visual Redesign to a More Scalable Way of Working
+            </h2>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+              The project expanded my role, connected AI assisted workflows, and created reusable systems for future work.
+            </p>
+          </div>
+          <div className="flex flex-col gap-[12px] w-full">
+            {IMPACT_CARDS.map((card) => (
+              <div key={card.title} className="bg-[#f7f7f7] flex flex-col gap-[6px] p-[16px]">
+                <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{card.title}</p>
+                <p className="text-[13px] font-normal leading-[19px] text-[#666]" style={{ fontFamily: poppins }}>{card.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-[20px] w-full">
+            {IMPACT_LIST.map((item) => (
+              <div key={item.num} className="flex flex-col gap-[6px]">
+                <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+                  {item.num} · {item.label}
+                </p>
+                <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+                  {item.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── 태블릿 (768px+) ──
   return (
     <section id="impact" className="w-full bg-white">
       <TContentWrap>
         <TSectionLabel num="09" label="IMPACT" />
-        <div className="flex flex-col gap-[20px]">
-          <div className="flex gap-[6px] items-center">
-            <img src={icSectionAsterisk} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Coming Soon</p>
-          </div>
-          <div className="bg-[#f7f7f7] w-full" style={{ height: '320px' }} />
+        <div className="flex flex-col gap-[10px]">
+          <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            From a Visual Redesign to a More Scalable Way of Working
+          </h2>
+          <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            The project expanded my role, connected AI assisted workflows, and created reusable systems for future work.
+          </p>
+        </div>
+        <div className="flex gap-[16px] w-full">
+          {IMPACT_CARDS.map((card) => (
+            <div key={card.title} className="bg-[#f7f7f7] flex flex-col gap-[8px] p-[20px] flex-1 min-w-0">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{card.title}</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{card.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col gap-[20px] w-full">
+          {IMPACT_LIST.map((item) => (
+            <div key={item.num} className="flex gap-[24px] items-start w-full">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] shrink-0" style={{ fontFamily: poppins, width: '240px' }}>
+                {item.num} · {item.label}
+              </p>
+              <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] flex-1 min-w-0" style={{ fontFamily: poppins }}>
+                {item.body}
+              </p>
+            </div>
+          ))}
         </div>
       </TContentWrap>
     </section>
@@ -2151,8 +2234,8 @@ function TabletReflectionSection() {
         <div className="w-full px-[20px] pt-[48px] pb-[96px] flex flex-col gap-[24px]">
           {/* 라벨 */}
           <div className="flex flex-col gap-[4px]">
-            <p className="text-[18px] font-medium leading-[27px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>10</p>
-            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>REFLECTION</p>
+            <p className="text-[16px] font-medium leading-[24px] text-[#b9cdfb]" style={{ fontFamily: poppins }}>10</p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>REFLECTION</p>
           </div>
           {/* 소제목 */}
           <h2 className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
@@ -2230,6 +2313,93 @@ function TabletReflectionSection() {
 }
 
 // ─────────────────────────────────────────────────
+// Next Project 섹션
+// ─────────────────────────────────────────────────
+function TabletNextProjectSection() {
+  const navigate = useNavigate()
+  const width = useWindowWidth()
+  const isTablet = width >= 768
+
+  // ── 모바일 (<768px) ── 카드 세로 스택
+  if (!isTablet) {
+    return (
+      <section className="w-full bg-[#f7f7f7]">
+        <div className="w-full px-[20px] py-[40px] flex flex-col gap-[24px]">
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Next Project</p>
+          <div className="flex flex-col gap-[20px] w-full">
+
+            {/* AI Avatar */}
+            <div className="flex flex-col gap-[12px] cursor-pointer group" onClick={() => navigate('/projects/ai-avatar')}>
+              <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+                <img src={imgCnaiTh} alt="AI Avatar Video Creation Platform" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
+              </div>
+              <div className="flex flex-col gap-[2px]">
+                <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI Avatar Video Creation Platform</p>
+                <p className="text-[12px] font-normal leading-[18px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>50% faster voice selection, 59% fewer voice re-selections</p>
+              </div>
+            </div>
+
+            {/* Homeless Shelter — 비활성 */}
+            <div className="flex flex-col gap-[12px] opacity-60 cursor-not-allowed">
+              <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+                <video src={vidShelterDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute top-[8px] left-[8px] bg-[#1e1e1e] px-[8px] py-[3px]">
+                  <span className="text-white text-[11px] font-medium leading-[16px]" style={{ fontFamily: poppins }}>Coming Soon</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-[2px]">
+                <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Homeless Shelter Life Management System</p>
+                <p className="text-[12px] font-normal leading-[18px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>94.3% NFC adoption and 30+ minutes faster response time</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── 태블릿 (768px+) ── 카드 가로 배치
+  return (
+    <section className="w-full bg-[#f7f7f7]">
+      <div className="w-full px-[32px] py-[48px] flex flex-col gap-[24px]">
+        <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Next Project</p>
+        <div className="flex gap-[20px] w-full">
+
+          {/* AI Avatar */}
+          <div className="flex-1 min-w-0 flex flex-col gap-[12px] cursor-pointer group" onClick={() => navigate('/projects/ai-avatar')}>
+            <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+              <img src={imgCnaiTh} alt="AI Avatar Video Creation Platform" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
+            </div>
+            <div className="flex flex-col gap-[2px]">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI Avatar Video Creation Platform</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>50% faster voice selection, 59% fewer voice re-selections</p>
+            </div>
+          </div>
+
+          {/* Homeless Shelter — 비활성 */}
+          <div className="flex-1 min-w-0 flex flex-col gap-[12px] opacity-60 cursor-not-allowed">
+            <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+              <video src={vidShelterDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute top-[10px] left-[10px] bg-[#1e1e1e] px-[10px] py-[4px]">
+                <span className="text-white text-[11px] font-medium leading-[16px]" style={{ fontFamily: poppins }}>Coming Soon</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-[2px]">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Homeless Shelter Life Management System</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>94.3% NFC adoption and 30+ minutes faster response time</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
 // Root export
 // ─────────────────────────────────────────────────
 export default function TabletCornerstonePage() {
@@ -2292,6 +2462,9 @@ export default function TabletCornerstonePage() {
 
       {/* 섹션 11: 10 Reflection */}
       <div id="reflection"><TabletReflectionSection /></div>
+
+      {/* Next Project */}
+      <TabletNextProjectSection />
 
     </motion.div>
   )

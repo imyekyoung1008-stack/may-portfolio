@@ -8,12 +8,16 @@ import { motion } from 'framer-motion'
 
 // ── Videos ────────────────────────────────────────
 import vidHero          from '../assets/videos/cornerstone-thumb-v2.mp4'
+import vidShelterDemo   from '../assets/videos/shelter-demo.mp4'
 import vidBeforeS1      from '../assets/videos/solution3-before.mp4'
 import vidBeforeS2      from '../assets/videos/solution2-before.mp4'
 import vidAfterS1       from '../assets/videos/solution1-after.mp4'
 import vidAfterS2       from '../assets/videos/solution2-after.mp4'
 import vidAiImpact1     from '../assets/videos/ai_impact1.mp4'
 import vidAiImpact2     from '../assets/videos/ai_impact2.mp4'
+
+// ── Images: next project ──────────────────────────
+import imgCnaiTh         from '../assets/images/cnai-thumb.png'
 
 // ── Images: problem / solutions ───────────────────
 import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
@@ -1445,16 +1449,61 @@ function Across10Programs() {
 }
 
 // ─────────────────────────────────────────────────
-// 섹션 13 — 10 IMPACT (placeholder)
+// 섹션 13 — 09 IMPACT
 // ─────────────────────────────────────────────────
+const IMPACT_CARDS = [
+  { title: 'AI Assisted Workflow',   desc: 'Exploration, collaboration, and system building' },
+  { title: 'Design → Development',   desc: 'GitHub, Vercel, Claude Code, and Figma MCP' },
+  { title: 'Reusable System',        desc: 'Applied across future pages and projects' },
+] as const
+
+const IMPACT_LIST = [
+  { num: '01', label: 'Expanded Beyond Design',                 body: 'Expanded my role beyond UI/UX into implementation using GitHub, Vercel, Claude Code, Figma MCP, and custom Figma plugins.' },
+  { num: '02', label: 'Built AI Assisted Workflows',            body: 'Applied AI across UX exploration, content workflows, design system building, and repetitive task automation.' },
+  { num: '03', label: 'More Scalable Design Process',           body: 'Turned repeated design decisions into reusable systems that could support future pages and projects.' },
+  { num: '04', label: 'Clearer Alignment & Handoff',            body: 'Used shared structures, prototypes, and style systems to create clearer collaboration between Program Managers, design, and development.' },
+  { num: '05', label: 'AI Knowledge Shared Across the Team',    body: 'The project led to more AI related work and opportunities to help teammates improve their own workflows.' },
+] as const
+
 function ImpactSection() {
   return (
     <section className="w-full bg-white">
       <ContentWrap>
-        <SectionLabel num="10" label="IMPACT" />
+        {/* 라벨 */}
+        <SectionLabel num="09" label="IMPACT" />
+
+        {/* 소제목 + 인트로 */}
+        <div className="flex flex-col gap-[12px]">
+          <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            From a Visual Redesign to a More Scalable Way of Working
+          </h2>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            The project expanded my role, connected AI assisted workflows, and created reusable systems for future work.
+          </p>
+        </div>
+
+        {/* 카드 3개 */}
+        <div className="flex gap-[24px] w-full">
+          {IMPACT_CARDS.map((card) => (
+            <div key={card.title} className="bg-[#f7f7f7] flex flex-col gap-[8px] p-[24px] flex-1 min-w-0">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{card.title}</p>
+              <p className="text-[16px] font-normal leading-[24px] text-[#666]" style={{ fontFamily: poppins }}>{card.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* 에디토리얼 리스트 */}
         <div className="flex flex-col gap-[24px] w-full">
-          <SubHeading icon={icSectionAsterisk} label="Coming Soon" />
-          <div className="bg-[#f7f7f7] w-full" style={{ height: '416px' }} />
+          {IMPACT_LIST.map((item) => (
+            <div key={item.num} className="flex gap-[32px] items-start w-full">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] shrink-0" style={{ fontFamily: poppins, width: '336px' }}>
+                {item.num} · {item.label}
+              </p>
+              <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] flex-1 min-w-0" style={{ fontFamily: poppins }}>
+                {item.body}
+              </p>
+            </div>
+          ))}
         </div>
       </ContentWrap>
     </section>
@@ -1500,6 +1549,54 @@ function ReflectionSection() {
             </div>
           </div>
         </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// Next Project 섹션
+// ─────────────────────────────────────────────────
+function NextProjectSection() {
+  const navigate = useNavigate()
+  return (
+    <section className="w-full bg-[#f7f7f7]">
+      <div className="w-full px-[40px] py-[60px]">
+        <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[32px]">
+          <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Next Project</p>
+          <div className="flex gap-[24px] w-full">
+
+            {/* AI Avatar — 클릭 가능 */}
+            <div
+              className="flex-1 min-w-0 flex flex-col gap-[16px] cursor-pointer group"
+              onClick={() => navigate('/projects/ai-avatar')}
+            >
+              <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+                <img src={imgCnaiTh} alt="AI Avatar Video Creation Platform" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
+              </div>
+              <div className="flex flex-col gap-[4px]">
+                <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI Avatar Video Creation Platform</p>
+                <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>50% faster voice selection, 59% fewer voice re-selections</p>
+              </div>
+            </div>
+
+            {/* Homeless Shelter — 비활성 */}
+            <div className="flex-1 min-w-0 flex flex-col gap-[16px] opacity-60 cursor-not-allowed">
+              <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+                <video src={vidShelterDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute top-[12px] left-[12px] bg-[#1e1e1e] px-[10px] py-[4px]">
+                  <span className="text-white text-[12px] font-medium leading-[18px]" style={{ fontFamily: poppins }}>Coming Soon</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-[4px]">
+                <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Homeless Shelter Life Management System</p>
+                <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>94.3% NFC adoption and 30+ minutes faster response time</p>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
@@ -1553,6 +1650,7 @@ export default function CornerstonePage() {
       <div id="programs"><Across10Programs /></div>
       <div id="impact"><ImpactSection /></div>
       <div id="reflection"><ReflectionSection /></div>
+      <NextProjectSection />
     </motion.div>
   )
 }
