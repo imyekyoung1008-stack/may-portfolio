@@ -12,7 +12,7 @@ import { LottieHeroPlayer } from './LottieHeroPlayer'
 import icClose from '../assets/icons/close.svg'
 
 // ── Images ────────────────────────────────────────
-import imgIntroHandingPhone from '../assets/images/ai-avatar/intro-handing-phone.png'
+import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.jpg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -154,7 +154,7 @@ function Section01Introduction() {
         <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
           <iframe
             key="MGSxaNMiLwU"
-            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=en`}
+            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=en&hl=en`}
             title="KT AI Human Studio"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -166,12 +166,12 @@ function Section01Introduction() {
           The platform serves enterprise clients across industries including education, finance, retail, and media, with a particular focus on content teams that need to produce multilingual video content at scale.
         </p>
 
-        {/* Intro handing phone image */}
+        {/* 실제 이미지 — Figma 942:19974 (Handing over phone) */}
         <img
-          src={imgIntroHandingPhone}
+          src={imgIntroTabletPhoto}
           alt="AI Avatar platform interface"
           className="w-full object-cover"
-          style={{ aspectRatio: '1920 / 1080' }}
+          style={{ aspectRatio: '16 / 9' }}
         />
       </div>
     </section>

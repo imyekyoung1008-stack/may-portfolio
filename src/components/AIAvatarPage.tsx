@@ -10,7 +10,7 @@ import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
 
 // ── Images ────────────────────────────────────────
-import imgIntroHandingPhone from '../assets/images/ai-avatar/intro-handing-phone.png'
+import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -238,16 +238,16 @@ function IntroSection() {
         <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
           <iframe
             key="MGSxaNMiLwU"
-            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=en`}
+            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=en&hl=en`}
             title="KT AI Human Studio"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
           />
         </div>
-        {/* 실제 이미지 — Figma 889:18458 (손으로 태블릿 들고 있는 사진) */}
+        {/* 실제 이미지 — Figma 942:19974 (Handing over phone) */}
         <div className="w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
-          <img src={imgIntroHandingPhone} alt="KT AI Human Studio interface on a tablet" className="w-full h-full object-cover" />
+          <img src={imgIntroTabletPhoto} alt="KT AI Human Studio interface on a tablet" className="w-full h-full object-cover" />
         </div>
       </ContentWrap>
     </section>
