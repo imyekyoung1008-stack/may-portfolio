@@ -23,7 +23,9 @@ import imgSolution03Before from '../assets/images/ai-avatar/solution-03-before.j
 import imgSolution03After  from '../assets/images/ai-avatar/solution-03-after.jpg'
 import imgSolution04Before from '../assets/images/ai-avatar/solution-04-before.jpg'
 import imgSolution04After  from '../assets/images/ai-avatar/solution-04-after.jpg'
-import imgTeamPhoto        from '../assets/images/ai-avatar/team-photo.jpg'
+import imgTeamGroupPhoto    from '../assets/images/ai-avatar/team-group-photo.jpg'
+import imgTeamPhoto01       from '../assets/images/ai-avatar/team-photo-01.jpg'
+import imgTeamPhoto02       from '../assets/images/ai-avatar/team-photo-02.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -728,12 +730,29 @@ function TabletTeamClosingSection() {
   return (
     <section className="w-full bg-white">
       <TContentWrap gap={20}>
-        <img
-          src={imgTeamPhoto}
-          alt="The CNAI STUDIO team that built KT AI Human Studio together"
-          className="w-full object-cover object-bottom"
-          style={{ height: '420px' }}
-        />
+        {/* 태블릿: 비율 유지 — 왼쪽 flex-1, 오른쪽 shrink-0 */}
+        <div className="flex gap-[16px] w-full">
+          <img
+            src={imgTeamGroupPhoto}
+            alt="CNAI STUDIO team group photo"
+            className="object-cover object-bottom shrink-0"
+            style={{ flex: '1 1 0', minWidth: 0, height: '300px', border: '1px solid rgba(30,30,30,0.1)' }}
+          />
+          <div className="flex flex-col gap-[16px] shrink-0" style={{ width: '260px' }}>
+            <img
+              src={imgTeamPhoto01}
+              alt="CNAI STUDIO team photo 01"
+              className="w-full object-cover"
+              style={{ height: '142px', border: '1px solid rgba(30,30,30,0.1)' }}
+            />
+            <img
+              src={imgTeamPhoto02}
+              alt="CNAI STUDIO team photo 02"
+              className="w-full object-cover"
+              style={{ height: '142px', border: '1px solid rgba(30,30,30,0.1)' }}
+            />
+          </div>
+        </div>
         <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
           The CNAI STUDIO team that built KT AI Human Studio together
         </p>

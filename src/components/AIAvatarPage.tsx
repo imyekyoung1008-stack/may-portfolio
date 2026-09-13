@@ -23,7 +23,9 @@ import imgSolution03Before from '../assets/images/ai-avatar/solution-03-before.j
 import imgSolution03After  from '../assets/images/ai-avatar/solution-03-after.jpg'
 import imgSolution04Before from '../assets/images/ai-avatar/solution-04-before.jpg'
 import imgSolution04After  from '../assets/images/ai-avatar/solution-04-after.jpg'
-import imgTeamPhoto        from '../assets/images/ai-avatar/team-photo.jpg'
+import imgTeamGroupPhoto    from '../assets/images/ai-avatar/team-group-photo.jpg'
+import imgTeamPhoto01       from '../assets/images/ai-avatar/team-photo-01.jpg'
+import imgTeamPhoto02       from '../assets/images/ai-avatar/team-photo-02.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
@@ -1195,13 +1197,31 @@ function TeamClosingSection() {
   return (
     <section className="w-full bg-white">
       <ContentWrap gap={24}>
-        {/* 팀 사진 — 960px 고정폭 컨테이너 안, 540px 높이, object-bottom */}
-        <img
-          src={imgTeamPhoto}
-          alt="The CNAI STUDIO team that built KT AI Human Studio together"
-          className="w-full object-cover object-bottom"
-          style={{ height: '540px' }}
-        />
+        {/* 3장 사진 — 576px(그룹) + gap 24px + 360px(스택 2장) = 960px */}
+        <div className="flex gap-[24px] w-full">
+          {/* 왼쪽: Group Photo 576×420 */}
+          <img
+            src={imgTeamGroupPhoto}
+            alt="CNAI STUDIO team group photo"
+            className="object-cover object-bottom shrink-0"
+            style={{ width: '576px', height: '420px', border: '1px solid rgba(30,30,30,0.1)' }}
+          />
+          {/* 오른쪽: Team Photo 01 + 02 세로 스택 */}
+          <div className="flex flex-col gap-[24px]" style={{ width: '360px' }}>
+            <img
+              src={imgTeamPhoto01}
+              alt="CNAI STUDIO team photo 01"
+              className="w-full object-cover"
+              style={{ height: '198px', border: '1px solid rgba(30,30,30,0.1)' }}
+            />
+            <img
+              src={imgTeamPhoto02}
+              alt="CNAI STUDIO team photo 02"
+              className="w-full object-cover"
+              style={{ height: '198px', border: '1px solid rgba(30,30,30,0.1)' }}
+            />
+          </div>
+        </div>
         <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
           The CNAI STUDIO team that built KT AI Human Studio together
         </p>

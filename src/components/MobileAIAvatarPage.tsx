@@ -28,7 +28,9 @@ import imgSolution03Before from '../assets/images/ai-avatar/solution-03-before.j
 import imgSolution03After  from '../assets/images/ai-avatar/solution-03-after.jpg'
 import imgSolution04Before from '../assets/images/ai-avatar/solution-04-before.jpg'
 import imgSolution04After  from '../assets/images/ai-avatar/solution-04-after.jpg'
-import imgTeamPhoto        from '../assets/images/ai-avatar/team-photo.jpg'
+import imgTeamGroupPhoto    from '../assets/images/ai-avatar/team-group-photo.jpg'
+import imgTeamPhoto01       from '../assets/images/ai-avatar/team-photo-01.jpg'
+import imgTeamPhoto02       from '../assets/images/ai-avatar/team-photo-02.jpg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -1041,13 +1043,29 @@ function Section14Reflection() {
 function Section15TeamClosing() {
   return (
     <section className="w-full bg-white">
-      <div className="flex flex-col gap-[24px] px-[16px] py-[32px] w-full">
+      <div className="flex flex-col gap-[16px] px-[16px] py-[32px] w-full">
+        {/* 그룹 사진 — full width */}
         <img
-          src={imgTeamPhoto}
-          alt="The CNAI STUDIO team that built KT AI Human Studio together"
+          src={imgTeamGroupPhoto}
+          alt="CNAI STUDIO team group photo"
           className="w-full object-cover object-bottom"
-          style={{ height: '240px' }}
+          style={{ height: '220px', border: '1px solid rgba(30,30,30,0.1)' }}
         />
+        {/* 나머지 2장 — 가로 배치 */}
+        <div className="flex gap-[12px] w-full">
+          <img
+            src={imgTeamPhoto01}
+            alt="CNAI STUDIO team photo 01"
+            className="flex-1 object-cover"
+            style={{ height: '110px', border: '1px solid rgba(30,30,30,0.1)' }}
+          />
+          <img
+            src={imgTeamPhoto02}
+            alt="CNAI STUDIO team photo 02"
+            className="flex-1 object-cover"
+            style={{ height: '110px', border: '1px solid rgba(30,30,30,0.1)' }}
+          />
+        </div>
         <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] w-full text-center" style={{ fontFamily: poppins }}>
           The CNAI STUDIO team that built KT AI Human Studio together
         </p>
