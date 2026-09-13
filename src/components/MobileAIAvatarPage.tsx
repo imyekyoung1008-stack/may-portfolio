@@ -55,11 +55,10 @@ function SectionLabel({ num, label }: { num: string; label: string }) {
 function MobileAIAvatarHeader() {
   const heroAnimation = useLottieAnimation('/lottie/ai-avatar-hero.json')
   const META = [
-    { label: 'Product',  value: 'Web',                  width: '163px' },
+    { label: 'Product',  value: 'Web (SaaS)',            width: '163px' },
     { label: 'My role',  value: 'Solo Product Designer', width: '163px' },
-    { label: 'Timeline', value: 'Q2 2026 to Q3 2026',   width: '163px' },
-    { label: 'Skills',   value: 'UX Strategy, Information Architecture, UI Design, Responsive Design, AI Assisted Workflow, Stakeholder Collaboration', width: '100%' },
-    { label: 'Team',     value: '2 Developers · 6 Program Managers', width: '100%' },
+    { label: 'Timeline', value: 'Q1 2023 to Q3 2023',   width: '163px' },
+    { label: 'Skills',   value: 'UX Research, Usability Testing, Interaction Design, UI Design, Prototyping, AI Recommendation Logic, Cross functional Collaboration', width: '100%' },
   ]
 
   return (
@@ -144,6 +143,12 @@ function MobileAIAvatarHeader() {
               </p>
             </div>
           ))}
+          {/* Team — 두 줄 처리 */}
+          <div className="flex flex-col items-start w-full">
+            <p className="text-[13px] font-normal leading-[19px]" style={{ fontFamily: poppins, color: '#8b8b8b' }}>Team</p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>1 Product Owner · 3 Developers</p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Client collaboration with KT AI Voice Studio team</p>
+          </div>
         </div>
       </div>
 
