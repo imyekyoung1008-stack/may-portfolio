@@ -3,36 +3,11 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=889-18398
 // ★ Desktop only (1440px+). 반응형은 별도 작업 예정.
 
-import React, { useEffect, useRef, useState, Component } from 'react'
-import type { ReactNode, ErrorInfo } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import LottieLib from 'lottie-react'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
-// Vite wraps lottie-react v2 (CJS) as `export default require_index_umd()`
-// so the actual component is at .default inside the exports object
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Lottie = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
-
-// ── Temporary debug ErrorBoundary ──────────────────
-class LottieErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
-  state = { error: null }
-  static getDerivedStateFromError(e: Error) { return { error: e } }
-  componentDidCatch(e: Error, info: ErrorInfo) {
-    console.error('[LottieErrorBoundary] caught:', e, info)
-  }
-  render() {
-    if (this.state.error) {
-      return (
-        <div style={{ background: '#fee', padding: 16, color: '#900', fontFamily: 'monospace', fontSize: 13 }}>
-          <b>Lottie Error:</b> {(this.state.error as Error).message}
-          <pre style={{ marginTop: 8, whiteSpace: 'pre-wrap' }}>{(this.state.error as Error).stack}</pre>
-        </div>
-      )
-    }
-    return this.props.children
-  }
-}
+import { LottieHeroPlayer } from './LottieHeroPlayer'
 
 // ── Images ────────────────────────────────────────
 import imgIntroHandingPhone from '../assets/images/ai-avatar/intro-handing-phone.png'
@@ -203,19 +178,14 @@ function AIAvatarHeader() {
         </div>
 
         {/* 히어로 — Lottie 애니메이션 (1800×1200 = 3:2, 960×640) */}
-        <LottieErrorBoundary>
-          {heroAnimation
-            ? <Lottie
-                animationData={heroAnimation}
-                loop
-                autoplay
-                className="w-full shrink-0 block"
-                style={{ height: '640px' }}
-                onDataFailed={() => console.error('[Lottie] onDataFailed')}
-              />
-            : <div className="w-full shrink-0 bg-[#bebebe]" style={{ height: '640px' }} />
-          }
-        </LottieErrorBoundary>
+        {heroAnimation
+          ? <LottieHeroPlayer
+              animationData={heroAnimation}
+              className="w-full shrink-0 block"
+              style={{ height: '640px' }}
+            />
+          : <div className="w-full shrink-0 bg-[#bebebe]" style={{ height: '640px' }} />
+        }
 
         {/* 소개 문단 */}
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
@@ -264,8 +234,17 @@ function IntroSection() {
             CNAI STUDIO collaborated with KT, Korea's largest telecom carrier, to integrate KT's AI voice generation technology into our video creation platform. This partnership evolved CNAI STUDIO from a B2B to a B2B2C service, allowing users to create personalized AI human videos by customizing both visuals and voices.
           </p>
         </div>
-        {/* Image Placeholder — Figma 889:18456 (회색 박스, 유튜브 텍스트는 placeholder) */}
-        <ImgPlaceholder aspectRatio="16/9" />
+        {/* 01 INTRODUCTION 유튜브 임베드 */}
+        <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
+          <iframe
+            key="MGSxaNMiLwU"
+            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&cc_load_policy=1&cc_lang_pref=en`}
+            title="KT AI Human Studio"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
+          />
+        </div>
         {/* 실제 이미지 — Figma 889:18458 (손으로 태블릿 들고 있는 사진) */}
         <div className="w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
           <img src={imgIntroHandingPhone} alt="KT AI Human Studio interface on a tablet" className="w-full h-full object-cover" />

@@ -6,10 +6,8 @@ import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import React from 'react'
-import LottieLib from 'lottie-react'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Lottie = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
+import { LottieHeroPlayer } from './LottieHeroPlayer'
 
 // ── Icons ─────────────────────────────────────────
 import icClose from '../assets/icons/close.svg'
@@ -89,7 +87,11 @@ function MobileAIAvatarHeader() {
 
         {/* 히어로 — Lottie 애니메이션 (1800×1200 = 3:2) */}
         {heroAnimation
-          ? <Lottie animationData={heroAnimation} loop autoplay className="w-full shrink-0 block" style={{ aspectRatio: '358 / 238.668' }} />
+          ? <LottieHeroPlayer
+              animationData={heroAnimation}
+              className="w-full shrink-0 block"
+              style={{ aspectRatio: '358 / 238.668' }}
+            />
           : <div className="w-full shrink-0 bg-[#bebebe]" style={{ aspectRatio: '358 / 238.668' }} />
         }
 
@@ -149,14 +151,16 @@ function Section01Introduction() {
           KT AI Human Studio enables businesses to create professional-quality video content using AI avatars and synthetic voices without requiring cameras, actors, or recording studios. Users select an AI avatar, choose a voice profile, input a script, and generate a complete video — significantly reducing production time and cost for corporate training, marketing, and communications.
         </p>
 
-        {/* Video placeholder */}
-        <div
-          className="w-full bg-[#c4c4c4] flex items-center justify-center"
-          style={{ aspectRatio: '1920 / 1080' }}
-        >
-          <span className="text-[14px] font-normal" style={{ fontFamily: poppins, color: '#ff0000' }}>
-            Video placeholder
-          </span>
+        {/* 01 INTRODUCTION 유튜브 임베드 */}
+        <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
+          <iframe
+            key="MGSxaNMiLwU"
+            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&cc_load_policy=1&cc_lang_pref=en`}
+            title="KT AI Human Studio"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
+          />
         </div>
 
         <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>

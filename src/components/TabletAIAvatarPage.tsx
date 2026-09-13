@@ -6,10 +6,8 @@ import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import React from 'react'
-import LottieLib from 'lottie-react'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Lottie = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
+import { LottieHeroPlayer } from './LottieHeroPlayer'
 
 // ── Images ────────────────────────────────────────
 import imgIntroHandingPhone from '../assets/images/ai-avatar/intro-handing-phone.png'
@@ -80,7 +78,11 @@ function TabletAIAvatarHeader() {
 
         {/* 히어로 — Lottie 애니메이션 (1800×1200 = 3:2) */}
         {heroAnimation
-          ? <Lottie animationData={heroAnimation} loop autoplay className="w-full shrink-0 block" style={{ aspectRatio: '704 / 469.336' }} />
+          ? <LottieHeroPlayer
+              animationData={heroAnimation}
+              className="w-full shrink-0 block"
+              style={{ aspectRatio: '704 / 469.336' }}
+            />
           : <div className="w-full shrink-0 bg-[#bebebe]" style={{ aspectRatio: '704 / 469.336' }} />
         }
 
@@ -128,11 +130,16 @@ function TabletIntroSection() {
             {`CNAI STUDIO collaborated with KT, Korea's largest telecom carrier, to integrate KT's AI voice generation technology into our video creation platform. This partnership evolved CNAI STUDIO from a B2B to a B2B2C service, allowing users to create personalized AI human videos by customizing both visuals and voices.`}
           </p>
         </div>
-        {/* 이미지 1 — Video placeholder (aspect 16:9, #c4c4c4 bg, 빨간 텍스트) */}
-        <div className="relative w-full bg-[#c4c4c4] overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <p className="text-[16px] leading-[24px] text-red-500" style={{ fontFamily: poppins }}>Video placeholder</p>
-          </div>
+        {/* 01 INTRODUCTION 유튜브 임베드 */}
+        <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
+          <iframe
+            key="MGSxaNMiLwU"
+            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&cc_load_policy=1&cc_lang_pref=en`}
+            title="KT AI Human Studio"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
+          />
         </div>
         {/* 이미지 2 — 실제 사진 (aspect 16:9) */}
         <div className="w-full overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
