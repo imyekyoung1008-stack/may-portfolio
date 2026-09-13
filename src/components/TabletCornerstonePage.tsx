@@ -80,19 +80,21 @@ import icConnDashedRight from '../assets/icons/cornerstone/connection-dashed-rig
 // ─────────────────────────────────────────────────
 const poppins = "'Poppins', sans-serif"
 
-const PROGRAMS: { name: string; img: string }[] = [
-  { name: 'UI/UX Design',                      img: imgProgUiux    },
-  { name: 'Cybersecurity',                      img: imgProgCyber   },
-  { name: 'Data Science',                       img: imgProgDs      },
-  { name: 'Network Systems Solutions',          img: imgProgNss     },
-  { name: 'Web Development',                    img: imgProgWeb     },
-  { name: 'Event Management',                   img: imgProgEm      },
-  { name: 'International Business Management',  img: imgProgIbm     },
-  { name: 'Hospitality Management',             img: imgProgHm      },
-  { name: 'Digital Marketing',                  img: imgProgDm      },
-  { name: 'Strategic Digital Marketing',        img: imgProgSdm     },
-  { name: 'English as a Second Language (ESL)', img: imgProgEsl     },
-  { name: 'CELPIP',                             img: imgProgCelpip  },
+const BASE_URL = 'https://ciccc-web-staging-env-staging-gojobs.vercel.app/programs'
+
+const PROGRAMS: { name: string; img: string; slug: string; available: boolean }[] = [
+  { name: 'UI/UX Design',                      img: imgProgUiux,   slug: 'ui-ux-design',                     available: true  },
+  { name: 'Cybersecurity',                      img: imgProgCyber,  slug: 'cybersecurity',                    available: true  },
+  { name: 'Data Science',                       img: imgProgDs,     slug: 'data-science',                     available: true  },
+  { name: 'Network Systems Solutions',          img: imgProgNss,    slug: 'network-systems-solutions',        available: true  },
+  { name: 'Web Development',                    img: imgProgWeb,    slug: 'web-development',                  available: true  },
+  { name: 'Event Management',                   img: imgProgEm,     slug: 'event-management',                 available: true  },
+  { name: 'International Business Management',  img: imgProgIbm,    slug: 'international-business-management', available: true },
+  { name: 'Hospitality Management',             img: imgProgHm,     slug: 'hospitality-management',           available: true  },
+  { name: 'Digital Marketing',                  img: imgProgDm,     slug: 'digital-marketing',                available: true  },
+  { name: 'Strategic Digital Marketing',        img: imgProgSdm,    slug: 'strategic-digital-marketing',      available: true  },
+  { name: 'English as a Second Language (ESL)', img: imgProgEsl,    slug: 'esl',                              available: true  },
+  { name: 'CELPIP',                             img: imgProgCelpip, slug: 'celpip',                           available: false },
 ]
 
 // ─────────────────────────────────────────────────
@@ -2108,11 +2110,28 @@ function TabletVisualSystemSection() {
           className="flex gap-[10px] items-start"
           style={{ width: 'max-content', animation: 'marquee 40s linear infinite', animationPlayState: paused ? 'paused' : 'running' }}
         >
-          {[...PROGRAMS, ...PROGRAMS].map((prog, i) => (
-            <button key={`${prog.name}-${i}`} type="button" className="cursor-pointer border-0 p-0 bg-transparent shrink-0" style={{ width: '180px' }}>
-              <img src={prog.img} alt={prog.name} style={{ width: '180px', height: '175px', display: 'block', objectFit: 'cover' }} />
-            </button>
-          ))}
+          {[...PROGRAMS, ...PROGRAMS].map((prog, i) =>
+            prog.available ? (
+              <a
+                key={`${prog.name}-${i}`}
+                href={`${BASE_URL}/${prog.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0"
+                style={{ width: '180px', display: 'block' }}
+              >
+                <img src={prog.img} alt={prog.name} style={{ width: '180px', height: '175px', display: 'block', objectFit: 'cover' }} />
+              </a>
+            ) : (
+              <div
+                key={`${prog.name}-${i}`}
+                className="shrink-0"
+                style={{ width: '180px', display: 'block', opacity: 0.6, cursor: 'not-allowed' }}
+              >
+                <img src={prog.img} alt={prog.name} style={{ width: '180px', height: '175px', display: 'block', objectFit: 'cover' }} />
+              </div>
+            )
+          )}
         </div>
       </div>
     </section>
