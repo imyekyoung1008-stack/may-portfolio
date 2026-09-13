@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
+import { YouTubeEmbed } from './YouTubeEmbed'
 
 // ── Icons ─────────────────────────────────────────
 import icClose from '../assets/icons/close.svg'
@@ -151,16 +152,7 @@ function Section01Introduction() {
         </p>
 
         {/* 01 INTRODUCTION 유튜브 임베드 */}
-        <div className="w-full relative" style={{ paddingTop: '56.25%' }}>
-          <iframe
-            key="MGSxaNMiLwU"
-            src={`https://www.youtube.com/embed/MGSxaNMiLwU?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=en&hl=en`}
-            title="KT AI Human Studio"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', display: 'block' }}
-          />
-        </div>
+        <YouTubeEmbed videoId="MGSxaNMiLwU" />
 
         <p className="text-[15px] font-normal leading-[22px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
           The platform serves enterprise clients across industries including education, finance, retail, and media, with a particular focus on content teams that need to produce multilingual video content at scale.
