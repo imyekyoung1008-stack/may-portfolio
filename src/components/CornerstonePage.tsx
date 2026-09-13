@@ -59,6 +59,7 @@ import icArrowSelectedDirection from '../assets/icons/arrow-selected-direction.s
 import icArrowNote              from '../assets/icons/arrow-note.svg'
 import icDesktopWindows   from '../assets/icons/cornerstone/desktop-windows.svg'
 import icArrowOutward     from '../assets/icons/cornerstone/arrow-outward.svg'
+import pdfContentChecklist from '../assets/documents/content-checklist.pdf'
 
 // ── Images: section AI IMPACT 1 ──────────────────
 import imgAi1BgDiagram    from '../assets/images/cornerstone-detail/ai-impact-1/background-diagram.png'
@@ -882,7 +883,7 @@ function AIImpact1Section() {
                 <div className="flex flex-col gap-[20px] w-full">
                   <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>What I Shared</p>
                   {/* View Live Prototype */}
-                  <div className="flex flex-col gap-[16px] w-full">
+                  <a href="https://ciccc-website.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-[16px] w-full cursor-pointer">
                     <div className="bg-[#b9cdfb] flex items-center justify-between pl-[12px] pr-[8px] w-full" style={{ height: '40px' }}>
                       <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>View Live Prototype</span>
                       <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
@@ -897,9 +898,9 @@ function AIImpact1Section() {
                         <img src={imgAi1Proto2} alt="" className="absolute inset-0 w-full h-full object-cover" />
                       </div>
                     </div>
-                  </div>
+                  </a>
                   {/* View Content Checklist */}
-                  <div className="flex flex-col gap-[16px] w-full">
+                  <a href={pdfContentChecklist} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-[16px] w-full cursor-pointer">
                     <div className="bg-[#b9cdfb] flex items-center justify-between pl-[12px] pr-[8px] w-full" style={{ height: '40px' }}>
                       <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>View Content Checklist</span>
                       <div className="bg-[#1e1e1e] flex items-center justify-center w-[24px] h-[24px] shrink-0">
@@ -914,7 +915,7 @@ function AIImpact1Section() {
                         <img src={imgAi1Checklist2} alt="" className="absolute inset-0 w-full h-full object-cover" />
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
               {/* 우: 블러 처리된 이메일 이미지 + 하단 그라디언트 */}

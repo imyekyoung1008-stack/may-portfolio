@@ -65,6 +65,7 @@ import icArrowNote       from '../assets/icons/arrow-note.svg'
 import icArrowRightBox   from '../assets/icons/cornerstone/arrow-right-box.svg'
 import icDesktopWindows  from '../assets/icons/cornerstone/desktop-windows.svg'
 import icArrowOutward    from '../assets/icons/cornerstone/arrow-outward.svg'
+import pdfContentChecklist from '../assets/documents/content-checklist.pdf'
 import icStep02PanelArrow   from '../assets/icons/cornerstone/step02-conn-left.svg'
 import icConnDashedLeft  from '../assets/icons/cornerstone/connection-dashed-left.svg'
 import icConnDashedRight from '../assets/icons/cornerstone/connection-dashed-right.svg'
@@ -1052,7 +1053,7 @@ function TabletAIImpact1Section() {
               <div className="flex flex-col gap-[12px] w-full">
                 <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What I Shared</p>
                 {/* View Live Prototype */}
-                <div className="flex flex-col gap-[8px] w-full">
+                <a href="https://ciccc-website.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-[8px] w-full cursor-pointer">
                   <div className="bg-[#b9cdfb] flex items-center gap-[8.8px] p-[10px] w-full">
                     <span className="flex-1 min-w-0 text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>View Live Prototype</span>
                     <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
@@ -1067,9 +1068,9 @@ function TabletAIImpact1Section() {
                       <img src={imgAi1ProtoMobile2} alt="" className="w-full h-full object-cover" />
                     </div>
                   </div>
-                </div>
+                </a>
                 {/* View Content Checklist */}
-                <div className="flex flex-col gap-[8px] w-full">
+                <a href={pdfContentChecklist} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-[8px] w-full cursor-pointer">
                   <div className="bg-[#b9cdfb] flex items-center gap-[8.8px] p-[10px] w-full">
                     <span className="flex-1 min-w-0 text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>View Content Checklist</span>
                     <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
@@ -1084,7 +1085,7 @@ function TabletAIImpact1Section() {
                       <img src={imgAi1ChecklistMobile2} alt="" className="w-full h-full object-cover" />
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
               {/* 이메일 미리보기 — Figma 888:17074 (email-mobile.png) */}
               <div className="relative w-full">
@@ -1264,7 +1265,7 @@ function TabletAIImpact1SectionTablet() {
                 <div className="flex flex-col" style={{ gap: '17.6px' }}>
                   <p className="font-normal text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>What I Shared</p>
                   {/* View Live Prototype */}
-                  <div className="flex flex-col" style={{ gap: '8.8px' }}>
+                  <a href="https://ciccc-website.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex flex-col cursor-pointer" style={{ gap: '8.8px' }}>
                     <div className="bg-[#b9cdfb] flex items-center justify-between" style={{ height: '29.333px', paddingLeft: '8.8px', paddingRight: '5.867px' }}>
                       <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>View Live Prototype</span>
                       <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
@@ -1279,9 +1280,9 @@ function TabletAIImpact1SectionTablet() {
                         <img src={imgAi1Proto2} alt="" className="w-full h-full object-cover" />
                       </div>
                     </div>
-                  </div>
+                  </a>
                   {/* View Content Checklist */}
-                  <div className="flex flex-col" style={{ gap: '8.8px' }}>
+                  <a href={pdfContentChecklist} target="_blank" rel="noopener noreferrer" className="flex flex-col cursor-pointer" style={{ gap: '8.8px' }}>
                     <div className="bg-[#b9cdfb] flex items-center justify-between" style={{ height: '29.333px', paddingLeft: '8.8px', paddingRight: '5.867px' }}>
                       <span className="font-medium text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins, fontSize: '11.733px', lineHeight: '17.6px' }}>View Content Checklist</span>
                       <div className="bg-[#1e1e1e] flex items-center justify-center shrink-0" style={{ width: '17.6px', height: '17.6px' }}>
@@ -1296,7 +1297,7 @@ function TabletAIImpact1SectionTablet() {
                         <img src={imgAi1Checklist2} alt="" className="w-full h-full object-cover" />
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
 
