@@ -1292,11 +1292,35 @@ function AIImpact3Section() {
             </StepCard>
 
             {/* Step 04 */}
-            <StepCard num="04" title="Bridge to Development & Reuse">
+            <StepCard num="04" title="Reuse Across New Pages">
+              {/* 영상 */}
               <div className="bg-white flex items-center pt-[16px] px-[20px] pb-[0px] w-full" style={{ height: '421px' }}>
                 <AutoplayVideo src={vidAiImpact2} loop className="flex-1 h-full min-w-0 object-cover" />
               </div>
-              <StepNote>Connected Figma text styles to development for reuse across future pages.</StepNote>
+              {/* 설명 */}
+              <div className="bg-white flex gap-[12px] items-center px-[20px] py-[16px] w-full">
+                <img src={icArrowNote} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0 block" />
+                <div className="flex flex-col gap-[8px] items-start flex-1 min-w-0">
+                  <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>From One Typography System to Future Pages</p>
+                  <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>The same typography library was reused across later landing pages, speeding up setup and keeping typography consistent.</p>
+                </div>
+              </div>
+              {/* 3단계 플로우 배지 */}
+              <div className="bg-white flex flex-col items-start px-[20px] py-[16px] w-full">
+                <div className="flex gap-[8px] items-stretch w-full">
+                  <div className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[20px] py-[16px] min-w-0">
+                    <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Cornerstone Website</span>
+                  </div>
+                  <img src={icArrowNote} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0 block self-center" />
+                  <div className="bg-[#b9cdfb] flex flex-1 items-center justify-center px-[20px] py-[16px] min-w-0">
+                    <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Shared Typography Library</span>
+                  </div>
+                  <img src={icArrowNote} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0 block self-center" />
+                  <div className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[20px] py-[16px] min-w-0">
+                    <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>AI Workshop Landing Page</span>
+                  </div>
+                </div>
+              </div>
             </StepCard>
 
           </div>

@@ -1795,12 +1795,36 @@ function TabletAIImpact3Section() {
             <MStepNote>Mapped the desktop scale to mobile and created reusable mobile text styles.</MStepNote>
           </MStepCard>
 
-          {/* 카드 04 — Bridge to Development & Reuse */}
-          <MStepCard num="04" title="Bridge to Development & Reuse">
+          {/* 카드 04 — Reuse Across New Pages */}
+          <MStepCard num="04" title="Reuse Across New Pages">
+            {/* 영상 */}
             <div className="bg-white pt-[14px] px-[14px]">
               <AutoplayVideo src={vidAiImpact2} loop className="w-full object-cover aspect-[2292/1494]" />
             </div>
-            <MStepNote>Connected Figma text styles to development for reuse across future pages.</MStepNote>
+            {/* 설명 */}
+            <div className="bg-white flex gap-[9px] items-center px-[14px] py-[12px] w-full">
+              <img src={icArrowNote} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0 block" />
+              <div className="flex flex-col gap-[6px] items-start flex-1 min-w-0">
+                <p className="font-medium text-[#1e1e1e] w-full" style={{ fontFamily: poppins, fontSize: '15px', lineHeight: '22.5px' }}>From One Typography System to Future Pages</p>
+                <p className="font-normal text-[#1e1e1e] w-full" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>The same typography library was reused across later landing pages, speeding up setup and keeping typography consistent.</p>
+              </div>
+            </div>
+            {/* 3단계 플로우 배지 */}
+            <div className="bg-white flex flex-col items-start px-[14px] py-[12px] w-full">
+              <div className="flex gap-[6px] items-stretch w-full">
+                <div className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[10px] py-[10px] min-w-0">
+                  <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '11px', lineHeight: '16.5px' }}>Cornerstone Website</span>
+                </div>
+                <img src={icArrowNote} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0 block self-center" />
+                <div className="bg-[#b9cdfb] flex flex-1 items-center justify-center px-[10px] py-[10px] min-w-0">
+                  <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '11px', lineHeight: '16.5px' }}>Shared Typography Library</span>
+                </div>
+                <img src={icArrowNote} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0 block self-center" />
+                <div className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[10px] py-[10px] min-w-0">
+                  <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '11px', lineHeight: '16.5px' }}>AI Workshop Landing Page</span>
+                </div>
+              </div>
+            </div>
           </MStepCard>
 
         </div>
@@ -1965,11 +1989,35 @@ function TabletAIImpact3Section() {
             </TStepCard>
 
             {/* Step 04 */}
-            <TStepCard num="04" title="Bridge to Development & Reuse">
+            <TStepCard num="04" title="Reuse Across New Pages">
+              {/* 영상 */}
               <div className="bg-white flex items-center pt-[14px] px-[16px] pb-[0]" style={{ height: '320px' }}>
                 <AutoplayVideo src={vidAiImpact2} loop className="flex-1 h-full min-w-0 object-cover" />
               </div>
-              <TStepNote>Connected Figma text styles to development for reuse across future pages.</TStepNote>
+              {/* 설명 */}
+              <div className="bg-white flex gap-[10px] items-center px-[16px] py-[14px] w-full">
+                <img src={icArrowNote} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0 block" />
+                <div className="flex flex-col gap-[6px] items-start flex-1 min-w-0">
+                  <p className="font-medium text-[#1e1e1e] w-full" style={{ fontFamily: poppins, fontSize: '16px', lineHeight: '24px' }}>From One Typography System to Future Pages</p>
+                  <p className="font-normal text-[#1e1e1e] w-full" style={{ fontFamily: poppins, fontSize: '14px', lineHeight: '21px' }}>The same typography library was reused across later landing pages, speeding up setup and keeping typography consistent.</p>
+                </div>
+              </div>
+              {/* 3단계 플로우 배지 */}
+              <div className="bg-white flex flex-col items-start px-[16px] py-[14px] w-full">
+                <div className="flex gap-[8px] items-stretch w-full">
+                  <div className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[14px] py-[12px] min-w-0">
+                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Cornerstone Website</span>
+                  </div>
+                  <img src={icArrowNote} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0 block self-center" />
+                  <div className="bg-[#b9cdfb] flex flex-1 items-center justify-center px-[14px] py-[12px] min-w-0">
+                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Shared Typography Library</span>
+                  </div>
+                  <img src={icArrowNote} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0 block self-center" />
+                  <div className="bg-[#f7f7f7] flex flex-1 items-center justify-center px-[14px] py-[12px] min-w-0">
+                    <span className="font-medium text-[#1e1e1e] text-center" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>AI Workshop Landing Page</span>
+                  </div>
+                </div>
+              </div>
             </TStepCard>
 
           </div>
