@@ -10,13 +10,18 @@ import { LottieHeroPlayer } from './LottieHeroPlayer'
 import { YouTubeEmbed } from './YouTubeEmbed'
 
 // ── Icons ─────────────────────────────────────────
-import icClose from '../assets/icons/close.svg'
+import icClose           from '../assets/icons/close.svg'
+import icAvatarCheck     from '../assets/icons/ai-avatar/check-circle.svg'
+import icAvatarArrowDown from '../assets/icons/ai-avatar/arrow-down-box.svg'
+import icWhyItWorks      from '../assets/icons/ai-avatar/why-it-works.svg'
 
 // ── Images ────────────────────────────────────────
 import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.jpg'
 import imgProjectGoalBg from '../assets/images/ai-avatar/project-goal-background.jpg'
 import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-thinking-diagram.jpg'
 import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
+import imgSolution01Before from '../assets/images/ai-avatar/solution-01-before.jpg'
+import imgSolution01After  from '../assets/images/ai-avatar/solution-01-after.jpg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -606,6 +611,113 @@ function StackedBarChart({
   )
 }
 
+// ─────────────────────────────────────────────────
+// 09 Design Solution 01
+// ─────────────────────────────────────────────────
+
+function MSolvesBadge({ problemNum }: { problemNum: string }) {
+  return (
+    <div className="bg-[#1e1e1e] flex gap-[6px] items-center pl-[10px] pr-[14px] py-[6px] rounded-full shrink-0">
+      <img src={icAvatarCheck} alt="" aria-hidden className="w-[16px] h-[16px] shrink-0" />
+      <span className="text-[13px] font-medium leading-[19px] text-white whitespace-nowrap" style={{ fontFamily: poppins }}>
+        SOLVES  PROBLEM {problemNum}
+      </span>
+    </div>
+  )
+}
+
+function MBeforeAfterDivider() {
+  return (
+    <div className="flex items-center justify-center w-full">
+      <div className="bg-[#1e1e1e] flex items-center justify-center w-[32px] h-[32px] rotate-90">
+        <img src={icAvatarArrowDown} alt="" aria-hidden className="w-[30.72px] h-[30.72px]" />
+      </div>
+    </div>
+  )
+}
+
+const M_WHY_IT_WORKS_01 = [
+  { num: '01', title: 'Works without extra setup', desc: 'A recommended voice is applied by default, so users can start without making additional adjustments.' },
+  { num: '02', title: 'Keeps the current state visible', desc: "The selected voice and key settings stay visible, so users don't have to remember what they previously selected." },
+  { num: '03', title: 'Makes voice settings easier to access', desc: 'The entry point clearly shows that AI Voice can be reviewed and adjusted whenever needed.' },
+]
+
+function Section09DesignSolution01() {
+  return (
+    <section className="w-full px-[16px] py-[48px] bg-white">
+      <div className="flex flex-col gap-[24px] w-full">
+        {/* 레이블 + 배지 */}
+        <div className="flex items-start justify-between gap-[8px] w-full">
+          <SectionLabel num="09" label="Design Solution 01" />
+          <MSolvesBadge problemNum="01" />
+        </div>
+
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+          Making the Voice Selection Entry Point Clearly Visible
+        </p>
+
+        {/* 통계 카드 3개 (세로 스택) */}
+        {[
+          { label: 'Task 1 success rate', value: '16%', note: 'Lowest of all 5 tasks' },
+          { label: 'Task 1 time',         value: '65s',  note: '2x+ the expected 30s' },
+          { label: 'Task 1 errors',       value: '8',    note: 'Caused by missing the entry point' },
+        ].map(({ label, value, note }) => (
+          <div key={label} className="flex flex-col gap-[8px] w-full p-[16px]" style={{ border: '1px solid #ddd' }}>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
+            <p className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
+            <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{note}</p>
+          </div>
+        ))}
+
+        {/* Why? */}
+        <div className="bg-[#f7f7f7] flex flex-col gap-[12px] p-[16px] w-full" style={{ border: '1px solid #ddd' }}>
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            In the original KT AI Voice Studio, the "AI Voice Selection" entry point had low visual prominence, so users often overlooked it during project setup. Task 1 had the lowest success rate at 16%, took more than twice the expected time, and resulted in 8 usability errors.
+          </p>
+        </div>
+
+        {/* Before image */}
+        <img src={imgSolution01Before} alt="Original KT AI Voice Studio" className="w-full object-cover" style={{ height: '220px' }} />
+        <p className="text-[12px] font-normal leading-[18px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>
+          Red annotation added for clarity; it was not part of the original UI.
+        </p>
+
+        <MBeforeAfterDivider />
+
+        {/* What we changed! */}
+        <div className="bg-[#a6daff] flex flex-col gap-[12px] p-[16px] w-full">
+          <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
+          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+            We redesigned the entry point to show the selected voice and key settings directly in the creation flow, making the feature easier to notice and easier to adjust.
+          </p>
+        </div>
+
+        {/* After image */}
+        <img src={imgSolution01After} alt="Redesigned KT AI Voice Studio" className="w-full object-cover" style={{ height: '220px' }} />
+
+        {/* Why it works */}
+        <div className="flex flex-col gap-[16px] w-full p-[16px]" style={{ border: '1px solid #ddd' }}>
+          <div className="flex items-center gap-[6px]">
+            <img src={icWhyItWorks} alt="" aria-hidden className="w-[20px] h-[20px] shrink-0" />
+            <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Why it works</p>
+          </div>
+          {M_WHY_IT_WORKS_01.map(({ num, title, desc }) => (
+            <div key={num} className="flex flex-col gap-[10px] w-full p-[14px] bg-[#f7f7f7]">
+              <div className="bg-[#1e1e1e] flex items-center justify-center w-[26px] h-[26px] shrink-0">
+                <p className="text-[14px] font-medium leading-[21px] text-white text-center" style={{ fontFamily: poppins }}>{num}</p>
+              </div>
+              <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{title}</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
 function Section07AnalysisOfResults() {
   return (
     <section className="w-full px-[16px] py-[48px]" style={{ backgroundColor: '#f7f7f7' }}>
@@ -745,6 +857,9 @@ export default function MobileAIAvatarPage() {
 
       {/* 07 Analysis of Results */}
       <Section07AnalysisOfResults />
+
+      {/* 09 Design Solution 01 */}
+      <Section09DesignSolution01 />
 
     </motion.div>
   )

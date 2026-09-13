@@ -15,12 +15,15 @@ import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.j
 import imgProjectGoalBg from '../assets/images/ai-avatar/project-goal-background.jpg'
 import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-thinking-diagram.jpg'
 import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
+import imgSolution01Before from '../assets/images/ai-avatar/solution-01-before.jpg'
+import imgSolution01After  from '../assets/images/ai-avatar/solution-01-after.jpg'
 
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
 import icAvatarCheck     from '../assets/icons/ai-avatar/check-circle.svg'
 import icAvatarArrowDown from '../assets/icons/ai-avatar/arrow-down-box.svg'
 import icProblemFlow     from '../assets/icons/ai-avatar/problem-flow-lines.svg'
+import icWhyItWorks      from '../assets/icons/ai-avatar/why-it-works.svg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -41,16 +44,6 @@ function KTSectionLabel({ num, label }: { num: string; label: string }) {
   )
 }
 
-/** Image Placeholder — Figma 의 회색 rounded-rect 박스 그대로 유지 */
-function ImgPlaceholder({ aspectRatio = '16/9', className = '' }: { aspectRatio?: string; className?: string }) {
-  return (
-    <div
-      className={`w-full bg-[#c4c4c4] shrink-0 ${className}`}
-      style={{ aspectRatio }}
-      aria-hidden
-    />
-  )
-}
 
 /** ContentWrap — max-w-[960px] 가운데 정렬, 섹션별 사용 */
 function ContentWrap({ children, gap = 24, py = 60 }: { children: React.ReactNode; gap?: number; py?: number }) {
@@ -798,20 +791,37 @@ function BeforeAfterDivider() {
   )
 }
 
+const SOLUTION_01_STATS = [
+  { label: 'Task 1 success rate', value: '16%', note: 'Lowest of all 5 tasks' },
+  { label: 'Task 1 time',         value: '65s',  note: '2x+ the expected 30s' },
+  { label: 'Task 1 errors',       value: '8',    note: 'Caused by missing the entry point' },
+]
+
+const WHY_IT_WORKS_01 = [
+  {
+    num: '01',
+    title: 'Works without extra setup',
+    desc: 'A recommended voice is applied by default, so users can start without making additional adjustments.',
+  },
+  {
+    num: '02',
+    title: 'Keeps the current state visible',
+    desc: "The selected voice and key settings stay visible, so users don't have to remember what they previously selected.",
+  },
+  {
+    num: '03',
+    title: 'Makes voice settings easier to access',
+    desc: 'The entry point clearly shows that AI Voice can be reviewed and adjusted whenever needed.',
+  },
+]
+
 function DesignSolution01Section() {
-  const stats = [
-    { label: 'Task 1 success rate', value: '16%',   note: 'Lowest of all 5 tasks' },
-    { label: 'Task 1 time',         value: '65s',   note: '2x+ the expected 30s' },
-    { label: 'Task 1 errors',       value: '8',     note: 'Caused by missing the entry point' },
-  ]
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+    <section className="w-full bg-white">
       <ContentWrap gap={40}>
         {/* 섹션 레이블 + 배지 */}
-        <div className="flex items-center gap-[4px] w-full">
-          <div className="flex-1 min-w-0">
-            <KTSectionLabel num="09" label="Design Solution 01" />
-          </div>
+        <div className="flex items-center justify-between gap-[4px] w-full">
+          <KTSectionLabel num="09" label="Design Solution 01" />
           <SolvesBadge problemNum="01" />
         </div>
 
@@ -819,9 +829,9 @@ function DesignSolution01Section() {
           Making the Voice Selection Entry Point Clearly Visible
         </h2>
 
-        {/* 3개 통계 카드 */}
+        {/* 통계 카드 3개 */}
         <div className="flex gap-[20px] w-full">
-          {stats.map(({ label, value, note }) => (
+          {SOLUTION_01_STATS.map(({ label, value, note }) => (
             <div key={label} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[24px]" style={{ border: '1px solid #ddd' }}>
               <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
               <p className="text-[28px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
@@ -830,34 +840,70 @@ function DesignSolution01Section() {
           ))}
         </div>
 
-        {/* Why? + Image Placeholder (Before) */}
+        {/* Why? → Before image → 화살표 → What we changed! → After image */}
         <div className="flex flex-col gap-[20px] w-full">
+          {/* Why? */}
           <div className="bg-[#f7f7f7] flex flex-col gap-[16px] p-[24px] w-full" style={{ border: '1px solid #ddd' }}>
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              In the original KT AI Voice Studio, the "AI Voice Selection" entry point had low visual prominence and poor placement, so users often overlooked voice settings during project setup. Task 1 in fact had the worst success rate and time of all five tasks.
+              In the original KT AI Voice Studio, the "AI Voice Selection" entry point had low visual prominence, so users often overlooked it during project setup. Task 1 had the lowest success rate at 16%, took more than twice the expected time, and resulted in 8 usability errors.
             </p>
           </div>
-          {/* Image Placeholder — Figma 889:18926 */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
+          {/* Before image */}
+          <img src={imgSolution01Before} alt="Original KT AI Voice Studio — before redesign" className="w-full object-cover" style={{ height: '530px' }} />
           <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>
-            * The red annotation on the original screen was added to illustrate the problem. It was not present in the actual interface, where the entry point was easy to miss.
+            Red annotation added for clarity; it was not part of the original UI.
           </p>
         </div>
 
+        {/* 구분자 */}
         <BeforeAfterDivider />
 
-        {/* What we changed! + Image Placeholder (After) */}
+        {/* What we changed! → After image */}
         <div className="flex flex-col gap-[20px] w-full">
           <div className="bg-[#a6daff] flex flex-col gap-[16px] p-[24px] w-full">
             <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
             <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-              We redesigned the entry as a persistent, visible UI that shows the selected voice and key settings at a glance, so users can confirm their configuration and continue without breaking the creation flow.
+              We redesigned the entry point to show the selected voice and key settings directly in the creation flow, making the feature easier to notice and easier to adjust.
             </p>
           </div>
-          {/* Image Placeholder — Figma 889:18935 */}
-          <div className="bg-[#bfbfbf] w-full shrink-0" style={{ height: '500px' }} aria-hidden />
+          {/* After image */}
+          <img src={imgSolution01After} alt="Redesigned KT AI Voice Studio — after redesign" className="w-full object-cover" style={{ height: '530px' }} />
         </div>
+
+        {/* Why it works */}
+        <div className="flex flex-col gap-[20px] w-full p-[20px]" style={{ border: '1px solid #ddd' }}>
+          {/* 헤더 */}
+          <div className="flex items-center gap-[6px] w-full">
+            <img src={icWhyItWorks} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Why it works</p>
+          </div>
+          {/* 카드 01 + 02 (가로) */}
+          <div className="flex gap-[20px] items-stretch w-full">
+            {WHY_IT_WORKS_01.slice(0, 2).map(({ num, title, desc }) => (
+              <div key={num} className="flex flex-col gap-[12px] flex-1 min-w-0 p-[20px] bg-[#f7f7f7]">
+                <div className="bg-[#1e1e1e] flex items-center justify-center w-[28px] h-[28px] shrink-0">
+                  <p className="text-[18px] font-medium leading-[27px] text-white text-center whitespace-nowrap" style={{ fontFamily: poppins }}>{num}</p>
+                </div>
+                <div className="flex flex-col gap-[8px] w-full">
+                  <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{title}</p>
+                  <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* 카드 03 (전체폭) */}
+          <div className="flex flex-col gap-[12px] w-full p-[20px] bg-[#f7f7f7]">
+            <div className="bg-[#1e1e1e] flex items-center justify-center w-[28px] h-[28px] shrink-0">
+              <p className="text-[18px] font-medium leading-[27px] text-white text-center whitespace-nowrap" style={{ fontFamily: poppins }}>03</p>
+            </div>
+            <div className="flex flex-col gap-[8px] w-full">
+              <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{WHY_IT_WORKS_01[2].title}</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{WHY_IT_WORKS_01[2].desc}</p>
+            </div>
+          </div>
+        </div>
+
       </ContentWrap>
     </section>
   )

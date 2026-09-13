@@ -15,9 +15,14 @@ import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.j
 import imgProjectGoalBg from '../assets/images/ai-avatar/project-goal-background.jpg'
 import imgAIProductThinkingDiagram from '../assets/images/ai-avatar/ai-product-thinking-diagram.jpg'
 import imgUXResearchTesting from '../assets/images/ai-avatar/ux-research-testing.jpg'
+import imgSolution01Before from '../assets/images/ai-avatar/solution-01-before.jpg'
+import imgSolution01After  from '../assets/images/ai-avatar/solution-01-after.jpg'
 
 // ── Icons ─────────────────────────────────────────
-import icClose from '../assets/icons/close.svg'
+import icClose           from '../assets/icons/close.svg'
+import icAvatarCheck     from '../assets/icons/ai-avatar/check-circle.svg'
+import icAvatarArrowDown from '../assets/icons/ai-avatar/arrow-down-box.svg'
+import icWhyItWorks      from '../assets/icons/ai-avatar/why-it-works.svg'
 
 // ─────────────────────────────────────────────────
 // Constants
@@ -368,6 +373,127 @@ function TabletUXResearchSection() {
 }
 
 // ─────────────────────────────────────────────────
+// 09 Design Solution 01
+// ─────────────────────────────────────────────────
+
+function TSolvesBadge({ problemNum }: { problemNum: string }) {
+  return (
+    <div className="bg-[#1e1e1e] flex gap-[6px] items-center pl-[12px] pr-[16px] py-[8px] rounded-full shrink-0">
+      <img src={icAvatarCheck} alt="" aria-hidden className="w-[18px] h-[18px] shrink-0" />
+      <span className="text-[14px] font-medium leading-[21px] text-white whitespace-nowrap" style={{ fontFamily: poppins }}>
+        SOLVES  PROBLEM {problemNum}
+      </span>
+    </div>
+  )
+}
+
+function TBeforeAfterDivider() {
+  return (
+    <div className="flex items-center justify-center w-full">
+      <div className="bg-[#1e1e1e] flex items-center justify-center w-[32px] h-[32px] rotate-90">
+        <img src={icAvatarArrowDown} alt="" aria-hidden className="w-[30.72px] h-[30.72px]" />
+      </div>
+    </div>
+  )
+}
+
+const T_WHY_IT_WORKS_01 = [
+  { num: '01', title: 'Works without extra setup', desc: 'A recommended voice is applied by default, so users can start without making additional adjustments.' },
+  { num: '02', title: 'Keeps the current state visible', desc: "The selected voice and key settings stay visible, so users don't have to remember what they previously selected." },
+  { num: '03', title: 'Makes voice settings easier to access', desc: 'The entry point clearly shows that AI Voice can be reviewed and adjusted whenever needed.' },
+]
+
+function TabletDesignSolution01Section() {
+  return (
+    <section className="w-full bg-white">
+      <TContentWrap gap={32}>
+        {/* 레이블 + 배지 */}
+        <div className="flex items-center justify-between gap-[4px] w-full">
+          <TSectionLabel num="09" label="Design Solution 01" />
+          <TSolvesBadge problemNum="01" />
+        </div>
+
+        <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+          Making the Voice Selection Entry Point Clearly Visible
+        </h2>
+
+        {/* 통계 카드 3개 */}
+        <div className="flex gap-[16px] w-full">
+          {[
+            { label: 'Task 1 success rate', value: '16%', note: 'Lowest of all 5 tasks' },
+            { label: 'Task 1 time',         value: '65s',  note: '2x+ the expected 30s' },
+            { label: 'Task 1 errors',       value: '8',    note: 'Caused by missing the entry point' },
+          ].map(({ label, value, note }) => (
+            <div key={label} className="flex flex-col gap-[10px] flex-1 min-w-0 p-[20px]" style={{ border: '1px solid #ddd' }}>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
+              <p className="text-[24px] font-medium leading-[34px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{value}</p>
+              <p className="text-[13px] font-medium leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{note}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Why? → Before → 화살표 → What we changed! → After */}
+        <div className="flex flex-col gap-[16px] w-full">
+          <div className="bg-[#f7f7f7] flex flex-col gap-[16px] p-[20px] w-full" style={{ border: '1px solid #ddd' }}>
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Why?</p>
+            <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+              In the original KT AI Voice Studio, the "AI Voice Selection" entry point had low visual prominence, so users often overlooked it during project setup. Task 1 had the lowest success rate at 16%, took more than twice the expected time, and resulted in 8 usability errors.
+            </p>
+          </div>
+          <img src={imgSolution01Before} alt="Original KT AI Voice Studio — before redesign" className="w-full object-cover" style={{ height: '420px' }} />
+          <p className="text-[13px] font-normal leading-[19px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>
+            Red annotation added for clarity; it was not part of the original UI.
+          </p>
+        </div>
+
+        <TBeforeAfterDivider />
+
+        <div className="flex flex-col gap-[16px] w-full">
+          <div className="bg-[#a6daff] flex flex-col gap-[16px] p-[20px] w-full">
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>What we changed!</p>
+            <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+              We redesigned the entry point to show the selected voice and key settings directly in the creation flow, making the feature easier to notice and easier to adjust.
+            </p>
+          </div>
+          <img src={imgSolution01After} alt="Redesigned KT AI Voice Studio — after redesign" className="w-full object-cover" style={{ height: '420px' }} />
+        </div>
+
+        {/* Why it works */}
+        <div className="flex flex-col gap-[16px] w-full p-[20px]" style={{ border: '1px solid #ddd' }}>
+          <div className="flex items-center gap-[6px] w-full">
+            <img src={icWhyItWorks} alt="" aria-hidden className="w-[24px] h-[24px] shrink-0" />
+            <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Why it works</p>
+          </div>
+          <div className="flex gap-[16px] items-stretch w-full">
+            {T_WHY_IT_WORKS_01.slice(0, 2).map(({ num, title, desc }) => (
+              <div key={num} className="flex flex-col gap-[10px] flex-1 min-w-0 p-[16px] bg-[#f7f7f7]">
+                <div className="bg-[#1e1e1e] flex items-center justify-center w-[28px] h-[28px] shrink-0">
+                  <p className="text-[16px] font-medium leading-[24px] text-white text-center whitespace-nowrap" style={{ fontFamily: poppins }}>{num}</p>
+                </div>
+                <div className="flex flex-col gap-[6px] w-full">
+                  <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{title}</p>
+                  <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-[10px] w-full p-[16px] bg-[#f7f7f7]">
+            <div className="bg-[#1e1e1e] flex items-center justify-center w-[28px] h-[28px] shrink-0">
+              <p className="text-[16px] font-medium leading-[24px] text-white text-center whitespace-nowrap" style={{ fontFamily: poppins }}>03</p>
+            </div>
+            <div className="flex flex-col gap-[6px] w-full">
+              <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{T_WHY_IT_WORKS_01[2].title}</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{T_WHY_IT_WORKS_01[2].desc}</p>
+            </div>
+          </div>
+        </div>
+
+      </TContentWrap>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
 // 07 ANALYSIS OF RESULTS — Figma 955:1124
 // ─────────────────────────────────────────────────
 
@@ -601,6 +727,7 @@ export default function TabletAIAvatarPage() {
       <div id="what-i-worked"><TabletWhatIWorkedOnSection /></div>
       <div id="ux-research"><TabletUXResearchSection /></div>
       <div id="analysis"><TabletAnalysisSection /></div>
+      <div id="solution-01"><TabletDesignSolution01Section /></div>
 
     </motion.div>
   )
