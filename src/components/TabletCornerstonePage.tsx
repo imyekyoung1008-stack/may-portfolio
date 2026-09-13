@@ -13,6 +13,8 @@ import vidBeforeS1      from '../assets/videos/solution3-before.mp4'
 import vidBeforeS2      from '../assets/videos/solution2-before.mp4'
 import vidAfterS1       from '../assets/videos/solution1-after.mp4'
 import vidAfterS2       from '../assets/videos/solution2-after.mp4'
+import vidAiImpact1     from '../assets/videos/ai_impact1.mp4'
+import vidAiImpact2     from '../assets/videos/ai_impact2.mp4'
 
 // ── Images ────────────────────────────────────────
 import imgProblemHeroBg from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
@@ -169,7 +171,7 @@ function TSubHeading({ icon = icSectionIcon, label }: { icon?: string; label: st
 }
 
 /** Viewport에 50% 이상 보이면 자동재생 */
-function AutoplayVideo({ src, className }: { src: string; className?: string }) {
+function AutoplayVideo({ src, className, loop }: { src: string; className?: string; loop?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null)
   useEffect(() => {
     const video = ref.current
@@ -181,7 +183,7 @@ function AutoplayVideo({ src, className }: { src: string; className?: string }) 
     observer.observe(video)
     return () => observer.disconnect()
   }, [])
-  return <video ref={ref} src={src} controls playsInline muted className={className} />
+  return <video ref={ref} src={src} controls playsInline muted loop={loop} className={className} />
 }
 
 // ─────────────────────────────────────────────────
@@ -1472,7 +1474,7 @@ function TabletAIImpact2Section() {
               <div className="bg-[#b9cdfb] flex items-center justify-center" style={{ padding: '10px 12px' }}>
                 <span className="font-medium text-[#1e1e1e]" style={{ fontFamily: poppins, fontSize: '13px', lineHeight: '19.5px' }}>Final Visual Design</span>
               </div>
-              <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '2292 / 1494' }} />
+              <AutoplayVideo src={vidAiImpact1} loop className="w-full object-cover aspect-[2292/1494]" />
             </div>
             <MStepNote>Refined the selected Stitch concept into the final UI in Figma.</MStepNote>
           </MStepCard>
@@ -1597,7 +1599,7 @@ function TabletAIImpact2Section() {
                     <span className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Final Visual Design</span>
                   </div>
                 </div>
-                <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '996/560' }} />
+                <AutoplayVideo src={vidAiImpact1} loop className="w-full object-cover aspect-[996/560]" />
               </div>
               <TStepNote>Refined the selected Stitch concept into the final UI in Figma.</TStepNote>
             </TStepCard>
@@ -1796,7 +1798,7 @@ function TabletAIImpact3Section() {
           {/* 카드 04 — Bridge to Development & Reuse */}
           <MStepCard num="04" title="Bridge to Development & Reuse">
             <div className="bg-white pt-[14px] px-[14px]">
-              <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '2292 / 1494' }} />
+              <AutoplayVideo src={vidAiImpact2} loop className="w-full object-cover aspect-[2292/1494]" />
             </div>
             <MStepNote>Connected Figma text styles to development for reuse across future pages.</MStepNote>
           </MStepCard>
@@ -1965,7 +1967,7 @@ function TabletAIImpact3Section() {
             {/* Step 04 */}
             <TStepCard num="04" title="Bridge to Development & Reuse">
               <div className="bg-white flex items-center pt-[14px] px-[16px] pb-[0]" style={{ height: '320px' }}>
-                <div className="bg-[#b7b7b7] flex-1 h-full min-w-0" />
+                <AutoplayVideo src={vidAiImpact2} loop className="flex-1 h-full min-w-0 object-cover" />
               </div>
               <TStepNote>Connected Figma text styles to development for reuse across future pages.</TStepNote>
             </TStepCard>

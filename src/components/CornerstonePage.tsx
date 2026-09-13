@@ -12,6 +12,8 @@ import vidBeforeS1      from '../assets/videos/solution3-before.mp4'
 import vidBeforeS2      from '../assets/videos/solution2-before.mp4'
 import vidAfterS1       from '../assets/videos/solution1-after.mp4'
 import vidAfterS2       from '../assets/videos/solution2-after.mp4'
+import vidAiImpact1     from '../assets/videos/ai_impact1.mp4'
+import vidAiImpact2     from '../assets/videos/ai_impact2.mp4'
 
 // ── Images: problem / solutions ───────────────────
 import imgProblemHeroBg  from '../assets/images/cornerstone-detail/problem-hero-bg.jpg'
@@ -147,7 +149,7 @@ function StepNote({ children }: { children: React.ReactNode }) {
 }
 
 /** 화면에 50% 이상 보이면 자동재생, 벗어나면 일시정지. controls/muted 유지. */
-function AutoplayVideo({ src, className }: { src: string; className?: string }) {
+function AutoplayVideo({ src, className, loop }: { src: string; className?: string; loop?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -167,7 +169,7 @@ function AutoplayVideo({ src, className }: { src: string; className?: string }) 
     return () => observer.disconnect()
   }, [])
 
-  return <video ref={ref} src={src} controls playsInline muted className={className} />
+  return <video ref={ref} src={src} controls playsInline muted loop={loop} className={className} />
 }
 
 /** Inner content wrapper: responsive container
@@ -1063,7 +1065,7 @@ function AIImpact2Section() {
                     <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Final Visual Design</span>
                   </div>
                 </div>
-                <div className="bg-[#c4c4c4] w-full" style={{ aspectRatio: '996 / 560' }} />
+                <AutoplayVideo src={vidAiImpact1} loop className="w-full object-cover aspect-[996/560]" />
               </div>
               <StepNote>Refined the selected Stitch concept into the final UI in Figma.</StepNote>
             </StepCard>
@@ -1290,10 +1292,9 @@ function AIImpact3Section() {
             </StepCard>
 
             {/* Step 04 */}
-            {/* TODO: 실제 이미지 나오면 교체 예정 */}
             <StepCard num="04" title="Bridge to Development & Reuse">
               <div className="bg-white flex items-center pt-[16px] px-[20px] pb-[0px] w-full" style={{ height: '421px' }}>
-                <div className="bg-[#b7b7b7] flex-1 h-full min-w-0" />
+                <AutoplayVideo src={vidAiImpact2} loop className="flex-1 h-full min-w-0 object-cover" />
               </div>
               <StepNote>Connected Figma text styles to development for reuse across future pages.</StepNote>
             </StepCard>
