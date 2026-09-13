@@ -284,7 +284,7 @@ function CornerstoneHeader() {
   const META = [
     { label: 'Product',  value: 'Responsive Web' },
     { label: 'My role',  value: 'Solo Product Designer' },
-    { label: 'Timeline', value: 'Q2 2026 - Q3 2026' },
+    { label: 'Timeline', value: 'Q3 2026 – Present' },
     { label: 'Skills',   value: 'UX Strategy, Information Architecture, UI Design, Responsive Design, AI Assisted Workflow, Stakeholder Collaboration' },
   ]
   return (
@@ -669,7 +669,7 @@ function BeforeAfter2() {
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
           <div className="bg-[#f3f3f3] flex items-center gap-[10px] px-[32px] py-[12px] w-full">
             <span className="text-[20px] font-medium leading-[30px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
-            <span className="text-[20px] font-normal leading-[30px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+            <span className="text-[20px] font-normal leading-[30px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Strategic Digital Marketing Program</span>
           </div>
           <div className="w-full aspect-[1920/1080]">
             <AutoplayVideo src={vidBeforeS2} className="w-full h-full block object-cover" />
@@ -695,7 +695,7 @@ function BeforeAfter2() {
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
           <div className="bg-white flex items-center gap-[10px] px-[32px] py-[12px] w-full">
             <span className="text-[20px] font-medium leading-[30px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
-            <span className="text-[20px] font-normal leading-[30px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+            <span className="text-[20px] font-normal leading-[30px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Strategic Digital Marketing Program</span>
           </div>
           <div className="w-full aspect-[1920/1080]">
             <AutoplayVideo src={vidAfterS2} className="w-full h-full block object-cover" />
@@ -1447,7 +1447,7 @@ function Across10Programs() {
               <div
                 key={`${prog.name}-${i}`}
                 className="shrink-0"
-                style={{ width: '247px', display: 'block', opacity: 0.6, cursor: 'not-allowed' }}
+                style={{ width: '247px', display: 'block', cursor: 'not-allowed' }}
               >
                 <img
                   src={prog.img}

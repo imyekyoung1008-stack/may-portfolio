@@ -206,7 +206,7 @@ function TabletHeader() {
   const META = [
     { label: 'Product',   value: 'Responsive Web' },
     { label: 'My role',   value: 'Solo Product Designer' },
-    { label: 'Timeline',  value: 'Q2 2026 - Q3 2026' },
+    { label: 'Timeline',  value: 'Q3 2026 – Present' },
     { label: 'Skills',    value: 'UX Strategy, Information Architecture, UI Design, Responsive Design, AI Assisted Workflow, Stakeholder Collaboration' },
   ]
 
@@ -314,7 +314,7 @@ function TabletHeader() {
           {/* Timeline — 163px (row2, 혼자) */}
           <div className="flex flex-col items-start shrink-0" style={{ width: 'calc(50% - 12px)' }}>
             <p className="text-[13px] font-normal leading-[19px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>Timeline</p>
-            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Q2 2026 - Q3 2026</p>
+            <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Q3 2026 – Present</p>
           </div>
           {/* Skills — 전체폭 (row3) */}
           <div className="flex flex-col items-start w-full">
@@ -815,7 +815,7 @@ function TabletSolution2BeforeAfter() {
           <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
             <div className="bg-[#f3f3f3] flex items-center gap-[8px] px-[24px] py-[10px]">
               <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
-              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Strategic Digital Marketing Program</span>
             </div>
             <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidBeforeS2} className="w-full h-full block object-cover" /></div>
             <div className="bg-[#f3f3f3] flex flex-col gap-[8px] px-[24px] py-[20px]">
@@ -831,7 +831,7 @@ function TabletSolution2BeforeAfter() {
           <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
             <div className="bg-white flex items-center gap-[8px] px-[24px] py-[10px]">
               <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
-              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+              <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Strategic Digital Marketing Program</span>
             </div>
             <div className="w-full aspect-[1920/1080]"><AutoplayVideo src={vidAfterS2} className="w-full h-full block object-cover" /></div>
             <div className="bg-white flex flex-col gap-[8px] px-[24px] py-[20px]">
@@ -852,7 +852,7 @@ function TabletSolution2BeforeAfter() {
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
           <div className="bg-[#f3f3f3] flex items-center gap-[10px] px-[16px] py-[10px]">
             <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>Before</span>
-            <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+            <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Strategic Digital Marketing Program</span>
           </div>
           <div className="w-full aspect-[1920/1080]">
             <AutoplayVideo src={vidBeforeS2} className="w-full h-full block object-cover" />
@@ -872,7 +872,7 @@ function TabletSolution2BeforeAfter() {
         <div className="flex flex-col w-full" style={{ border: '1px solid #DDD' }}>
           <div className="bg-white flex items-center gap-[10px] px-[16px] py-[10px]">
             <span className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>After</span>
-            <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· UI/UX Design Program</span>
+            <span className="text-[16px] font-normal leading-[24px] text-[#8b8b8b] whitespace-nowrap" style={{ fontFamily: poppins }}>· Strategic Digital Marketing Program</span>
           </div>
           <div className="w-full aspect-[1920/1080]">
             <AutoplayVideo src={vidAfterS2} className="w-full h-full block object-cover" />
@@ -2126,7 +2126,7 @@ function TabletVisualSystemSection() {
               <div
                 key={`${prog.name}-${i}`}
                 className="shrink-0"
-                style={{ width: '180px', display: 'block', opacity: 0.6, cursor: 'not-allowed' }}
+                style={{ width: '180px', display: 'block', cursor: 'not-allowed' }}
               >
                 <img src={prog.img} alt={prog.name} style={{ width: '180px', height: '175px', display: 'block', objectFit: 'cover' }} />
               </div>
