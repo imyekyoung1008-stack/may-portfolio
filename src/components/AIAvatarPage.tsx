@@ -462,16 +462,21 @@ function UXResearchSection() {
 // ─────────────────────────────────────────────────
 
 /** 바 차트 공통 컬럼 */
-function BarCol({ value, barH, barColor, isGradient, label }: {
+function BarCol({ value, barH, barColor, isGradient, label, dividerStyle, labelPb = 9 }: {
   value: string; barH: string | 'flex'; barColor: string; isGradient?: boolean; label: string
+  dividerStyle?: React.CSSProperties
+  labelPb?: number
 }) {
   const barStyle: React.CSSProperties = isGradient
     ? { background: 'linear-gradient(to bottom, #3d5afb, #1c2a78)', borderRadius: '6px 6px 0 0', flexShrink: 0 }
     : { backgroundColor: barColor, borderRadius: '6px 6px 0 0', flexShrink: 0 }
 
   return (
-    <div className="flex flex-col items-center justify-end h-[180px] shrink-0" style={{ width: '53.5px' }}>
-      <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>{value}</p>
+    <div className="relative flex flex-col items-center justify-end h-[180px] shrink-0" style={{ width: '53.5px' }}>
+      {dividerStyle && (
+        <div className="absolute border-t-[3px] border-dashed border-[#9098C0] pointer-events-none" style={dividerStyle} />
+      )}
+      <p className="relative z-[1] text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins, paddingBottom: `${labelPb}px` }}>{value}</p>
       {barH === 'flex'
         ? <div className="flex-1 min-h-0 w-full" style={barStyle} />
         : <div style={{ ...barStyle, height: barH, width: '100%' }} />
@@ -481,17 +486,15 @@ function BarCol({ value, barH, barColor, isGradient, label }: {
   )
 }
 
-function ChartCard({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+function ChartCard({ title, subtitle, children }: { title: string; subtitle?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="bg-white flex flex-col gap-[16px] items-center px-[16px] py-[24px] shrink-0" style={{ width: '470px', height: '320px', border: '1px solid #ddd' }}>
-      <div className="flex flex-col items-start w-[422px] shrink-0">
-        <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{title}</p>
+    <div className="bg-white flex flex-col justify-between px-[16px] py-[24px] shrink-0" style={{ width: '470px', height: '320px', border: '1px solid #ddd' }}>
+      {/* 상단: 제목 + 선택적 부제목/범례 */}
+      <div className="flex flex-col gap-[8px] shrink-0 w-full">
+        <p className="text-[20px] font-medium leading-[28px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{title}</p>
+        {subtitle && <div className="w-full shrink-0">{subtitle}</div>}
       </div>
-      {subtitle && (
-        <div className="w-[422px] shrink-0">
-          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{subtitle}</p>
-        </div>
-      )}
+      {/* 하단: 차트 영역 (180px, 바닥 고정) */}
       {children}
     </div>
   )
@@ -516,7 +519,7 @@ function AnalysisSection() {
           {/* Row 1 */}
           <div className="flex gap-[20px]">
             {/* Success rate */}
-            <ChartCard title="Success rate">
+            <ChartCard title="Success rate (%)">
               <div className="flex gap-[10.5px] items-end justify-center h-[180px] w-full">
                 <BarCol value="16"  barH="28.785px" barColor="#3d5afb" isGradient label="T1" />
                 <BarCol value="33"  barH="59.385px" barColor="#3d5afb" isGradient label="T2" />
@@ -526,13 +529,18 @@ function AnalysisSection() {
               </div>
             </ChartCard>
             {/* Time taken */}
-            <ChartCard title="Time taken (s)" subtitle="Expected Task Time">
+            <ChartCard title="Time taken (s)" subtitle={
+              <div className="flex items-center gap-[12px]">
+                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Expected Task Time</p>
+                <div className="border-t-[3px] border-dashed border-[#9098C0] shrink-0" style={{ width: '50.55px' }} />
+              </div>
+            }>
               <div className="flex gap-[10.5px] items-end justify-center h-[180px] w-full">
-                <BarCol value="65"  barH="32.49px" barColor="#3d5afb" isGradient label="T1" />
-                <BarCol value="328" barH="flex"    barColor="#3d5afb" isGradient label="T2" />
-                <BarCol value="283" barH="flex"    barColor="#e7e9f5" label="T3" />
-                <BarCol value="91"  barH="45.495px" barColor="#e7e9f5" label="T4" />
-                <BarCol value="42"  barH="21px"    barColor="#e7e9f5" label="T5" />
+                <BarCol value="65"  barH="32.49px"  barColor="#3d5afb" isGradient label="T1" dividerStyle={{ inset: '73.34% 1.5px 24.99% 1.5px' } as React.CSSProperties} />
+                <BarCol value="328" barH="flex"      barColor="#3d5afb" isGradient label="T2" dividerStyle={{ inset: '34.45% 1.5px 63.88% 1.5px' } as React.CSSProperties} />
+                <BarCol value="283" barH="flex"      barColor="#e7e9f5" label="T3"            dividerStyle={{ top: '-1.67%', right: '1.5px', bottom: '100%', left: '1.5px' }} />
+                <BarCol value="91"  barH="45.495px"  barColor="#e7e9f5" label="T4"            dividerStyle={{ inset: '42.79% 1.5px 55.55% 1.5px' } as React.CSSProperties} labelPb={30} />
+                <BarCol value="42"  barH="21px"      barColor="#e7e9f5" label="T5"            dividerStyle={{ inset: '59.45% 1.5px 38.88% 1.5px' } as React.CSSProperties} labelPb={25} />
               </div>
             </ChartCard>
           </div>
@@ -540,9 +548,8 @@ function AnalysisSection() {
           {/* Row 2 */}
           <div className="flex gap-[20px]">
             {/* Error rate — stacked */}
-            <ChartCard title="Error rate">
-              {/* Legend */}
-              <div className="flex flex-wrap gap-x-[18px] items-center w-[422px] shrink-0">
+            <ChartCard title="Error count" subtitle={
+              <div className="flex flex-wrap gap-x-[18px] items-center w-full">
                 {[{ color: '#8fd9d9', label: 'Interaction' }, { color: '#f4d98a', label: 'Labeling' }, { color: '#c9b8f5', label: 'IA' }, { color: '#b7e8c4', label: 'UI' }].map(({ color, label }) => (
                   <div key={label} className="flex gap-[6px] items-center">
                     <div style={{ width: 12, height: 12, backgroundColor: color, flexShrink: 0 }} />
@@ -550,6 +557,7 @@ function AnalysisSection() {
                   </div>
                 ))}
               </div>
+            }>
               <div className="flex gap-[10.5px] items-end justify-center h-[180px] w-full">
                 {/* T1: 8 errors — teal+yellow */}
                 <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '53.5px' }}>
@@ -598,15 +606,21 @@ function AnalysisSection() {
             </ChartCard>
 
             {/* Satisfaction */}
-            <ChartCard title="Satisfaction (/5)" subtitle="Average: 2.67">
-              <div className="flex gap-[10.5px] items-end justify-center h-[180px] w-full">
+            <ChartCard title="Participant satisfaction (/5)">
+              <div className="relative flex gap-[10.5px] items-end justify-center h-[180px] w-full">
+                {/* Average dashed line — behind bars */}
+                <div
+                  className="absolute border-t border-dashed border-[#9098C0] pointer-events-none"
+                  style={{ top: '52px', left: '-16px', right: '-16px' }}
+                />
+                {/* Bars */}
                 {[
-                  { val: '2.9', h: '104.385px', isGrad: false, label: 'P1' },
-                  { val: '2.9', h: '104.385px', isGrad: false, label: 'P2' },
-                  { val: '4',   h: 'flex',      isGrad: false, label: 'P3' },
-                  { val: '1',   h: '36px',      isGrad: true,  label: 'P4' },
-                  { val: '3.5', h: 'flex',      isGrad: false, label: 'P5' },
-                  { val: '2',   h: '72px',      isGrad: false, label: 'P6' },
+                  { val: '3', h: '108px', isGrad: false, label: 'P1' },
+                  { val: '3', h: '108px', isGrad: false, label: 'P2' },
+                  { val: '4', h: 'flex',  isGrad: false, label: 'P3' },
+                  { val: '1', h: '36px',  isGrad: true,  label: 'P4' },
+                  { val: '3', h: '108px', isGrad: true,  label: 'P5' },
+                  { val: '2', h: '72px',  isGrad: true,  label: 'P6' },
                 ].map(({ val, h, isGrad, label }) => (
                   <div key={label} className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '42.87px' }}>
                     <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>{val}</p>
@@ -617,6 +631,24 @@ function AnalysisSection() {
                     <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>{label}</p>
                   </div>
                 ))}
+                {/* avg. 2.67 text — rendered after bars to sit on top */}
+                <p
+                  className="absolute text-[16px] font-semibold pointer-events-none"
+                  style={{
+                    top: '28px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'linear-gradient(to right, #0E43FB, #1F0099)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                    fontFamily: poppins,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  avg. 2.67
+                </p>
               </div>
             </ChartCard>
           </div>

@@ -803,18 +803,23 @@ function TabletOutcomeBottomSection() {
 
 /** 바 컬럼 — 재사용 헬퍼 */
 function TBarCol({
-  value, barH, barColor, isGradient, label, barW = '56px',
+  value, barH, barColor, isGradient, label, barW = '56px', dividerStyle, labelPb = 9,
 }: {
   value: string; barH: string | 'flex'; barColor: string
   isGradient?: boolean; label: string; barW?: string
+  dividerStyle?: React.CSSProperties
+  labelPb?: number
 }) {
   const barStyle: React.CSSProperties = isGradient
     ? { background: 'linear-gradient(to bottom, #3d5afb, #1c2a78)', borderRadius: '6px 6px 0 0', flexShrink: 0 }
     : { backgroundColor: barColor, borderRadius: '6px 6px 0 0', flexShrink: 0 }
 
   return (
-    <div className="flex flex-col items-center justify-end h-[180px] shrink-0" style={{ width: barW }}>
-      <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>{value}</p>
+    <div className="relative flex flex-col items-center justify-end h-[180px] shrink-0" style={{ width: barW }}>
+      {dividerStyle && (
+        <div className="absolute border-t-[3px] border-dashed border-[#9098C0] pointer-events-none" style={dividerStyle} />
+      )}
+      <p className="relative z-[1] text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins, paddingBottom: `${labelPb}px` }}>{value}</p>
       {barH === 'flex'
         ? <div className="flex-1 min-h-0 w-full" style={barStyle} />
         : <div style={{ ...barStyle, height: barH, width: '100%' }} />
@@ -825,20 +830,18 @@ function TBarCol({
 }
 
 /** 차트 카드 래퍼 — w-[344px] h-[340px] */
-function TChartCard({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+function TChartCard({ title, subtitle, children }: { title: string; subtitle?: React.ReactNode; children: React.ReactNode }) {
   return (
     <div
-      className="bg-white flex flex-col gap-[16px] items-center px-[16px] py-[20px] shrink-0"
+      className="bg-white flex flex-col justify-between px-[16px] py-[20px] shrink-0"
       style={{ width: '344px', height: '340px', border: '1px solid #ddd' }}
     >
-      <div className="flex flex-col items-start w-full shrink-0">
+      {/* 상단: 제목 + 선택적 부제목/범례 */}
+      <div className="flex flex-col gap-[8px] shrink-0 w-full">
         <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>{title}</p>
+        {subtitle && <div className="w-full shrink-0">{subtitle}</div>}
       </div>
-      {subtitle && (
-        <div className="w-full shrink-0">
-          <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{subtitle}</p>
-        </div>
-      )}
+      {/* 하단: 차트 영역 (180px, 바닥 고정) */}
       {children}
     </div>
   )
@@ -865,7 +868,7 @@ function TabletAnalysisSection() {
           <div className="flex gap-[16px] w-full overflow-x-auto pb-[4px]">
 
             {/* Success rate */}
-            <TChartCard title="Success rate">
+            <TChartCard title="Success rate (%)">
               <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
                 <TBarCol value="16"  barH="28.785px" barColor="#3d5afb" isGradient label="T1" />
                 <TBarCol value="33"  barH="59.385px" barColor="#3d5afb" isGradient label="T2" />
@@ -876,13 +879,18 @@ function TabletAnalysisSection() {
             </TChartCard>
 
             {/* Time taken */}
-            <TChartCard title="Time taken (s)" subtitle="Expected Task Time">
+            <TChartCard title="Time taken (s)" subtitle={
+              <div className="flex items-center gap-[12px]">
+                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Expected Task Time</p>
+                <div className="border-t-[3px] border-dashed border-[#9098C0] shrink-0" style={{ width: '50.55px' }} />
+              </div>
+            }>
               <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
-                <TBarCol value="65"  barH="32.49px"  barColor="#3d5afb" isGradient label="T1" />
-                <TBarCol value="328" barH="flex"     barColor="#3d5afb" isGradient label="T2" />
-                <TBarCol value="283" barH="flex"     barColor="#e7e9f5" label="T3" />
-                <TBarCol value="91"  barH="45.495px" barColor="#e7e9f5" label="T4" />
-                <TBarCol value="42"  barH="21px"     barColor="#e7e9f5" label="T5" />
+                <TBarCol value="65"  barH="32.49px"  barColor="#3d5afb" isGradient label="T1" dividerStyle={{ inset: '73.34% 1.5px 24.99% 1.5px' } as React.CSSProperties} />
+                <TBarCol value="328" barH="flex"      barColor="#3d5afb" isGradient label="T2" dividerStyle={{ inset: '34.45% 1.5px 63.88% 1.5px' } as React.CSSProperties} />
+                <TBarCol value="283" barH="flex"      barColor="#e7e9f5" label="T3"            dividerStyle={{ top: '-1.67%', right: '1.5px', bottom: '100%', left: '1.5px' }} />
+                <TBarCol value="91"  barH="45.495px"  barColor="#e7e9f5" label="T4"            dividerStyle={{ inset: '42.79% 1.5px 55.55% 1.5px' } as React.CSSProperties} labelPb={30} />
+                <TBarCol value="42"  barH="21px"      barColor="#e7e9f5" label="T5"            dividerStyle={{ inset: '59.45% 1.5px 38.88% 1.5px' } as React.CSSProperties} labelPb={25} />
               </div>
             </TChartCard>
           </div>
@@ -891,9 +899,8 @@ function TabletAnalysisSection() {
           <div className="flex gap-[16px] w-full overflow-x-auto pb-[4px]">
 
             {/* Error rate — stacked */}
-            <TChartCard title="Error rate">
-              {/* 범례 */}
-              <div className="flex flex-wrap gap-x-[8px] items-center w-full shrink-0">
+            <TChartCard title="Error count" subtitle={
+              <div className="flex flex-wrap gap-x-[8px] items-center w-full">
                 {[
                   { color: '#8fd9d9', label: 'Interaction' },
                   { color: '#f4d98a', label: 'Labeling' },
@@ -906,6 +913,7 @@ function TabletAnalysisSection() {
                   </div>
                 ))}
               </div>
+            }>
               <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
                 {/* T1: 8 — teal+yellow */}
                 <div className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '56px' }}>
@@ -957,15 +965,21 @@ function TabletAnalysisSection() {
             </TChartCard>
 
             {/* Satisfaction (/5) */}
-            <TChartCard title="Satisfaction (/5)" subtitle="Average: 2.67">
-              <div className="flex gap-[8px] items-end justify-center h-[180px] w-full">
+            <TChartCard title="Participant satisfaction (/5)">
+              <div className="relative flex gap-[8px] items-end justify-center h-[180px] w-full">
+                {/* Average dashed line — behind bars */}
+                <div
+                  className="absolute border-t border-dashed border-[#9098C0] pointer-events-none"
+                  style={{ top: '52px', left: '-16px', right: '-16px' }}
+                />
+                {/* Bars */}
                 {[
-                  { val: '2.9', h: '104.385px', isGrad: false, label: 'P1' },
-                  { val: '2.9', h: '104.385px', isGrad: false, label: 'P2' },
-                  { val: '4',   h: 'flex',      isGrad: false, label: 'P3' },
-                  { val: '1',   h: '36px',      isGrad: true,  label: 'P4' },
-                  { val: '3.5', h: 'flex',      isGrad: false, label: 'P5' },
-                  { val: '2',   h: '72px',      isGrad: false, label: 'P6' },
+                  { val: '3', h: '108px', isGrad: false, label: 'P1' },
+                  { val: '3', h: '108px', isGrad: false, label: 'P2' },
+                  { val: '4', h: 'flex',  isGrad: false, label: 'P3' },
+                  { val: '1', h: '36px',  isGrad: true,  label: 'P4' },
+                  { val: '3', h: '108px', isGrad: true,  label: 'P5' },
+                  { val: '2', h: '72px',  isGrad: true,  label: 'P6' },
                 ].map(({ val, h, isGrad, label }) => (
                   <div key={label} className="flex flex-col items-center justify-end h-full shrink-0" style={{ width: '45.333px' }}>
                     <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] pb-[9px]" style={{ fontFamily: poppins }}>{val}</p>
@@ -976,6 +990,24 @@ function TabletAnalysisSection() {
                     <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e] pt-[10.5px]" style={{ fontFamily: poppins }}>{label}</p>
                   </div>
                 ))}
+                {/* avg. 2.67 text — rendered after bars to sit on top */}
+                <p
+                  className="absolute text-[16px] font-semibold pointer-events-none"
+                  style={{
+                    top: '28px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'linear-gradient(to right, #0E43FB, #1F0099)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                    fontFamily: poppins,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  avg. 2.67
+                </p>
               </div>
             </TChartCard>
           </div>

@@ -450,21 +450,32 @@ function Section06UXResearch() {
 /** 단일 색상 막대 차트 (Success rate / Time taken / Satisfaction) */
 function BarChart({
   title,
+  subtitle,
   bars,
   maxValue,
   unit = '%',
   showExpectedLine = false,
   averageLabel,
+  averageValue,
 }: {
   title: string
-  bars: { label: string; value: number; highlight?: boolean }[]
+  subtitle?: React.ReactNode
+  bars: { label: string; value: number; highlight?: boolean; dividerStyle?: React.CSSProperties }[]
   maxValue: number
   unit?: string
   showExpectedLine?: boolean
   averageLabel?: string
+  averageValue?: number
 }) {
   const barWidth = bars.length <= 5 ? '58.8px' : '47.667px'
   const BAR_AREA_H = 180 // px
+
+  // Average line position: from top of bar area
+  // Each bar column: axis label(19px) + gap(4px) + bar + gap(4px) + value label(19px), all in h=180px
+  const avgLineTop = averageValue !== undefined
+    ? BAR_AREA_H - (19 + 4 + Math.round((averageValue / maxValue) * BAR_AREA_H * 0.7))
+    : undefined
+  const avgTextTop = avgLineTop !== undefined ? avgLineTop - 4 - 19 : undefined
 
   return (
     <div
@@ -479,15 +490,8 @@ function BarChart({
         {title}
       </p>
 
-      {/* Average 라벨 (Satisfaction 차트) */}
-      {averageLabel && (
-        <p
-          className="text-[13px] font-normal leading-[19px] shrink-0 mt-[4px]"
-          style={{ fontFamily: poppins, color: '#8b8b8b' }}
-        >
-          {averageLabel}
-        </p>
-      )}
+      {/* 선택적 서브타이틀 (Expected Task Time 범례 등) */}
+      {subtitle && <div className="shrink-0 mt-[4px]">{subtitle}</div>}
 
       {/* Bar area — 하단 정렬 */}
       <div
@@ -506,14 +510,44 @@ function BarChart({
             </p>
           </div>
         )}
+        {/* Average dashed line (Satisfaction 차트) */}
+        {avgLineTop !== undefined && (
+          <div
+            className="absolute left-0 right-0 border-t border-dashed border-[#9098C0] pointer-events-none"
+            style={{ top: `${avgLineTop}px` }}
+          />
+        )}
+        {/* avg. text (Satisfaction 차트) */}
+        {avgTextTop !== undefined && averageLabel && (
+          <p
+            className="absolute text-[13px] font-semibold pointer-events-none"
+            style={{
+              top: `${avgTextTop}px`,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: 'linear-gradient(to right, #0E43FB, #1F0099)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent',
+              fontFamily: poppins,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {averageLabel}
+          </p>
+        )}
 
         {bars.map((bar) => {
           const barH = Math.round((bar.value / maxValue) * BAR_AREA_H * 0.7)
           return (
-            <div key={bar.label} className="flex flex-col items-center gap-[4px] shrink-0" style={{ width: barWidth }}>
+            <div key={bar.label} className="relative h-full flex flex-col justify-end items-center gap-[4px] shrink-0" style={{ width: barWidth }}>
+              {bar.dividerStyle && (
+                <div className="absolute border-t-[3px] border-dashed border-[#9098C0] pointer-events-none" style={bar.dividerStyle} />
+              )}
               {/* 값 라벨 */}
               <p
-                className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]"
+                className="relative z-[1] text-[13px] font-normal leading-[19px] text-[#1e1e1e]"
                 style={{ fontFamily: poppins }}
               >
                 {bar.value}{unit}
@@ -935,7 +969,7 @@ function Section07AnalysisOfResults() {
 
           {/* Chart 1: Success rate — T1/T2 그라디언트, T3/T4/T5 연보라 */}
           <BarChart
-            title="Success rate"
+            title="Success rate (%)"
             bars={[
               { label: 'T1', value: 16,  highlight: true },
               { label: 'T2', value: 33,  highlight: true },
@@ -946,25 +980,30 @@ function Section07AnalysisOfResults() {
             maxValue={100}
           />
 
-          {/* Chart 2: Time taken — T1/T2 그라디언트, T3/T4/T5 연보라, Expected Task Time 점선 */}
+          {/* Chart 2: Time taken — T1/T2 그라디언트, T3/T4/T5 연보라, 막대별 점선 구분선 */}
           <BarChart
             title="Time taken (s)"
+            subtitle={
+              <div className="flex items-center gap-[12px]">
+                <p className="text-[13px] font-normal leading-[19px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Expected Task Time</p>
+                <div className="border-t-[3px] border-dashed border-[#9098C0] shrink-0" style={{ width: '40px' }} />
+              </div>
+            }
             bars={[
-              { label: 'T1', value: 65,  highlight: true },
-              { label: 'T2', value: 328, highlight: true },
-              { label: 'T3', value: 283, highlight: false },
-              { label: 'T4', value: 91,  highlight: false },
-              { label: 'T5', value: 42,  highlight: false },
+              { label: 'T1', value: 65,  highlight: true,  dividerStyle: { inset: '73.34% 1.5px 24.99% 1.5px' } as React.CSSProperties },
+              { label: 'T2', value: 328, highlight: true,  dividerStyle: { inset: '34.45% 1.5px 63.88% 1.5px' } as React.CSSProperties },
+              { label: 'T3', value: 283, highlight: false, dividerStyle: { top: '-1.67%', right: '1.5px', bottom: '100%', left: '1.5px' } },
+              { label: 'T4', value: 91,  highlight: false, dividerStyle: { inset: '42.79% 1.5px 55.55% 1.5px' } as React.CSSProperties },
+              { label: 'T5', value: 42,  highlight: false, dividerStyle: { inset: '59.45% 1.5px 38.88% 1.5px' } as React.CSSProperties },
             ]}
             maxValue={328}
             unit=""
-            showExpectedLine
           />
 
           {/* Chart 3: Error rate — 누적 막대 (Interaction/Labeling/IA) */}
           {/* T1: 8 (Interaction+Labeling), T2: 12 (Interaction+Labeling+IA), T3: 4 (Interaction+IA), T4: 0, T5: 1 (Labeling) */}
           <StackedBarChart
-            title="Error rate"
+            title="Error count"
             bars={[
               { label: 'T1', total: 8,  segments: [{ value: 3,   color: '#8fd9d9' }, { value: 5,   color: '#f4d98a' }] },
               { label: 'T2', total: 12, segments: [{ value: 3,   color: '#8fd9d9' }, { value: 7.5, color: '#f4d98a' }, { value: 1.5, color: '#c9b8f5' }] },
@@ -976,18 +1015,19 @@ function Section07AnalysisOfResults() {
 
           {/* Chart 4: Satisfaction — Average 2.67, P1~P6, P4만 그라디언트 */}
           <BarChart
-            title="Satisfaction (/5)"
+            title="Participant satisfaction (/5)"
             bars={[
-              { label: 'P1', value: 2.9, highlight: false },
-              { label: 'P2', value: 2.9, highlight: false },
-              { label: 'P3', value: 4,   highlight: false },
-              { label: 'P4', value: 1,   highlight: true },
-              { label: 'P5', value: 3.5, highlight: false },
-              { label: 'P6', value: 2,   highlight: false },
+              { label: 'P1', value: 3, highlight: false },
+              { label: 'P2', value: 3, highlight: false },
+              { label: 'P3', value: 4, highlight: false },
+              { label: 'P4', value: 1, highlight: true  },
+              { label: 'P5', value: 3, highlight: true  },
+              { label: 'P6', value: 2, highlight: true  },
             ]}
             maxValue={5}
             unit=""
-            averageLabel="Average: 2.67"
+            averageLabel="avg. 2.67"
+            averageValue={2.67}
           />
 
         </div>
