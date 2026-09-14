@@ -2,17 +2,23 @@
 // Figma: node 809-1202
 // ★ MainPage.tsx(데스크톱)는 건드리지 않고 완전히 별도 컴포넌트로 분리
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import lottie from 'lottie-web'
+import type { AnimationItem } from 'lottie-web'
 
 // ── Images ──────────────────────────────────────
 import imgHeroPhoto      from '../assets/images/hero-photo.jpeg'
 import imgCnaiTh         from '../assets/images/cnai-thumb.png'
+import imgEduvisa        from '../assets/images/eduvisa-thumb.webp'
+import imgAiEdge         from '../assets/images/ai-edge-thumb.webp'
+import lottieCornerstone from '../assets/lottie/cornerstone-marketing.json'
 
 // ── Videos ──────────────────────────────────────
 import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
 import vidShelterDemo    from '../assets/videos/shelter-demo.mp4'
+import vidTwinflame      from '../assets/videos/twinflame-thumb.mp4'
 
 // ── Icons ────────────────────────────────────────
 import { MayImLogo } from './MayImLogo'
@@ -21,6 +27,29 @@ import icArrowNext       from '../assets/icons/arrow-next.svg'
 import resumePdf         from '../assets/documents/May_Im_Resume.pdf'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
 import icViewProject     from '../assets/icons/arrow-view-project.svg'
+
+// ─────────────────────────────────────────────────
+// CornerstoneLottie — lottie-web 직접 구동 컴포넌트
+// ─────────────────────────────────────────────────
+function CornerstoneLottie() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const animRef = useRef<AnimationItem | null>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    animRef.current = lottie.loadAnimation({
+      container: containerRef.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: lottieCornerstone,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+    })
+    return () => animRef.current?.destroy()
+  }, [])
+
+  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+}
 
 // ─────────────────────────────────────────────────
 // Data (데스크톱과 동일한 내용, 별도 선언)
@@ -309,27 +338,55 @@ export default function TabletMainPage() {
           </motion.div>
 
           {/* Additional Projects */}
-          <div className="pt-[32px] pb-[120px] flex flex-col gap-[32px] w-full">
+          <div className="pb-[120px] flex flex-col gap-[32px] w-full">
             <p className="text-[22px] font-medium leading-[32px] text-[#212121]" style={{ fontFamily: poppins }}>Additional Projects</p>
-            {[
+            {([
               [
-                { title: 'TwinFlame',             category: 'AI-assisted Motion & Marketing' },
-                { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content' },
+                { title: 'TwinFlame',        category: 'AI-assisted Motion & Marketing',                  video: vidTwinflame as string | undefined, img: undefined as string | undefined, lottie: undefined as unknown, href: 'https://lnkd.in/p/gcsm_WEZ' as string | undefined },
+                { title: 'AI Edge Workshop', category: 'UX/UI, Marketing Design & AI-generated Visuals', video: undefined as string | undefined,    img: imgAiEdge as string | undefined, lottie: undefined as unknown, href: 'https://bc.ciccc.ca/lp/ai-edge/' as string | undefined },
               ],
               [
-                { title: 'AI Edge Workshop', category: 'UX/UI, Marketing Design & AI-generated Visuals' },
-                { title: 'Eduvisa',          category: 'Landing Page UX/UI & Development' },
+                { title: 'Eduvisa',              category: 'Landing Page UX/UI & Development',  video: undefined as string | undefined, img: imgEduvisa as string | undefined, lottie: undefined as unknown,          href: 'https://eduvisa.ai/' as string | undefined },
+                { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content', video: undefined as string | undefined, img: undefined as string | undefined,   lottie: lottieCornerstone as unknown, href: undefined as string | undefined },
               ],
-            ].map((row, ri) => (
+            ] as { title: string; category: string; video?: string; img?: string; lottie?: unknown; href?: string }[][]).map((row, ri) => (
               <div key={ri} className="flex gap-[24px] items-start w-full">
-                {row.map(({ title, category }) => (
-                  <div key={title} className="flex-[1_0_0] min-w-px flex flex-col gap-[12px]">
-                    <div className="w-full bg-[#e7e4df]" style={{ height: '253.75px' }} />
+                {row.map(({ title, category, video, img, lottie, href }) => (
+                  <a
+                    key={title}
+                    {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="flex-[1_0_0] min-w-px flex flex-col gap-[12px] no-underline"
+                    style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
+                  >
+                    {video ? (
+                      <div className="relative w-full aspect-video overflow-hidden">
+                        <video
+                          src={video}
+                          autoPlay loop muted playsInline
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : img ? (
+                      <div className="relative w-full aspect-video overflow-hidden">
+                        <img
+                          src={img} alt={title}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : lottie ? (
+                      <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+                        <div className="absolute inset-0">
+                          <CornerstoneLottie />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full aspect-video bg-[#e7e4df]" />
+                    )}
                     <div className="flex flex-col gap-[2px]">
                       <p className="text-[20px] font-medium leading-[30px] text-[#212121]" style={{ fontFamily: poppins }}>{title}</p>
                       <p className="text-[16px] font-normal leading-[24px] text-[#8c8c8c]" style={{ fontFamily: poppins }}>{category}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             ))}

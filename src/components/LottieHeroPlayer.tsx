@@ -7,12 +7,10 @@
  * - Cornerstone 페이지 video controls와 동일한 크림색 그라데이션 바
  */
 
-import React, { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import type { CSSProperties } from 'react'
-import LottieLib from 'lottie-react'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const LottieComponent = ((LottieLib as any).default ?? LottieLib) as React.ComponentType<any>
+import lottie from 'lottie-web'
+import type { AnimationItem } from 'lottie-web'
 
 // ── 인라인 SVG 아이콘 ──────────────────────────────────────────────────────
 function PlayIcon() {
@@ -40,51 +38,68 @@ interface LottieHeroPlayerProps {
 
 // ── Component ─────────────────────────────────────────────────────────────
 export function LottieHeroPlayer({ animationData, className, style }: LottieHeroPlayerProps) {
-  // lottie ref — controls .play(), .pause(), .goToAndPlay()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const lottieRef = useRef<any>(null)
+  // lottie-web AnimationItem ref
+  const containerRef = useRef<HTMLDivElement>(null)
+  const animRef      = useRef<AnimationItem | null>(null)
 
   // React state: only changes on user interaction → minimal re-renders
-  const [playing, setPlaying]   = useState(true)
-  const [hovered, setHovered]   = useState(false)
+  const [playing, setPlaying] = useState(true)
+  const [hovered, setHovered] = useState(false)
 
   // Direct DOM ref for the progress fill — updated at 60fps without setState
-  const fillRef     = useRef<HTMLDivElement>(null)
-  const thumbRef    = useRef<HTMLDivElement>(null)
-  const trackRef    = useRef<HTMLDivElement>(null)
-  const isDragging  = useRef(false)
+  const fillRef    = useRef<HTMLDivElement>(null)
+  const thumbRef   = useRef<HTMLDivElement>(null)
+  const trackRef   = useRef<HTMLDivElement>(null)
+  const isDragging = useRef(false)
 
-  // ── frame tracking (direct DOM, no re-render) ──────────────────────────
-  const handleEnterFrame = useCallback(() => {
-    if (isDragging.current) return
-    const item = lottieRef.current?.animationItem
-    if (!item || !fillRef.current) return
-    const pct = (item.currentFrame / item.totalFrames) * 100
-    fillRef.current.style.width = `${pct}%`
-    if (thumbRef.current) thumbRef.current.style.left = `${pct}%`
-  }, [])
+  // ── lottie-web 초기화 ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (!containerRef.current) return
+    const anim = lottie.loadAnimation({
+      container:   containerRef.current,
+      renderer:    'svg',
+      loop:        true,
+      autoplay:    true,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      animationData: animationData as any,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid meet' },
+    })
+    animRef.current = anim
+
+    // enterFrame: 진행바 직접 DOM 업데이트 (setState 없이 60fps)
+    anim.addEventListener('enterFrame', () => {
+      if (isDragging.current) return
+      if (!animRef.current || !fillRef.current) return
+      const pct = (animRef.current.currentFrame / animRef.current.totalFrames) * 100
+      fillRef.current.style.width = `${pct}%`
+      if (thumbRef.current) thumbRef.current.style.left = `${pct}%`
+    })
+
+    return () => anim.destroy()
+  }, [animationData])
 
   // ── play / pause ───────────────────────────────────────────────────────
   const togglePlay = useCallback(() => {
+    if (!animRef.current) return
     if (playing) {
-      lottieRef.current?.pause()
+      animRef.current.pause()
       setPlaying(false)
     } else {
-      lottieRef.current?.play()
+      animRef.current.play()
       setPlaying(true)
     }
   }, [playing])
 
   // ── seek helpers ───────────────────────────────────────────────────────
   const seekToRatio = useCallback((ratio: number) => {
-    const item = lottieRef.current?.animationItem
-    const total = item?.totalFrames ?? 240
+    if (!animRef.current) return
+    const total = animRef.current.totalFrames ?? 240
     const frame = Math.max(0, Math.min(total - 1, Math.round(ratio * total)))
-    lottieRef.current?.goToAndPlay(frame, true)
+    animRef.current.goToAndPlay(frame, true)
     setPlaying(true)
     // update bar immediately (before next enterFrame)
-    if (fillRef.current)  fillRef.current.style.width  = `${ratio * 100}%`
-    if (thumbRef.current) thumbRef.current.style.left  = `${ratio * 100}%`
+    if (fillRef.current)  fillRef.current.style.width = `${ratio * 100}%`
+    if (thumbRef.current) thumbRef.current.style.left = `${ratio * 100}%`
   }, [])
 
   const ratioFromPointer = (e: { clientX: number }, el: HTMLDivElement) => {
@@ -137,13 +152,9 @@ export function LottieHeroPlayer({ animationData, className, style }: LottieHero
       // mobile: tap anywhere on the container to toggle controls
       onTouchStart={() => setHovered(h => !h)}
     >
-      {/* Lottie animation */}
-      <LottieComponent
-        animationData={animationData}
-        loop
-        autoplay
-        lottieRef={lottieRef}
-        onEnterFrame={handleEnterFrame}
+      {/* lottie-web container */}
+      <div
+        ref={containerRef}
         style={{ width: '100%', height: '100%', display: 'block' }}
       />
 
