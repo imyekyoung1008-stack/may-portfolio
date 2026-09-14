@@ -29,6 +29,7 @@ export function ProjectPageWrapper({ children }: ProjectPageWrapperProps) {
   return (
     <motion.div
       ref={containerRef}
+      data-scroll-container="project-page"
       style={{
         position: 'fixed',
         inset: 0,
