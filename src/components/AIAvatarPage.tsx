@@ -565,8 +565,8 @@ function ProblemDefinitionSection() {
                   <span style={{ fontSize: '22px', lineHeight: 1 }}>😧</span>
                 </div>
               </div>
-              {/* T4: 😧 (중간) */}
-              <div className="flex flex-1 min-w-0 items-center justify-center relative z-10">
+              {/* T4: 😧 (T3과 동일한 높이) */}
+              <div className="flex flex-1 min-w-0 items-start justify-center relative z-10" style={{ paddingBottom: '40px' }}>
                 <div className="flex items-center justify-center w-[40px] h-[40px] rounded-[20px] bg-white" style={{ border: '2px solid #e6e8f5', boxShadow: '0px 4px 14px -6px rgba(30,40,120,0.2)' }}>
                   <span style={{ fontSize: '22px', lineHeight: 1 }}>😧</span>
                 </div>
