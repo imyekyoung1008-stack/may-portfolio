@@ -17,6 +17,7 @@ import vidShelterDemo    from '../assets/videos/shelter-demo.mp4'
 import { MayImLogo } from './MayImLogo'
 import icArrowInsert     from '../assets/icons/arrow-insert.svg'
 import icArrowNext       from '../assets/icons/arrow-next.svg'
+import resumePdf         from '../assets/documents/May_Im_Resume.pdf'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
 
 // ─────────────────────────────────────────────────
@@ -124,9 +125,11 @@ export default function MobileMainPage() {
           </div>
 
           {/* View Resume — px-14 py-10, 15px/22px */}
-          <button
-            type="button"
-            className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#1e1e1e] cursor-pointer border-0 outline-none"
+          <a
+            href={resumePdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#1e1e1e] cursor-pointer no-underline"
           >
             <span
               className="text-[#f7f4f0] text-[15px] leading-[22px] font-medium not-italic whitespace-nowrap"
@@ -137,7 +140,7 @@ export default function MobileMainPage() {
             <div className="flex items-center justify-center size-[32px] shrink-0 bg-[#f7f4f0]">
               <img src={icArrowNext} alt="" aria-hidden className="block w-[22px] h-[22px]" />
             </div>
-          </button>
+          </a>
         </div>
 
         {/* ══ 섹션 2: 프로젝트 카드 3개 — gap-40px ══ */}

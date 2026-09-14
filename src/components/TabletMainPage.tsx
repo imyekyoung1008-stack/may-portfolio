@@ -18,6 +18,7 @@ import vidShelterDemo    from '../assets/videos/shelter-demo.mp4'
 import { MayImLogo } from './MayImLogo'
 import icArrowInsert     from '../assets/icons/arrow-insert.svg'
 import icArrowNext       from '../assets/icons/arrow-next.svg'
+import resumePdf         from '../assets/documents/May_Im_Resume.pdf'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
 import icViewProject     from '../assets/icons/arrow-view-project.svg'
 
@@ -217,9 +218,11 @@ export default function TabletMainPage() {
             </div>
 
             {/* View Resume — px-14 py-10, 18px/27px */}
-            <button
-              type="button"
-              className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#1e1e1e] cursor-pointer border-0 outline-none"
+            <a
+              href={resumePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#1e1e1e] cursor-pointer no-underline"
             >
               <span
                 className="text-[#f7f4f0] text-[18px] leading-[27px] font-medium not-italic whitespace-nowrap"
@@ -230,7 +233,7 @@ export default function TabletMainPage() {
               <div className="flex items-center justify-center size-[32px] shrink-0 bg-[#f7f4f0]">
                 <img src={icArrowNext} alt="" aria-hidden className="block w-[22px] h-[22px]" />
               </div>
-            </button>
+            </a>
 
             {/* About me 카드 — h-180px, 노란쪽 px-16 py-20 */}
             <div

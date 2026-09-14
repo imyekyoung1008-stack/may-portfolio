@@ -31,6 +31,7 @@ import icArrowInsert     from '../assets/icons/arrow-insert.svg'
 import icArrowNext       from '../assets/icons/arrow-next.svg'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
 import icViewProject     from '../assets/icons/arrow-view-project.svg'
+import resumePdf         from '../assets/documents/May_Im_Resume.pdf'
 
 // ─────────────────────────────────────────────────
 // Data
@@ -239,9 +240,11 @@ export default function MainPage() {
 
               {/* ── 741:34012: Download Resume CTA ── */}
               {/* Figma: bg #1E1E1E, px-14 py-10, justify-between, full width */}
-              <button
-                type="button"
-                className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#1e1e1e] cursor-pointer border-0 outline-none"
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#1e1e1e] cursor-pointer no-underline"
               >
                 {/* 18px Medium, #F7F4F0 */}
                 <span
@@ -261,7 +264,7 @@ export default function MainPage() {
                     className="block w-[22px] h-[22px]"
                   />
                 </div>
-              </button>
+              </a>
 
               {/* ── 741:34013: About me card ── */}
               {/* Figma: h-180px, flex-row, flex-[438_0_0] each half */}
