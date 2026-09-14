@@ -110,7 +110,7 @@ function TabletAIAvatarHeader() {
 
         {/* 소개 문단 */}
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-          {`As the product designer, I led the end-to-end UX/UI of KT AI Human Studio, integrating video generation and voice synthesis. I worked closely with KT's AI division to align technical feasibility and UX goals, and defined and optimized the voice feature through usability testing on KT AI Voice Studio. Using Figma, I designed the core flows, including the main interface, admin pages, and payment system, and validated them through rapid prototyping.`}
+          {`As the solo product designer, I led the end-to-end UX/UI for an AI avatar creation platform, integrating video generation with a client's AI voice technology. I worked directly with the client's AI team, product owner, and developers to define requirements, run usability testing, and design the main creation flow, voice selection experience, admin pages, and payment flow. The resulting experience reduced voice selection time by 48.2% and improved the overall voice discovery and selection process.`}
         </p>
 
         {/* 메타정보 그리드 — 2열 flex-wrap */}
@@ -144,7 +144,7 @@ function TabletIntroSection() {
   return (
     <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
       <TContentWrap gap={24}>
-        <TSectionLabel num="01" label="INTRODUTION" />
+        <TSectionLabel num="01" label="Introduction" />
         <div className="flex flex-col gap-[12px] w-full">
           <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
             Two Platforms in One: KT AI Human Studio Launch
@@ -175,7 +175,7 @@ function TabletProjectGoalSection() {
   return (
     <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
       <TContentWrap gap={24}>
-        <TSectionLabel num="02" label="PROJECT GOAL" />
+        <TSectionLabel num="02" label="Project Goal" />
         <div className="flex flex-col gap-[12px] w-full">
           <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
             Integrating AI Voice Customization Into the Creation Flow
@@ -299,7 +299,7 @@ function TabletWhatIWorkedOnSection() {
       <TContentWrap gap={32}>
         <TSectionLabel num="05" label="What did I work on?" />
         <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          End-to-End UX/UI Design
+          UX/UI Design From Concept to Delivery
         </h2>
         <div className="flex flex-col gap-[24px] w-full">
           {WORK_ITEMS.map(({ num, title, body }) => (
@@ -321,65 +321,182 @@ function TabletWhatIWorkedOnSection() {
 // 06 UX RESEARCH — Figma 952:1124
 // ─────────────────────────────────────────────────
 function TabletUXResearchSection() {
+  const T_TASKS = [
+    { id: 'T1', label: 'Task 1', title: 'Access the AI voice selection screen after creating a project', expected: 'Expected 30s · 5 taps' },
+    { id: 'T2', label: 'Task 2', title: 'Select a voice using filters and search (by project)',          expected: 'Expected 4 min · 8 taps' },
+    { id: 'T3', label: 'Task 3', title: 'Write a sentence and select a voice (by sentence)',             expected: 'Expected 6 min · 79 taps' },
+    { id: 'T4', label: 'Task 4', title: 'Adjust detailed voice settings (emotion · language · speed · pitch)', expected: 'Expected 2 min · 34 taps' },
+    { id: 'T5', label: 'Task 5', title: 'Play the written sentence, add silence',                        expected: 'Expected 1 min · 12 taps' },
+  ]
   return (
     <section className="w-full" style={{ backgroundColor: '#f7f7f7' }}>
       <TContentWrap gap={32}>
         <TSectionLabel num="06" label="UX Research" />
         <div className="flex flex-col gap-[12px] w-full">
-          <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            Conducting a Usability Test on "KT AI Voice Studio"
-          </h2>
+          <div className="flex flex-col gap-[4px] w-full">
+            <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+              Conducting a Usability Test on "KT AI Voice Studio"
+            </h2>
+            <p className="text-[14px] font-normal leading-[21px]" style={{ fontFamily: poppins, color: '#999' }}>
+              Existing live AI voice product from the client
+            </p>
+          </div>
           <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            To identify integration challenges and improve the voice selection experience, we conducted a usability test with six people using KT AI Voice Studio for the first time. Participants were split into two groups, with and without content creation experience, to compare behavior patterns. We designed five tasks covering the full voice selection and editing flow. The most critical usability issues appeared in Tasks 1 and 2, related to voice access and search efficiency.
+            To understand how prior content creation experience affected voice selection behavior, we conducted usability testing with six first-time users of KT AI Voice Studio. Participants were split into two groups: three with content creation experience and three without. We designed five tasks covering the full voice selection and editing flow, then compared how each group navigated, selected, and adjusted voices.
           </p>
         </div>
 
         <img src={imgUXResearchTesting} alt="UX Research usability testing" className="w-full" />
-        {/* Task 카드 — 2×2 + 1 full */}
+
+        {/* Task 카드 — 2×2 + 1 full, all #f3f3f3 */}
         <div className="flex flex-col gap-[16px] w-full">
-
-          {/* Row 1: T1 + T2 — #a6daff */}
           <div className="flex gap-[16px] w-full">
-            {[
-              { id: 'T1', label: 'Task 1', title: 'Access the AI voice selection screen after creating a project', expected: 'Expected 30s · 5 taps' },
-              { id: 'T2', label: 'Task 2', title: 'Select a voice using filters and search (by project)',          expected: 'Expected 4 min · 8 taps' },
-            ].map(({ id, label, title, expected }) => (
-              <div key={id} className="flex flex-col gap-[10px] p-[20px] flex-1 min-w-0" style={{ backgroundColor: '#a6daff' }}>
-                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{label}</p>
-                <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e] min-h-[56px]" style={{ fontFamily: poppins }}>{title}</p>
-                <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{expected}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Row 2: T3 + T4 — gray */}
-          <div className="flex gap-[16px] w-full">
-            {[
-              { id: 'T3', label: 'Task 3', title: 'Write a sentence and select a voice (by sentence)',                    expected: 'Expected 6 min · 79 taps' },
-              { id: 'T4', label: 'Task 4', title: 'Adjust detailed voice settings (emotion · language · speed · pitch)', expected: 'Expected 2 min · 34 taps' },
-            ].map(({ id, label, title, expected }) => (
-              <div key={id} className="flex flex-col gap-[10px] p-[20px] flex-1 min-w-0 bg-[#f3f3f3]" style={{ border: '1px solid #ddd' }}>
+            {T_TASKS.slice(0, 2).map(({ id, label, title, expected }) => (
+              <div key={id} className="flex flex-col gap-[12px] flex-1 min-w-0 px-[16px] pt-[16px] pb-[18px] bg-[#f3f3f3]" style={{ border: '1px solid #ddd' }}>
                 <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{label}</p>
-                <p className="text-[16px] font-medium leading-[24px] text-[#666] min-h-[56px]" style={{ fontFamily: poppins }}>{title}</p>
+                <p className="text-[14px] font-medium leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{title}</p>
                 <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{expected}</p>
               </div>
             ))}
           </div>
-
-          {/* T5 — full width gray */}
-          <div className="flex flex-col gap-[10px] p-[20px] w-full bg-[#f3f3f3]" style={{ border: '1px solid #ddd' }}>
+          <div className="flex gap-[16px] w-full">
+            {T_TASKS.slice(2, 4).map(({ id, label, title, expected }) => (
+              <div key={id} className="flex flex-col gap-[12px] flex-1 min-w-0 px-[16px] pt-[16px] pb-[18px] bg-[#f3f3f3]" style={{ border: '1px solid #ddd' }}>
+                <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{label}</p>
+                <p className="text-[14px] font-medium leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{title}</p>
+                <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{expected}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-[12px] w-full px-[16px] pt-[16px] pb-[18px] bg-[#f3f3f3]" style={{ border: '1px solid #ddd' }}>
             <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>Task 5</p>
-            <p className="text-[16px] font-medium leading-[24px] text-[#666] min-h-[56px]" style={{ fontFamily: poppins }}>Play the written sentence, add silence</p>
+            <p className="text-[14px] font-medium leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>Play the written sentence, add silence</p>
             <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>Expected 1 min · 12 taps</p>
           </div>
         </div>
 
-        {/* Key Insight */}
-        <div className="w-full bg-[#a6daff] flex flex-col gap-[16px] items-center p-[24px] text-center">
-          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Key Insight</p>
-          <p className="text-[22px] font-medium leading-[32px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-            Most usability issues occurred before users could confidently start selecting voices.
+        {/* Research Setup */}
+        <div className="w-full flex flex-col gap-[24px] items-center px-[40px] py-[32px]" style={{ backgroundColor: '#a6daff', minHeight: '195px' }}>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] text-center" style={{ fontFamily: poppins }}>Research Setup</p>
+          <div className="flex gap-[24px] w-full">
+            <div className="flex flex-col gap-[8px] flex-1">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>6 Participants</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>First-time KT AI Voice Studio users</p>
+            </div>
+            <div className="flex flex-col gap-[8px] flex-1">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>2 Groups</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+                3 with content creation experience<br />3 without content creation experience
+              </p>
+            </div>
+            <div className="flex flex-col gap-[8px] flex-1">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>5 Tasks</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Covering voice access, search, selection, editing, and playback</p>
+            </div>
+          </div>
+        </div>
+      </TContentWrap>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 08 Problem Definition — Figma 965-1124
+// ─────────────────────────────────────────────────
+
+const T_PROBLEMS = [
+  { num: 'Problem 1', title: 'AI Voice Selection button UI, hard to notice',                                    tag: 'Usability',         solution: 'Stronger UI prominence and user awareness' },
+  { num: 'Problem 2', title: 'Hard to check applied values when multiple filters are selected',                 tag: 'Usability',         solution: 'Switched to an intuitive vertical filter layout' },
+  { num: 'Problem 3', title: 'Voice variety causes user selection overload',                                    tag: 'Connected Insight', solution: 'Recommended voices and a Default Voice' },
+  { num: 'Problem 4', title: 'Applying a voice to the script often differs from expectation, causing rework',  tag: 'Usage Pattern',     solution: 'Added an "enter example sentence" feature' },
+]
+
+const T_BUBBLE_CARDS = [
+  { bg: '#e6e0fb', color: '#4a3b93', label: 'Task 1', emoji: '😰', quote: '"I can\'t find where to select a voice."' },
+  { bg: '#dcf3df', color: '#276637', label: 'Task 2', emoji: '😰', quote: '"I don\'t know which filters are applied."' },
+  { bg: '#dcf3df', color: '#276637', label: 'Task 2', emoji: '😰', quote: '"Too many options, hard to choose."' },
+  { bg: '#fbedc4', color: '#8a660c', label: 'Task 3', emoji: '😧', quote: '"The applied voice differs from what I expected, I want to change it."' },
+  { bg: '#eceef4', color: '#585c72', label: 'Task 4', emoji: '😧', quote: '"I don\'t feel the need to adjust speed or pitch."' },
+]
+
+function TabletProblemDefinitionSection() {
+  return (
+    <section className="w-full" style={{ backgroundColor: '#f7f7f7' }}>
+      <TContentWrap gap={40}>
+        <TSectionLabel num="08" label="Problem Definition" />
+        <div className="flex flex-col gap-[12px] w-full">
+          <h2 className="text-[24px] font-medium leading-[34px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+            Four Problems Identified Through Research Data
+          </h2>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+            Users struggled to discover due to high complexity and lack of preview.
           </p>
+        </div>
+
+        {/* 말풍선 카드 — 2열 그리드, gap 22px */}
+        <div className="bg-white flex flex-col gap-[20px] px-[20px] py-[24px] w-full" style={{ border: '1px solid #ddd' }}>
+          <p className="text-[18px] font-normal leading-[27px] text-[#8b8b8b] text-center w-full" style={{ fontFamily: poppins }}>
+            Here's what drove the low success rates and high error rates in Tasks 1 and 2, task by task.
+          </p>
+          <div className="grid grid-cols-2 w-full" style={{ gap: '22px' }}>
+            {T_BUBBLE_CARDS.map(({ bg, color, label, emoji, quote }, i) => (
+              <div key={i} className="relative rounded-[12px] pt-[12px] pb-[14px] px-[14px]" style={{ backgroundColor: bg }}>
+                {/* 말풍선 꼬리 */}
+                <div className="absolute rotate-45 rounded-[2px]" style={{ left: '19.72px', top: '-8.28px', width: '15.556px', height: '15.556px', backgroundColor: bg }} />
+                <span style={{ fontSize: '37.701px', lineHeight: 1, display: 'block', marginBottom: '8px' }}>{emoji}</span>
+                <p className="text-[13px] font-semibold leading-[20px] uppercase tracking-[0.5px] mb-[4px]" style={{ fontFamily: poppins, color }}>{label}</p>
+                <p className="text-[14px] font-medium leading-[21px]" style={{ fontFamily: poppins, color }}>{quote}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Key Insight */}
+        <div className="bg-[#a6daff] flex flex-col gap-[16px] px-[20px] py-[24px] w-full">
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>Key Insight</p>
+          <p className="text-[22px] font-medium leading-[32px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+            Primary pain points were concentrated in Tasks 1 and 2.
+          </p>
+        </div>
+
+        <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+          Taken together, these reactions reveal four core problems. Each corresponds to one of the four design solutions below.
+        </p>
+
+        {/* Problem 카드 — 2×2 그리드, gap 16px, 각 카드 344px */}
+        <div className="flex flex-col gap-[16px] w-full">
+          <div className="flex gap-[16px]">
+            {T_PROBLEMS.slice(0, 2).map(({ num, title, tag, solution }) => (
+              <div key={num} className="flex flex-col flex-1 min-w-0">
+                <div className="bg-[#ffbfbf] flex flex-col gap-[16px] px-[20px] py-[24px]">
+                  <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{num}</p>
+                  <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{title}</p>
+                </div>
+                <div className="bg-white flex flex-col gap-[16px] px-[20px] py-[24px]">
+                  <div className="bg-[#f7f4f0] flex items-center justify-center px-[12px] py-[6px] self-start">
+                    <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>{tag}</p>
+                  </div>
+                  <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{solution}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-[16px]">
+            {T_PROBLEMS.slice(2, 4).map(({ num, title, tag, solution }) => (
+              <div key={num} className="flex flex-col flex-1 min-w-0">
+                <div className="bg-[#ffbfbf] flex flex-col gap-[16px] px-[20px] py-[24px]">
+                  <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{num}</p>
+                  <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{title}</p>
+                </div>
+                <div className="bg-white flex flex-col gap-[16px] px-[20px] py-[24px]">
+                  <div className="bg-[#f7f4f0] flex items-center justify-center px-[12px] py-[6px] self-start">
+                    <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e] whitespace-nowrap" style={{ fontFamily: poppins }}>{tag}</p>
+                  </div>
+                  <p className="text-[16px] font-normal leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>{solution}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </TContentWrap>
     </section>
@@ -816,7 +933,7 @@ function TabletAnalysisSection() {
             Key Challenges Identified in Tasks 1 and 2
           </h2>
           <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            We analyzed four metrics: success rate, time on task, error rate, and satisfaction. Tasks 1 and 2 had the lowest success rates and the highest error rates.
+            We analyzed four metrics: task success, time on task, error count, and participant satisfaction. Tasks 1 and 2 showed the most significant usability issues, with the lowest success rates and highest error counts.
           </p>
         </div>
 
@@ -882,6 +999,7 @@ export default function TabletAIAvatarPage() {
       <div id="what-i-worked"><TabletWhatIWorkedOnSection /></div>
       <div id="ux-research"><TabletUXResearchSection /></div>
       <div id="analysis"><TabletAnalysisSection /></div>
+      <div id="problem-def"><TabletProblemDefinitionSection /></div>
       <div id="solution-01"><TabletDesignSolution01Section /></div>
       <div id="solution-02"><TabletDesignSolution02Section /></div>
       <div id="solution-03"><TabletDesignSolution03Section /></div>

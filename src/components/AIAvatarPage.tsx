@@ -199,7 +199,7 @@ function AIAvatarHeader() {
 
         {/* 소개 문단 */}
         <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-          As the product designer, I led the end-to-end UX/UI of KT AI Human Studio, integrating video generation and voice synthesis. I worked closely with KT's AI division to align technical feasibility and UX goals, and defined and optimized the voice feature through usability testing on KT AI Voice Studio. Using Figma, I designed the core flows, including the main interface, admin pages, and payment system, and validated them through rapid prototyping.
+          As the solo product designer, I led the end-to-end UX/UI for an AI avatar creation platform, integrating video generation with a client's AI voice technology. I worked directly with the client's AI team, product owner, and developers to define requirements, run usability testing, and design the main creation flow, voice selection experience, admin pages, and payment flow. The resulting experience reduced voice selection time by 48.2% and improved the overall voice discovery and selection process.
         </p>
 
         {/* 메타정보 그리드 */}
@@ -236,7 +236,7 @@ function IntroSection() {
   return (
     <section className="w-full bg-white">
       <ContentWrap gap={24}>
-        <KTSectionLabel num="01" label="INTRODUTION" />
+        <KTSectionLabel num="01" label="Introduction" />
         <div className="flex flex-col gap-[12px] w-full">
           <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
             Two Platforms in One: KT AI Human Studio Launch
@@ -263,7 +263,7 @@ function ProjectGoalSection() {
   return (
     <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
       <ContentWrap gap={24}>
-        <KTSectionLabel num="02" label="PROJECT GOAL" />
+        <KTSectionLabel num="02" label="Project Goal" />
         <div className="flex flex-col gap-[12px] w-full">
           <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
             Integrating AI Voice Customization Into the Creation Flow
@@ -424,37 +424,52 @@ function UXResearchSection() {
       <ContentWrap gap={40}>
         <KTSectionLabel num="06" label="UX Research" />
         <div className="flex flex-col gap-[12px] w-full">
-          <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            Conducting a Usability Test on "KT AI Voice Studio"
-          </h2>
+          <div className="flex flex-col gap-[4px] w-full">
+            <h2 className="text-[28px] font-medium leading-[36px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
+              Conducting a Usability Test on "KT AI Voice Studio"
+            </h2>
+            <p className="text-[14px] font-normal leading-[21px]" style={{ fontFamily: poppins, color: '#999' }}>
+              Existing live AI voice product from the client
+            </p>
+          </div>
           <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            To identify integration challenges and improve the voice selection experience, we conducted a usability test with six people using KT AI Voice Studio for the first time. Participants were split into two groups, with and without content creation experience, to compare behavior patterns. We designed five tasks covering the full voice selection and editing flow. The most critical usability issues appeared in Tasks 1 and 2, related to voice access and search efficiency.
+            To understand how prior content creation experience affected voice selection behavior, we conducted usability testing with six first-time users of KT AI Voice Studio. Participants were split into two groups: three with content creation experience and three without. We designed five tasks covering the full voice selection and editing flow, then compared how each group navigated, selected, and adjusted voices.
           </p>
         </div>
         <img src={imgUXResearchTesting} alt="UX Research usability testing" className="w-full" />
         {/* Task 카드 5개 */}
         <div className="flex gap-[12px] items-stretch w-full">
-          {TASKS.map(({ id, label, title, expected, highlight }) => (
+          {TASKS.map(({ id, label, title, expected }) => (
             <div
               key={id}
-              className="flex flex-col gap-[12px] flex-1 min-w-0 px-[16px] py-[17px]"
-              style={{
-                backgroundColor: highlight ? '#a6daff' : '#f3f3f3',
-                border: highlight ? 'none' : '1px solid #ddd',
-              }}
+              className="flex flex-col gap-[12px] flex-1 min-w-0 px-[16px] pt-[16px] pb-[18px]"
+              style={{ backgroundColor: '#f3f3f3', border: '1px solid #ddd' }}
             >
-              <p className="text-[14px] font-normal leading-[21px]" style={{ fontFamily: poppins, color: highlight ? '#1e1e1e' : '#666' }}>{label}</p>
-              <p className="text-[14px] font-medium leading-[21px] min-h-[56px]" style={{ fontFamily: poppins, color: highlight ? '#1e1e1e' : '#666' }}>{title}</p>
-              <p className="text-[14px] font-normal leading-[21px]" style={{ fontFamily: poppins, color: highlight ? '#1e1e1e' : '#666' }}>{expected}</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{label}</p>
+              <p className="text-[14px] font-medium leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{title}</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#666]" style={{ fontFamily: poppins }}>{expected}</p>
             </div>
           ))}
         </div>
-        {/* Key Insight */}
-        <div className="bg-[#a6daff] flex flex-col gap-[16px] items-center px-[60px] py-[40px] w-full text-center">
-          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Key Insight</p>
-          <p className="text-[24px] font-medium leading-[36px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
-            Most usability issues occurred before users could confidently start selecting voices.
-          </p>
+        {/* Research Setup */}
+        <div className="w-full flex flex-col gap-[24px] items-center px-[40px] py-[32px]" style={{ backgroundColor: '#a6daff', minHeight: '195px' }}>
+          <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] text-center" style={{ fontFamily: poppins }}>Research Setup</p>
+          <div className="flex gap-[24px] w-full">
+            <div className="flex flex-col gap-[8px] flex-1">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>6 Participants</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>First-time KT AI Voice Studio users</p>
+            </div>
+            <div className="flex flex-col gap-[8px] flex-1">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>2 Groups</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>
+                3 with content creation experience<br />3 without content creation experience
+              </p>
+            </div>
+            <div className="flex flex-col gap-[8px] flex-1">
+              <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>5 Tasks</p>
+              <p className="text-[14px] font-normal leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Covering voice access, search, selection, editing, and playback</p>
+            </div>
+          </div>
         </div>
       </ContentWrap>
     </section>
@@ -475,7 +490,7 @@ function AnalysisSection() {
             Key Challenges Identified in Tasks 1 and 2
           </h2>
           <p className="text-[18px] font-normal leading-[27px] text-[#1e1e1e] w-full" style={{ fontFamily: poppins }}>
-            We analyzed four metrics: success rate, time on task, error rate, and satisfaction. Tasks 1 and 2 had the lowest success rates and the highest error rates.
+            We analyzed four metrics: task success, time on task, error count, and participant satisfaction. Tasks 1 and 2 showed the most significant usability issues, with the lowest success rates and highest error counts.
           </p>
         </div>
 
