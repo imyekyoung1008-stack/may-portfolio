@@ -241,63 +241,62 @@ export default function MobileMainPage() {
             </p>
           )}
 
-          {/* 카드 4개 — showAll true일 때만 표시, fade+slide-up 애니메이션 */}
-          {showAll && (
+          {/* 카드 4개 — showAll true일 때만 표시 */}
+          {/* 상단 3개 카드와 동일한 whileInView 애니메이션 (stagger delay: i*0.12) */}
+          {showAll && ADDITIONAL_CARDS.map(({ title, category, video, img, lottie, href }, i) => (
             <motion.div
-              className="flex flex-col gap-[24px] w-full"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut' }}
+              key={title}
+              initial={{ opacity: 0, y: 48 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.12 }}
             >
-              {ADDITIONAL_CARDS.map(({ title, category, video, img, lottie, href }) => (
-                <a
-                  key={title}
-                  {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="flex flex-col gap-[12px] w-full no-underline"
-                  style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
-                >
-                  {video ? (
-                    <div className="relative w-full aspect-video overflow-hidden">
-                      <video
-                        src={video}
-                        autoPlay loop muted playsInline
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    </div>
-                  ) : img ? (
-                    <div className="relative w-full aspect-video overflow-hidden">
-                      <img
-                        src={img} alt={title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    </div>
-                  ) : lottie ? (
-                    <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                      <div className="absolute inset-0">
-                        <CornerstoneLottie />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="w-full aspect-video bg-[#e7e4df]" />
-                  )}
-                  <div className="flex flex-col gap-[2px]">
-                    <p
-                      className="text-[18px] font-medium leading-[26px] text-[#212121]"
-                      style={{ fontFamily: poppins }}
-                    >
-                      {title}
-                    </p>
-                    <p
-                      className="text-[13px] font-normal leading-[19px] text-[#8c8c8c]"
-                      style={{ fontFamily: poppins }}
-                    >
-                      {category}
-                    </p>
+              <a
+                {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="flex flex-col gap-[12px] w-full no-underline"
+                style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
+              >
+                {video ? (
+                  <div className="relative w-full aspect-video overflow-hidden">
+                    <video
+                      src={video}
+                      autoPlay loop muted playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
                   </div>
-                </a>
-              ))}
+                ) : img ? (
+                  <div className="relative w-full aspect-video overflow-hidden">
+                    <img
+                      src={img} alt={title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                ) : lottie ? (
+                  <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+                    <div className="absolute inset-0">
+                      <CornerstoneLottie />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-full aspect-video bg-[#e7e4df]" />
+                )}
+                <div className="flex flex-col gap-[2px]">
+                  <p
+                    className="text-[18px] font-medium leading-[26px] text-[#212121]"
+                    style={{ fontFamily: poppins }}
+                  >
+                    {title}
+                  </p>
+                  <p
+                    className="text-[13px] font-normal leading-[19px] text-[#8c8c8c]"
+                    style={{ fontFamily: poppins }}
+                  >
+                    {category}
+                  </p>
+                </div>
+              </a>
             </motion.div>
-          )}
+          ))}
 
           {/* View More 버튼 — showAll false일 때만 표시 (Figma node 1014:42659) */}
           {!showAll && (
@@ -326,10 +325,14 @@ export default function MobileMainPage() {
         </div>
 
         {/* ══ 섹션 3: About me 카드 — 맨 아래 ══ */}
-        {/* h-180px, 노란쪽 px-16 py-20 */}
-        <div
+        {/* h-180px, 노란쪽 px-16 py-20 — 상단 카드와 동일한 whileInView 애니메이션 */}
+        <motion.div
           className="flex h-[180px] items-start w-full shrink-0 cursor-pointer"
           onClick={() => navigate('/about')}
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           {/* 왼쪽: 사진 */}
           <div className="flex-[438_0_0] h-full min-w-px relative">
@@ -375,7 +378,7 @@ export default function MobileMainPage() {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </div>

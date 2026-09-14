@@ -388,56 +388,65 @@ export default function MainPage() {
             {/* Additional Projects — mp-right-col 내부에 배치 (flex sibling 버그 방지) */}
             <div className="pb-[120px] flex flex-col gap-[32px]">
             <p className="text-[24px] font-medium leading-[36px] text-[#212121]" style={{ fontFamily: "'Poppins', sans-serif" }}>Additional Projects</p>
-            {([
-              [
-                { title: 'TwinFlame',        category: 'AI-assisted Motion & Marketing',                  video: vidTwinflame as string | undefined, img: undefined as string | undefined, lottie: undefined as unknown, href: 'https://lnkd.in/p/gcsm_WEZ' as string | undefined },
-                { title: 'AI Edge Workshop', category: 'UX/UI, Marketing Design & AI-generated Visuals', video: undefined as string | undefined,    img: imgAiEdge as string | undefined, lottie: undefined as unknown, href: 'https://bc.ciccc.ca/lp/ai-edge/' as string | undefined },
-              ],
-              [
-                { title: 'Eduvisa',              category: 'Landing Page UX/UI & Development',  video: undefined as string | undefined, img: imgEduvisa as string | undefined, lottie: undefined as unknown,          href: 'https://eduvisa.ai/' as string | undefined },
-                { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content', video: undefined as string | undefined, img: undefined as string | undefined,   lottie: lottieCornerstone as unknown, href: undefined as string | undefined },
-              ],
-            ] as { title: string; category: string; video?: string; img?: string; lottie?: unknown; href?: string }[][]).map((row, ri) => (
-              <div key={ri} className="flex gap-[24px] items-start w-full">
-                {row.map(({ title, category, video, img, lottie, href }) => (
-                  <a
-                    key={title}
-                    {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="flex-[1_0_0] min-w-px flex flex-col gap-[12px] no-underline"
-                    style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
-                  >
-                    {video ? (
-                      <div className="relative w-full aspect-video overflow-hidden">
-                        <video
-                          src={video}
-                          autoPlay loop muted playsInline
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : img ? (
-                      <div className="relative w-full aspect-video overflow-hidden">
-                        <img
-                          src={img} alt={title}
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : lottie ? (
-                      <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                        <div className="absolute inset-0">
-                          <CornerstoneLottie />
+            {/* 4개 카드 동시 등장 — stagger 없이 단일 motion.div로 감쌈 */}
+            <motion.div
+              className="flex flex-col gap-[32px]"
+              initial={{ opacity: 0, y: 48 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              {([
+                [
+                  { title: 'TwinFlame',        category: 'AI-assisted Motion & Marketing',                  video: vidTwinflame as string | undefined, img: undefined as string | undefined, lottie: undefined as unknown, href: 'https://lnkd.in/p/gcsm_WEZ' as string | undefined },
+                  { title: 'AI Edge Workshop', category: 'UX/UI, Marketing Design & AI-generated Visuals', video: undefined as string | undefined,    img: imgAiEdge as string | undefined, lottie: undefined as unknown, href: 'https://bc.ciccc.ca/lp/ai-edge/' as string | undefined },
+                ],
+                [
+                  { title: 'Eduvisa',              category: 'Landing Page UX/UI & Development',  video: undefined as string | undefined, img: imgEduvisa as string | undefined, lottie: undefined as unknown,          href: 'https://eduvisa.ai/' as string | undefined },
+                  { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content', video: undefined as string | undefined, img: undefined as string | undefined,   lottie: lottieCornerstone as unknown, href: undefined as string | undefined },
+                ],
+              ] as { title: string; category: string; video?: string; img?: string; lottie?: unknown; href?: string }[][]).map((row, ri) => (
+                <div key={ri} className="flex gap-[24px] items-start w-full">
+                  {row.map(({ title, category, video, img, lottie, href }) => (
+                    <a
+                      key={title}
+                      {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      className="flex-[1_0_0] min-w-px flex flex-col gap-[12px] no-underline"
+                      style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
+                    >
+                      {video ? (
+                        <div className="relative w-full aspect-video overflow-hidden">
+                          <video
+                            src={video}
+                            autoPlay loop muted playsInline
+                            className="absolute inset-0 w-full h-full object-cover"
+                          />
                         </div>
+                      ) : img ? (
+                        <div className="relative w-full aspect-video overflow-hidden">
+                          <img
+                            src={img} alt={title}
+                            className="absolute inset-0 w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : lottie ? (
+                        <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+                          <div className="absolute inset-0">
+                            <CornerstoneLottie />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="w-full aspect-video bg-[#e7e4df]" />
+                      )}
+                      <div className="flex flex-col gap-[2px]">
+                        <p className="text-[20px] font-medium leading-[30px] text-[#212121]" style={{ fontFamily: "'Poppins', sans-serif" }}>{title}</p>
+                        <p className="text-[16px] font-normal leading-[24px] text-[#8c8c8c]" style={{ fontFamily: "'Poppins', sans-serif" }}>{category}</p>
                       </div>
-                    ) : (
-                      <div className="w-full aspect-video bg-[#e7e4df]" />
-                    )}
-                    <div className="flex flex-col gap-[2px]">
-                      <p className="text-[20px] font-medium leading-[30px] text-[#212121]" style={{ fontFamily: "'Poppins', sans-serif" }}>{title}</p>
-                      <p className="text-[16px] font-normal leading-[24px] text-[#8c8c8c]" style={{ fontFamily: "'Poppins', sans-serif" }}>{category}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            ))}
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </motion.div>
           </div>
 
         </div>
