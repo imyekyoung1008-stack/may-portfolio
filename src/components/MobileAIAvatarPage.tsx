@@ -9,6 +9,10 @@ import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
 import { YouTubeEmbed } from './YouTubeEmbed'
 
+// ── Next Project assets ───────────────────────────
+import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
+import vidShelterDemo     from '../assets/videos/shelter-demo.mp4'
+
 // ── Icons ─────────────────────────────────────────
 import icClose           from '../assets/icons/close.svg'
 import icAvatarCheck     from '../assets/icons/ai-avatar/check-circle.svg'
@@ -937,6 +941,49 @@ function Section15TeamClosing() {
 }
 
 // ─────────────────────────────────────────────────
+// Next Project 섹션
+// ─────────────────────────────────────────────────
+function MobileNextProjectSection() {
+  const navigate = useNavigate()
+  return (
+    <section className="w-full bg-[#f7f7f7]">
+      <div className="w-full px-[20px] py-[40px] flex flex-col gap-[24px]">
+        <p className="text-[16px] font-medium leading-[24px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Next Project</p>
+        <div className="flex flex-col gap-[20px] w-full">
+
+          {/* Cornerstone — 클릭 가능 */}
+          <div className="flex flex-col gap-[12px] cursor-pointer group" onClick={() => navigate('/projects/cornerstone')}>
+            <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+              <video src={vidCornerstoneDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
+            </div>
+            <div className="flex flex-col gap-[2px]">
+              <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Cornerstone College Website</p>
+              <p className="text-[12px] font-normal leading-[18px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>70%+ AI-assisted workflow, one scalable system across 10 program pages</p>
+            </div>
+          </div>
+
+          {/* Homeless Shelter — 비활성 */}
+          <div className="flex flex-col gap-[12px] opacity-60 cursor-not-allowed">
+            <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+              <video src={vidShelterDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute top-[8px] left-[8px] bg-[#1e1e1e] px-[8px] py-[3px]">
+                <span className="text-white text-[11px] font-medium leading-[16px]" style={{ fontFamily: poppins }}>Coming Soon</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-[2px]">
+              <p className="text-[14px] font-medium leading-[21px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Homeless Shelter Life Management System (Wildflower-Gardening)</p>
+              <p className="text-[12px] font-normal leading-[18px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>94.3% NFC adoption and 30+ minutes faster response time</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
 // Main export
 // ─────────────────────────────────────────────────
 export default function MobileAIAvatarPage() {
@@ -1023,6 +1070,9 @@ export default function MobileAIAvatarPage() {
 
       {/* 15 Team · Closing */}
       <Section15TeamClosing />
+
+      {/* Next Project */}
+      <MobileNextProjectSection />
 
     </motion.div>
   )
