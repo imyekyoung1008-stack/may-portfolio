@@ -26,6 +26,7 @@ import imgS31Before          from '../assets/images/s3-1_before.webp'
 import imgS31After           from '../assets/images/s3-1_after.webp'
 import imgS32Before          from '../assets/images/s3-2_before.webp'
 import imgS32After           from '../assets/images/s3-2_after.webp'
+import imgMockupScreen       from '../assets/images/mockup-screen.webp'
 import shelterUI01Json       from '../assets/lottie/shelter-ui-01.json'
 
 // ── 영상 파일 (src/assets/videos/) ─────────────────
@@ -147,7 +148,7 @@ type UIMedia =
 interface StepData {
   num: string
   title: string
-  description: string
+  description?: string   // 01번 카드만 표시
   usageVideo: string
   uiMedia: UIMedia
 }
@@ -163,21 +164,18 @@ const STEPS: StepData[] = [
   {
     num: '02',
     title: 'Leave & Overnight Requests',
-    description: 'Submit and manage leave or overnight requests directly from the app',
     usageVideo: vidUsage02,
     uiMedia: { type: 'video', src: vidUI02 },
   },
   {
     num: '03',
     title: 'Never Miss a Notification',
-    description: 'Stay updated with real-time alerts, surveys, and community announcements',
     usageVideo: vidUsage03,
     uiMedia: { type: 'video', src: vidUI03 },
   },
   {
     num: '04',
     title: 'Feature 04 Title',
-    description: 'Feature 04 description goes here',
     usageVideo: vidUsage04,
     uiMedia: { type: 'video', src: vidUI04 },
   },
@@ -215,7 +213,7 @@ function UsageCard({ num, usageVideo }: { num: string; usageVideo: string }) {
   return (
     <div style={{
       position: 'relative', width: '382px', height: '616px',
-      borderRadius: '22px', overflow: 'hidden', flexShrink: 0,
+      borderRadius: 0, overflow: 'hidden', flexShrink: 0,
     }}>
       {/* 영상 — 카드 전체 cover */}
       <video
@@ -231,7 +229,7 @@ function UsageCard({ num, usageVideo }: { num: string; usageVideo: string }) {
       }} />
       {/* 스텝 번호 — 좌상단 */}
       <p style={{
-        position: 'absolute', top: '10px', left: '20px', margin: 0,
+        position: 'absolute', top: '20px', left: '20px', margin: 0,
         fontFamily: poppins, fontSize: '64px', fontWeight: 500, lineHeight: 1,
         color: 'white', letterSpacing: '-2.56px',
         userSelect: 'none', pointerEvents: 'none',
@@ -244,14 +242,14 @@ function UsageCard({ num, usageVideo }: { num: string; usageVideo: string }) {
         aria-label={isPlaying ? 'Pause' : 'Play'}
         style={{
           position: 'absolute', bottom: '20px', left: '20px',
-          display: 'flex', alignItems: 'center', gap: '6px',
+          display: 'flex', alignItems: 'center', gap: '3px',
           background: 'rgba(255,255,255,0.07)',
           backdropFilter: 'blur(25px)',
           WebkitBackdropFilter: 'blur(25px)',
           borderRadius: '1000px',
           border: 'none',
           paddingTop: '7px', paddingBottom: '7px',
-          paddingLeft: '8px', paddingRight: '15px',
+          paddingLeft: '8px', paddingRight: '12px',
           cursor: 'pointer',
           fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: 'white',
           outline: 'none',
@@ -264,41 +262,174 @@ function UsageCard({ num, usageVideo }: { num: string; usageVideo: string }) {
   )
 }
 
-// ── Lottie 스크린 (UI 카드 내부) ─────────────────
-// lottie.loadAnimation() 직접 호출 패턴 (AIAvatarPage와 동일)
-function LottieScreen({ animationData }: { animationData: unknown }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const animRef = useRef<AnimationItem | null>(null)
+// ── 컨트롤바 (UI 영상 카드 전용) ───────────────────
+function ControlBar({
+  isPlaying,
+  progress,
+  onToggle,
+  onSeek,
+}: {
+  isPlaying: boolean
+  progress: number
+  onToggle: () => void
+  onSeek: (ratio: number) => void
+}) {
+  const barRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (!containerRef.current) return
-    animRef.current?.destroy()
-    animRef.current = lottie.loadAnimation({
-      container: containerRef.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      animationData: animationData as any,
-      rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
-    })
-    return () => { animRef.current?.destroy(); animRef.current = null }
-  }, [animationData])
+  const calcRatio = (clientX: number): number => {
+    const rect = barRef.current?.getBoundingClientRect()
+    if (!rect || rect.width === 0) return 0
+    return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+  }
 
-  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    onSeek(calcRatio(e.clientX))
+    const onMove = (ev: MouseEvent) => onSeek(calcRatio(ev.clientX))
+    const onUp   = () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+    }
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+  }
+
+  return (
+    <div style={{
+      position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 3,
+      display: 'flex', alignItems: 'center', gap: '8px',
+      padding: '10px 16px 12px',
+      background: 'rgba(0,0,0,0.18)',
+      backdropFilter: 'blur(25px)',
+      WebkitBackdropFilter: 'blur(25px)',
+    }}>
+      {/* 재생/일시정지 아이콘 버튼 */}
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+        style={{
+          background: 'none', border: 'none', padding: 0, margin: 0,
+          cursor: 'pointer', display: 'flex', alignItems: 'center',
+          flexShrink: 0, outline: 'none',
+        }}
+      >
+        {isPlaying ? <PauseIcon /> : <PlayIcon />}
+      </button>
+      {/* 진행바 — 클릭/드래그로 seek */}
+      <div
+        ref={barRef}
+        onMouseDown={handleMouseDown}
+        style={{
+          flex: 1, height: '3px',
+          background: 'rgba(255,255,255,0.3)',
+          borderRadius: '2px',
+          cursor: 'pointer',
+          position: 'relative',
+          userSelect: 'none',
+        }}
+      >
+        <div style={{
+          position: 'absolute', left: 0, top: 0, bottom: 0,
+          width: `${Math.min(100, progress * 100)}%`,
+          background: 'white',
+          borderRadius: '2px',
+          pointerEvents: 'none',
+        }} />
+      </div>
+    </div>
+  )
 }
 
 // ── UI 영상 카드 — 382×615, border-radius 22px ───
 function UICard({ step }: { step: StepData }) {
-  // 텍스트 영역 높이: top(24) + num(28) + gap(4) + title(32) + 여유 = ~100px
-  const MEDIA_TOP = 100
+  // 텍스트 영역: top(24) + num(28) + gap(4) + title(32) [+ desc(25.2)] + 여유
+  // description이 있을 때 130px, 없을 때 100px
+  const MEDIA_TOP = step.description ? 130 : 100
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [progress,  setProgress ] = useState(0)
+
+  // Lottie 전용 refs
+  const lottieContainerRef = useRef<HTMLDivElement>(null)
+  const animRef = useRef<AnimationItem | null>(null)
+
+  // mp4 전용 ref
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Lottie 초기화 + enterFrame 구독 (STEPS 는 상수이므로 마운트 1회)
+  useEffect(() => {
+    if (step.uiMedia.type !== 'lottie') return
+    const container = lottieContainerRef.current
+    if (!container) return
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const anim = lottie.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: step.uiMedia.animationData as any,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+    })
+    animRef.current = anim
+    const onFrame = () => {
+      if (anim.totalFrames > 0) setProgress(anim.currentFrame / anim.totalFrames)
+    }
+    anim.addEventListener('enterFrame', onFrame)
+    return () => {
+      anim.removeEventListener('enterFrame', onFrame)
+      anim.destroy()
+      animRef.current = null
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // mp4 timeupdate 구독
+  useEffect(() => {
+    if (step.uiMedia.type !== 'video') return
+    const v = videoRef.current
+    if (!v) return
+    const onTimeUpdate = () => {
+      if (v.duration) setProgress(v.currentTime / v.duration)
+    }
+    v.addEventListener('timeupdate', onTimeUpdate)
+    return () => v.removeEventListener('timeupdate', onTimeUpdate)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const togglePlay = () => {
+    if (step.uiMedia.type === 'lottie') {
+      if (isPlaying) animRef.current?.pause()
+      else           animRef.current?.play()
+    } else {
+      const v = videoRef.current
+      if (!v) return
+      if (isPlaying) v.pause()
+      else           v.play().catch(() => {})
+    }
+    setIsPlaying(p => !p)
+  }
+
+  const seekTo = (ratio: number) => {
+    if (step.uiMedia.type === 'lottie') {
+      const anim = animRef.current
+      if (!anim) return
+      anim.goToAndStop(ratio * anim.totalFrames, true)
+      setProgress(ratio)
+    } else {
+      const v = videoRef.current
+      if (!v || !v.duration) return
+      v.currentTime = ratio * v.duration
+      setProgress(ratio)
+    }
+  }
+
   return (
     <div style={{
       position: 'relative', width: '382px', height: '615px',
-      borderRadius: '22px', overflow: 'hidden', flexShrink: 0,
+      borderRadius: 0, overflow: 'hidden', flexShrink: 0,
       background: '#F8F8F8',
     }}>
-      {/* 스텝 번호 + 제목 — 좌상단 (21px, 24px) */}
+      {/* 스텝 번호 + 제목 (+ 01번만 설명) — 좌상단 */}
       <div style={{
         position: 'absolute', top: '24px', left: '21px', zIndex: 2,
         display: 'flex', flexDirection: 'column', gap: '4px',
@@ -309,13 +440,19 @@ function UICard({ step }: { step: StepData }) {
         <p style={{ margin: 0, fontFamily: poppins, fontSize: '24px', fontWeight: 500, lineHeight: '32px', color: '#0C0C13' }}>
           {step.title}
         </p>
+        {step.description && (
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '25.2px', color: '#212121', letterSpacing: '-0.36px' }}>
+            {step.description}
+          </p>
+        )}
       </div>
       {/* UI 미디어 — 텍스트 아래부터 카드 하단까지 채움 */}
       <div style={{ position: 'absolute', top: `${MEDIA_TOP}px`, left: 0, right: 0, bottom: 0, overflow: 'hidden' }}>
         {step.uiMedia.type === 'lottie'
-          ? <LottieScreen animationData={step.uiMedia.animationData} />
+          ? <div ref={lottieContainerRef} style={{ width: '100%', height: '100%' }} />
           : (
             <video
+              ref={videoRef}
               src={step.uiMedia.src}
               autoPlay muted loop playsInline
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -323,6 +460,8 @@ function UICard({ step }: { step: StepData }) {
           )
         }
       </div>
+      {/* 컨트롤바 */}
+      <ControlBar isPlaying={isPlaying} progress={progress} onToggle={togglePlay} onSeek={seekTo} />
     </div>
   )
 }
@@ -1054,38 +1193,47 @@ function ImplementedSolutionSection() {
 // ─────────────────────────────────────────────────
 function ReflectionSection() {
   return (
-    <section className="w-full bg-white px-[170px]">
-      <div
-        className="max-w-[960px] mx-auto w-full flex flex-col"
-        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
-      >
-        <ShelterSectionLabel num="09" label="Reflection" />
-
-        {/* 제목 */}
-        <h2
-          className="text-[#1e1e1e] w-full m-0"
-          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+    <>
+      <section className="w-full bg-white px-[170px]">
+        <div
+          className="max-w-[960px] mx-auto w-full flex flex-col"
+          style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
         >
-          Design Beyond the Screen
-        </h2>
+          <ShelterSectionLabel num="09" label="Reflection" />
 
-        {/* 본문 */}
-        <p className="m-0" style={{ fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
-          Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
-        </p>
+          {/* 제목 */}
+          <h2
+            className="text-[#1e1e1e] w-full m-0"
+            style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+          >
+            Design Beyond the Screen
+          </h2>
 
-        {/* YouTube 임베드 — 16:9, autoplay + mute */}
-        <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
-          <iframe
-            src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
-            title="Homeless Shelter Management System — Reflection"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
-          />
+          {/* 본문 */}
+          <p className="m-0" style={{ fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
+            Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
+          </p>
+
+          {/* YouTube 임베드 — 16:9, autoplay + mute */}
+          <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
+            <iframe
+              src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
+              title="Homeless Shelter Management System — Reflection"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* 목업 스크린 콜라주 — full-bleed (960px 컨테이너·좌우 패딩 벗어남) */}
+      <img
+        src={imgMockupScreen}
+        alt="Homeless Shelter Management System mockup screens"
+        style={{ width: '100%', display: 'block' }}
+      />
+    </>
   )
 }
 
