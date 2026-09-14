@@ -4,7 +4,7 @@
 
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import lottie from 'lottie-web'
 import type { AnimationItem } from 'lottie-web'
 
@@ -26,6 +26,7 @@ import icArrowInsert     from '../assets/icons/arrow-insert.svg'
 import icArrowNext       from '../assets/icons/arrow-next.svg'
 import resumePdf         from '../assets/documents/May_Im_Resume.pdf'
 import icExploreArrow    from '../assets/icons/icon-explore-arrow.svg'
+import icViewMoreArrow   from '../assets/icons/view-more-arrow.svg'
 
 // ─────────────────────────────────────────────────
 // CornerstoneLottie — lottie-web 직접 구동 컴포넌트
@@ -88,19 +89,27 @@ const PROJECT_CARDS = [
   },
 ]
 
+const ADDITIONAL_CARDS = [
+  { title: 'TwinFlame',             category: 'AI-assisted Motion & Marketing',                  video: vidTwinflame as string | undefined,    img: undefined as string | undefined, lottie: undefined as unknown, href: 'https://lnkd.in/p/gcsm_WEZ' as string | undefined },
+  { title: 'AI Edge Workshop',      category: 'UX/UI, Marketing Design & AI-generated Visuals', video: undefined as string | undefined,        img: imgAiEdge as string | undefined,  lottie: undefined as unknown, href: 'https://bc.ciccc.ca/lp/ai-edge/' as string | undefined },
+  { title: 'Eduvisa',               category: 'Landing Page UX/UI & Development',               video: undefined as string | undefined,        img: imgEduvisa as string | undefined, lottie: undefined as unknown, href: 'https://eduvisa.ai/' as string | undefined },
+  { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content',               video: undefined as string | undefined,        img: undefined as string | undefined,  lottie: lottieCornerstone as unknown, href: undefined as string | undefined },
+] as { title: string; category: string; video?: string; img?: string; lottie?: unknown; href?: string }[]
+
 // ─────────────────────────────────────────────────
 // MobileMainPage
-// 세로 1컬럼: [로고+헤드라인+리스트+버튼] → [카드 3개] → [About me]
+// 세로 1컬럼: [로고+헤드라인+리스트+버튼] → [카드 3개] → [View More / Additional Projects] → [About me]
 // ─────────────────────────────────────────────────
 export default function MobileMainPage() {
   const navigate = useNavigate()
+  const [showAll, setShowAll] = useState(false)
 
   return (
     <div
       className="bg-[#F7F4F0] px-[24px] pb-[48px]"
       style={{ fontFamily: poppins }}
     >
-      {/* 외부: flex-col, gap-48px (3개 섹션 사이) */}
+      {/* 외부: flex-col, gap-48px (섹션 사이) */}
       <div className="flex flex-col gap-[48px] items-start w-full">
 
         {/* ══ 섹션 1: 로고 + 헤드라인 + 리스트 + 버튼 ══ */}
@@ -218,6 +227,104 @@ export default function MobileMainPage() {
           ))}
         </div>
 
+        {/* ══ Additional Projects (View More) ══ */}
+        {/* gap-[48px] 컨테이너 안에 있으므로 위아래 섹션과 동일한 48px 간격 유지 */}
+        <div className="flex flex-col gap-[24px] w-full">
+
+          {/* 타이틀 — showAll true일 때만 표시 */}
+          {showAll && (
+            <p
+              className="text-[20px] font-medium leading-[28px] text-[#212121]"
+              style={{ fontFamily: poppins }}
+            >
+              Additional Projects
+            </p>
+          )}
+
+          {/* 카드 4개 — showAll true일 때만 표시, fade+slide-up 애니메이션 */}
+          {showAll && (
+            <motion.div
+              className="flex flex-col gap-[24px] w-full"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
+            >
+              {ADDITIONAL_CARDS.map(({ title, category, video, img, lottie, href }) => (
+                <a
+                  key={title}
+                  {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="flex flex-col gap-[12px] w-full no-underline"
+                  style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
+                >
+                  {video ? (
+                    <div className="relative w-full aspect-video overflow-hidden">
+                      <video
+                        src={video}
+                        autoPlay loop muted playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : img ? (
+                    <div className="relative w-full aspect-video overflow-hidden">
+                      <img
+                        src={img} alt={title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : lottie ? (
+                    <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+                      <div className="absolute inset-0">
+                        <CornerstoneLottie />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="w-full aspect-video bg-[#e7e4df]" />
+                  )}
+                  <div className="flex flex-col gap-[2px]">
+                    <p
+                      className="text-[18px] font-medium leading-[26px] text-[#212121]"
+                      style={{ fontFamily: poppins }}
+                    >
+                      {title}
+                    </p>
+                    <p
+                      className="text-[13px] font-normal leading-[19px] text-[#8c8c8c]"
+                      style={{ fontFamily: poppins }}
+                    >
+                      {category}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </motion.div>
+          )}
+
+          {/* View More 버튼 — showAll false일 때만 표시 (Figma node 1014:42659) */}
+          {!showAll && (
+            <button
+              type="button"
+              onClick={() => setShowAll(true)}
+              className="w-full flex items-center justify-between px-[14px] py-[10px] bg-[#e7e4de] cursor-pointer border-0 outline-none"
+            >
+              <span
+                className="text-[#1e1e1e] text-[15px] leading-[22px] font-medium not-italic whitespace-nowrap"
+                style={{ fontFamily: poppins }}
+              >
+                View More
+              </span>
+              <div className="flex items-center justify-center w-[32px] h-[32px] shrink-0 bg-[#f7f4f0]">
+                <img
+                  src={icViewMoreArrow}
+                  alt=""
+                  aria-hidden
+                  width={22}
+                  height={22}
+                />
+              </div>
+            </button>
+          )}
+        </div>
+
         {/* ══ 섹션 3: About me 카드 — 맨 아래 ══ */}
         {/* h-180px, 노란쪽 px-16 py-20 */}
         <div
@@ -270,53 +377,6 @@ export default function MobileMainPage() {
           </div>
         </div>
 
-      </div>
-
-      {/* Additional Projects */}
-      <div className="pb-[80px] flex flex-col gap-[24px] w-full">
-        <p className="text-[20px] font-medium leading-[28px] text-[#212121]" style={{ fontFamily: poppins }}>Additional Projects</p>
-        {([
-          { title: 'TwinFlame',        category: 'AI-assisted Motion & Marketing',                  video: vidTwinflame as string | undefined, img: undefined as string | undefined, lottie: undefined as unknown, href: 'https://lnkd.in/p/gcsm_WEZ' as string | undefined },
-          { title: 'AI Edge Workshop', category: 'UX/UI, Marketing Design & AI-generated Visuals', video: undefined as string | undefined,    img: imgAiEdge as string | undefined, lottie: undefined as unknown, href: 'https://bc.ciccc.ca/lp/ai-edge/' as string | undefined },
-          { title: 'Eduvisa',          category: 'Landing Page UX/UI & Development',               video: undefined as string | undefined,    img: imgEduvisa as string | undefined, lottie: undefined as unknown,          href: 'https://eduvisa.ai/' as string | undefined },
-          { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content',         video: undefined as string | undefined,    img: undefined as string | undefined,  lottie: lottieCornerstone as unknown, href: undefined as string | undefined },
-        ] as { title: string; category: string; video?: string; img?: string; lottie?: unknown; href?: string }[]).map(({ title, category, video, img, lottie, href }) => (
-          <a
-            key={title}
-            {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
-            className="flex flex-col gap-[12px] w-full no-underline"
-            style={{ cursor: href ? 'pointer' : 'default', color: 'inherit' }}
-          >
-            {video ? (
-              <div className="relative w-full aspect-video overflow-hidden">
-                <video
-                  src={video}
-                  autoPlay loop muted playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-            ) : img ? (
-              <div className="relative w-full aspect-video overflow-hidden">
-                <img
-                  src={img} alt={title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-            ) : lottie ? (
-              <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                <div className="absolute inset-0">
-                  <CornerstoneLottie />
-                </div>
-              </div>
-            ) : (
-              <div className="w-full aspect-video bg-[#e7e4df]" />
-            )}
-            <div className="flex flex-col gap-[2px]">
-              <p className="text-[18px] font-medium leading-[26px] text-[#212121]" style={{ fontFamily: poppins }}>{title}</p>
-              <p className="text-[13px] font-normal leading-[19px] text-[#8c8c8c]" style={{ fontFamily: poppins }}>{category}</p>
-            </div>
-          </a>
-        ))}
       </div>
     </div>
   )
