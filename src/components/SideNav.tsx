@@ -2,7 +2,7 @@
 // AI Avatar 페이지와 동일한 스타일/동작.
 // items prop으로 페이지별 섹션 목록을 전달.
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 const poppins = "'Poppins', sans-serif"
 

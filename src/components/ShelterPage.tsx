@@ -481,7 +481,7 @@ function UICard({ step }: { step: StepData }) {
 // ─────────────────────────────────────────────────
 const CARD_GAP  = 20   // UsageCard ↔ UICard 간격
 const SET_GAP   = 24   // 세트와 세트 사이 간격
-const SIDE_PAD  = 160  // 트랙 좌우 여백
+const SIDE_PAD  = 220  // 트랙 좌우 여백
 const SET_W     = 382 + CARD_GAP + 382                                   // 784px
 const TRACK_W   = SIDE_PAD * 2 + STEPS.length * SET_W + (STEPS.length - 1) * SET_GAP  // 3368px
 

@@ -3,7 +3,7 @@
 // Figma: https://www.figma.com/design/fCphmFmQRkjF6EWKKqby8E/2026?node-id=889-18398
 // ★ Desktop only (1440px+). 반응형은 별도 작업 예정.
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
