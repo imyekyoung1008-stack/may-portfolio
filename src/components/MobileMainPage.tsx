@@ -82,10 +82,10 @@ const PROJECT_CARDS = [
   },
   {
     video: vidShelterDemo,
-    alt:   'Homeless Shelter Life Management System demo',
-    title: 'Homeless Shelter Life Management System',
+    alt:   'Homeless Shelter Management System demo',
+    title: 'Homeless Shelter Management System',
     desc:  '94.3% NFC adoption and 30+ minutes faster response time',
-    route: null as string | null,
+    route: '/projects/shelter' as string | null,
   },
 ]
 

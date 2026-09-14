@@ -4,6 +4,7 @@ import MainPageRouter  from './components/MainPageRouter'
 import AboutPageRouter from './components/AboutPageRouter'
 import CornerstonePageRouter from './components/CornerstonePageRouter'
 import AIAvatarPageRouter from './components/AIAvatarPageRouter'
+import ShelterPageRouter from './components/ShelterPageRouter'
 import ScrollToTop     from './components/ScrollToTop'
 
 function AnimatedRoutes() {
@@ -15,6 +16,7 @@ function AnimatedRoutes() {
         <Route path="/about"                    element={<AboutPageRouter />} />
         <Route path="/projects/cornerstone"     element={<CornerstonePageRouter />} />
         <Route path="/projects/ai-avatar"       element={<AIAvatarPageRouter />} />
+        <Route path="/projects/shelter"         element={<ShelterPageRouter />} />
       </Routes>
     </AnimatePresence>
   )
