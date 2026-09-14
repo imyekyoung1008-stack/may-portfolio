@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
 import { YouTubeEmbed } from './YouTubeEmbed'
+import { SideNav } from './SideNav'
 
 // ── Images ────────────────────────────────────────
 import imgIntroTabletPhoto from '../assets/images/ai-avatar/intro-tablet-photo.jpg'
@@ -92,70 +93,6 @@ const NAV_ITEMS = [
   { id: 'outcome-bottom', label: 'Outcome' },
   { id: 'reflection',     label: 'Reflection' },
 ] as const
-
-function SideNav() {
-  const [activeId, setActiveId] = useState<string>('intro')
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
-        })
-      },
-      // 뷰포트 상단 30% 구간에 들어온 섹션을 활성으로 판단
-      { rootMargin: '0px 0px -70% 0px', threshold: 0 },
-    )
-    NAV_ITEMS.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <nav
-      className="hidden 3xl:block"
-      style={{
-        position: 'fixed',
-        left: '48px',
-        top: '100px',
-        width: '200px',
-        zIndex: 30,
-        background: 'transparent',
-      }}
-    >
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px', background: 'transparent' }}>
-        {NAV_ITEMS.map(({ id, label }) => (
-          <li key={id}>
-            <button
-              type="button"
-              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              style={{
-                background: 'none',
-                border: 'none',
-                padding: 0,
-                cursor: 'pointer',
-                textAlign: 'left',
-                fontFamily: poppins,
-                fontSize: '11px',
-                fontWeight: activeId === id ? 500 : 400,
-                lineHeight: '16px',
-                color: activeId === id ? '#1e1e1e' : '#c0c0c0',
-                transition: 'color 0.2s ease',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {label}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
-}
 
 // ─────────────────────────────────────────────────
 // Header — 889:18399
@@ -1162,7 +1099,7 @@ export default function AIAvatarPage() {
       </button>
 
       {/* Side nav */}
-      <SideNav />
+      <SideNav items={NAV_ITEMS} />
 
       {/* Header */}
       <AIAvatarHeader />

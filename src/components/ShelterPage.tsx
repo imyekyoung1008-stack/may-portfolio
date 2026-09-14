@@ -3,6 +3,7 @@
 // Desktop layout (≥1024px). 반응형은 추후 별도 작업.
 
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import lottie from 'lottie-web'
 import type { AnimationItem } from 'lottie-web'
@@ -11,11 +12,24 @@ import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
 import { ProjectHero } from './ProjectHero'
 import { ProjectPageWrapper } from './ProjectPageWrapper'
+import { SideNav } from './SideNav'
 import imgOverviewDiagram    from '../assets/images/shelter-overview-diagram.webp'
 import imgFieldResearch      from '../assets/images/shelter-field-research.webp'
+import imgS1Before           from '../assets/images/s1_before.webp'
+import imgS1After            from '../assets/images/s1_after.webp'
+import imgS2Before           from '../assets/images/s2_before.webp'
+import imgS2After            from '../assets/images/s2_after.webp'
+import imgS3Notification      from '../assets/images/s3-notification.webp'
+import imgNFCSolution         from '../assets/images/nfc-implemented-solution.webp'
+import imgCnaiTh              from '../assets/images/cnai-thumb.png'
+import imgS31Before          from '../assets/images/s3-1_before.webp'
+import imgS31After           from '../assets/images/s3-1_after.webp'
+import imgS32Before          from '../assets/images/s3-2_before.webp'
+import imgS32After           from '../assets/images/s3-2_after.webp'
 import shelterUI01Json       from '../assets/lottie/shelter-ui-01.json'
 
 // ── 영상 파일 (src/assets/videos/) ─────────────────
+import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
 import vidUsage01 from '../assets/videos/shelter-usage-01.mp4'
 import vidUsage02 from '../assets/videos/shelter-usage-02.mp4'
 import vidUsage03 from '../assets/videos/shelter-usage-03.mp4'
@@ -27,6 +41,20 @@ import vidUI04    from '../assets/videos/shelter-ui-04.mp4'
 // → 파일이 없으면 placeholder로 폴백됨
 
 const poppins = "'Poppins', sans-serif"
+
+const SHELTER_NAV_ITEMS = [
+  { id: 'sh-intro',        label: 'Introduction' },
+  { id: 'sh-overview',     label: 'Overview' },
+  { id: 'sh-walkthrough',  label: 'Feature Walkthrough' },
+  { id: 'sh-ux-research',  label: 'UX Research' },
+  { id: 'sh-analysis',     label: 'Analysis of Results' },
+  { id: 'sh-problem',      label: 'Problem Definition' },
+  { id: 'sh-solution-1',   label: 'Design Solution 1' },
+  { id: 'sh-solution-2',   label: 'Design Solution 2' },
+  { id: 'sh-solution-3',   label: 'Design Solution 3' },
+  { id: 'sh-implemented',  label: 'Implemented Solution' },
+  { id: 'sh-reflection',   label: 'Reflection' },
+] as const
 
 // ─────────────────────────────────────────────────
 // 섹션 레이블 — 번호(accent #CEE0D3) + 소제목
@@ -414,6 +442,288 @@ const ANALYSIS_CARDS = [
   },
 ]
 
+// ─────────────────────────────────────────────────
+// 07 Design Solution 01 — Before / After
+// ─────────────────────────────────────────────────
+function DesignSolution1Section() {
+  return (
+    <section className="w-full bg-white px-[170px]">
+      <div
+        className="max-w-[960px] mx-auto w-full flex flex-col"
+        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
+      >
+        <ShelterSectionLabel num="05" label="Design Solution 1" />
+
+        {/* 제목 */}
+        <h2
+          className="text-[#1e1e1e] w-full m-0"
+          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+        >
+          From One Screen to Clear Navigation
+        </h2>
+
+        {/* Problem 블록 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#C2410C' }}>
+            Problem
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            A single-screen structure made key actions harder to find and left little room for future features.
+          </p>
+        </div>
+
+        {/* Why this approach 박스 */}
+        <div style={{ backgroundColor: '#F1FAF3', padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>
+            Why this approach
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            We introduced tab-based navigation to give key functions predictable locations. Because tabs stay visible at all times, residents no longer need to remember where features live.
+          </p>
+        </div>
+
+        {/* Result 블록 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>
+            Result
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            Core actions were separated into clearer destinations, making leave requests, community features, and personal information easier to find. It also created room to add future features without crowding the home screen.
+          </p>
+        </div>
+
+        {/* Before / After — 가로 2열 */}
+        <div style={{ display: 'flex', gap: '24px' }}>
+          {/* Before */}
+          <div style={{ flex: '1 0 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>
+              Before : 1st prototype
+            </p>
+            <div style={{
+              height: '600px', backgroundColor: '#F7F7F7',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              overflow: 'hidden',
+            }}>
+              <img
+                src={imgS1Before}
+                alt="Before — Design Solution 1"
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+          </div>
+
+          {/* After */}
+          <div style={{ flex: '1 0 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>
+              After
+            </p>
+            <div style={{
+              height: '600px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              overflow: 'hidden',
+            }}>
+              <img
+                src={imgS1After}
+                alt="After — Design Solution 1"
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 06 Design Solution 02
+// ─────────────────────────────────────────────────
+function DesignSolution2Section() {
+  return (
+    <section className="w-full bg-white px-[170px]">
+      <div
+        className="max-w-[960px] mx-auto w-full flex flex-col"
+        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
+      >
+        <ShelterSectionLabel num="06" label="Design Solution 2" />
+
+        {/* 제목 */}
+        <h2
+          className="text-[#1e1e1e] w-full m-0"
+          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+        >
+          Instantly Recognizable Status System
+        </h2>
+
+        {/* Problem 블록 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#C2410C' }}>
+            Problem
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            Status was shown only as text, making it difficult to understand at a glance.
+          </p>
+        </div>
+
+        {/* Why this approach 박스 */}
+        <div style={{ backgroundColor: '#F1FAF3', padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>
+            Why this approach
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            We introduced a color coded status system with clear visual labels so residents could recognize their current state immediately without relying on text alone.
+          </p>
+        </div>
+
+        {/* Result 블록 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>
+            Result
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            Residents could identify their status at a glance, reducing confusion during leave and return checks.
+          </p>
+        </div>
+
+        {/* Before / After 가로 2열 */}
+        <div style={{ display: 'flex', gap: '24px' }}>
+          {/* Before */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>
+              Before : 1st prototype
+            </p>
+            <div style={{
+              height: '600px', backgroundColor: '#F7F7F7',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              overflow: 'hidden',
+            }}>
+              <img
+                src={imgS2Before}
+                alt="Before — Design Solution 02"
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+          </div>
+
+          {/* After */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>
+              After
+            </p>
+            <div style={{
+              height: '600px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              overflow: 'hidden',
+            }}>
+              <img
+                src={imgS2After}
+                alt="After — Design Solution 02"
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 06 Problem Definition
+// ─────────────────────────────────────────────────
+const PROBLEM_CARDS = [
+  {
+    problemLabel: 'Problem 01',
+    problem: 'Single-screen architecture made key actions harder to find as features grew.',
+    insight: 'Residents had to scan unrelated content to complete simple tasks.',
+  },
+  {
+    problemLabel: 'Problem 02',
+    problem: 'Secondary content competed visually with core actions.',
+    insight: 'Some residents mistook reminders for actionable buttons.',
+  },
+  {
+    problemLabel: 'Problem 03',
+    problem: 'Text-only status made the current state harder to understand at a glance.',
+    insight: 'This added friction during time-sensitive status checks.',
+  },
+]
+
+function ProblemDefinitionSection() {
+  return (
+    <section className="w-full bg-white px-[170px]">
+      <div
+        className="max-w-[960px] mx-auto w-full flex flex-col"
+        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
+      >
+        <ShelterSectionLabel num="06" label="Problem Definition" />
+
+        {/* 제목 */}
+        <h2
+          className="text-[#1e1e1e] w-full m-0"
+          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+        >
+          A single home screen couldn't hold everything the app needed to do.
+        </h2>
+
+        {/* 본문 */}
+        <p className="m-0" style={{ fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
+          Leave requests, status, reminders, notifications, and program information all competed for
+          the same space. As the product grew, key actions became harder to find and the home screen
+          had little room to scale.
+        </p>
+
+        {/* 이미지 플레이스홀더 — 실제 이미지로 교체 시 <img> 태그로 대체 */}
+        <div
+          style={{
+            width: '100%', height: '530px',
+            backgroundColor: '#F0F0F0',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, color: '#1E1E1E', textAlign: 'center' }}>
+            Existing MVP screens and key usability issues
+          </p>
+        </div>
+
+        {/* Problem / Insight 카드 3개 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {PROBLEM_CARDS.map((card) => (
+            <div
+              key={card.problemLabel}
+              style={{
+                backgroundColor: '#F7F7F7',
+                padding: '20px',
+                display: 'flex',
+                gap: '24px',
+              }}
+            >
+              {/* 좌측: Problem */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#C2410C' }}>
+                  {card.problemLabel}
+                </p>
+                <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+                  {card.problem}
+                </p>
+              </div>
+              {/* 우측: Insight */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>
+                  Insight
+                </p>
+                <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+                  {card.insight}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function AnalysisSection() {
   return (
     <section className="w-full bg-white px-[170px]">
@@ -548,6 +858,287 @@ function UXResearchSection() {
 }
 
 // ─────────────────────────────────────────────────
+// 07 Design Solution 03
+// ─────────────────────────────────────────────────
+
+/** Before/After 가로 2열 공용 컴포넌트 */
+function BeforeAfterRow({
+  beforeLabel, beforeImg, beforeAlt, beforeBg,
+  afterImg, afterAlt,
+  height,
+}: {
+  beforeLabel: string
+  beforeImg: string
+  beforeAlt: string
+  beforeBg?: string
+  afterImg: string
+  afterAlt: string
+  height: number
+}) {
+  return (
+    <div style={{ display: 'flex', gap: '24px' }}>
+      {/* Before */}
+      <div style={{ flex: '1 0 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>
+          {beforeLabel}
+        </p>
+        <div style={{
+          height: `${height}px`,
+          backgroundColor: beforeBg ?? '#F7F7F7',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          overflow: 'hidden',
+        }}>
+          <img src={beforeImg} alt={beforeAlt} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
+        </div>
+      </div>
+      {/* After */}
+      <div style={{ flex: '1 0 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>
+          After
+        </p>
+        <div style={{
+          height: `${height}px`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          overflow: 'hidden',
+        }}>
+          <img src={afterImg} alt={afterAlt} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function DesignSolution3Section() {
+  return (
+    <section className="w-full bg-white px-[170px]" style={{ borderTop: '1px solid #EAEAEA' }}>
+      <div
+        className="max-w-[960px] mx-auto w-full flex flex-col"
+        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
+      >
+        <ShelterSectionLabel num="07" label="Design Solution 3" />
+
+        {/* 제목 */}
+        <h2
+          className="text-[#1e1e1e] w-full m-0"
+          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+        >
+          Every Notification at a Glance
+        </h2>
+
+        {/* Problem 블록 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#C2410C' }}>Problem</p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            Notifications were hidden behind a small bell icon, making important information easy to miss for digitally vulnerable users.
+          </p>
+        </div>
+
+        {/* Why this approach 박스 */}
+        <div style={{ backgroundColor: '#F1FAF3', padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>Why this approach</p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            We brought notifications directly onto the home screen and redesigned them as visible, actionable cards. This reduced navigation steps and let residents notice important updates and respond in the same place.
+          </p>
+        </div>
+
+        {/* Result 블록 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>Result</p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            Residents could notice important updates and respond to program invitations directly in the app, making participation tracking faster and reducing the risk of missed or inconsistent records.
+          </p>
+        </div>
+
+        {/* ── 서브섹션 01 ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '20px', fontWeight: 500, color: '#1E1E1E' }}>
+            01 · Making Notifications Visible
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            From a hidden bell icon to visible updates on the home screen
+          </p>
+          <BeforeAfterRow
+            beforeLabel="Before : 2nd prototype"
+            beforeImg={imgS31Before} beforeAlt="Before — Making Notifications Visible"
+            afterImg={imgS31After}   afterAlt="After — Making Notifications Visible"
+            height={600}
+          />
+        </div>
+
+        {/* ── 서브섹션 02 ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '20px', fontWeight: 500, color: '#1E1E1E' }}>
+            02 · Turning Notifications into Actions
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            From manual tracking to in-app participation
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#1E1E1E' }}>
+            Program participation had been managed verbally or on paper, making tracking slow and unreliable. We added Join and Decline actions directly to notification cards so participation could be recorded in real time.
+          </p>
+          <BeforeAfterRow
+            beforeLabel="Before"
+            beforeImg={imgS32Before} beforeAlt="Before — Turning Notifications into Actions"
+            afterImg={imgS32After}   afterAlt="After — Turning Notifications into Actions"
+            height={426}
+            beforeBg="transparent"
+          />
+        </div>
+
+        {/* ── Notification Card System 플레이스홀더 ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>
+            Notification Card System
+          </p>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 400, color: '#777' }}>
+            Designed flexible notification patterns for different content types, priorities, and actions.
+          </p>
+          <div style={{ width: '100%', height: '537px', overflow: 'hidden' }}>
+            <img
+              src={imgS3Notification}
+              alt="Notification Card System"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 01 Implemented Solution (넘버링 리셋 — Figma 원본 기준)
+// ─────────────────────────────────────────────────
+function ImplementedSolutionSection() {
+  return (
+    <section className="w-full bg-white px-[170px]">
+      <div
+        className="max-w-[960px] mx-auto w-full flex flex-col"
+        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
+      >
+        <ShelterSectionLabel num="08" label="Implemented Solution" />
+
+        {/* 제목 */}
+        <h2
+          className="text-[#1e1e1e] w-full m-0"
+          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+        >
+          NFC Leave/Return System enabled
+        </h2>
+
+        {/* 본문 — 첫 문장 뒤 줄바꿈 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <p className="m-0" style={{ fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
+            To improve the inefficiency of the manual leave request process, we introduced an NFC-based system.
+          </p>
+          <p className="m-0" style={{ fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
+            Residents apply for leave via the app, and administrators manage requests through the web. Scanning the QR code at the center automatically records leave and return, greatly enhancing management efficiency.
+          </p>
+        </div>
+
+        {/* 이미지 — 16:9, object-fit: cover */}
+        <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
+          <img
+            src={imgNFCSolution}
+            alt="NFC Leave/Return System"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 09 Reflection
+// ─────────────────────────────────────────────────
+function ReflectionSection() {
+  return (
+    <section className="w-full bg-white px-[170px]">
+      <div
+        className="max-w-[960px] mx-auto w-full flex flex-col"
+        style={{ paddingTop: '60px', paddingBottom: '60px', gap: '24px' }}
+      >
+        <ShelterSectionLabel num="09" label="Reflection" />
+
+        {/* 제목 */}
+        <h2
+          className="text-[#1e1e1e] w-full m-0"
+          style={{ fontFamily: poppins, fontSize: '28px', fontWeight: 500, lineHeight: '36px' }}
+        >
+          Design Beyond the Screen
+        </h2>
+
+        {/* 본문 */}
+        <p className="m-0" style={{ fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
+          Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
+        </p>
+
+        {/* YouTube 임베드 — 16:9, autoplay + mute */}
+        <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
+          <iframe
+            src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
+            title="Homeless Shelter Management System — Reflection"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// Next Project 섹션
+// ─────────────────────────────────────────────────
+function NextProjectSection() {
+  const navigate = useNavigate()
+  return (
+    <section className="w-full bg-[#f7f7f7]">
+      <div className="w-full px-[40px] py-[60px]">
+        <div className="max-w-[960px] mx-auto w-full flex flex-col gap-[32px]">
+          <p className="text-[20px] font-medium leading-[30px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Next Project</p>
+          <div className="flex gap-[24px] w-full">
+
+            {/* AI Avatar — 클릭 가능 */}
+            <div
+              className="flex-1 min-w-0 flex flex-col gap-[16px] cursor-pointer group"
+              onClick={() => navigate('/projects/ai-avatar')}
+            >
+              <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+                <img src={imgCnaiTh} alt="AI Avatar Video Creation Platform" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
+              </div>
+              <div className="flex flex-col gap-[4px]">
+                <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>AI Avatar Video Creation Platform</p>
+                <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>50% faster voice selection, 59% fewer voice re-selections</p>
+              </div>
+            </div>
+
+            {/* Cornerstone — 클릭 가능 */}
+            <div
+              className="flex-1 min-w-0 flex flex-col gap-[16px] cursor-pointer group"
+              onClick={() => navigate('/projects/cornerstone')}
+            >
+              <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
+                <video src={vidCornerstoneDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
+              </div>
+              <div className="flex flex-col gap-[4px]">
+                <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Cornerstone College Website</p>
+                <p className="text-[14px] font-normal leading-[21px] text-[#8b8b8b]" style={{ fontFamily: poppins }}>70%+ AI-assisted workflow, one scalable system across 10 program pages</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
 // ShelterPage
 // ─────────────────────────────────────────────────
 export default function ShelterPage() {
@@ -581,11 +1172,20 @@ export default function ShelterPage() {
         teamLines={['2 Product Designers · 1 PM · 5 Developers']}
       />
 
-      <IntroSection />
-      <OverviewSection />
-      <HorizontalScrollSection />
-      <UXResearchSection />
-      <AnalysisSection />
+      <SideNav items={SHELTER_NAV_ITEMS} />
+
+      <div id="sh-intro"><IntroSection /></div>
+      <div id="sh-overview"><OverviewSection /></div>
+      <div id="sh-walkthrough"><HorizontalScrollSection /></div>
+      <div id="sh-ux-research"><UXResearchSection /></div>
+      <div id="sh-analysis"><AnalysisSection /></div>
+      <div id="sh-problem"><ProblemDefinitionSection /></div>
+      <div id="sh-solution-1"><DesignSolution1Section /></div>
+      <div id="sh-solution-2"><DesignSolution2Section /></div>
+      <div id="sh-solution-3"><DesignSolution3Section /></div>
+      <div id="sh-implemented"><ImplementedSolutionSection /></div>
+      <div id="sh-reflection"><ReflectionSection /></div>
+      <NextProjectSection />
     </ProjectPageWrapper>
   )
 }
