@@ -241,6 +241,25 @@ export default function MobileMainPage() {
         </div>
 
       </div>
+
+      {/* Additional Projects */}
+      <div className="pt-[32px] pb-[80px] flex flex-col gap-[24px] w-full">
+        <p className="text-[20px] font-medium leading-[28px] text-[#212121]" style={{ fontFamily: poppins }}>Additional Projects</p>
+        {[
+          { title: 'TwinFlame',             category: 'AI-assisted Motion & Marketing' },
+          { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content' },
+          { title: 'AI Edge Workshop',      category: 'UX/UI, Marketing Design & AI-generated Visuals' },
+          { title: 'Eduvisa',               category: 'Landing Page UX/UI & Development' },
+        ].map(({ title, category }) => (
+          <div key={title} className="flex flex-col gap-[12px] w-full">
+            <div className="w-full bg-[#e7e4df]" style={{ height: '220px' }} />
+            <div className="flex flex-col gap-[2px]">
+              <p className="text-[18px] font-medium leading-[26px] text-[#212121]" style={{ fontFamily: poppins }}>{title}</p>
+              <p className="text-[13px] font-normal leading-[19px] text-[#8c8c8c]" style={{ fontFamily: poppins }}>{category}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

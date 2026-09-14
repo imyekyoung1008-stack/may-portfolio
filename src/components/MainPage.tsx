@@ -356,10 +356,36 @@ export default function MainPage() {
               ))}
             </div>
 
+            {/* Additional Projects — mp-right-col 내부에 배치 (flex sibling 버그 방지) */}
+            <div className="pt-[32px] pb-[120px] flex flex-col gap-[32px]">
+            <p className="text-[24px] font-medium leading-[36px] text-[#212121]" style={{ fontFamily: "'Poppins', sans-serif" }}>Additional Projects</p>
+            {[
+              [
+                { title: 'TwinFlame',             category: 'AI-assisted Motion & Marketing' },
+                { title: 'Cornerstone Marketing', category: 'Marketing Design & Visual Content' },
+              ],
+              [
+                { title: 'AI Edge Workshop', category: 'UX/UI, Marketing Design & AI-generated Visuals' },
+                { title: 'Eduvisa',          category: 'Landing Page UX/UI & Development' },
+              ],
+            ].map((row, ri) => (
+              <div key={ri} className="flex gap-[24px] items-start w-full">
+                {row.map(({ title, category }) => (
+                  <div key={title} className="flex-[1_0_0] min-w-px flex flex-col gap-[12px]">
+                    <div className="w-full bg-[#e7e4df]" style={{ height: '253.75px' }} />
+                    <div className="flex flex-col gap-[2px]">
+                      <p className="text-[20px] font-medium leading-[30px] text-[#212121]" style={{ fontFamily: "'Poppins', sans-serif" }}>{title}</p>
+                      <p className="text-[16px] font-normal leading-[24px] text-[#8c8c8c]" style={{ fontFamily: "'Poppins', sans-serif" }}>{category}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
 
         </div>
 
-</div>
+      </div>
+    </div>
   )
 }
