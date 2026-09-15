@@ -159,8 +159,8 @@ function MobileShelterHeader() {
 
         {/* Hero Lottie */}
         {heroAnimation
-          ? <LottieHeroPlayer animationData={heroAnimation} className="w-full shrink-0 block" style={{ height: '280px' }} />
-          : <div className="w-full shrink-0 bg-[#bebebe]" style={{ height: '280px' }} />
+          ? <LottieHeroPlayer animationData={heroAnimation} className="w-full shrink-0 block" style={{ aspectRatio: '358 / 238.668' }} />
+          : <div className="w-full shrink-0 bg-[#bebebe]" style={{ aspectRatio: '358 / 238.668' }} />
         }
 
         {/* 소개 문단 */}
@@ -281,7 +281,7 @@ function MobileShelterUXResearchSection() {
           <p style={{ margin: 0, fontFamily: poppins, fontSize: '15px', fontWeight: 400, lineHeight: '22px', color: '#1e1e1e' }}>
             Weekly visits to the shelter revealed that many residents struggled with basic app tasks, including downloading, signing up, and checking status. We also found that the existing location-based leave/return method did not meet legal requirements, which led us to shift to NFC tag-based tracking.
           </p>
-          <div className="w-full overflow-hidden" style={{ height: '240px' }}>
+          <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1077' }}>
             <img src={imgFieldResearch} alt="Field research at homeless shelter" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
