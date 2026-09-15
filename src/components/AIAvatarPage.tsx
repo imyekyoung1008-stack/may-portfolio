@@ -1153,13 +1153,14 @@ function NextProjectSection() {
               </div>
             </div>
 
-            {/* Homeless Shelter — 비활성 */}
-            <div className="flex-1 min-w-0 flex flex-col gap-[16px] opacity-60 cursor-not-allowed">
+            {/* Homeless Shelter */}
+            <div
+              className="flex-1 min-w-0 flex flex-col gap-[16px] cursor-pointer group"
+              onClick={() => navigate('/projects/shelter')}
+            >
               <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
                 <video src={vidShelterDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute top-[12px] left-[12px] bg-[#1e1e1e] px-[10px] py-[4px]">
-                  <span className="text-white text-[12px] font-medium leading-[18px]" style={{ fontFamily: poppins }}>Coming Soon</span>
-                </div>
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
               </div>
               <div className="flex flex-col gap-[4px]">
                 <p className="text-[18px] font-medium leading-[27px] text-[#1e1e1e]" style={{ fontFamily: poppins }}>Homeless Shelter Life Management System (Wildflower-Gardening)</p>

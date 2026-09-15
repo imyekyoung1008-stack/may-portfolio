@@ -1,11 +1,22 @@
 // TabletShelterPage.tsx — Homeless Shelter Management System (Tablet 768–1023px)
 // ★ ShelterPage.tsx(데스크톱 원본)는 절대 건드리지 않음. 이 파일만 편집.
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import lottie from 'lottie-web'
+import type { AnimationItem } from 'lottie-web'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
+
+import shelterUI01Json from '../assets/lottie/shelter-ui-01.json'
+import vidUsage01 from '../assets/videos/shelter-usage-01.mp4'
+import vidUsage02 from '../assets/videos/shelter-usage-02.mp4'
+import vidUsage03 from '../assets/videos/shelter-usage-03.mp4'
+import vidUsage04 from '../assets/videos/shelter-usage-04.mp4'
+import vidUI02    from '../assets/videos/shelter-ui-02.mp4'
+import vidUI03    from '../assets/videos/shelter-ui-03.mp4'
+import vidUI04    from '../assets/videos/shelter-ui-04.mp4'
 
 import imgOverviewDiagram   from '../assets/images/shelter-overview-diagram.webp'
 import imgFieldResearch     from '../assets/images/shelter-field-research.webp'
@@ -52,7 +63,7 @@ function TSectionLabel({ num, label }: { num: string; label: string }) {
 // ── Before/After 가로 2열 공용 컴포넌트 ──
 function TBeforeAfterRow({
   beforeLabel, beforeImg, beforeAlt, beforeBg,
-  afterImg, afterAlt, height,
+  afterImg, afterAlt,
 }: {
   beforeLabel: string
   beforeImg: string
@@ -60,21 +71,18 @@ function TBeforeAfterRow({
   beforeBg?: string
   afterImg: string
   afterAlt: string
-  height: number
 }) {
   return (
     <div style={{ display: 'flex', gap: '24px' }}>
       <div style={{ flex: '1 0 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#1E1E1E' }}>{beforeLabel}</p>
-        <div style={{ height: `${height}px`, backgroundColor: beforeBg ?? '#F7F7F7', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          <img src={beforeImg} alt={beforeAlt} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
+        <div style={{ backgroundColor: beforeBg ?? '#F7F7F7' }}>
+          <img src={beforeImg} alt={beforeAlt} style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
       </div>
       <div style={{ flex: '1 0 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 500, color: '#0F766E' }}>After</p>
-        <div style={{ height: `${height}px`, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          <img src={afterImg} alt={afterAlt} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
-        </div>
+        <img src={afterImg} alt={afterAlt} style={{ width: '100%', height: 'auto', display: 'block' }} />
       </div>
     </div>
   )
@@ -126,6 +134,317 @@ const PROBLEM_CARDS = [
     insight: 'This added friction during time-sensitive status checks.',
   },
 ]
+
+// ─────────────────────────────────────────────────
+// 03 Feature Walkthrough — 데이터 & 카드 컴포넌트
+// ─────────────────────────────────────────────────
+
+type TUIMedia =
+  | { type: 'lottie'; animationData: unknown }
+  | { type: 'video';  src: string }
+
+interface TStepData {
+  num: string
+  title: string
+  description?: string
+  usageVideo: string
+  uiMedia: TUIMedia
+}
+
+const T_STEPS: TStepData[] = [
+  {
+    num: '01',
+    title: 'Resident Status Tracking',
+    description: 'Instantly update and check resident status via NFC tagging',
+    usageVideo: vidUsage01,
+    uiMedia: { type: 'lottie', animationData: shelterUI01Json },
+  },
+  {
+    num: '02',
+    title: 'Leave & Overnight Requests',
+    usageVideo: vidUsage02,
+    uiMedia: { type: 'video', src: vidUI02 },
+  },
+  {
+    num: '03',
+    title: 'Never Miss a Notification',
+    usageVideo: vidUsage03,
+    uiMedia: { type: 'video', src: vidUI03 },
+  },
+  {
+    num: '04',
+    title: 'Personalized Jobs and Programs',
+    usageVideo: vidUsage04,
+    uiMedia: { type: 'video', src: vidUI04 },
+  },
+]
+
+const T_CARD_GAP = 16  // UsageCard ↔ UICard 간격
+const T_SET_GAP  = 20  // 세트 간 간격
+
+function TPauseIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="2" y="1" width="3.5" height="12" rx="1" fill="white" />
+      <rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="white" />
+    </svg>
+  )
+}
+function TPlayIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <polygon points="2,1 13,7 2,13" fill="white" />
+    </svg>
+  )
+}
+
+// 사용 영상 카드 — 270×436px
+function TUsageCard({ num, usageVideo }: { num: string; usageVideo: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isPlaying, setIsPlaying] = useState(true)
+
+  const togglePlay = () => {
+    const v = videoRef.current
+    if (!v) return
+    if (isPlaying) { v.pause() } else { v.play().catch(() => {}) }
+    setIsPlaying(!isPlaying)
+  }
+
+  return (
+    <div style={{
+      position: 'relative', width: '270px', height: '436px',
+      overflow: 'hidden', flexShrink: 0,
+    }}>
+      <video
+        ref={videoRef}
+        src={usageVideo}
+        autoPlay muted loop playsInline
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 52%)',
+      }} />
+      <p style={{
+        position: 'absolute', top: '16px', left: '16px', margin: 0,
+        fontFamily: poppins, fontSize: '45px', fontWeight: 500, lineHeight: 1,
+        color: 'white', letterSpacing: '-1.8px',
+        userSelect: 'none', pointerEvents: 'none',
+      }}>
+        {num}
+      </p>
+      <button
+        type="button" onClick={togglePlay}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+        style={{
+          position: 'absolute', bottom: '16px', left: '16px',
+          display: 'flex', alignItems: 'center', gap: '3px',
+          background: 'rgba(255,255,255,0.07)',
+          backdropFilter: 'blur(25px)',
+          WebkitBackdropFilter: 'blur(25px)',
+          borderRadius: '1000px',
+          border: 'none',
+          paddingTop: '6px', paddingBottom: '6px',
+          paddingLeft: '8px', paddingRight: '10px',
+          cursor: 'pointer',
+          fontFamily: poppins, fontSize: '13px', fontWeight: 500, color: 'white',
+          outline: 'none',
+        }}
+      >
+        {isPlaying ? <TPauseIcon /> : <TPlayIcon />}
+        {isPlaying ? 'Pause' : 'Play'}
+      </button>
+    </div>
+  )
+}
+
+// 컨트롤바 (UI 영상 카드 전용)
+function TControlBar({
+  isPlaying, progress, onToggle, onSeek,
+}: {
+  isPlaying: boolean
+  progress: number
+  onToggle: () => void
+  onSeek: (ratio: number) => void
+}) {
+  const barRef = useRef<HTMLDivElement>(null)
+
+  const calcRatio = (clientX: number): number => {
+    const rect = barRef.current?.getBoundingClientRect()
+    if (!rect || rect.width === 0) return 0
+    return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    onSeek(calcRatio(e.clientX))
+    const onMove = (ev: MouseEvent) => onSeek(calcRatio(ev.clientX))
+    const onUp = () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+    }
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+  }
+
+  return (
+    <div style={{
+      position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 3,
+      display: 'flex', alignItems: 'center', gap: '8px',
+      padding: '8px 14px 10px',
+      background: 'rgba(0,0,0,0.18)',
+      backdropFilter: 'blur(25px)',
+      WebkitBackdropFilter: 'blur(25px)',
+    }}>
+      <button
+        type="button" onClick={onToggle}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+        style={{
+          background: 'none', border: 'none', padding: 0, margin: 0,
+          cursor: 'pointer', display: 'flex', alignItems: 'center',
+          flexShrink: 0, outline: 'none',
+        }}
+      >
+        {isPlaying ? <TPauseIcon /> : <TPlayIcon />}
+      </button>
+      <div
+        ref={barRef}
+        onMouseDown={handleMouseDown}
+        style={{
+          flex: 1, height: '3px',
+          background: 'rgba(255,255,255,0.3)',
+          borderRadius: '2px',
+          cursor: 'pointer',
+          position: 'relative',
+          userSelect: 'none',
+        }}
+      >
+        <div style={{
+          position: 'absolute', left: 0, top: 0, bottom: 0,
+          width: `${Math.min(100, progress * 100)}%`,
+          background: 'white',
+          borderRadius: '2px',
+          pointerEvents: 'none',
+        }} />
+      </div>
+    </div>
+  )
+}
+
+// UI 영상 카드 — 270×435px
+function TUICard({ step }: { step: TStepData }) {
+  const MEDIA_TOP = step.description ? 93 : 72
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [progress,  setProgress ] = useState(0)
+
+  const lottieContainerRef = useRef<HTMLDivElement>(null)
+  const animRef = useRef<AnimationItem | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (step.uiMedia.type !== 'lottie') return
+    const container = lottieContainerRef.current
+    if (!container) return
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const anim = lottie.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: step.uiMedia.animationData as any,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+    })
+    animRef.current = anim
+    const onFrame = () => {
+      if (anim.totalFrames > 0) setProgress(anim.currentFrame / anim.totalFrames)
+    }
+    anim.addEventListener('enterFrame', onFrame)
+    return () => {
+      anim.removeEventListener('enterFrame', onFrame)
+      anim.destroy()
+      animRef.current = null
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (step.uiMedia.type !== 'video') return
+    const v = videoRef.current
+    if (!v) return
+    const onTimeUpdate = () => {
+      if (v.duration) setProgress(v.currentTime / v.duration)
+    }
+    v.addEventListener('timeupdate', onTimeUpdate)
+    return () => v.removeEventListener('timeupdate', onTimeUpdate)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const togglePlay = () => {
+    if (step.uiMedia.type === 'lottie') {
+      if (isPlaying) animRef.current?.pause()
+      else           animRef.current?.play()
+    } else {
+      const v = videoRef.current
+      if (!v) return
+      if (isPlaying) v.pause()
+      else           v.play().catch(() => {})
+    }
+    setIsPlaying(p => !p)
+  }
+
+  const seekTo = (ratio: number) => {
+    if (step.uiMedia.type === 'lottie') {
+      const anim = animRef.current
+      if (!anim) return
+      anim.goToAndStop(ratio * anim.totalFrames, true)
+      setProgress(ratio)
+    } else {
+      const v = videoRef.current
+      if (!v || !v.duration) return
+      v.currentTime = ratio * v.duration
+      setProgress(ratio)
+    }
+  }
+
+  return (
+    <div style={{
+      position: 'relative', width: '270px', height: '435px',
+      overflow: 'hidden', flexShrink: 0,
+      background: '#F8F8F8',
+    }}>
+      <div style={{
+        position: 'absolute', top: '20px', left: '18px', zIndex: 2,
+        display: 'flex', flexDirection: 'column', gap: '4px',
+      }}>
+        <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 500, lineHeight: '22px', color: '#999' }}>
+          {step.num}
+        </p>
+        <p style={{ margin: 0, fontFamily: poppins, fontSize: '18px', fontWeight: 500, lineHeight: '26px', color: '#0C0C13' }}>
+          {step.title}
+        </p>
+        {step.description && (
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '14px', fontWeight: 400, lineHeight: '21px', color: '#212121', letterSpacing: '-0.28px' }}>
+            {step.description}
+          </p>
+        )}
+      </div>
+      <div style={{ position: 'absolute', top: `${MEDIA_TOP}px`, left: 0, right: 0, bottom: 0, overflow: 'hidden' }}>
+        {step.uiMedia.type === 'lottie'
+          ? <div ref={lottieContainerRef} style={{ width: '100%', height: '100%' }} />
+          : (
+            <video
+              ref={videoRef}
+              src={step.uiMedia.src}
+              autoPlay muted loop playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          )
+        }
+      </div>
+      <TControlBar isPlaying={isPlaying} progress={progress} onToggle={togglePlay} onSeek={seekTo} />
+    </div>
+  )
+}
 
 // ─────────────────────────────────────────────────
 // Hero Header
@@ -251,13 +570,49 @@ function TabletShelterOverviewSection() {
 }
 
 // ─────────────────────────────────────────────────
-// 03 UX Research
+// 03 Feature Walkthrough — 가로 스크롤 캐러셀
+// ─────────────────────────────────────────────────
+function TabletFeatureWalkthroughSection() {
+  return (
+    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+      {/* 섹션 레이블 */}
+      <div className="w-full px-[32px]" style={{ paddingTop: '60px', paddingBottom: '24px' }}>
+        <TSectionLabel num="03" label="Feature Walkthrough" />
+      </div>
+      {/* 가로 스크롤 트랙 */}
+      <div
+        className="[&::-webkit-scrollbar]:hidden"
+        style={{
+          width: '100%',
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          paddingLeft: '32px',
+          paddingRight: '32px',
+          paddingBottom: '60px',
+          boxSizing: 'border-box',
+          display: 'flex',
+          gap: `${T_SET_GAP}px`,
+        }}
+      >
+        {T_STEPS.map((step) => (
+          <div key={step.num} style={{ display: 'flex', gap: `${T_CARD_GAP}px`, alignItems: 'center', flexShrink: 0 }}>
+            <TUsageCard num={step.num} usageVideo={step.usageVideo} />
+            <TUICard step={step} />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 04 UX Research
 // ─────────────────────────────────────────────────
 function TabletShelterUXResearchSection() {
   return (
     <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
       <TContentWrap gap={24}>
-        <TSectionLabel num="03" label="UX Research" />
+        <TSectionLabel num="04" label="UX Research" />
         <h2 style={{ margin: 0, fontFamily: poppins, fontSize: '24px', fontWeight: 500, lineHeight: '34px', color: '#1e1e1e' }}>
           How might we make essential shelter tasks easier to find for residents with low digital literacy?
         </h2>
@@ -412,7 +767,6 @@ function TabletShelterDS1Section() {
           beforeLabel="Before : 1st prototype"
           beforeImg={imgS1Before} beforeAlt="Before — Design Solution 1"
           afterImg={imgS1After}   afterAlt="After — Design Solution 1"
-          height={400}
         />
       </TContentWrap>
     </section>
@@ -452,7 +806,6 @@ function TabletShelterDS2Section() {
           beforeLabel="Before : 1st prototype"
           beforeImg={imgS2Before} beforeAlt="Before — Design Solution 2"
           afterImg={imgS2After}   afterAlt="After — Design Solution 2"
-          height={400}
         />
       </TContentWrap>
     </section>
@@ -501,7 +854,6 @@ function TabletShelterDS3Section() {
             beforeLabel="Before : 2nd prototype"
             beforeImg={imgS31Before} beforeAlt="Before — Making Notifications Visible"
             afterImg={imgS31After}   afterAlt="After — Making Notifications Visible"
-            height={400}
           />
         </div>
 
@@ -520,7 +872,6 @@ function TabletShelterDS3Section() {
             beforeLabel="Before"
             beforeImg={imgS32Before} beforeAlt="Before — Turning Notifications into Actions"
             afterImg={imgS32After}   afterAlt="After — Turning Notifications into Actions"
-            height={309}
             beforeBg="transparent"
           />
         </div>
@@ -578,31 +929,34 @@ function TabletShelterImplementedSection() {
 // ─────────────────────────────────────────────────
 function TabletShelterReflectionSection() {
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
-      <TContentWrap gap={24}>
-        <TSectionLabel num="09" label="Reflection" />
-        <h2 style={{ margin: 0, fontFamily: poppins, fontSize: '24px', fontWeight: 500, lineHeight: '34px', color: '#1e1e1e' }}>
-          Design Beyond the Screen
-        </h2>
-        <p style={{ margin: 0, fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
-          Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
-        </p>
-        <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
-          <iframe
-            src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
-            title="Homeless Shelter Management System — Reflection"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
-          />
-        </div>
-        <img
-          src={imgMockupScreen}
-          alt="Homeless Shelter Management System mockup screens"
-          style={{ width: '100%', display: 'block', objectFit: 'contain' }}
-        />
-      </TContentWrap>
-    </section>
+    <>
+      <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+        <TContentWrap gap={24}>
+          <TSectionLabel num="09" label="Reflection" />
+          <h2 style={{ margin: 0, fontFamily: poppins, fontSize: '24px', fontWeight: 500, lineHeight: '34px', color: '#1e1e1e' }}>
+            Design Beyond the Screen
+          </h2>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '18px', fontWeight: 400, lineHeight: '27px', color: '#1E1E1E' }}>
+            Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
+          </p>
+          <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
+            <iframe
+              src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
+              title="Homeless Shelter Management System — Reflection"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
+            />
+          </div>
+        </TContentWrap>
+      </section>
+      {/* 목업 스크린 콜라주 — full-bleed (좌우 패딩 벗어남) */}
+      <img
+        src={imgMockupScreen}
+        alt="Homeless Shelter Management System mockup screens"
+        style={{ width: '100%', display: 'block' }}
+      />
+    </>
   )
 }
 
@@ -685,6 +1039,7 @@ export default function TabletShelterPage() {
       <TabletShelterHeader />
       <TabletShelterIntroSection />
       <TabletShelterOverviewSection />
+      <TabletFeatureWalkthroughSection />
       <TabletShelterUXResearchSection />
       <TabletShelterAnalysisSection />
       <TabletShelterProblemDefinitionSection />

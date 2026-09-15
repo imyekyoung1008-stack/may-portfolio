@@ -65,15 +65,13 @@ function MBeforeAfterStack({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ margin: 0, fontFamily: poppins, fontSize: '13px', fontWeight: 500, color: '#1E1E1E' }}>{beforeLabel}</p>
-        <div style={{ width: '100%', backgroundColor: beforeBg ?? '#F7F7F7', overflow: 'hidden' }}>
-          <img src={beforeImg} alt={beforeAlt} style={{ width: '100%', display: 'block', objectFit: 'contain' }} />
+        <div style={{ backgroundColor: beforeBg ?? '#F7F7F7' }}>
+          <img src={beforeImg} alt={beforeAlt} style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ margin: 0, fontFamily: poppins, fontSize: '13px', fontWeight: 500, color: '#0F766E' }}>After</p>
-        <div style={{ width: '100%', overflow: 'hidden' }}>
-          <img src={afterImg} alt={afterAlt} style={{ width: '100%', display: 'block', objectFit: 'contain' }} />
-        </div>
+        <img src={afterImg} alt={afterAlt} style={{ width: '100%', height: 'auto', display: 'block' }} />
       </div>
     </div>
   )
@@ -569,31 +567,34 @@ function MobileShelterImplementedSection() {
 // ─────────────────────────────────────────────────
 function MobileShelterReflectionSection() {
   return (
-    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
-      <MContentWrap gap={20}>
-        <MSectionLabel num="09" label="Reflection" />
-        <h2 style={{ margin: 0, fontFamily: poppins, fontSize: '20px', fontWeight: 500, lineHeight: '30px', color: '#1e1e1e' }}>
-          Design Beyond the Screen
-        </h2>
-        <p style={{ margin: 0, fontFamily: poppins, fontSize: '15px', fontWeight: 400, lineHeight: '22px', color: '#1E1E1E' }}>
-          Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
-        </p>
-        <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
-          <iframe
-            src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
-            title="Homeless Shelter Management System — Reflection"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
-          />
-        </div>
-        <img
-          src={imgMockupScreen}
-          alt="Homeless Shelter Management System mockup screens"
-          style={{ width: '100%', display: 'block', objectFit: 'contain' }}
-        />
-      </MContentWrap>
-    </section>
+    <>
+      <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+        <MContentWrap gap={20}>
+          <MSectionLabel num="09" label="Reflection" />
+          <h2 style={{ margin: 0, fontFamily: poppins, fontSize: '20px', fontWeight: 500, lineHeight: '30px', color: '#1e1e1e' }}>
+            Design Beyond the Screen
+          </h2>
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '15px', fontWeight: 400, lineHeight: '22px', color: '#1E1E1E' }}>
+            Many residents were initially skeptical of using the app, and even basic tasks like downloading it were unfamiliar. Watching my team persist through these challenges deeply inspired me. This project taught me that design is not only about usability, but also about responsibility. As a product designer, I learned how to create experiences that deliver both functionality and social value. Moving forward, I aim to build technology that makes a real difference in people's lives.
+          </p>
+          <div className="w-full overflow-hidden" style={{ aspectRatio: '1920/1080' }}>
+            <iframe
+              src="https://www.youtube.com/embed/VlxojGwgZg8?autoplay=1&mute=1"
+              title="Homeless Shelter Management System — Reflection"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
+            />
+          </div>
+        </MContentWrap>
+      </section>
+      {/* 목업 스크린 콜라주 — full-bleed (좌우 패딩 벗어남) */}
+      <img
+        src={imgMockupScreen}
+        alt="Homeless Shelter Management System mockup screens"
+        style={{ width: '100%', display: 'block' }}
+      />
+    </>
   )
 }
 
@@ -606,10 +607,10 @@ function MobileShelterNextProjectSection() {
     <section className="w-full bg-[#f7f7f7]">
       <div className="w-full px-[16px] py-[40px] flex flex-col gap-[20px]">
         <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 500, lineHeight: '24px', color: '#1e1e1e' }}>Next Project</p>
-        <div className="flex gap-[16px] w-full">
+        <div className="flex flex-col gap-[20px] w-full">
 
           {/* AI Avatar */}
-          <div className="flex-1 min-w-0 flex flex-col gap-[10px] cursor-pointer group" onClick={() => navigate('/projects/ai-avatar')}>
+          <div className="flex flex-col gap-[12px] cursor-pointer group" onClick={() => navigate('/projects/ai-avatar')}>
             <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
               <img src={imgCnaiTh} alt="AI Avatar Video Creation Platform" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
@@ -621,7 +622,7 @@ function MobileShelterNextProjectSection() {
           </div>
 
           {/* Cornerstone */}
-          <div className="flex-1 min-w-0 flex flex-col gap-[10px] cursor-pointer group" onClick={() => navigate('/projects/cornerstone')}>
+          <div className="flex flex-col gap-[12px] cursor-pointer group" onClick={() => navigate('/projects/cornerstone')}>
             <div className="relative overflow-hidden w-full" style={{ aspectRatio: '886.84/591.23' }}>
               <video src={vidCornerstoneDemo} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
