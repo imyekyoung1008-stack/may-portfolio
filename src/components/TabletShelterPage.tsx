@@ -575,11 +575,7 @@ function TabletShelterOverviewSection() {
 function TabletFeatureWalkthroughSection() {
   return (
     <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
-      {/* 섹션 레이블 */}
-      <div className="w-full px-[32px]" style={{ paddingTop: '60px', paddingBottom: '24px' }}>
-        <TSectionLabel num="03" label="Feature Walkthrough" />
-      </div>
-      {/* 가로 스크롤 트랙 */}
+      {/* 가로 스크롤 트랙 — 레이블 없이 캐러셀만 */}
       <div
         className="[&::-webkit-scrollbar]:hidden"
         style={{
@@ -588,6 +584,7 @@ function TabletFeatureWalkthroughSection() {
           scrollbarWidth: 'none',
           paddingLeft: '32px',
           paddingRight: '32px',
+          paddingTop: '60px',
           paddingBottom: '60px',
           boxSizing: 'border-box',
           display: 'flex',

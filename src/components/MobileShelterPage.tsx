@@ -1,11 +1,22 @@
 // MobileShelterPage.tsx — Homeless Shelter Management System (Mobile < 768px)
 // ★ ShelterPage.tsx(데스크톱) / TabletShelterPage.tsx(태블릿)은 절대 건드리지 않음. 이 파일만 편집.
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import lottie from 'lottie-web'
+import type { AnimationItem } from 'lottie-web'
 import { useLottieAnimation } from '../hooks/useLottieAnimation'
 import { LottieHeroPlayer } from './LottieHeroPlayer'
+
+import shelterUI01Json from '../assets/lottie/shelter-ui-01.json'
+import vidUsage01 from '../assets/videos/shelter-usage-01.mp4'
+import vidUsage02 from '../assets/videos/shelter-usage-02.mp4'
+import vidUsage03 from '../assets/videos/shelter-usage-03.mp4'
+import vidUsage04 from '../assets/videos/shelter-usage-04.mp4'
+import vidUI02    from '../assets/videos/shelter-ui-02.mp4'
+import vidUI03    from '../assets/videos/shelter-ui-03.mp4'
+import vidUI04    from '../assets/videos/shelter-ui-04.mp4'
 
 import imgOverviewDiagram   from '../assets/images/shelter-overview-diagram.webp'
 import imgFieldResearch     from '../assets/images/shelter-field-research.webp'
@@ -27,6 +38,321 @@ import icClose              from '../assets/icons/close.svg'
 import vidCornerstoneDemo from '../assets/videos/cornerstone-thumb-v2.mp4'
 
 const poppins = "'Poppins', sans-serif"
+
+// ─────────────────────────────────────────────────
+// Feature Walkthrough 캐러셀 — 데이터 & 카드 컴포넌트
+// ─────────────────────────────────────────────────
+
+type MUIMedia =
+  | { type: 'lottie'; animationData: unknown }
+  | { type: 'video';  src: string }
+
+interface MStepData {
+  num: string
+  title: string
+  description?: string
+  usageVideo: string
+  uiMedia: MUIMedia
+}
+
+const M_STEPS: MStepData[] = [
+  {
+    num: '01',
+    title: 'Resident Status Tracking',
+    description: 'Instantly update and check resident status via NFC tagging',
+    usageVideo: vidUsage01,
+    uiMedia: { type: 'lottie', animationData: shelterUI01Json },
+  },
+  {
+    num: '02',
+    title: 'Leave & Overnight Requests',
+    usageVideo: vidUsage02,
+    uiMedia: { type: 'video', src: vidUI02 },
+  },
+  {
+    num: '03',
+    title: 'Never Miss a Notification',
+    usageVideo: vidUsage03,
+    uiMedia: { type: 'video', src: vidUI03 },
+  },
+  {
+    num: '04',
+    title: 'Personalized Jobs and Programs',
+    usageVideo: vidUsage04,
+    uiMedia: { type: 'video', src: vidUI04 },
+  },
+]
+
+// 카드 크기: 200×323 (usage), 200×322 (UI) — 270×436/435 기준 200/270 배율
+const M_CARD_W   = 200
+const M_USAGE_H  = 323
+const M_UI_H     = 322
+const M_CARD_GAP = 12  // UsageCard ↔ UICard 간격
+const M_SET_GAP  = 16  // 세트 간 간격
+
+function MPauseIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+      <rect x="2" y="1" width="3.5" height="12" rx="1" fill="white" />
+      <rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="white" />
+    </svg>
+  )
+}
+function MPlayIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+      <polygon points="2,1 13,7 2,13" fill="white" />
+    </svg>
+  )
+}
+
+// 사용 영상 카드 — M_CARD_W × M_USAGE_H
+function MUsageCard({ num, usageVideo }: { num: string; usageVideo: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isPlaying, setIsPlaying] = useState(true)
+
+  const togglePlay = () => {
+    const v = videoRef.current
+    if (!v) return
+    if (isPlaying) { v.pause() } else { v.play().catch(() => {}) }
+    setIsPlaying(!isPlaying)
+  }
+
+  return (
+    <div style={{
+      position: 'relative', width: `${M_CARD_W}px`, height: `${M_USAGE_H}px`,
+      overflow: 'hidden', flexShrink: 0,
+    }}>
+      <video
+        ref={videoRef}
+        src={usageVideo}
+        autoPlay muted loop playsInline
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 52%)',
+      }} />
+      <p style={{
+        position: 'absolute', top: '12px', left: '12px', margin: 0,
+        fontFamily: poppins, fontSize: '35px', fontWeight: 500, lineHeight: 1,
+        color: 'white', letterSpacing: '-1.4px',
+        userSelect: 'none', pointerEvents: 'none',
+      }}>
+        {num}
+      </p>
+      <button
+        type="button" onClick={togglePlay}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+        style={{
+          position: 'absolute', bottom: '12px', left: '12px',
+          display: 'flex', alignItems: 'center', gap: '3px',
+          background: 'rgba(255,255,255,0.07)',
+          backdropFilter: 'blur(25px)',
+          WebkitBackdropFilter: 'blur(25px)',
+          borderRadius: '1000px',
+          border: 'none',
+          paddingTop: '5px', paddingBottom: '5px',
+          paddingLeft: '7px', paddingRight: '9px',
+          cursor: 'pointer',
+          fontFamily: poppins, fontSize: '12px', fontWeight: 500, color: 'white',
+          outline: 'none',
+        }}
+      >
+        {isPlaying ? <MPauseIcon /> : <MPlayIcon />}
+        {isPlaying ? 'Pause' : 'Play'}
+      </button>
+    </div>
+  )
+}
+
+// 컨트롤바 (UI 영상 카드 전용)
+function MControlBar({
+  isPlaying, progress, onToggle, onSeek,
+}: {
+  isPlaying: boolean
+  progress: number
+  onToggle: () => void
+  onSeek: (ratio: number) => void
+}) {
+  const barRef = useRef<HTMLDivElement>(null)
+
+  const calcRatio = (clientX: number): number => {
+    const rect = barRef.current?.getBoundingClientRect()
+    if (!rect || rect.width === 0) return 0
+    return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    onSeek(calcRatio(e.clientX))
+    const onMove = (ev: MouseEvent) => onSeek(calcRatio(ev.clientX))
+    const onUp = () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+    }
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+  }
+
+  return (
+    <div style={{
+      position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 3,
+      display: 'flex', alignItems: 'center', gap: '6px',
+      padding: '7px 12px 9px',
+      background: 'rgba(0,0,0,0.18)',
+      backdropFilter: 'blur(25px)',
+      WebkitBackdropFilter: 'blur(25px)',
+    }}>
+      <button
+        type="button" onClick={onToggle}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+        style={{
+          background: 'none', border: 'none', padding: 0, margin: 0,
+          cursor: 'pointer', display: 'flex', alignItems: 'center',
+          flexShrink: 0, outline: 'none',
+        }}
+      >
+        {isPlaying ? <MPauseIcon /> : <MPlayIcon />}
+      </button>
+      <div
+        ref={barRef}
+        onMouseDown={handleMouseDown}
+        style={{
+          flex: 1, height: '2px',
+          background: 'rgba(255,255,255,0.3)',
+          borderRadius: '2px',
+          cursor: 'pointer',
+          position: 'relative',
+          userSelect: 'none',
+        }}
+      >
+        <div style={{
+          position: 'absolute', left: 0, top: 0, bottom: 0,
+          width: `${Math.min(100, progress * 100)}%`,
+          background: 'white',
+          borderRadius: '2px',
+          pointerEvents: 'none',
+        }} />
+      </div>
+    </div>
+  )
+}
+
+// UI 영상 카드 — M_CARD_W × M_UI_H
+function MUICard({ step }: { step: MStepData }) {
+  const MEDIA_TOP = step.description ? 78 : 60
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [progress,  setProgress ] = useState(0)
+
+  const lottieContainerRef = useRef<HTMLDivElement>(null)
+  const animRef = useRef<AnimationItem | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (step.uiMedia.type !== 'lottie') return
+    const container = lottieContainerRef.current
+    if (!container) return
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const anim = lottie.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: step.uiMedia.animationData as any,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+    })
+    animRef.current = anim
+    const onFrame = () => {
+      if (anim.totalFrames > 0) setProgress(anim.currentFrame / anim.totalFrames)
+    }
+    anim.addEventListener('enterFrame', onFrame)
+    return () => {
+      anim.removeEventListener('enterFrame', onFrame)
+      anim.destroy()
+      animRef.current = null
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (step.uiMedia.type !== 'video') return
+    const v = videoRef.current
+    if (!v) return
+    const onTimeUpdate = () => {
+      if (v.duration) setProgress(v.currentTime / v.duration)
+    }
+    v.addEventListener('timeupdate', onTimeUpdate)
+    return () => v.removeEventListener('timeupdate', onTimeUpdate)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const togglePlay = () => {
+    if (step.uiMedia.type === 'lottie') {
+      if (isPlaying) animRef.current?.pause()
+      else           animRef.current?.play()
+    } else {
+      const v = videoRef.current
+      if (!v) return
+      if (isPlaying) v.pause()
+      else           v.play().catch(() => {})
+    }
+    setIsPlaying(p => !p)
+  }
+
+  const seekTo = (ratio: number) => {
+    if (step.uiMedia.type === 'lottie') {
+      const anim = animRef.current
+      if (!anim) return
+      anim.goToAndStop(ratio * anim.totalFrames, true)
+      setProgress(ratio)
+    } else {
+      const v = videoRef.current
+      if (!v || !v.duration) return
+      v.currentTime = ratio * v.duration
+      setProgress(ratio)
+    }
+  }
+
+  return (
+    <div style={{
+      position: 'relative', width: `${M_CARD_W}px`, height: `${M_UI_H}px`,
+      overflow: 'hidden', flexShrink: 0,
+      background: '#F8F8F8',
+    }}>
+      <div style={{
+        position: 'absolute', top: '16px', left: '14px', zIndex: 2,
+        display: 'flex', flexDirection: 'column', gap: '3px',
+      }}>
+        <p style={{ margin: 0, fontFamily: poppins, fontSize: '13px', fontWeight: 500, lineHeight: '19px', color: '#999' }}>
+          {step.num}
+        </p>
+        <p style={{ margin: 0, fontFamily: poppins, fontSize: '15px', fontWeight: 500, lineHeight: '22px', color: '#0C0C13' }}>
+          {step.title}
+        </p>
+        {step.description && (
+          <p style={{ margin: 0, fontFamily: poppins, fontSize: '12px', fontWeight: 400, lineHeight: '18px', color: '#212121', letterSpacing: '-0.24px' }}>
+            {step.description}
+          </p>
+        )}
+      </div>
+      <div style={{ position: 'absolute', top: `${MEDIA_TOP}px`, left: 0, right: 0, bottom: 0, overflow: 'hidden' }}>
+        {step.uiMedia.type === 'lottie'
+          ? <div ref={lottieContainerRef} style={{ width: '100%', height: '100%' }} />
+          : (
+            <video
+              ref={videoRef}
+              src={step.uiMedia.src}
+              autoPlay muted loop playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          )
+        }
+      </div>
+      <MControlBar isPlaying={isPlaying} progress={progress} onToggle={togglePlay} onSeek={seekTo} />
+    </div>
+  )
+}
 
 // ── 공용 레이아웃 래퍼 — px-[16px], py-[48px], gap 기본 20px ──
 function MContentWrap({ children, gap = 20 }: { children: React.ReactNode; gap?: number }) {
@@ -248,13 +574,45 @@ function MobileShelterOverviewSection() {
 }
 
 // ─────────────────────────────────────────────────
-// 03 UX Research
+// 03 Feature Walkthrough — 가로 스크롤 캐러셀
+// ─────────────────────────────────────────────────
+function MobileFeatureWalkthroughSection() {
+  return (
+    <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
+      <div
+        className="[&::-webkit-scrollbar]:hidden"
+        style={{
+          width: '100%',
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+          paddingTop: '48px',
+          paddingBottom: '48px',
+          boxSizing: 'border-box',
+          display: 'flex',
+          gap: `${M_SET_GAP}px`,
+        }}
+      >
+        {M_STEPS.map((step) => (
+          <div key={step.num} style={{ display: 'flex', gap: `${M_CARD_GAP}px`, alignItems: 'center', flexShrink: 0 }}>
+            <MUsageCard num={step.num} usageVideo={step.usageVideo} />
+            <MUICard step={step} />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────
+// 04 UX Research
 // ─────────────────────────────────────────────────
 function MobileShelterUXResearchSection() {
   return (
     <section className="w-full bg-white" style={{ borderTop: '1px solid #f7f7f7' }}>
       <MContentWrap gap={20}>
-        <MSectionLabel num="03" label="UX Research" />
+        <MSectionLabel num="04" label="UX Research" />
         <h2 style={{ margin: 0, fontFamily: poppins, fontSize: '20px', fontWeight: 500, lineHeight: '30px', color: '#1e1e1e' }}>
           How might we make essential shelter tasks easier to find for residents with low digital literacy?
         </h2>
@@ -677,6 +1035,7 @@ export default function MobileShelterPage() {
       <MobileShelterHeader />
       <MobileShelterIntroSection />
       <MobileShelterOverviewSection />
+      <MobileFeatureWalkthroughSection />
       <MobileShelterUXResearchSection />
       <MobileShelterAnalysisSection />
       <MobileShelterProblemDefinitionSection />
