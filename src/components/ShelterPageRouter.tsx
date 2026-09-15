@@ -1,10 +1,32 @@
 // ShelterPageRouter.tsx
 // 창 너비에 따라 데스크톱 / 태블릿 / 모바일 레이아웃 전환
-// 태블릿·모바일은 추후 별도 구현 예정 — 그 전까지는 데스크톱 컴포넌트로 폴백
 
+import { useEffect, useRef } from 'react'
+import { useWindowWidth } from '../hooks/useWindowWidth'
+import { saveScrollPosition, restoreScrollPosition } from '../hooks/usePreserveScroll'
 import ShelterPage from './ShelterPage'
+import TabletShelterPage from './TabletShelterPage'
+import MobileShelterPage from './MobileShelterPage'
+
+const SCROLL_KEY = 'shelter'
 
 export default function ShelterPageRouter() {
-  // TODO: 태블릿·모바일 반응형 추가 시 AIAvatarPageRouter와 동일한 패턴으로 확장
-  return <ShelterPage />
+  const width = useWindowWidth()
+  const prevLayout = useRef('')
+  const rafId = useRef(0)
+
+  const layout = width >= 1024 ? 'desktop' : width >= 768 ? 'tablet' : 'mobile'
+
+  if (prevLayout.current && prevLayout.current !== layout) saveScrollPosition(SCROLL_KEY)
+  prevLayout.current = layout
+
+  useEffect(() => {
+    cancelAnimationFrame(rafId.current)
+    rafId.current = restoreScrollPosition(SCROLL_KEY)
+    return () => cancelAnimationFrame(rafId.current)
+  }, [layout])
+
+  if (width >= 1024) return <ShelterPage />
+  if (width >= 768) return <TabletShelterPage />
+  return <MobileShelterPage />
 }

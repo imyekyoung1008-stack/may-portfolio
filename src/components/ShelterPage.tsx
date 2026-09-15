@@ -27,6 +27,7 @@ import imgS31After           from '../assets/images/s3-1_after.webp'
 import imgS32Before          from '../assets/images/s3-2_before.webp'
 import imgS32After           from '../assets/images/s3-2_after.webp'
 import imgMockupScreen       from '../assets/images/mockup-screen.webp'
+import imgProblemDefinition  from '../assets/images/problem-definition.webp'
 import shelterUI01Json       from '../assets/lottie/shelter-ui-01.json'
 
 // ── 영상 파일 (src/assets/videos/) ─────────────────
@@ -175,7 +176,7 @@ const STEPS: StepData[] = [
   },
   {
     num: '04',
-    title: 'Feature 04 Title',
+    title: 'Personalized Jobs and Programs',
     usageVideo: vidUsage04,
     uiMedia: { type: 'video', src: vidUI04 },
   },
@@ -813,17 +814,11 @@ function ProblemDefinitionSection() {
         </p>
 
         {/* 이미지 플레이스홀더 — 실제 이미지로 교체 시 <img> 태그로 대체 */}
-        <div
-          style={{
-            width: '100%', height: '530px',
-            backgroundColor: '#F0F0F0',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
-        >
-          <p style={{ margin: 0, fontFamily: poppins, fontSize: '16px', fontWeight: 400, color: '#1E1E1E', textAlign: 'center' }}>
-            Existing MVP screens and key usability issues
-          </p>
-        </div>
+        <img
+          src={imgProblemDefinition}
+          alt="Existing MVP screens and key usability issues"
+          style={{ width: '100%', display: 'block', objectFit: 'contain' }}
+        />
 
         {/* Problem / Insight 카드 3개 */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
